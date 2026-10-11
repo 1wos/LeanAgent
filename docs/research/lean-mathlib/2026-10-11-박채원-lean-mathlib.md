@@ -13,7 +13,7 @@
 | 2.2 Algebraic Structures | 환·군의 공리만으로 성질 증명. `have`, `apply`, `symm` | [S02_Proving_Identities_in_Algebraic_Structures.lean](2026-10-11-박채원-lean-mathlib/S02_Proving_Identities_in_Algebraic_Structures.lean) |
 | 2.3 Theorems and Lemmas | 등식은 `rw`, 부등식은 `apply` / `exact`. 부등식 n개 잇기는 추이 정리 n−1번, `linarith` | [S03_Using_Theorems_and_Lemmas.lean](2026-10-11-박채원-lean-mathlib/S03_Using_Theorems_and_Lemmas.lean) |
 | 2.4 Order and Divisibility | 등식 = `≤` 두 방향 (`le_antisymm`). min/max, `∣`, gcd. `repeat` | [S04_More_on_Order_and_Divisibility.lean](2026-10-11-박채원-lean-mathlib/S04_More_on_Order_and_Divisibility.lean) |
-| 2.5 Algebraic Structures | 2.4 증명을 격자(⊓/⊔)·순서환·거리공간에서 다시 함. `trans` | [S05_Proving_Facts_about_Algebraic_Structures.md](2026-10-11-박채원-lean-mathlib/S05_Proving_Facts_about_Algebraic_Structures.md) |
+| 2.5 Algebraic Structures | 2.4 증명을 격자(⊓/⊔)·순서환·거리공간에서 다시 함. `trans` | [S05_Proving_Facts_about_Algebraic_Structures.lean](2026-10-11-박채원-lean-mathlib/S05_Proving_Facts_about_Algebraic_Structures.lean) · [설명 md](2026-10-11-박채원-lean-mathlib/S05_Proving_Facts_about_Algebraic_Structures.md) |
 
 ## 작은 예제
 
