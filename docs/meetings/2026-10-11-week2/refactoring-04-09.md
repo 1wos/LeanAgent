@@ -56,7 +56,7 @@
 | --- | --- |
 | 명제 보존 | 후보가 `statement.lean`의 내용으로 시작하고 바로 `:=`가 이어지는지 검사한다. `statement.lean`은 JSONL의 `statement` 필드를 그대로 저장한 파일이다. |
 | 금지 패턴 | 대회 사이트 소스(`app.py`의 `_FORBIDDEN_PATTERNS`)에 있는 업로드 검사용 정규식 목록을 그대로 적용한다. `sorry`, `native_decide`, `#eval`, 최상위 보조 선언 등이 들어 있다. |
-| 컴파일과 공리 | 종료 코드가 0이고 오류 메시지가 없어야 한다. 파일 끝에 붙인 `#print axioms`의 출력에 `sorryAx`가 없고, 공리 목록이 참조 증명과 같아야 한다. |
+| 컴파일과 공리 | 종료 코드가 0이고 오류 메시지가 없어야 한다. 파일 끝에 붙인 `#print axioms`의 출력에 `sorryAx`가 없어야 한다. 스크립트는 공리 목록을 결과 파일에 기록하며, 참조 증명의 목록과 같은지는 결과 파일을 보고 확인했다. |
 | 증명 토큰 | [토큰 계산기](refactoring-04-09/proof_tokens.py)를 사용한다. 대회 주최 측의 논문인 Lean Refactor(arXiv:2605.20244v2) 부록 J의 `proof_length`를 다시 구현했고, 연산자 목록을 저자의 공개 저장소(`delta-lab-ai/lean-refactor`의 `lean_refactor/utils.py`)와 대조했다. 웜업 15문제의 공식 `proof_length`를 모두 재현한다. |
 | heartbeat | 선언 앞에 `set_option Elab.async false in`과 `#count_heartbeats in`을 붙인 별도 사본을 컴파일한다. 종료 코드가 0일 때만 값을 기록한다. 제출용 후보에는 이 명령을 넣지 않는다. |
 
@@ -116,7 +116,7 @@
 | --- | --- | --- | ---: | ---: | --- |
 | 1 | 잎 경우 여섯 개의 `exists`·`constructor`·`apply` 묶음을 익명 생성자 한 줄로 바꿨다. | 통과 | 262 | 497 | 채택. 토큰은 11개 늘었지만 heartbeat가 3,856에서 497로 줄었다. |
 | 2 | `obtain`으로 관계를 꺼내지 않고 `Bisimilarity.follow_fst`와 `follow_snd`를 가정에 직접 적용했다. | 통과 | 198 | 441 | 채택 |
-| 3 | 증인 제시를 `refine` 한 줄로 합치고, 경우 분석을 `rintro s (t \| t)` 패턴으로 썼다. | 실패. `Unknown identifier 't'` ([로그](refactoring-04-09/P9/runs/attempt_03.check.log)) | - | - | 교정으로 넘김 |
+| 3 | 증인 제시를 `refine` 한 줄로 합치고, 경우 분석을 `rintro s (t \| t)` 패턴으로 썼다. | 실패. ``Unknown identifier `t` `` ([로그](refactoring-04-09/P9/runs/attempt_03.check.log)) | - | - | 교정으로 넘김 |
 | 4 | 시도 3의 교정. `Tr`의 생성자가 8개여서 패턴이 맞지 않았다. `intro s t; cases t`와 `next t =>`로 바꿨다. | 통과 | 169 | 380 | 채택 |
 | 5 | 두 방향 블록의 `intro`와 `cases`를 `<;>`로 한 번만 쓰게 했다. | 통과 | 157 | 383 | 채택 |
 | 6 | `obtain` 뒤 `exact` 두 줄을 `Exists.imp`와 `And.imp` 항 한 줄로 바꿨다. | 통과 | 124 | 353 | 채택 |
@@ -126,7 +126,7 @@
 | 10 | `refine (...).imp ?_ ?_`를 `apply (...).imp`로 바꿨다. | 통과 | 87 | 502 | 채택 |
 | 11 | 증인 제시를 `exists`로 바꿨다. | 통과 | 83 | 524 | 채택 |
 | 12 | 바깥의 경우 분석을 `repeat' first` 하나로 합치고, `bisim` 경우와 `choiceL` 경우의 항을 하나로 통일했다. `rename_i`를 지웠다. | 통과 | 79 | 516 | 채택. 현재 후보다. |
-| 13 | 비교용. 시도 7의 후보에서 `bisim` 경우만 `grind [IsBisimulation, ChoiceBisim]`로 닫았다. | 통과 | 103 | 1,242 | 기각. 시도 7보다 토큰은 17개 줄고 heartbeat는 889 늘었다. |
+| 13 | 비교용. `bisim` 경우를 `grind [IsBisimulation, ChoiceBisim]`로 닫았다. 시도 7의 후보와는 두 군데가 더 다르다. 증인의 명시 인자 `@ChoiceBisim _ _ defs`가 남아 있고, `rename_i t` 대신 `‹_›`를 쓴다. | 통과 | 103 | 1,242 | 기각. 시도 7보다 토큰은 17개 적고 heartbeat는 889 많다. |
 
 시도 1에서 heartbeat가 크게 줄어든 원인은 분석하지 않았다. 참조 증명의 `exists`·`constructor`·`apply` 묶음을 항으로 바꾼 것만으로 줄었다는 관찰이다.
 
@@ -240,8 +240,8 @@ Mathlib의 정리는 `BorelSpace Y`를 요구하는데 명제에는 `OpensMeasur
 ## 8. 두 문제에서 얻은 점
 
 - **구조를 바꾸는 수정이 줄 단위 수정보다 컸다.** 4번에서 줄 단위 수정인 시도 1–3은 851 → 806토큰에 그쳤다. 라이브러리 정리로 단계를 통째로 바꾼 시도 4와 시도 7은 각각 806 → 543, 427 → 185였고, 증명 전체를 Mathlib 정리로 바꾼 R3이 123토큰이다. 9번에서 토큰을 가장 많이 줄인 것은 시도 2(262 → 198)와 시도 6(157 → 124)이다. 시도 2는 관계를 꺼냈다가 되돌리는 왕복을 없앴고, 시도 6은 두 줄짜리 전술을 항 하나로 바꿨다.
-- **길이와 heartbeat는 따로 움직인다.** 9번의 시도 1은 토큰이 251 → 262로 늘었는데 heartbeat는 3,856 → 497로 줄었다. 반대로 시도 13은 `grind`로 토큰을 17개 줄이고 heartbeat를 889 늘렸다. 4번의 시도 3은 `nlinarith`를 `linarith`로 바꿔 토큰 6개와 heartbeat 3,039를 줄였다.
-- **토큰 계산 규칙이 수정 방향을 정한다.** 점으로 이은 이름은 길이와 무관하게 1토큰이고, 괄호·쉼표·꺾쇠는 각각 1토큰이며, 줄바꿈은 0토큰이다. 이름을 줄이는 것은 효과가 없고, 구두점이 줄어드는 구조 변경이 효과가 있다. 전체 규칙은 [토큰 계산기](refactoring-04-09/proof_tokens.py)의 코드에 있다.
+- **길이와 heartbeat는 따로 움직인다.** 9번의 시도 1은 토큰이 251 → 262로 늘었는데 heartbeat는 3,856 → 497로 줄었다. 반대로 `grind`를 넣은 시도 13은 시도 7보다 토큰이 17개 적고 heartbeat가 889 많다. 4번의 시도 3은 `nlinarith`를 `linarith`로 바꿔 토큰 6개와 heartbeat 3,039를 줄였다.
+- **토큰 계산 규칙이 수정 방향을 정한다.** 점으로 이은 이름은 길이와 무관하게 1토큰이고, 괄호·쉼표·꺾쇠는 각각 1토큰이며, 줄바꿈은 0토큰이다. 다만 `:=` 바로 뒤에서 줄을 바꾸면 1토큰이 늘어난다. 이름을 줄이는 것은 효과가 없고, 구두점이 줄어드는 구조 변경이 효과가 있다. 전체 규칙은 [토큰 계산기](refactoring-04-09/proof_tokens.py)의 코드에 있다.
 - **두 축의 교환 비율을 알면 미세 조정을 판단할 수 있다.** 두 감소율을 같은 비중으로 볼 때 토큰 1개는 4번에서 heartbeat 약 14, 9번에서 약 15와 같다. 9번의 시도 5, 8, 9, 10, 11은 heartbeat가 늘었지만 이 비율로 보면 이득이어서 채택했다.
 - **측정기를 먼저 맞춰야 한다.** 논문 HTML의 코드 목록은 연산자 `⁻¹`을 `-1`로 표시한다. 그대로 옮긴 토큰 계산기는 15문제 중 12문제만 공식 값과 맞았다.
 
@@ -282,7 +282,11 @@ python3 verify_candidate.py --repo <cslib 경로> \
 | `--hb-line` | heartbeat 측정 명령을 끼워 넣을 줄. 선언 바로 위의 주석이 시작하는 줄을 준다. 4번은 주석이 87–98행이어서 87이고, 9번은 310행의 한 줄 주석이어서 310이다. |
 | `--name` | `#print axioms`에 넘길 정리의 전체 이름. |
 | `--workdir`, `--tag` | 생성한 사본, 로그, 결과 파일을 둘 폴더와 파일 이름의 앞부분. |
+| `--lean-arg` | Lean에 넘길 옵션. 생략할 수 있다. |
+| `--extra-import` | heartbeat 측정 사본에만 추가할 import. 생략할 수 있다. |
 
 실행이 끝나면 `out/P4/final.result.json`이 생긴다. `compiled`가 `true`이고, `proof_tokens`가 123, `heartbeat.heartbeats`가 1,411이면 이 문서의 4번 결과와 같다. 9번은 `v4.33.0-rc2`에서 79와 510이다.
+
+이 폴더의 결과 파일은 위 명령에 옵션을 더해 실행한 기록이다. 4번은 PhysLib의 `lakefile.toml`에 있는 빌드 옵션을 `--lean-arg=-Dwarn.sorry=false --lean-arg=-Dweak.says.verify=true`로 함께 넘겼다. 9번의 환경별 결과(`P9/compat`)는 `--extra-import Mathlib.Util.CountHeartbeats`를 붙여 실행했다. 두 경우 모두 옵션 없이 실행해도 같은 값이 나온다. 4번은 2026-10-11에 참조 증명(851토큰, heartbeat 11,947)과 최종 후보(123토큰, heartbeat 1,411)로 확인했고, 9번은 세 환경의 참조 증명과 최종 후보로 확인했다.
 
 토큰 계산기의 자체 점검은 `python3 proof_tokens.py --check benchmark_data_warmup.jsonl`이며 `15/15`가 나와야 한다. 시도 표의 수치는 `python3 attempt_table.py P9/runs 251 3856`처럼 결과 파일에서 뽑는다.

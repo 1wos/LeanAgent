@@ -7,7 +7,7 @@ second copy is compiled with `#count_heartbeats in` in front of the declaration.
 Nothing inside the repository checkout is modified: generated files and logs go
 to --workdir.
 
-Checks, in the order the Arena applies them:
+Checks:
   1. the candidate starts with the benchmark statement, unchanged
   2. no forbidden pattern (same regex list as the Arena upload filter)
   3. the file compiles, and `#print axioms` shows no `sorryAx`
