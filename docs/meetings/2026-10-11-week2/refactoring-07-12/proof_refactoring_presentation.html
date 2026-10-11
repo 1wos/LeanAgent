@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="P7 progress와 P12 tensor gap 증명의 개념, 리팩터링 전후 비교와 실제 Lean 검증 결과">
+  <title>Week 2 · P7·P12 증명 리팩터링</title>
+  <style>
+    :root {
+      --bg: #f4f7ef;
+      --surface: #ffffff;
+      --surface-2: #edf2e8;
+      --text: #21392e;
+      --muted: #607264;
+      --border: #d8e2d4;
+      --accent: #245c43;
+      --accent-2: #548665;
+      --accent-soft: #e5eee0;
+      --good: #276749;
+      --good-soft: #e4f0e5;
+      --bad: #865e28;
+      --bad-soft: #f7f0e2;
+      --code-bg: #11251d;
+      --code-text: #dce8dc;
+      --radius: 10px;
+      --shadow: 0 2px 12px rgba(34, 63, 39, .045);
+      --mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+      --sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c1711;
+        --surface: #14241a;
+        --surface-2: #1d3023;
+        --text: #e5eee0;
+        --muted: #a1b59e;
+        --border: #304634;
+        --accent: #9ccda4;
+        --accent-2: #c3dec0;
+        --accent-soft: #243b29;
+        --good: #a2d6b1;
+        --good-soft: #1d3525;
+        --bad: #e0be7f;
+        --bad-soft: #342c1c;
+        --code-bg: #0c1b13;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: var(--mono); font-size: .88em; }
+    :not(pre) > code {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: .1em .4em;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      background: radial-gradient(ellipse at 90% 10%, rgba(174, 201, 132, .16), transparent 52%), linear-gradient(115deg, #143727 0%, #24503a 62%, #3c6144 100%);
+      color: #fff;
+      padding: 56px 24px 88px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "P7 / P12";
+      position: absolute;
+      right: 28px;
+      top: 86px;
+      font-size: clamp(54px, 10vw, 154px);
+      letter-spacing: -.06em;
+      opacity: .055;
+      font-family: var(--mono);
+      line-height: 1;
+    }
+    .hero-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .pill {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      padding: 4px 12px;
+      border-radius: 5px;
+      background: rgba(215, 230, 189, .09);
+      border: 1px solid rgba(219, 235, 201, .24);
+    }
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.25;
+      margin: 0 0 12px;
+      letter-spacing: -.02em;
+    }
+    .hero p { margin: 0; opacity: .9; max-width: 720px; }
+    .hero .meta {
+      margin-top: 22px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      opacity: .92;
+    }
+    .hero .meta b { font-weight: 600; }
+    .hero code { background: rgba(255, 255, 255, .15); color: #fff; }
+
+    /* ---------- Layout ---------- */
+    .wrap { max-width: 1080px; margin: -56px auto 0; padding: 0 24px 80px; position: relative; z-index: 2; }
+    nav.toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 10px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+    nav.toc a {
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    nav.toc a:hover { background: var(--surface-2); color: var(--text); text-decoration: none; }
+
+    section { margin-top: 48px; scroll-margin-top: 80px; }
+    h2 {
+      font-size: 24px;
+      margin: 0 0 18px;
+      letter-spacing: -.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h2 .num {
+      display: inline-grid;
+      place-items: center;
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 15px;
+    }
+    h3 { font-size: 17px; margin: 28px 0 10px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 26px;
+    }
+    .lead { font-size: 16.5px; }
+    .muted { color: var(--muted); }
+
+    /* ---------- KPI ---------- */
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+    .kpi .label { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .kpi .value { font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin-top: 2px; }
+    .kpi .value.good { color: var(--good); }
+    .kpi .sub { font-size: 13px; color: var(--muted); }
+
+    /* ---------- Metric bars ---------- */
+    .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 18px; }
+    @media (max-width: 560px) { .metric-grid { grid-template-columns: 1fr; } }
+    .metric-card h4 { margin: 0 0 4px; font-size: 16px; }
+    .metric-card .thm { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+    .metric { margin: 14px 0; }
+    .metric-head { display: flex; justify-content: space-between; font-size: 13.5px; margin-bottom: 6px; }
+    .metric-head .delta { font-weight: 700; color: var(--good); }
+    .bar {
+      position: relative;
+      height: 22px;
+      background: var(--surface-2);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .bar span {
+      position: absolute; inset: 0 auto 0 0;
+      display: flex; align-items: center;
+      padding-left: 8px;
+      font-size: 12px; font-weight: 600; color: #fff;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .bar.before span { background: linear-gradient(90deg, #677c68, #80947d); }
+    .bar.after span  { background: linear-gradient(90deg, #276749, #41825a); min-width: 34px; }
+    .axiom-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 12px; margin-top: 16px;
+      border-top: 1px dashed var(--border);
+      font-size: 13.5px;
+    }
+    .badge {
+      font-size: 12px; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px;
+      background: var(--good-soft); color: var(--good);
+    }
+
+    /* ---------- Table ---------- */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    thead th { font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); background: var(--surface-2); }
+    tbody tr:hover { background: var(--surface-2); }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.delta { color: var(--good); font-weight: 700; }
+    td.group { font-weight: 700; vertical-align: top; }
+
+    /* ---------- Diagnosis ---------- */
+    .diag { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+    .diag-item {
+      background: var(--bad-soft);
+      border: 1px solid color-mix(in srgb, var(--bad) 20%, transparent);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 14.5px;
+    }
+    .diag-item strong { display: block; color: var(--bad); margin-bottom: 4px; font-size: 15px; }
+    .strategy {
+      background: var(--good-soft);
+      border-left: 4px solid var(--good);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 15px;
+    }
+    .pipeline {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+      margin-top: 12px; font-size: 13px;
+    }
+    .pipeline code { white-space: nowrap; }
+    .pipeline .arrow { color: var(--muted); font-family: var(--mono); }
+
+    /* ---------- Code ---------- */
+    pre {
+      margin: 0;
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 18px 20px;
+      border-radius: 0 0 12px 12px;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.65;
+      tab-size: 2;
+    }
+    .code-block { border-radius: 12px; overflow: hidden; border: 1px solid #2c4635; margin: 10px 0; }
+    .code-title {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #1b3528; color: #adc2ab;
+      padding: 9px 16px;
+      font-size: 12.5px; font-family: var(--mono);
+    }
+    .code-title .dots { display: inline-flex; gap: 6px; margin-right: 12px; }
+    .code-title .dots i { width: 10px; height: 10px; border-radius: 50%; background: #4c6752; display: inline-block; }
+    .code-title .tag { padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+    .tag.before { background: rgba(174, 142, 86, .18); color: #e0c38b; }
+    .tag.after  { background: rgba(127, 188, 143, .16); color: #a4dab7; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    @media (max-width: 900px) { .compare { grid-template-columns: 1fr; } }
+    .compare .code-block.before pre { max-height: 520px; }
+    .compare .code-block.after { position: sticky; top: 80px; }
+
+    /* Lean token colors */
+    .tk-kw  { color: #b8d5a0; }
+    .tk-tac { color: #94d5ba; }
+    .tk-comb{ color: #ddc58e; font-weight: 600; }
+    .tk-id  { color: #d8ca94; }
+    .tk-num { color: #e6b98d; }
+    .tk-com { color: #8ba18e; font-style: italic; }
+
+    /* ---------- Verification ---------- */
+    .verify { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .check { display: flex; gap: 12px; align-items: flex-start; margin: 10px 0; font-size: 14.5px; }
+    .check .ok {
+      flex: none; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--good); color: #fff;
+      display: grid; place-items: center; font-size: 13px; font-weight: 700;
+      margin-top: 2px;
+    }
+
+    footer {
+      margin-top: 64px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--muted);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .ast-demo { display: grid; grid-template-columns: minmax(230px, .8fr) minmax(0, 1.2fr); gap: 24px; }
+    .tree { border-radius: 12px; }
+    .tree [data-node] { border-radius: 4px; padding: 2px 4px; }
+    .tree .visited { color: #b7d6a9; }
+    .tree .active { background: #ddc58e; color: #192f22; }
+    button { font: inherit; cursor: pointer; border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; background: var(--accent); color: var(--surface); }
+    button:disabled { opacity: .5; cursor: default; }
+    button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+    .demo-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+    #ast-status { min-height: 3.4em; font-weight: 600; }
+    summary { cursor: pointer; padding: 12px 16px; background: var(--surface-2); }
+    caption { text-align: left; font-weight: 600; padding-bottom: 12px; }
+    .compare > *, .diag > *, .verify > * { min-width: 0; }
+    h2 { overflow-wrap: anywhere; }
+    h2 code, .hero code { white-space: normal; overflow-wrap: anywhere; }
+    @media (max-width: 600px) {
+      .ast-demo { grid-template-columns: 1fr; }
+      .wrap { padding-inline: 14px; }
+      .card { padding: 18px; }
+      :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
+      .verify { grid-template-columns: 1fr; }
+      nav.toc { position: static; }
+      nav.toc a { padding: 6px 8px; font-size: 13px; }
+      .compare .code-block.after { position: static; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    /* Forest green palette with warm paper surfaces. */
+    .two-col { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .card > :first-child, .strategy > :first-child { margin-top:0; }
+    .card > :last-child, .strategy > :last-child { margin-bottom:0; }
+    .section-intro { color:var(--muted); margin:-8px 0 20px; }
+    .eyebrow, .hero .meta { position:relative; }
+    .hero .subtitle { font-size:18px; max-width:780px; }
+    .toc a[aria-current="location"] { background:var(--accent-soft); color:var(--accent); font-weight:700; }
+    section { scroll-margin-top:110px; }
+    h2 .num { flex:none; }
+    h2 code { font-size:.72em; }
+    .two-col > *, .metric-grid > *, .demo-panel > * { min-width:0; }
+    .kpi .value small { font-size:16px; font-weight:500; }
+    .kpi .value { font-variant-numeric:tabular-nums; }
+    .note { color:var(--muted); font-size:13.5px; }
+    .statement pre { font-size:14px; }
+    dl.glossary { display:grid; grid-template-columns:155px minmax(0,1fr); gap:10px 18px; margin:16px 0; }
+    dt { font-weight:700; } dd { margin:0; }
+    .term { background:var(--surface-2); padding:16px 20px; border:1px solid var(--border); border-radius:10px; font-family:var(--mono); font-size:20px; overflow-x:auto; white-space:nowrap; }
+    .demo-panel { display:grid; grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr); gap:24px; align-items:start; }
+    .demo-panel pre.tree { padding:22px; font-size:15px; line-height:2; border-radius:10px; }
+    .tree [data-node] { display:inline-block; }
+    .demo-status { min-height:5.1em; font-weight:600; }
+    .demo-controls { margin-top:18px; }
+    .secondary { background:var(--surface-2); color:var(--text); }
+    button { background:#245c43; color:#fff; }
+    .dim-controls { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+    .dim-controls button { background:var(--surface-2); color:var(--text); }
+    .dim-controls button[aria-pressed="true"] { background:#245c43; color:white; border-color:#245c43; }
+    .stack-diagram { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .stack-half { border:1px solid var(--border); border-radius:10px; padding:14px; background:var(--surface-2); }
+    .stack-half h4 { margin:0 0 10px; font-size:15px; }
+    .stack-half:last-child { background:var(--accent-soft); }
+    .word-row { display:flex; align-items:center; gap:10px; margin:6px 0; font-family:var(--mono); }
+    .word-label { min-width:32px; color:var(--accent); font-weight:700; }
+    .word-cells { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; flex:1; }
+    .word-cell { background:var(--surface); border:1px solid var(--border); text-align:center; border-radius:4px; color:var(--muted); font-size:12px; padding:3px; }
+    .equation { font-family:var(--mono); background:var(--surface-2); padding:16px 20px; border-radius:10px; margin:16px 0; overflow-x:auto; font-size:15px; }
+    .equation strong { color:var(--accent); }
+    .concept-card { border-top:4px solid var(--accent); }
+    .concept-card h3 { margin-top:0; font-size:19px; }
+    .concept-card .plain { font-size:19px; font-weight:650; }
+    .concept-card .mini-label { color:var(--muted); font-size:12px; letter-spacing:.06em; font-weight:700; }
+    .compare .code-block.before pre, .compare .code-block.after pre { max-height:520px; }
+    .compare .code-block.after { top:110px; }
+    .compare { margin-top:12px; }
+    .code-title { gap:12px; }
+    .code-title > span:first-child { min-width:0; overflow-wrap:anywhere; }
+    .code-title .tag { flex:none; }
+    .code-block pre:focus-visible { outline:3px solid #94d5ba; outline-offset:-3px; }
+    .tk-com { color:#92aa95; }
+    .code-caption { color:var(--muted); font-size:13px; margin:4px 0 14px; }
+    .helper-details { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:18px 0; background:var(--surface); }
+    .helper-details > summary { font-weight:650; }
+    .details-content { padding:18px 22px; }
+    .details-content .code-block { margin:0; }
+    .helper-map { margin-top:18px; }
+    .process { background:#173d2b; color:#e3ebdc; border-radius:14px; padding:28px; margin:22px 0; }
+    .process h3 { color:#fff; margin:0 0 18px; font-size:20px; }
+    .process ol { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; counter-reset:step; }
+    .process li { border-top:2px solid #5b8b67; padding-top:14px; counter-increment:step; font-size:14px; }
+    .process li::before { content:'0' counter(step); display:block; color:#c7dbab; font-family:var(--mono); margin-bottom:7px; font-size:13px; }
+    .process strong { display:block; color:#fff; font-size:16px; margin-bottom:8px; }
+    .process code { background:#2a5038; color:#c4dfb7; overflow-wrap:anywhere; white-space:normal; }
+    .process .note { color:#bdceba; margin-bottom:0; }
+    .checks { padding:0; list-style:none; margin:16px 0 0; }
+    .checks .check { margin:12px 0; }
+    .verify h3 { margin-top:0; }
+    .scope { background:var(--surface-2); border-left:3px solid var(--accent); padding:16px 20px; border-radius:8px; margin:20px 0; }
+    .resource-links { display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:14px; font-size:14px; }
+    .resource-links a { text-decoration:underline; text-underline-offset:3px; }
+    .skip { position:absolute; top:-100px; left:16px; z-index:100; padding:10px 16px; background:var(--surface); border-radius:8px; }
+    .skip:focus { top:12px; }
+    .presentation-tools { display:flex; align-items:center; gap:8px; margin-left:auto; }
+    .presentation-tools button { padding:6px 10px; font-size:13px; }
+    .presentation-tools .secondary { background:var(--surface-2); color:var(--text); }
+    #page-progress { position:fixed; top:0; left:0; height:3px; width:0; background:#60925f; z-index:50; pointer-events:none; }
+    .bar span { min-width:44px; }
+    .metric-card .thm { overflow-wrap:anywhere; }
+    footer a { text-decoration:underline; }
+
+    .toc a { border-radius:5px; border-bottom:2px solid transparent; }
+    .toc a[aria-current="location"] { border-bottom-color:var(--accent); background:var(--surface-2); }
+    h2 { letter-spacing:-.025em; }
+    h2 .num { background:#245c43; color:#fff; border-radius:5px; width:38px; height:30px; font-family:var(--mono); font-size:13px; }
+    .kpi { border-top:3px solid var(--accent); }
+    .metric-card { border-top:3px solid var(--border); }
+    .code-block, .helper-details, .stack-half { border-radius:8px; }
+    .concept-card { border-top-width:3px; }
+    .tree .active { background:#d9d7a4; color:#192f22; }
+    .check .ok { background:#276749; color:#fff; }
+    .reading-notes { margin:18px 0 28px; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+    .reading-note { padding:22px 26px; background:var(--surface); }
+    .reading-note + .reading-note { background:var(--surface-2); border-top:1px solid var(--border); }
+    .reading-note h3 { font-size:17px; margin:0 0 12px; color:var(--accent); }
+    .reading-note h3 span { display:inline-block; margin-right:10px; font-size:11px; letter-spacing:.1em; vertical-align:2px; color:var(--muted); font-weight:600; }
+    .reading-note p { margin:10px 0 0; line-height:1.85; }
+    .reading-note p:first-of-type { margin-top:0; }
+    @media (max-width:600px) { .reading-note { padding:18px; } }
+    @media (min-width:1200px) { body.large-type .wrap, body.large-type .hero-inner { max-width:1280px; } body.large-type { font-size:19px; } body.large-type .lead { font-size:20px; } body.large-type h2 { font-size:29px; } body.large-type h3 { font-size:21px; } body.large-type pre { font-size:15px; } body.large-type .diag-item, body.large-type .strategy, body.large-type table { font-size:17px; } body.large-type .reading-note h3 { font-size:21px; } }
+    @media (max-width:800px) { .two-col, .demo-panel { grid-template-columns:1fr; } .process ol { grid-template-columns:1fr 1fr; } .presentation-tools { margin-left:0; } }
+    @media (max-width:600px) { .hero { padding:38px 20px 80px; } .hero .subtitle { font-size:16px; } .hero .meta { gap:8px 20px; } .process { padding:22px; } .process ol { grid-template-columns:1fr; } .stack-diagram { grid-template-columns:1fr; } dl.glossary { grid-template-columns:1fr; gap:4px; } dd { margin-bottom:10px; } section { scroll-margin-top:20px; } h2 { font-size:22px; align-items:flex-start; } h2 .num { margin-top:3px; } .term { font-size:17px; } .details-content { padding:14px; } .table-wrap { padding:16px; } th,td { padding:10px; } .presentation-tools { display:none; } }
+    @media print { :root { --bg:white; --surface:white; --surface-2:#f0f4ec; --text:#21392e; --muted:#536750; --border:#d4dece; --accent:#245c43; --accent-soft:#e6eee0; --good:#276749; --good-soft:#e4f0e5; --bad:#865e28; --bad-soft:#f7f0e2; --code-bg:#f0f4ec; --code-text:#253c2c; } @page { size:A4; margin:15mm; } body { font-size:10pt; } .hero { padding:26px; background:#245c43 !important; print-color-adjust:exact; -webkit-print-color-adjust:exact; } .hero h1 { font-size:26pt; } .wrap { margin:0 auto; padding:0; } nav.toc, #page-progress, .demo-controls, .dim-controls, .skip { display:none; } section { margin-top:28px; } h2 { font-size:17pt; break-after:avoid; } h3 { break-after:avoid; } .card,.kpi { box-shadow:none; } .compare { grid-template-columns:1fr; } .compare .code-block.after { position:static; } .compare .code-block pre { max-height:none; overflow:visible; } pre { white-space:pre-wrap; overflow-wrap:anywhere; font-size:8pt; } .code-title { print-color-adjust:exact; -webkit-print-color-adjust:exact; } .tk-kw,.tk-tac,.tk-id,.tk-num,.tk-com,.tk-comb { color:inherit; } .process { print-color-adjust:exact; -webkit-print-color-adjust:exact; } .two-col { grid-template-columns:1fr 1fr; } a { color:inherit; } footer { margin-top:30px; } }
+    </style>
+</head>
+<body>
+  <a class="skip" href="#background">본문으로 이동</a>
+  <div id="page-progress" aria-hidden="true"></div>
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div class="eyebrow"><span class="pill">Week 2</span><span class="pill">Lean Proof Refactoring</span><span class="pill">Warm-up P7 · P12</span></div>
+      <h1>P7·P12 증명 리팩터링</h1>
+      <p class="subtitle">P7의 반복되는 case split을 합치고,<br>P12의 인덱스·확률 계산을 보조정리로 정리한 과정</p>
+      <div class="meta"><span><b>대상</b> Cslib · ArkLib</span><span><b>검증 로그</b> 2026.10.10</span><span><b>자료 작성</b> 2026.10.11</span></div>
+    </div>
+  </header>
+  <main class="wrap">
+    <nav class="toc" aria-label="발표 목차">
+      <a href="#background">작업 대상</a><a href="#demo">예제 탐색</a><a href="#meaning">정리 해석</a><a href="#summary">변경 요지</a><a href="#metrics">수치 비교</a><a href="#p7">P7</a><a href="#p12">P12</a><a href="#verification">실행 기록</a>
+      <div class="presentation-tools"><button id="large-type" class="secondary" type="button" aria-pressed="false">큰 글씨</button><button id="print-page" class="secondary" type="button">인쇄</button></div>
+    </nav>
+
+    <section id="background" aria-labelledby="background-title">
+      <h2 id="background-title">살펴볼 정리와 작업 범위</h2>
+      <div class="card">
+        <p class="lead"><strong>증명할 명제는 유지하고, 증명 코드에서 반복과 불필요한 계산을 줄였습니다.</strong> JSONL의 <code>statement</code>가 목표 명제이고 <code>src</code>가 참조 증명입니다. 두 증명을 읽고 실행한 뒤 수정본도 같은 환경에서 검사했습니다.</p>
+        <div class="two-col">
+          <div><h3>P7 · 타입 규칙과 계산 가능성</h3><p>Cslib의 타입이 있는 람다 계산입니다. 빈 환경에서 타입을 갖는 항은 이미 값이거나 한 단계 계산할 수 있음을 보입니다. <code>Typing</code> 유도에 대한 귀납이 증명의 뼈대입니다.</p></div>
+          <div><h3>P12 · 다중선형 결합의 근접성</h3><p>ArkLib의 코딩 이론입니다. affine line에 대한 gap 가정을 여러 행을 묶은 코드에도 적용해, 양의 차원의 다중선형 결합에 대한 correlated agreement를 유도합니다.</p></div>
+        </div>
+        <details><summary>읽기에 필요한 기본 개념</summary><div class="details-content">
+          <dl class="glossary"><dt>귀납적 정의</dt><dd>생성 규칙으로 대상을 정의합니다. P7에서는 typing 규칙마다 하나의 증명 경우가 생깁니다.</dd><dt>귀납가설 (IH)</dt><dd>더 작은 유도나 더 낮은 차원에 대해 이미 얻은 증명 결과입니다.</dd><dt>canonical form</dt><dd>타입과 값이라는 조건으로 가능한 항의 형태를 좁힙니다. 함수 타입의 값이면 함수 추상화 형태임을 꺼냅니다.</dd><dt>local closure (LC)</dt><dd>구문 안의 바운드 변수가 적절히 묶여 있다는 조건입니다. P7에서 <code>Typing.wf</code>로 얻습니다.</dd><dt>word / code</dt><dd>word는 좌표별 기호의 배열이고, code는 허용되는 word들의 집합입니다. P12의 <code>MC</code>는 module code입니다.</dd><dt>interleaving</dt><dd>여러 행의 같은 열을 하나의 기호로 묶는 표현입니다. 행 사이의 공동 일치를 다룹니다.</dd><dt>Δ₀ / e</dt><dd>코드까지의 거리와 허용 거리입니다. 이 정리의 Nat 버전에서는 불일치 좌표 수를 사용합니다.</dd><dt>ε / q</dt><dd>gap 가정의 확률 문턱입니다. <code>q = |F|</code>는 유한 스칼라 집합의 크기입니다.</dd></dl>
+        </div></details>
+      </div>
+    </section>
+
+    <section id="demo" aria-labelledby="demo-title">
+      <h2 id="demo-title">예제로 확인하는 증명의 구조</h2>
+      <p class="section-intro">P7은 부분항의 계산 경로를, P12는 행과 무작위 좌표의 분할을 따라갑니다.</p>
+      <div class="card">
+        <h3 style="margin-top:0">P7 · 함수 적용에서 선택하는 계산 규칙</h3>
+        <p>함수 부분이 계산하면 <code>Red.appₗ</code>, 함수가 값이고 인자가 계산하면 <code>Red.appᵣ</code>, 둘 다 값이면 canonical form을 확인하고 <code>Red.abs</code>를 사용합니다.</p>
+        <div class="demo-panel">
+          <pre class="tree" aria-label="예제 항의 구문 트리"><span data-node="root">app</span>
+├─ <span data-node="left">λx. x</span>
+└─ <span data-node="right">app</span>
+   ├─ <span data-node="inner">λy. y</span>
+   └─ <span data-node="value">v</span></pre>
+          <div>
+            <div class="term" id="eval-term">(λx. x) ((λy. y) v)</div>
+            <p class="demo-status" id="eval-status" role="status" aria-live="polite">시작 전 · v는 타입이 맞는 닫힌 값입니다. 다음 단계를 눌러 함수 적용의 계산 경로를 확인합니다.</p>
+            <div class="demo-controls"><button type="button" id="eval-next">다음 단계</button><button type="button" id="eval-reset" class="secondary">처음으로</button></div>
+          </div>
+        </div>
+        <p class="note">설명용 구문과 HTML 데모입니다. 브라우저 안에서 Lean을 실행하지 않습니다. progress는 한 단계 계산 가능성을 보장하며, 평가가 항상 종료한다는 주장은 아닙니다.</p>
+      </div>
+
+      <div class="card" style="margin-top:20px">
+        <h3 style="margin-top:0">P12 · 차원을 줄이는 행 분할</h3>
+        <p>차원 <code>ϑ</code>의 입력은 <code>2^ϑ</code>개 행입니다. 두 절반 <code>U₀</code>·<code>U₁</code>를 마지막 좌표 <code>r_last</code>로 affine 결합한 뒤, 남은 좌표로 다중선형 결합합니다.</p>
+        <div class="dim-controls" role="group" aria-label="예제 차원 선택"><button type="button" data-dim="1" aria-pressed="false">ϑ = 1</button><button type="button" data-dim="2" aria-pressed="true">ϑ = 2</button><button type="button" data-dim="3" aria-pressed="false">ϑ = 3</button></div>
+        <div class="stack-diagram" id="stack-diagram" aria-label="4개 행을 두 절반으로 분할">
+          <div class="stack-half"><h4>U₀ · 앞 절반 (2행)</h4><div class="word-row"><span class="word-label">u₀</span><span class="word-cells"><span class="word-cell">a</span><span class="word-cell">b</span><span class="word-cell">c</span><span class="word-cell">d</span></span></div><div class="word-row"><span class="word-label">u₁</span><span class="word-cells"><span class="word-cell">a</span><span class="word-cell">b</span><span class="word-cell">c</span><span class="word-cell">d</span></span></div></div>
+          <div class="stack-half"><h4>U₁ · 뒤 절반 (2행)</h4><div class="word-row"><span class="word-label">u₂</span><span class="word-cells"><span class="word-cell">a</span><span class="word-cell">b</span><span class="word-cell">c</span><span class="word-cell">d</span></span></div><div class="word-row"><span class="word-label">u₃</span><span class="word-cells"><span class="word-cell">a</span><span class="word-cell">b</span><span class="word-cell">c</span><span class="word-cell">d</span></span></div></div>
+        </div>
+        <div class="equation"><strong>M<sub>ϑ</sub>(u; r)</strong> = M<sub>ϑ−1</sub>((1 − r_last) U₀ + r_last U₁; r_init)</div>
+        <p id="dim-status" role="status" aria-live="polite">ϑ = 2 · 4행을 2행씩 분할합니다. 마지막 좌표로 두 절반을 결합하고, 남은 1개 좌표로 계산합니다.</p>
+        <p class="note">셀의 a·b·c·d는 열 위치를 표시합니다. 실제 데이터나 gap 가정을 검증하는 수치 예제는 아닙니다. 이 재귀식과 균등 샘플링 분할을 <code>tensor_success_split</code>에서 연결합니다.</p>
+      </div>
+    </section>
+
+    <section id="meaning" aria-labelledby="meaning-title">
+      <h2 id="meaning-title">수식이 말하는 내용</h2>
+      <div class="two-col">
+        <article class="card concept-card"><div class="mini-label">P7 · TYPING.PROGRESS</div><h3>닫힌 항의 값과 계산 규칙</h3><p class="plain">이미 값이거나,<br>적용할 계산 규칙이 있다</p><div class="equation">Typing [] t τ<br>⇒ t.Value ∨ ∃ t′, t ⭢βᵛ t′</div><p><code>[]</code>는 빈 typing 환경입니다. 함수 적용에서는 부분항의 귀납 결과와 값의 형태를 함께 확인합니다. 자유 변수만 남아 계산이 막히는 경우는 빈 환경의 typing과 양립할 수 없습니다.</p></article>
+        <article class="card concept-card"><div class="mini-label">P12 · TENSOR GAP</div><h3>행들의 공동 일치를 얻는 조건</h3><p class="plain">결합 결과가 충분히 자주 가까우면,<br>원래 행들을 함께 가깝게 맞출 수 있다</p><div class="equation">Pr[Δ₀(M<sub>ϑ</sub>(u; r), C) ≤ e] &gt; ϑ ε / q<br>⇒ jointProximityNat(u, C, e)</div><p>각 양의 interleaving 크기에 대한 affine-line gap 가정이 필요합니다. 결론은 행을 묶은 word가 interleaved code에서 거리 <code>e</code> 이내라는 뜻이며, 여러 행의 불일치를 같은 열 기준으로 셉니다.</p></article>
+      </div>
+      <div class="scope"><strong>두 문제의 귀납 대상이 다릅니다.</strong> P7은 <code>Typing</code>의 유도 규칙으로 경우를 나누고, P12는 자연수 차원 <code>ϑ</code>에 귀납합니다. P7은 대칭 분기를 합치는 작업이, P12는 표현 변환을 작은 보조정리에 모으는 작업이 효과적이었습니다.</div>
+    </section>
+
+    <section id="summary" aria-labelledby="summary-title">
+      <h2 id="summary-title">핵심 변경 사항</h2>
+      <div class="card"><p class="lead"><strong>P7은 같은 구조의 분기를 합쳤고, P12는 핵심 귀납 논증과 표현 변환을 분리했습니다.</strong> 두 문제 모두 JSONL의 명제를 그대로 유지했습니다.</p><p>P7의 <code>inl</code>·<code>inr</code>와 <code>abs</code>·<code>tabs</code>는 공통 코드로 처리합니다. P12는 사용하지 않는 cardinality 하한을 삭제하고, 샘플링 변환·기저 단계·귀납 단계를 각각 보조정리로 옮겼습니다.</p></div>
+      <div class="kpis">
+        <div class="kpi"><div class="label">P7 · 정리 전체</div><div class="value">83 <small>→</small> 49 <small>줄</small></div><div class="sub">41.0% 감소</div></div>
+        <div class="kpi"><div class="label">P12 · 새 보조정리 포함</div><div class="value">177 <small>→</small> 76 <small>줄</small></div><div class="sub">57.1% 감소 · 주 정리는 17줄</div></div>
+        <div class="kpi"><div class="label">원본·수정본 실제 Lean 검사</div><div class="value good">4 / 4 <small>PASS</small></div><div class="sub">종료 코드 0 · 대상 정리에 sorryAx 없음</div></div>
+      </div>
+    </section>
+
+    <section id="metrics" aria-labelledby="metrics-title">
+      <h2 id="metrics-title">증명 규모와 검사 결과</h2>
+      <div class="metric-grid">
+        <div class="card metric-card"><h4>P7 · 반복 분기를 하나로 정리</h4><div class="thm">Typing.progress · 정리 선언 포함</div><div class="metric"><div class="metric-head"><span>전체 줄 수</span><span class="delta">41.0% 감소</span></div><div class="bar before"><span style="width:100%">83</span></div><div class="bar after"><span style="width:59.04%">49</span></div></div><div class="metric"><div class="metric-head"><span>grind 출현 횟수</span><span class="delta">57.9% 감소</span></div><div class="bar before"><span style="width:100%">19</span></div><div class="bar after"><span style="width:42.11%">8</span></div></div><div class="axiom-row"><span>공리 목록</span><span class="badge">원본과 동일</span></div></div>
+        <div class="card metric-card"><h4>P12 · 보조정리를 포함한 크기 변화</h4><div class="thm">interleaved_affine_gaps_imply_tensor_gaps</div><div class="metric"><div class="metric-head"><span>새 보조정리 + 주 정리</span><span class="delta">57.1% 감소</span></div><div class="bar before"><span style="width:100%">177</span></div><div class="bar after"><span style="width:42.94%">76</span></div></div><div class="metric"><div class="metric-head"><span>공백·주석 제외 문자 수</span><span class="delta">47.4% 감소</span></div><div class="bar before"><span style="width:100%">5,135</span></div><div class="bar after"><span style="width:52.62%">2,702</span></div></div><div class="axiom-row"><span>공리 목록</span><span class="badge">원본과 동일</span></div></div>
+      </div>
+      <div class="card table-wrap" style="margin-top:18px"><table><caption>최종 파일과 2026-10-10 실행 로그 기준</caption><thead><tr><th scope="col">항목</th><th scope="col">P7 원본</th><th scope="col">P7 수정</th><th scope="col">P12 원본</th><th scope="col">P12 수정</th></tr></thead><tbody><tr><th scope="row">비교 범위 전체 줄 수</th><td class="num">83</td><td class="num">49</td><td class="num">177</td><td class="num">76</td></tr><tr><th scope="row">주 정리 줄 수</th><td class="num">83</td><td class="num">49</td><td class="num">177</td><td class="num">17</td></tr><tr><th scope="row">공백·주석 제외 문자 수</th><td class="num">1,243</td><td class="num">1,108</td><td class="num">5,135</td><td class="num">2,702</td></tr><tr><th scope="row">단회 파일 검사 시간</th><td class="num">4.458초</td><td class="num">3.517초</td><td class="num">10.786초</td><td class="num">10.611초</td></tr><tr><th scope="row">종료 코드 / 결과</th><td>0 / PASS</td><td>0 / PASS</td><td>0 / PASS</td><td>0 / PASS</td></tr></tbody></table><p class="note">줄 수는 선언·빈 줄·주석을 포함합니다. P12 수정본은 새 helper 블록 59줄과 주 정리 17줄의 합이며 두 블록 사이 구분용 빈 줄을 제외합니다. import·공통 문맥·검증 명령은 비교에서 제외했습니다. P12의 공통 문맥 1,199줄은 유지했습니다.</p><p class="note">시간은 의존성 빌드·다운로드를 제외한 <code>lake env lean</code> 1회 경과 시간입니다. P12는 공통 문맥도 검사합니다. 반복 측정이나 heartbeat 측정은 수행하지 않았으므로 속도 개선을 일반화하지 않습니다.</p></div>
+    </section>
+
+    <section id="p7" aria-labelledby="p7-title">
+      <h2 id="p7-title"><span class="num">P7</span> <span>typing 유도의 반복 패턴 정리</span></h2>
+      <p class="section-intro"><code>Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress</code></p>
+      <div class="card"><h3 style="margin-top:0">기존 풀이가 사용하는 논리</h3><p><code>Typing</code> 유도에 귀납해 각 typing 규칙을 처리합니다. 함수 적용은 두 부분항의 progress와 canonical form을 결합합니다. 합 타입의 두 주입은 같은 논증을 반복하고, 함수·타입 추상화는 각각 local closure를 다시 구성합니다.</p></div>
+      <h3>Lean 정리의 형태</h3><div class="statement"><div class="code-block "><div class="code-title"><span>statement · P7</span></div><pre class="lean" tabindex="0"><code id="p7-statement-code">lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t&#x27;, t ⭢βᵛ t&#x27;</code></pre></div></div>
+      <div class="reading-notes" aria-label="P7 명제와 증명 읽기">
+        <article class="reading-note" aria-labelledby="p7-syntax-title">
+          <h3 id="p7-syntax-title"><span>SYNTAX</span>선언의 기호를 풀어 읽기</h3>
+          <p><code>lemma Typing.progress</code>는 <code>Typing.progress</code>라는 이름의 정리를 선언합니다. 괄호 안의 <code>(der : Typing [] t τ)</code>는 정리가 받는 가정입니다. <code>der</code>는 빈 환경 <code>[]</code>에서 항 <code>t</code>가 타입 <code>τ</code>를 갖는다는 증거이고, 그 뒤의 <code>:</code>부터 증명할 결론이 나옵니다.</p>
+          <p><code>t.Value</code>는 “t가 값이다”라는 명제입니다. <code>∨</code>는 두 명제 중 하나가 성립한다는 뜻이고, <code>∃ t', t ⭢βᵛ t'</code>는 “어떤 다음 항 t'가 존재하며 t가 그 항으로 한 단계 call-by-value 계산된다”는 뜻입니다. 따라서 결론의 왼쪽을 증명하려면 값이라는 증거를, 오른쪽을 증명하려면 다음 항과 계산 관계의 증거를 함께 제출해야 합니다.</p>
+        </article>
+        <article class="reading-note" aria-labelledby="p7-flow-title">
+          <h3 id="p7-flow-title"><span>PROOF FLOW</span>증명 전개를 따라가면</h3>
+          <p>수정본은 먼저 <code>generalize</code>로 빈 환경을 <code>Γ</code>라는 변수로 바꾸고 그 등식을 남깁니다. 전체 typing 증거를 <code>wholeTyped</code>로 보존한 뒤 <code>induction der</code>로 typing 규칙마다 경우를 나눕니다. 각 경우에서 <code>subst eq</code>로 빈 환경 조건을 복원하고, 부분항에 대한 귀납가설을 사용합니다.</p>
+          <p>함수 적용에서는 <code>rcases</code>로 함수와 인자가 값인지 계산 가능한지 확인합니다. 둘 다 값이면 canonical form을 꺼내 <code>Red.abs</code>를 사용하고, 인자나 함수가 계산하면 각각 <code>Red.appᵣ</code>·<code>Red.appₗ</code>로 전체 항의 다음 단계를 만듭니다. <code>inl</code>·<code>inr</code>는 같은 코드로 부분항의 결과를 옮깁니다. <code>abs</code>·<code>tabs</code>에서는 <code>wholeTyped.wf.2.1</code>로 local closure를 얻어 값임을 보이고, 나머지 규칙도 귀납 결과와 해당 계산 생성자를 연결해 마무리합니다.</p>
+        </article>
+      </div>
+      <h3>길어진 부분과 정리 방법</h3><div class="diag"><div class="diag-item"><strong>inl · inr 반복</strong>부분항이 값이면 전체도 값입니다. 부분항이 계산하면 같은 주입 안에서 계산합니다.</div><div class="diag-item"><strong>abs · tabs의 LC 재구성</strong>이미 보존한 전체 typing 유도의 <code>wf.2.1</code>이 필요한 local closure를 제공합니다.</div><div class="diag-item"><strong>함수 적용의 간접적인 표현</strong>계산 생성자를 직접 지정해 왼쪽·오른쪽·β 계산 경로를 드러냅니다.</div></div>
+      <div class="strategy" style="margin-top:16px"><strong>귀납 구조를 유지하면서 공통 분기를 합칩니다.</strong><p><code>case inl ... | inr ...</code>와 <code>case abs | tabs</code>로 대칭 경우를 묶습니다. <code>rcases</code>로 부분항의 계산 증거를 바로 꺼내고, 함수 적용에는 <code>Red.abs</code>·<code>Red.appᵣ</code>·<code>Red.appₗ</code>을 제출합니다.</p></div>
+      <h3>두 증명을 나란히 읽기</h3><div class="compare"><div><div class="code-block before"><div class="code-title"><span>Progress.lean · 83줄</span><span class="tag before">원본</span></div><pre class="lean" tabindex="0"><code id="p7-original-code">lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t&#x27;, t ⭢βᵛ t&#x27; := by
+  generalize eq : [] = Γ at der
+  have der&#x27; : Typing Γ t τ := der
+  induction der &lt;;&gt; subst eq
+  case var mem =&gt; grind
+  case app t₁ _ _ t₂ l r ih_l ih_r =&gt;
+    right
+    cases ih_l rfl l with
+    | inl val_l =&gt;
+        cases ih_r rfl r with
+        | inl val_r =&gt;
+            have ⟨σ, t₁, eq⟩ := l.canonical_form_abs val_l
+            exists t₁ ^ᵗᵗ t₂
+            grind
+        | inr red_r =&gt;
+            obtain ⟨t₂&#x27;, _⟩ := red_r
+            exists t₁.app t₂&#x27;
+            grind
+    | inr red_l =&gt;
+        obtain ⟨t₁&#x27;, _⟩ := red_l
+        exists t₁&#x27;.app t₂
+        grind
+  case tapp σ&#x27; der _ ih =&gt;
+    right
+    specialize ih rfl der
+    cases ih with
+    | inl val =&gt;
+        obtain ⟨_, t, _⟩ := der.canonical_form_tabs val
+        exists t ^ᵗᵞ σ&#x27;
+        grind
+    | inr red =&gt;
+        obtain ⟨t&#x27;, _⟩ := red
+        exists .tapp t&#x27; σ&#x27;
+        grind
+  case let&#x27; t₁ σ t₂ τ L der _ ih _ =&gt;
+    right
+    cases ih rfl der with
+    | inl _ =&gt;
+        exists t₂ ^ᵗᵗ t₁
+        grind
+    | inr red =&gt;
+        obtain ⟨t₁&#x27;, _⟩ := red
+        exists t₁&#x27;.let&#x27; t₂
+        grind
+  case inl der _ ih =&gt;
+    cases (ih rfl der) with
+    | inl val =&gt; grind
+    | inr red =&gt;
+        right
+        obtain ⟨t&#x27;, _⟩ := red
+        exists .inl t&#x27;
+        grind
+  case inr der _ ih =&gt;
+    cases (ih rfl der) with
+    | inl val =&gt; grind
+    | inr red =&gt;
+        right
+        obtain ⟨t&#x27;, _⟩ := red
+        exists .inr t&#x27;
+        grind
+  case case t₁ _ _ t₂ _ t₃ _ der _ _ ih _ _ =&gt;
+    right
+    cases ih rfl der with
+    | inl val =&gt;
+        have ⟨t₁, lr⟩ := der.canonical_form_sum val
+        cases lr &lt;;&gt; [exists t₂ ^ᵗᵗ t₁; exists t₃ ^ᵗᵗ t₁] &lt;;&gt; grind
+    | inr red =&gt;
+        obtain ⟨t₁&#x27;, _⟩ := red
+        exists t₁&#x27;.case t₂ t₃
+        grind
+  case sub =&gt; grind
+  case abs σ _ τ L _ _=&gt;
+    left
+    constructor
+    apply LC.abs L
+    · grind only [→ wf, cases Term.LC]
+    · grind only [→ wf]
+  case tabs L _ _=&gt;
+    left
+    constructor
+    apply LC.tabs L
+    · grind only [→ wf, cases Term.LC]
+    · grind only [→ wf]</code></pre></div><p class="code-caption">JSONL src 전체 · 선언 포함 83줄</p></div><div><div class="code-block after"><div class="code-title"><span>ProgressRefactored.lean · 49줄</span><span class="tag after">수정본</span></div><pre class="lean" tabindex="0"><code id="p7-refactored-code">lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t&#x27;, t ⭢βᵛ t&#x27; := by
+  generalize eq : [] = Γ at der
+  -- Retain the typing derivation to recover local closure after induction.
+  have wholeTyped : Typing Γ t τ := der
+  induction der &lt;;&gt; subst eq
+  case var =&gt; grind
+  case app t₁ _ _ t₂ leftTyped rightTyped ihLeft ihRight =&gt;
+    right
+    rcases ihLeft rfl leftTyped with leftValue | ⟨t₁&#x27;, step⟩
+    · rcases ihRight rfl rightTyped with rightValue | ⟨t₂&#x27;, step⟩
+      · obtain ⟨σ, body, rfl⟩ := leftTyped.canonical_form_abs leftValue
+        exact ⟨_, Red.abs leftValue.lc rightValue⟩
+      · exact ⟨_, Red.appᵣ leftValue step⟩
+    · exact ⟨_, Red.appₗ rightTyped.wf.2.1 step⟩
+  case tapp σ&#x27; typed _ ih =&gt;
+    right
+    rcases ih rfl typed with value | ⟨t&#x27;, step⟩
+    · obtain ⟨_, body, eq⟩ := typed.canonical_form_tabs value
+      exists body ^ᵗᵞ σ&#x27;
+      grind
+    · exists .tapp t&#x27; σ&#x27;
+      grind
+  case let&#x27; t₁ σ t₂ τ L typed _ ih _ =&gt;
+    right
+    rcases ih rfl typed with value | ⟨t₁&#x27;, step⟩
+    · exists t₂ ^ᵗᵗ t₁
+      grind
+    · exists t₁&#x27;.let&#x27; t₂
+      grind
+  case inl typed _ ih | inr typed _ ih =&gt;
+    -- The two injections share the same value and congruence-step argument.
+    rcases ih rfl typed with value | ⟨t&#x27;, step⟩
+    · left
+      constructor
+      exact value
+    · right
+      exact ⟨_, by constructor; exact step⟩
+  case case t₁ _ _ t₂ _ t₃ _ typed _ _ ih _ _ =&gt;
+    right
+    rcases ih rfl typed with value | ⟨t₁&#x27;, step⟩
+    · obtain ⟨t₁, side⟩ := typed.canonical_form_sum value
+      cases side &lt;;&gt; [exists t₂ ^ᵗᵗ t₁; exists t₃ ^ᵗᵗ t₁] &lt;;&gt; grind
+    · exists t₁&#x27;.case t₂ t₃
+      grind
+  case sub =&gt; grind
+  case abs | tabs =&gt;
+    left
+    constructor
+    exact wholeTyped.wf.2.1</code></pre></div><p class="code-caption">정리 전체 49줄 · grind 출현 19곳에서 8곳</p></div></div>
+      <details class="helper-details"><summary>시도 중 만난 오류와 해결</summary><div class="details-content"><p><strong>이름 충돌:</strong> 전체 typing 유도와 분기별 유도를 모두 <code>typed</code>로 부르면 귀납가설에 전체 항의 유도를 전달하는 타입 불일치가 생겼습니다. 전체 유도를 <code>wholeTyped</code>로 구분해 해결했습니다.</p><p><strong>실행 경로:</strong> 이동한 runner의 JSONL 경로를 <code>ROOT.parent</code>로 바로잡고 원본부터 다시 확인했습니다.</p><p><strong>남겨 둔 부분:</strong> 빈 환경 일반화, canonical-form 분석, 일부 <code>grind</code>를 유지했습니다. 최종 대상 증명의 미해결 오류는 없습니다.</p><div class="resource-links"><span>원본 Lean (본문 코드 참조)</span><span>수정 Lean (본문 코드 참조)</span><span>수정본 검증 로그 (로컬 검증 기록)</span></div></div></details>
+    </section>
+
+    <section id="p12" aria-labelledby="p12-title">
+      <h2 id="p12-title"><span class="num">P12</span> <span>귀납 논증과 표현 변환의 구분</span></h2>
+      <p class="section-intro"><code>interleaved_affine_gaps_imply_tensor_gaps</code></p>
+      <div class="card"><h3 style="margin-top:0">기존 풀이가 사용하는 논리</h3><p>차원 1은 affine-line 가정으로 처리합니다. 다음 차원에서는 word stack을 두 절반으로 나누고 마지막 좌표를 먼저 샘플링합니다. 좋은 매개변수 집합 <code>R*</code>에 귀납가설을 적용한 뒤 interleaved-code gap을 사용하고, 두 절반의 공동 일치를 원래 stack으로 합칩니다.</p></div>
+      <h3>Lean 정리의 형태</h3><div class="statement"><div class="code-block "><div class="code-title"><span>statement · P12</span></div><pre class="lean" tabindex="0"><code id="p12-statement-code">theorem interleaved_affine_gaps_imply_tensor_gaps
+    (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat
+      (F := F) (A := A) (ι := ι) (C := MC) (e := e) (ε := ε))
+    (h_interleaved_gaps : ∀ m : ℕ, m ≥ 1 →
+      e_ε_correlatedAgreementAffineLinesNat (F := F)
+        (A := InterleavedSymbol A (Fin m)) (ι := ι) (C := MC ^⋈ (Fin m)) e ε) :
+    ∀ (ϑ : ℕ), (hϑ_gt_0 : ϑ &gt; 0) → δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A)
+      (ι := ι) (C := MC) (ϑ := ϑ) (e := e) (ε := ε)</code></pre></div></div>
+      <div class="reading-notes" aria-label="P12 명제와 증명 읽기">
+        <article class="reading-note" aria-labelledby="p12-syntax-title">
+          <h3 id="p12-syntax-title"><span>SYNTAX</span>가정과 결론의 범위를 읽기</h3>
+          <p><code>theorem</code> 다음은 정리의 이름이고, 이어지는 두 괄호는 증명에 필요한 가정입니다. <code>hC_proximityGapAffineLines</code>는 원래 코드 <code>MC</code>의 affine-line gap 성질을 받습니다. <code>h_interleaved_gaps</code>의 <code>∀ m : ℕ, m ≥ 1 → …</code>는 “모든 자연수 m에 대해, m이 1 이상이면 m개 행을 묶은 코드에도 같은 gap 성질이 성립한다”는 뜻입니다.</p>
+          <p><code>(F := F)</code>·<code>(A := A)</code>·<code>(C := MC)</code>는 정의의 인자를 이름으로 지정하는 문법입니다. 여기서 <code>F</code>는 스칼라, <code>A</code>는 기호의 타입, <code>ι</code>는 word의 좌표 타입입니다. <code>Fin m</code>은 m개 행의 인덱스 타입이고, <code>InterleavedSymbol A (Fin m)</code>은 각 열에서 그 행들의 기호를 묶은 타입입니다. <code>MC ^⋈ (Fin m)</code>는 이에 대응하는 interleaved code를 나타냅니다.</p>
+          <p>두 가정 뒤의 <code>:</code>부터 결론입니다. <code>∀ (ϑ : ℕ), (hϑ_gt_0 : ϑ &gt; 0) → …</code>는 임의의 자연수 차원 <code>ϑ</code>와 그 차원이 양수라는 증거를 받아 결론을 보인다는 뜻입니다. 마지막의 <code>δ_ε_multilinearCorrelatedAgreement_Nat</code>는 해당 차원과 거리·문턱 인자 <code>e</code>·<code>ε</code>에서의 다중선형 correlated agreement 성질이며, 그 내용은 위의 “정리 해석”에서 설명한 확률 조건과 공동 일치의 함의입니다.</p>
+        </article>
+        <article class="reading-note" aria-labelledby="p12-flow-title">
+          <h3 id="p12-flow-title"><span>PROOF FLOW</span>귀납과 helper가 연결되는 순서</h3>
+          <p>주 정리는 <code>intro ϑ</code>로 차원을 받은 뒤 <code>induction ϑ</code>로 귀납합니다. 0차원은 양수 조건과 모순이므로 <code>omega</code>로 닫습니다. 양의 차원은 다시 나누어, 1차원에서는 <code>tensor_gap_one</code>으로 다중선형 결합과 singleton 샘플링을 affine-line 가정에 연결합니다. 2차원 이상에서는 직전 차원의 귀납가설과 interleaved gap 가정을 <code>tensor_gap_succ</code>에 넘깁니다.</p>
+          <p>귀납 단계 helper는 입력을 <code>U₀</code>·<code>U₁</code>로 나누고, <code>tensor_success_split</code>의 확률 등식으로 마지막 좌표를 분리합니다. 그 뒤 좋은 매개변수 집합 <code>R*</code>의 확률 하한을 얻고, 귀납가설로 그 집합의 원소마다 interleaved code에 가까움을 보입니다. <code>Pr_le_Pr_of_implies</code>로 사건 포함을 확률 부등식으로 옮겨 gap 가정을 적용한 다음, <code>CA_split_rowwise_implies_CA</code>로 두 절반의 공동 일치를 원래 stack의 결론으로 합칩니다.</p>
+        </article>
+      </div>
+      <h3>길어진 부분과 정리 방법</h3><div class="diag"><div class="diag-item"><strong>수동 Fin 인덱스 복원</strong><code>Fin.snoc</code>과 마지막 인덱스의 경우 분석을 기존 샘플링 분할 정리로 대체합니다.</div><div class="diag-item"><strong>사용하지 않는 cardinality 하한</strong><code>h_R_star_card_gt_eps</code>는 이후 사용되지 않습니다. 관련 분모 소거와 cast 계산도 함께 삭제합니다.</div><div class="diag-item"><strong>형 변환·부등식의 혼재</strong>점별 등식과 확률 단조성을 작은 인터페이스로 두어 귀납 논증에서 표현 정리를 줄입니다.</div></div>
+      <div class="process"><h3>차원 확장에서 필요한 연결</h3><ol><li><strong>성공 사건 분할</strong><code>tensor_success_split</code><br>마지막 좌표를 분리한 샘플링과 원래 사건의 확률을 연결합니다.</li><li><strong>좋은 집합의 확률</strong><code>prob_R_star_gt_threshold</code><br>R*에 속할 확률이 ε / q보다 큼을 얻습니다.</li><li><strong>가까운 affine 결합</strong>귀납가설로 R*의 원소마다 interleaved code에 가까움을 얻고, 확률 단조성으로 gap 가정을 적용합니다.</li><li><strong>원래 stack의 공동 일치</strong><code>CA_split_rowwise_implies_CA</code><br>두 절반의 결과를 원래 입력의 결론으로 합칩니다.</li></ol><p class="note">마지막 확률 연결은 <code>lt_of_lt_of_le</code>와 <code>Pr_le_Pr_of_implies</code>로 표현합니다. R*의 원소 수를 별도로 계산할 필요가 없습니다.</p></div>
+      <div class="card table-wrap helper-map"><table><caption>보조정리별 역할 분담</caption><thead><tr><th scope="col">이름</th><th scope="col">담당하는 변환·논증</th></tr></thead><tbody><tr><td><code>tensor_success_split</code></td><td>각 r에서 사건의 등식을 먼저 증명하고 <code>simp_rw</code>와 기존 균등 샘플링 분할 정리로 확률 등식을 얻습니다.</td></tr><tr><td><code>tensor_gap_one</code></td><td>1차원의 다중선형 결합과 affine line, singleton 샘플링, 두 행의 표현을 연결합니다.</td></tr><tr><td><code>tensor_gap_succ</code></td><td>R*의 확률 하한, 귀납가설, interleaved gap, 공동 일치의 결합을 담당합니다.</td></tr></tbody></table></div>
+      <h3>기존 증명과 간결해진 주 정리</h3><div class="compare"><div><div class="code-block before"><div class="code-title"><span>TensorGaps.lean · 177줄</span><span class="tag before">원본</span></div><pre class="lean" tabindex="0"><code id="p12-original-code">theorem interleaved_affine_gaps_imply_tensor_gaps
+    (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat
+      (F := F) (A := A) (ι := ι) (C := MC) (e := e) (ε := ε))
+    (h_interleaved_gaps : ∀ m : ℕ, m ≥ 1 →
+      e_ε_correlatedAgreementAffineLinesNat (F := F)
+        (A := InterleavedSymbol A (Fin m)) (ι := ι) (C := MC ^⋈ (Fin m)) e ε) :
+    ∀ (ϑ : ℕ), (hϑ_gt_0 : ϑ &gt; 0) → δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A)
+      (ι := ι) (C := MC) (ϑ := ϑ) (e := e) (ε := ε) := by
+    classical
+    intro ϑ
+    induction ϑ with
+    | zero =&gt;
+      intro u
+      contradiction
+    | succ ϑ_sub_1 ih =&gt;
+      cases ϑ_sub_1 with
+      | zero =&gt;
+        -- `ϑ = 1`
+        simp only [zero_add, gt_iff_lt, zero_lt_one, ModuleCode, forall_const]
+        intro u
+        let toAffineLineEval := multilinearCombine₁_eq_affineLineEvaluation (F := F) (u := u)
+        intro hprob_gt
+        simp_rw [toAffineLineEval] at hprob_gt
+        let prob_eq := prob_uniform_singleton_finFun_eq (F := F)
+          (P := fun r =&gt; Δ₀(affineLineEvaluation (u 0) (u 1) r, MC) ≤ e)
+        -- Convert sampling (r ← (Fin 1 → F)) into sampling (r ← F)
+        simp_rw [prob_eq, Nat.cast_one, ENNReal.coe_one, one_mul] at hprob_gt
+        have h_correlated_agreement := hC_proximityGapAffineLines (u 0) (u 1) hprob_gt
+        simp only [jointProximityNat₂, Fin.isValue] at h_correlated_agreement
+        have h_u_eq: u = finMapTwoWords (u 0) (u 1) := by
+          funext rowIdx
+          match rowIdx with
+          | 0 =&gt; rfl
+          | 1 =&gt; rfl
+        rw [h_u_eq.symm] at h_correlated_agreement
+        exact h_correlated_agreement
+      | succ ϑ_sub_2 =&gt;
+        intro hϑ_gt_0 u hP_multilinearCombine_close_gt
+        -- `ϑ ≥ 2`
+        -- set ϑ_sub_1 := ϑ_sub_2 + 1
+        let ϑ := ϑ_sub_2 + 1 + 1
+        have hϑ : ϑ = ϑ_sub_2 + 1 + 1 := by rfl
+        -- have hfinϑ : Fin ϑ = Fin (ϑ_sub_2 + 1 + 1) := by rfl
+        set U₀ : Fin (2 ^ (ϑ_sub_2 + 1)) → Word A ι :=
+          (splitHalfRowWiseInterleavedWords (ϑ := ϑ_sub_2 + 1) u).1
+        set U₁ : Fin (2 ^ (ϑ_sub_2 + 1)) → Word A ι :=
+          (splitHalfRowWiseInterleavedWords (ϑ := ϑ_sub_2 + 1) u).2
+        unfold jointProximityNat
+        simp only
+        -- intro hP_multilinearCombine_close_gt
+        have h_finsnoc_eq_r: ∀ r: Fin (ϑ_sub_2 + 1 + 1) → F,
+          Fin.snoc (fun (i : Fin (ϑ_sub_2 + 1)) ↦ r i.castSucc)
+            (r (Fin.last (ϑ_sub_2 + 1))) = r := fun r =&gt; by
+          funext i
+          have hi_le_lt := i.isLt
+          by_cases h : i = Fin.last (ϑ_sub_2 + 1)
+          · simp only [h, Fin.snoc_last]
+          · have h_i_ne_last: i ≠ Fin.last (ϑ_sub_2 + 1) := by omega
+            have h_i_ne_last_val: i.val ≠ Fin.last (ϑ_sub_2 + 1) := by omega
+            rw [Fin.val_last] at h_i_ne_last_val
+            have h_i_lt: i.val &lt; (ϑ_sub_2 + 1) := by omega
+            simp only [Fin.snoc, Fin.castSucc_castLT, cast_eq, dite_eq_ite, ite_eq_left_iff, not_lt]
+            simp only [isEmpty_Prop, not_le, h_i_lt, IsEmpty.forall_iff]
+        let P : F → (Fin (ϑ_sub_2 + 1) → F) → Prop := fun r_last r_init =&gt;
+          Δ₀(multilinearCombine (u:=u) (r:=Fin.snoc r_init r_last), MC) ≤ e
+        let hP_split_r_last := prob_split_last_uniform_sampling_of_finFun
+          (ϑ := ϑ_sub_2 + 1) (F := F) (P := P)
+        unfold P at hP_split_r_last
+        simp_rw [h_finsnoc_eq_r] at hP_split_r_last
+        rw [hP_split_r_last] at hP_multilinearCombine_close_gt
+        -- Now we have two randomness sampling in hP_multilinearCombine_close_gt :
+        -- `((ϑ_sub_2 + 1 + 1) * ε) / |𝔽|
+          -- &lt; Pr_{ r_last; r_init }[  Δ₀((Fin.snoc r_init r_last)|⨂|u, ↑MC) ≤ ↑e)) ]` (0)
+        -- We need to achieve the upperbound for hP_multilinearCombine_close_gt probability by:
+        -- i.e. `Pr_{ r_last; r_init }[  Δ₀((Fin.snoc r_init r_last)|⨂|u, ↑MC) ≤ ↑e)) ]`
+        -- `= Pr_{ r_last; r_init }[ Δ₀((r_init)|⨂|affineCombine(U₀, U₁, r_last), ↑MC) ≤ ↑e)) ]`
+        -- `= PR_{ r_last }[ r_init; Δ₀((r_init)|⨂|affineCombine(U₀, U₁, r_last), ↑MC) ≤ ↑e)) ]`
+        -- Divide into two cases: r_last ∈ R* and r_last ∉ R*
+        -- `= Pr_{ r_last }[ r_last ∈ R* ∧
+          -- Pr_{ r_init }[ Δ₀((r_init)|⨂|affineCombine(U₀, U₁, r_last), ↑MC) ≤ ↑e)) ]` (1)
+        -- `+ Pr_{ r_last }[ r_last ∉ R* ∧
+          -- Pr_{ r_init }[ Δ₀((r_init)|⨂|affineCombine(U₀, U₁, r_last), ↑MC) ≤ ↑e)) ]` (2)
+        -- `(1) = Pr_{ r_last }[ r_last ∈ R* ]` (3)
+        -- `(2): ∀ r ∉ R*, it&#x27;s trivial that the probability
+          -- ≤ ((ϑ_sub_2 + 1) * ε) / |𝔽|, due to definition of membership of R*` (4)
+
+        -- Combine (0), (3), (4): we have `Pr_{ r_last }[ r_last ∈ R* ] &gt; ε/|𝔽|` (5)
+
+        -- Applying `correlatedAgreement_of_mem_R_star_tensor` to (5), we get
+          -- `Δ₀((r_last)|⨂|affineCombine(U₀, U₁, r_last), ↑MC) ≤ ↑e)) ] &gt; ε/|𝔽|` (6)
+        -- This is premise for affineProxmityGaps of interleaved code (`h_interleaved_gaps`)
+          -- for `m = 2^{ϑ_sub_2 + 1}`, which directly leads to Q.E.D.
+        let  ϑ_pred := ϑ_sub_2 + 1
+        have h_ϑ_pred : ϑ_pred = ϑ_sub_2 + 1 := by rfl
+        have h_ϑ : ϑ = ϑ_pred + 1 := by rfl
+        -- Step 1: Apply multilinearCombine recursive form
+        -- We need the lemma `multilinearCombine u r = multilinearCombine`
+          -- `(affineLineEvaluation U₀ U₁ r_last) r_init` where `r = Fin.snoc r_init r_last`
+        have multilinearCombine_snoc_eq_multilinearCombine_affine
+          (r_init : Fin ϑ_pred → F) (r_last : F) : multilinearCombine u (Fin.snoc r_init r_last) =
+            multilinearCombine (affineLineEvaluation U₀ U₁ r_last) r_init := by
+          rw [multilinearCombine_recursive_form]
+          simp only [Fin.snoc_last, Fin.init_snoc]
+          rfl
+        -- Rewrite the probability using this identity
+        simp_rw [multilinearCombine_snoc_eq_multilinearCombine_affine]
+          at hP_multilinearCombine_close_gt
+        -- hP_multilinearCombine_close_gt now looks like:
+        -- Pr_{ r_last ← $ᵖ F; r_init ← $ᵖ (Fin ϑ_pred → F) }[ Δ₀(multilinearCombine
+            -- (affineLineEvaluation U₀ U₁ r_last) r_init, ↑MC) ≤ ↑e ] &gt; ↑(↑ϑ * ↑ε) / q
+        -- Step 2 &amp; 3: Define R* and apply Law of Total Probability
+        let R_star_set := R_star_tensor MC (m:=ϑ_pred) (e:=e) (ε:=ε) U₀ U₁
+        -- Step 5: Show Pr[R*] &gt; ε / q
+        have h_prob_Rstar_gt_eps_div_q : Pr_{ let r ← $ᵖ F }[ r ∈ R_star_set ]
+          &gt; (↑ε : ENNReal) / (Fintype.card F : ENNReal) := by
+          let res := prob_R_star_gt_threshold (MC := MC) (ε := ε) (ϑ := ϑ_sub_2 + 1) (u := u)
+            (e := e) (hP_multilinearCombine_close_gt)
+          exact res
+        -- Convert Pr_{}[] to cardinality
+        have h_R_star_card_gt_eps : R_star_set.card &gt; ε := by
+          rw [prob_uniform_eq_card_filter_div_card] at h_prob_Rstar_gt_eps_div_q -- Needs NNReal
+          simp only [ENNReal.coe_natCast] at h_prob_Rstar_gt_eps_div_q
+          rw [gt_iff_lt] at h_prob_Rstar_gt_eps_div_q
+          have h_cancel_q_denom := ENNReal.div_lt_div_iff_left
+            (a := (ε : ENNReal))
+            (b := (#(filter (fun r =&gt; r ∈ R_star_set) Finset.univ)))
+            (c := (Fintype.card F : ENNReal)) (hc₀ := by simp only [ne_eq,
+            Nat.cast_eq_zero, Fintype.card_ne_zero, not_false_eq_true]) (hc := by simp only [ne_eq,
+              ENNReal.natCast_ne_top, not_false_eq_true])
+          rw [h_cancel_q_denom] at h_prob_Rstar_gt_eps_div_q
+          simp only [filter_univ_mem, Nat.cast_lt] at h_prob_Rstar_gt_eps_div_q
+          exact h_prob_Rstar_gt_eps_div_q
+        -- Step 6: Apply Inductive Hypothesis for r_last ∈ R*
+        have h_line_close_to_C_m : ∀ (r : R_star_set),
+          jointProximityNat (u := affineLineEvaluation U₀ U₁ r.val) (e := e) (C := MC) := by
+          intro r_in_Rstar
+          -- Use the lemma proven earlier
+          apply correlatedAgreement_of_mem_R_star_tensor
+            (ih := fun u_prev =&gt; ih (by omega) u_prev ) (u := u)
+        -- Step 7: Apply Affine Gap of Interleaved Code C^(m = 2^(ϑ_sub_2 + 1))
+        have h_C_m_gap := h_interleaved_gaps (2^(ϑ_sub_2 + 1)) (Nat.one_le_two_pow)
+        -- Need the hypothesis Pr[...] &gt; ε/q for h_C_m_gap
+        have h_prob_line_gt_eps_div_q :
+          Pr_{ let r ← $ᵖ F }[
+            Δ₀(affineLineEvaluation (u₀ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₀))
+              (u₁ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₁)) (r := r),
+              ((MC ^⋈ (Fin (2 ^ (ϑ_sub_2 + 1)))))) ≤ e
+          ] &gt; (↑ε : ENNReal) / (Fintype.card F : ENNReal) := by
+            -- This is implied by h_prob_Rstar_gt_eps_div_q becuz R* is a subset of the success set
+            apply lt_of_le_of_lt&#x27; _ h_prob_Rstar_gt_eps_div_q
+            have h_r_implies: ∀ (r : F), r ∈ R_star_set →
+              Δ₀(affineLineEvaluation
+                (u₀ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₀))
+                (u₁ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₁)) (r := r),
+                ((MC ^⋈ (Fin (2 ^ (ϑ_sub_2 + 1)))))) ≤ e := by
+              intro r hr_in_Rstar
+              specialize h_line_close_to_C_m ⟨r, hr_in_Rstar⟩
+              unfold jointProximityNat at h_line_close_to_C_m
+              exact h_line_close_to_C_m
+            let Pr_le := Pr_le_Pr_of_implies (D := $ᵖ F)
+              (g := fun r =&gt; Δ₀(affineLineEvaluation
+                (u₀ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₀))
+                (u₁ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₁)) (r := r),
+                ((MC ^⋈ (Fin (2 ^ (ϑ_sub_2 + 1)))))) ≤ e)
+              (f := fun r =&gt; r ∈ R_star_set) (h_imp := h_r_implies)
+            simp only at Pr_le
+            exact Pr_le
+        -- Apply the gap property of C^m
+        have h_final_gap : jointProximityNat₂
+          (u₀ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₀))
+          (u₁ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₁)) (e := e)
+          (C := (MC ^⋈ (Fin (2^(ϑ_sub_2 + 1))))) := by
+          apply h_C_m_gap (u₀ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₀))
+            (u₁ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1))) ι from U₁))
+            (h_prob_line_gt_eps_div_q)
+        apply CA_split_rowwise_implies_CA (u := u) (e := e)
+        exact h_final_gap</code></pre></div><p class="code-caption">JSONL src 전체 · 선언 포함 177줄</p></div><div><div class="code-block after"><div class="code-title"><span>TensorGapsRefactored.lean · 주 정리 17줄</span><span class="tag after">수정본</span></div><pre class="lean" tabindex="0"><code id="p12-refactored-code">theorem interleaved_affine_gaps_imply_tensor_gaps
+    (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat
+      (F := F) (A := A) (ι := ι) (C := MC) (e := e) (ε := ε))
+    (h_interleaved_gaps : ∀ m : ℕ, m ≥ 1 →
+      e_ε_correlatedAgreementAffineLinesNat (F := F)
+        (A := InterleavedSymbol A (Fin m)) (ι := ι) (C := MC ^⋈ (Fin m)) e ε) :
+    ∀ (ϑ : ℕ), (hϑ_gt_0 : ϑ &gt; 0) → δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A)
+      (ι := ι) (C := MC) (ϑ := ϑ) (e := e) (ε := ε) := by
+  intro ϑ
+  induction ϑ with
+  | zero =&gt; intro h; omega
+  | succ n ih =&gt;
+    cases n with
+    | zero =&gt; intro _; exact tensor_gap_one (MC := MC) hC_proximityGapAffineLines
+    | succ n =&gt;
+      intro _
+      exact tensor_gap_succ (MC := MC) (ih (Nat.succ_pos n)) h_interleaved_gaps</code></pre></div><p class="code-caption">주 정리 17줄 · 아래 새 helper 59줄 포함 시 전체 76줄</p><div class="strategy"><strong>주 정리에는 귀납의 골격이 남습니다.</strong><p>0차원은 양수 조건과 모순입니다. 1차원은 <code>tensor_gap_one</code>, 2차원 이상은 <code>tensor_gap_succ</code>에 맡깁니다.</p></div></div></div>
+      <details class="helper-details"><summary>추가한 helper의 증명 펼치기 · 59줄</summary><div class="details-content"><div class="code-block "><div class="code-title"><span>TensorGapsRefactored.lean · 새 helper 블록 59줄</span></div><pre class="lean" tabindex="0"><code id="p12-helpers-code">-- The helpers below expose the sampling and induction interfaces explicitly.
+omit [DecidableEq F] [NoZeroDivisors F] [Fintype A] [Module.Free F A] [Nontrivial ↥MC]
+
+omit [Nonempty ι] [DecidableEq ι] in
+/-- Split the last coordinate once, keeping all probability coercions behind an equality. -/
+private lemma tensor_success_split {n : ℕ}
+    (u : WordStack A (Fin (2 ^ (n + 1))) ι) :
+    Pr_{let r ← $ᵖ (Fin (n + 1) → F)}[Δ₀(multilinearCombine u r, MC) ≤ e] =
+    Pr_{let r_last ← $ᵖ F; let r_init ← $ᵖ (Fin n → F)}[
+      multilinearCombine_affineComb_split_last_close (MC := MC) u e r_last r_init] := by
+  classical
+  have fold (r : Fin (n + 1) → F) :
+      (Δ₀(multilinearCombine u r, MC) ≤ e) =
+        multilinearCombine_affineComb_split_last_close (MC := MC) u e
+          (r (Fin.last n)) (fun i =&gt; r i.castSucc) := by
+    unfold multilinearCombine_affineComb_split_last_close
+    rw [multilinearCombine_recursive_form]
+    rfl
+  simp_rw [fold]
+  exact prob_split_last_uniform_sampling_of_finFun _
+
+/-- The one-coordinate tensor statement is exactly the affine-line statement. -/
+private lemma tensor_gap_one
+    (hC : e_ε_correlatedAgreementAffineLinesNat (F := F) (A := A) (ι := ι) (C := MC) e ε) :
+    δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A) (ι := ι) (C := MC) 1 e ε := by
+  classical
+  intro u hprob
+  simp_rw [multilinearCombine₁_eq_affineLineEvaluation (F := F) (u := u)] at hprob
+  simp_rw [prob_uniform_singleton_finFun_eq (F := F)
+    (P := fun r =&gt; Δ₀(affineLineEvaluation (u 0) (u 1) r, MC) ≤ e),
+    Nat.cast_one, ENNReal.coe_one, one_mul] at hprob
+  have hCA := hC (u 0) (u 1) hprob
+  have hu : u = finMapTwoWords (u 0) (u 1) := by
+    funext i
+    fin_cases i &lt;;&gt; rfl
+  simpa only [jointProximityNat₂, ← hu] using hCA
+
+/-- Lift the tensor statement by one coordinate via the good-parameter set R*. -/
+private lemma tensor_gap_succ {n : ℕ}
+    (ih : δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A) (ι := ι) (C := MC) n e ε)
+    (hGaps : ∀ m : ℕ, m ≥ 1 → e_ε_correlatedAgreementAffineLinesNat (F := F)
+      (A := InterleavedSymbol A (Fin m)) (ι := ι) (C := MC ^⋈ (Fin m)) e ε) :
+    δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A) (ι := ι) (C := MC) (n + 1) e ε := by
+  classical
+  intro u hprob
+  let U₀ := (splitHalfRowWiseInterleavedWords (ϑ := n) u).1
+  let U₁ := (splitHalfRowWiseInterleavedWords (ϑ := n) u).2
+  let good := R_star_tensor MC (m := n) (e := e) (ε := ε) U₀ U₁
+  have hgood : Pr_{let r ← $ᵖ F}[r ∈ good] &gt;
+      (ε : ENNReal) / (Fintype.card F : ENNReal) := by
+    apply prob_R_star_gt_threshold (MC := MC) (u := u) (e := e)
+    rwa [← tensor_success_split (MC := MC) (u := u)]
+  have hclose : ∀ r : F, r ∈ good →
+      Δ₀(affineLineEvaluation (⋈|U₀) (⋈|U₁) r, MC ^⋈ (Fin (2 ^ n))) ≤ e := by
+    intro r hr
+    exact correlatedAgreement_of_mem_R_star_tensor (MC := MC) (ih := ih) (u := u) ⟨r, hr⟩
+  apply CA_split_rowwise_implies_CA (C := MC) (u := u) (e := e)
+  apply hGaps (2 ^ n) Nat.one_le_two_pow (⋈|U₀) (⋈|U₁)
+  exact lt_of_lt_of_le hgood (Pr_le_Pr_of_implies (D := $ᵖ F) (h_imp := hclose))</code></pre></div></div></details>
+      <details class="helper-details"><summary>여섯 차례의 시도에서 확인한 점</summary><div class="details-content table-wrap"><table><caption>실제 실패 로그와 다음 수정</caption><thead><tr><th scope="col">시도</th><th scope="col">막힌 점</th><th scope="col">해결 방향</th></tr></thead><tbody><tr><td><span>1차</span></td><td>simp 진행 없음, ModuleCode에서 Set으로의 인자 추론 실패</td><td>A·ι를 명시하고 snoc 재구성을 거치지 않는 샘플링 형태를 사용했습니다.</td></tr><tr><td><span>2차</span></td><td>확률식 내부 Fin.init와 lambda 표현 불일치</td><td>기저 단계의 사건 predicate를 명시했습니다.</td></tr><tr><td><span>3차</span></td><td>기저는 해결, 확률식 내부의 표현 불일치는 지속</td><td>전체 확률식의 일괄 단순화 대신 점별 등식으로 접근했습니다.</td></tr><tr><td><span>4차</span></td><td>확률 함수에 congrArg를 적용할 때 고차 단일화 실패</td><td>각 샘플 r에서 사건의 동등성을 먼저 증명했습니다.</td></tr><tr><td><span>5차</span></td><td>점별 rewrite 뒤 정의적 동등성 목표 잔존</td><td>Fin.init와 lambda 사이의 목표를 rfl로 닫았습니다.</td></tr><tr><td><span>6차</span></td><td>논리는 완성됐지만 unusedSectionVars 경고로 엄격 검사 실패</td><td>sampling helper에만 omit을 적용해 불필요한 가정을 제외했습니다.</td></tr><tr><td>최종</td><td colspan="2">원본과 수정본 모두 PASS. 대상 정리의 sorryAx 의존성 없음.</td></tr></tbody></table><p class="note">시도별 로그는 로컬 실행 기록이며, 위 표에 오류와 해결 과정을 요약했습니다. 실패 로그의 줄 번호는 각 시도 당시 파일 기준입니다. 오류가 있던 실행의 공리 출력은 성공 판정에 사용하지 않았습니다.</p></div></details>
+      <div class="scope"><strong>남아 있는 범위:</strong> 대상 증명의 미해결 오류는 없습니다. 앞부분의 공통 보조정리 문맥 1,199줄은 그대로 복원해 사용하며, 이를 별도 라이브러리 모듈로 재편하지는 않았습니다.</div>
+      <div class="resource-links"><span>원본 Lean (본문 코드 참조)</span><span>수정 Lean (본문 코드 참조)</span><span>수정본 검증 로그 (로컬 검증 기록)</span></div>
+    </section>
+
+    <section id="verification" aria-labelledby="verification-title">
+      <h2 id="verification-title">실행 기록과 공리 확인</h2>
+      <p class="section-intro">2026-10-10 최종 실행 결과입니다. 이번 HTML 작성 과정에서 Lean 증명을 변경하지 않았습니다.</p>
+      <div class="verify">
+        <div class="card"><h3>P7 · Cslib</h3><p><code>Lean v4.33.0-rc2</code></p><ul class="checks"><li class="check"><span class="ok" aria-hidden="true">✓</span><span>원본·수정본 각각 종료 코드 0</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>JSONL 명제 선언 유지</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>#check·#print axioms 출력 동일</span></li></ul><div class="resource-links"><span>원본 로그 (로컬 검증 기록)</span><span>수정 로그 (로컬 검증 기록)</span><span>결과 JSON (로컬 검증 기록)</span></div></div>
+        <div class="card"><h3>P12 · ArkLib</h3><p><code>Lean v4.31.0</code></p><ul class="checks"><li class="check"><span class="ok" aria-hidden="true">✓</span><span>원본·수정본 각각 종료 코드 0</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>JSONL 명제 선언 유지</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>#check·#print axioms 출력 동일</span></li></ul><div class="resource-links"><span>원본 로그 (로컬 검증 기록)</span><span>수정 로그 (로컬 검증 기록)</span><span>결과 JSON (로컬 검증 기록)</span></div></div>
+      </div>
+      <div class="card" style="margin-top:20px"><h3 style="margin-top:0">추가 공리 없이 유지한 의존성</h3><div class="code-block"><div class="code-title">#print axioms · P7 / P12 · 원본과 수정본</div><pre><code>[propext, Classical.choice, Quot.sound]
+
+sorryAx: 없음
+추가된 공리: 없음</code></pre></div><p>대상 정리를 포함한 모듈은 import하지 않습니다. P7은 <code>Fsub.Typing</code>만 import하고, P12는 <code>DG25.Basic</code>과 대상 정리 앞의 보조정리 문맥을 사용합니다. 수정본이 이미 증명된 동일 정리를 호출하는 구조를 피했습니다.</p></div>
+      <h3>검증에 사용한 로컬 실행 명령</h3><div class="code-block"><div class="code-title">기본값 --variant both · 원본과 수정본 검사</div><pre tabindex="0"><code>python3 week2/P7/run_progress.py
+python3 week2/P12/run_tensor_gaps.py</code></pre></div>
+      <p>위 명령은 기존 로컬 작업 폴더 <code>leanProject</code>에서 사용했습니다. 실행 스크립트와 소스·의존성 저장소는 로컬 작업 자료입니다. 필요한 import 모듈을 빌드한 뒤 각 파일을 <code>lake env lean</code>으로 검사합니다. 두 문제 모두 <code>-DwarningAsError=true</code>를 적용하며 P12는 <code>-DautoImplicit=false</code>도 지정합니다. runner는 수정본을 덮어쓰지 않습니다.</p>
+      <details class="helper-details"><summary>재현에 사용한 버전과 확인 범위</summary><div class="details-content"><dl class="glossary"><dt>P7 커밋</dt><dd><code>3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc</code></dd><dt>P12 커밋</dt><dd><code>c1712f6c496d0aef04f09bae42aec13811b3273f</code></dd><dt>cslib-progress</dt><dd>P7에 필요한 정의·보조정리·고정 의존성·빌드 결과를 제공하는 별도 Cslib checkout입니다.</dd><dt>검증 범위</dt><dd>필요한 import 모듈과 두 문제의 원본·수정본입니다. 전체 라이브러리 CI를 수행한 결과는 아닙니다.</dd></dl></div></details>
+      <div class="scope"><strong>라이브러리의 기존 경고:</strong> ArkLib 의존성 빌드에서는 <code>Fin/Basic.lean:307</code>, <code>MvPolynomial/Interpolation.lean:258</code>의 기존 sorry 경고가 재출력됩니다. 이번 대상 정리의 전이적 공리 목록에는 원본·수정본 모두 <code>sorryAx</code>가 없습니다.</div>
+      <div class="resource-links"><a href="proof_refactoring-07-12.md">상세 Markdown 보고서</a><span>원본 benchmark JSONL (로컬 원본 데이터)</span><span>P7 실행 스크립트 (로컬 실행 파일)</span><span>P12 실행 스크립트 (로컬 실행 파일)</span></div>
+    </section>
+    <footer><span>Week 2 · Warm-up P7·P12 · 오프라인 단일 HTML</span><a href="#top">맨 위로</a></footer>
+  </main>
+  <script>
+  (() => {
+    'use strict';
+    // Teaching demo only. No Lean execution or network request.
+    const next = document.getElementById('eval-next');
+    const reset = document.getElementById('eval-reset');
+    const status = document.getElementById('eval-status');
+    const term = document.getElementById('eval-term');
+    const initial = status.textContent;
+    const steps = [
+      {nodes:['root'], term:'(λx. x) ((λy. y) v)', text:'1 / 4 · app 규칙의 유도에서 두 부분항의 귀납 결과를 꺼냅니다. 각각 값인지, 한 단계 계산하는지 확인합니다.'},
+      {nodes:['left','right'], term:'(λx. x) ((λy. y) v)', text:'2 / 4 · 왼쪽 λx. x는 값입니다. 오른쪽 (λy. y) v는 β 계산으로 v가 됩니다. 전체 항에는 Red.appᵣ를 적용할 수 있습니다.'},
+      {nodes:['root','value'], term:'(λx. x) v', text:'3 / 4 · 한 단계 계산한 결과입니다. 이제 함수와 인자가 모두 값이므로 canonical form을 확인하고 Red.abs로 계산합니다.'},
+      {nodes:['value'], term:'v', text:'4 / 4 · 결과 v는 값입니다. 예제의 각 단계에서 “값이거나 다음 계산이 있다”는 progress의 뜻을 확인했습니다.'}
+    ];
+    let index = -1;
+    function renderEval() {
+      const step = index < 0 ? null : steps[index];
+      term.textContent = step ? step.term : '(λx. x) ((λy. y) v)';
+      status.textContent = step ? step.text : initial;
+      document.querySelectorAll('.tree [data-node]').forEach(el => {
+        el.classList.toggle('active', Boolean(step && step.nodes.includes(el.dataset.node)));
+      });
+      next.disabled = index === steps.length - 1;
+    }
+    next.addEventListener('click', () => { if (index < steps.length-1) index++; renderEval(); });
+    reset.addEventListener('click', () => { index = -1; renderEval(); });
+
+    const stack = document.getElementById('stack-diagram');
+    const dimStatus = document.getElementById('dim-status');
+    const subs = ['₀','₁','₂','₃','₄','₅','₆','₇'];
+    function renderDim(dim) {
+      const half = 2 ** (dim-1);
+      stack.replaceChildren();
+      for (let h = 0; h < 2; h++) {
+        const panel = document.createElement('div'); panel.className = 'stack-half';
+        const title = document.createElement('h4'); title.textContent = `U${subs[h]} · ${h === 0 ? '앞' : '뒤'} 절반 (${half}행)`; panel.append(title);
+        for (let row = h*half; row < (h+1)*half; row++) {
+          const word = document.createElement('div'); word.className='word-row';
+          const label = document.createElement('span'); label.className='word-label'; label.textContent='u'+subs[row];
+          const cells = document.createElement('span'); cells.className='word-cells';
+          ['a','b','c','d'].forEach(x => { const cell=document.createElement('span'); cell.className='word-cell'; cell.textContent=x; cells.append(cell); });
+          word.append(label,cells); panel.append(word);
+        }
+        stack.append(panel);
+      }
+      stack.setAttribute('aria-label',`${2**dim}개 행을 두 절반으로 분할`);
+      dimStatus.textContent = dim === 1 ? 'ϑ = 1 · 2행의 affine 결합이 바로 기저 단계입니다. 무작위 좌표는 1개이며 tensor_gap_one에서 처리합니다.' : `ϑ = ${dim} · ${2**dim}행을 ${half}행씩 분할합니다. 마지막 좌표로 두 절반을 결합하고, 남은 ${dim-1}개 좌표로 계산합니다.`;
+      document.querySelectorAll('[data-dim]').forEach(btn => btn.setAttribute('aria-pressed',String(Number(btn.dataset.dim) === dim)));
+    }
+    document.querySelectorAll('[data-dim]').forEach(btn => btn.addEventListener('click', () => renderDim(Number(btn.dataset.dim))));
+
+    // All code starts as escaped source text; highlighting preserves textContent.
+    const keywords = new Set(['theorem','lemma','private','open','in','case','with','have','fun','match','by','at','let','def','omit']);
+    const tactics = new Set(['induction','simp','simp_all','simp_rw','intro','intros','exact','apply','cases','rcases','unfold','specialize','constructor','rfl','generalize','subst','right','left','obtain','exists','grind','omega','rw','rwa','simpa','classical','fin_cases','funext']);
+    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const token = /(--[^\n]*)|([A-Za-z_][\w'.]*)|(\d+)/g;
+    document.querySelectorAll('pre.lean code').forEach(el => {
+      el.innerHTML = esc(el.textContent).replace(token, (m,com,id,num) => {
+        const cls = com ? 'tk-com' : num ? 'tk-num' : keywords.has(id) ? 'tk-kw' : tactics.has(id) ? 'tk-tac' : id.includes('.') ? 'tk-id' : '';
+        return cls ? `<span class="${cls}">${m}</span>` : m;
+      });
+    });
+    document.getElementById('large-type').addEventListener('click', event => {
+      const active = document.body.classList.toggle('large-type');
+      event.currentTarget.setAttribute('aria-pressed',String(active));
+      event.currentTarget.textContent = active ? '기본 글씨' : '큰 글씨';
+    });
+    document.getElementById('print-page').addEventListener('click', () => window.print());
+    const sections = Array.from(document.querySelectorAll('main > section'));
+    const navLinks = Array.from(document.querySelectorAll('nav.toc > a'));
+    let pending = false;
+    function updatePosition() {
+      const range = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('page-progress').style.width = `${range > 0 ? 100*window.scrollY/range : 0}%`;
+      let current = sections[0].id;
+      sections.forEach(section => { if (section.getBoundingClientRect().top <= 135) current=section.id; });
+      navLinks.forEach(link => { if (link.hash === '#'+current) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current'); });
+      pending = false;
+    }
+    window.addEventListener('scroll', () => { if (!pending) { pending=true; requestAnimationFrame(updatePosition); } }, {passive:true});
+    window.addEventListener('resize', updatePosition);
+    renderEval(); renderDim(2); updatePosition();
+  })();
+  </script>
+</body>
+</html>
