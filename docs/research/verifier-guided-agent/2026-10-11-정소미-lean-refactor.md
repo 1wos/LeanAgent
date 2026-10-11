@@ -131,3 +131,4 @@ Lean 컴파일러가 돌려주는 것은 성공 여부와 오류 메시지다. �
 - 논문의 PhysLean은 웜업 4번의 출처인 PhysLib과 같은 저장소다. GitHub가 `HEPLean/PhysLean`을 `leanprover-community/physlib`으로 연결한다.
 - 부록 A, E, G와 부록 B의 대부분(B.5 제외)은 읽지 않았다. 그림은 캡션과 본문의 설명만 확인했다.
 - 같은 분야의 시작 자료로 지정된 APOLLO(arXiv:2505.05758)와 Learning to Repair Lean Proofs from Compiler Feedback(arXiv:2602.02990)은 초록만 확인했다. 앞의 논문은 실패한 부분 증명을 분리하여 다시 증명하고 재결합하는 반복을 다룬다. 뒤의 논문은 틀린 증명과 컴파일러 피드백에서 고친 증명을 예측하도록 학습하는 데이터셋 APRIL을 다룬다.
+- 이 문서를 쓴 뒤에 분야의 다른 논문을 예비 조사했고, 그 결과를 발표 자료([refactoring-04-09.html](../../meetings/2026-10-11-week2/refactoring-04-09.html))의 10번 슬라이드와 부록 C에 정리했다. 예비 조사는 정독이 아니며, 정독한 논문은 이 문서의 한 편이다.

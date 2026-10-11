@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lean 증명 리팩터링: 웜업 4·9번</title>
+<style>
+  :root {
+    --ink: #2A2E33;
+    --muted: #6B7480;
+    --accent: #2687E8;
+    --tint: #E3F3FF;
+    --soft: #F4F9FE;
+    --line: #E6EAF0;
+    --code: #F1F4F8;
+    --bg: #FFFFFF;
+    --stage: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  .slide { word-break: keep-all; }
+  html, body { height: 100%; margin: 0; background: var(--stage); }
+  body {
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Segoe UI", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .deck { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .slide {
+    --u: calc(min(100vw, 177.7778vh) / 1280);
+    width: calc(var(--u) * 1280);
+    height: calc(var(--u) * 720);
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: none;
+    padding: calc(var(--u) * 52) calc(var(--u) * 64) calc(var(--u) * 50);
+  }
+  .slide.active { display: block; }
+  h1 { font-size: calc(var(--u) * 40); font-weight: 800; line-height: 1.2; margin: 0; letter-spacing: -0.015em; }
+  .sub { font-size: calc(var(--u) * 20); color: var(--muted); margin: calc(var(--u) * 16) 0 calc(var(--u) * 20); line-height: 1.35; }
+  code, pre { font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace; }
+  code { font-size: 0.9em; background: var(--code); padding: 0 0.28em; border-radius: 0.25em; white-space: nowrap; }
+  table { width: 100%; border-collapse: collapse; font-size: calc(var(--u) * 18.5); line-height: 1.36; }
+  th { text-align: left; color: var(--muted); font-weight: 700; font-size: calc(var(--u) * 14.5);
+       padding: calc(var(--u) * 6) calc(var(--u) * 12); border-bottom: 1px solid var(--line); }
+  td { padding: calc(var(--u) * 11) calc(var(--u) * 12); border-bottom: 1px solid var(--line); vertical-align: middle; }
+  td:first-child { color: var(--accent); font-weight: 800; white-space: nowrap; }
+  tr.hl td { font-weight: 700; }
+  .dense table { font-size: calc(var(--u) * 17); }
+  .dense td { padding: calc(var(--u) * 9.5) calc(var(--u) * 12); }
+  .foot { position: absolute; left: calc(var(--u) * 64); right: calc(var(--u) * 130); bottom: calc(var(--u) * 18);
+          font-size: calc(var(--u) * 12.5); color: var(--muted); line-height: 1.4; }
+  .num { position: absolute; right: calc(var(--u) * 64); bottom: calc(var(--u) * 18); font-size: calc(var(--u) * 13); color: var(--muted); }
+  .accent { color: var(--accent); }
+  .muted { color: var(--muted); }
+  .band { background: var(--bg); border-top: 1px solid var(--line); margin: 0 calc(var(--u) * -64); padding: calc(var(--u) * 26) calc(var(--u) * 64); }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: calc(var(--u) * 48); }
+  .label { font-size: calc(var(--u) * 17); font-weight: 700; color: var(--muted); }
+  .big { font-size: calc(var(--u) * 32); font-weight: 800; line-height: 1.25; }
+  .mid { font-size: calc(var(--u) * 18.5); line-height: 1.45; }
+
+  /* 제목 슬라이드 */
+  .title { padding: 0; }
+  .title .top { background: var(--bg); height: 82%; padding: calc(var(--u) * 64) calc(var(--u) * 68) 0; }
+  .title .kicker { font-size: calc(var(--u) * 20); font-weight: 800; color: var(--accent); }
+  .title h1 { font-size: calc(var(--u) * 84); line-height: 1.12; margin-top: calc(var(--u) * 84); }
+  .title .lead { font-size: calc(var(--u) * 32); font-weight: 800; color: var(--accent); margin-top: calc(var(--u) * 34); }
+  .title .desc { font-size: calc(var(--u) * 24); color: var(--muted); margin-top: calc(var(--u) * 14); }
+  .title .bottom { height: 18%; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; padding: 0 calc(var(--u) * 68); }
+  .title .name { font-size: calc(var(--u) * 24); font-weight: 800; }
+  .title .meta { font-size: calc(var(--u) * 18); color: var(--muted); text-align: right; line-height: 1.4; }
+
+  /* 흐름 그림 */
+  .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: start;
+          column-gap: calc(var(--u) * 22); margin: calc(var(--u) * 40) 0 calc(var(--u) * 46); }
+  .flow .step b { display: block; font-size: calc(var(--u) * 38); font-weight: 800; }
+  .flow .step span { display: block; font-size: calc(var(--u) * 19); color: var(--muted); margin-top: calc(var(--u) * 10); }
+  .flow .arrow { font-size: calc(var(--u) * 34); color: var(--accent); font-weight: 800; padding-top: calc(var(--u) * 4); }
+
+  /* 결과 슬라이드 */
+  .hero { font-size: calc(var(--u) * 104); font-weight: 800; color: var(--accent); line-height: 1; margin: calc(var(--u) * 26) 0 calc(var(--u) * 10); letter-spacing: -0.02em; }
+  .hero-cap { font-size: calc(var(--u) * 24); }
+
+  /* 카드와 표를 나란히 */
+  .split { display: grid; grid-template-columns: calc(var(--u) * 300) 1fr; column-gap: calc(var(--u) * 36); align-items: start; }
+  .card { background: var(--bg); border: 1px solid var(--line); padding: calc(var(--u) * 26) calc(var(--u) * 26); }
+  .card .hero { font-size: calc(var(--u) * 76); margin: calc(var(--u) * 6) 0 calc(var(--u) * 12); }
+  .stat { display: grid; grid-template-columns: calc(var(--u) * 64) 1fr; align-items: center; column-gap: calc(var(--u) * 14);
+          padding: calc(var(--u) * 12) 0; border-bottom: 1px solid var(--line); }
+  .stat:last-child { border-bottom: 0; }
+  .stat b { font-size: calc(var(--u) * 50); font-weight: 800; color: var(--accent); line-height: 1; }
+  .stat span { font-size: calc(var(--u) * 16); line-height: 1.35; }
+
+  /* 마지막 슬라이드 */
+  .closing { padding: 0; }
+  .closing .top { background: var(--bg); border-bottom: 1px solid var(--line); padding: calc(var(--u) * 46) calc(var(--u) * 64) calc(var(--u) * 34); }
+  .closing .top .kicker { font-size: calc(var(--u) * 20); font-weight: 800; color: var(--accent); }
+  .closing .top h1 { font-size: calc(var(--u) * 56); margin-top: calc(var(--u) * 20); }
+  .closing .top .sub { font-size: calc(var(--u) * 24); margin-bottom: 0; }
+  .closing .body { padding: calc(var(--u) * 20) calc(var(--u) * 64) 0; }
+
+  /* 코드 슬라이드 */
+  pre { background: var(--bg); border: 1px solid var(--line); margin: 0; padding: calc(var(--u) * 18) calc(var(--u) * 22);
+        font-size: calc(var(--u) * 14.2); line-height: 1.5; white-space: pre; overflow: hidden; }
+  .code-note { font-size: calc(var(--u) * 16.5); color: var(--ink); margin-top: calc(var(--u) * 14); line-height: 1.45; }
+
+  .hint { position: fixed; left: 50%; bottom: 8px; transform: translateX(-50%); color: #8a9099; font-size: 12px; }
+
+
+  /* 순서도 */
+  svg.chart { display: block; width: 100%; height: auto; margin-top: calc(var(--u) * 2); }
+  svg.chart text { font-family: inherit; fill: var(--ink); }
+  svg.chart .node { fill: #fff; stroke: var(--ink); stroke-width: 1.6; }
+  svg.chart .node.key { stroke: var(--accent); stroke-width: 2.6; }
+  svg.chart .edge { fill: none; stroke: var(--muted); stroke-width: 1.6; }
+  svg.chart .t { font-size: 19px; font-weight: 800; text-anchor: middle; }
+  svg.chart .t2 { font-size: 17px; font-weight: 800; text-anchor: middle; }
+  svg.chart .s { font-size: 15px; fill: var(--muted); text-anchor: middle; }
+  svg.chart .l { font-size: 15px; font-weight: 800; fill: var(--accent); }
+  .stages { display: grid; grid-template-columns: repeat(6, 1fr); column-gap: calc(var(--u) * 26); margin-top: calc(var(--u) * 4); }
+  .stage { position: relative; border: 1px solid var(--line); border-radius: calc(var(--u) * 8); padding: calc(var(--u) * 12); }
+  .stage:not(:last-child)::after { content: "→"; position: absolute; right: calc(var(--u) * -23); top: calc(var(--u) * 30); color: var(--accent); font-weight: 800; font-size: calc(var(--u) * 20); }
+  .stage .ref { font-size: calc(var(--u) * 12.5); color: var(--muted); }
+  .stage b.name { display: block; font-size: calc(var(--u) * 21); font-weight: 800; margin: calc(var(--u) * 2) 0 calc(var(--u) * 6); }
+  .stage .paper { font-size: calc(var(--u) * 14.5); line-height: 1.38; min-height: calc(var(--u) * 82); }
+  .stage .ours { font-size: calc(var(--u) * 14.5); line-height: 1.38; border-top: 1px solid var(--line); margin-top: calc(var(--u) * 8); padding-top: calc(var(--u) * 8); min-height: calc(var(--u) * 112); }
+  .tag { display: inline-block; font-size: calc(var(--u) * 12); font-weight: 800; padding: 0 calc(var(--u) * 6); border-radius: calc(var(--u) * 4); border: 1px solid currentColor; margin-bottom: calc(var(--u) * 5); }
+  .tag.same { color: var(--muted); }
+  .tag.diff { color: var(--accent); }
+  .notes3 { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: calc(var(--u) * 36); margin-top: calc(var(--u) * 8); font-size: calc(var(--u) * 16); line-height: 1.42; }
+  .notes3 b { display: block; color: var(--accent); font-weight: 800; margin-bottom: calc(var(--u) * 3); }
+  .line-note { font-size: calc(var(--u) * 16); line-height: 1.45; margin-top: calc(var(--u) * 14); }
+
+  @media print {
+    @page { size: 1280px 720px; margin: 0; }
+    html, body { height: auto; background: #fff; }
+    .deck { position: static; display: block; }
+    .slide { display: block !important; --u: 1px; page-break-after: always; break-after: page; }
+    .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- 1 -->
+<section class="slide title">
+  <div class="top">
+    <div class="kicker">LeanAgent · WEEK 02</div>
+    <h1>Lean 증명<br>리팩터링</h1>
+    <div class="lead">컴파일 피드백으로 줄인 웜업 4·9번</div>
+    <div class="desc">대회 과제: 검증된 Lean 증명을 명제는 그대로 두고 더 짧고 싸게 다시 쓰기<br>웜업은 본선 전에 공개된 연습 문제 15개 · 참고한 논문은 Lean Refactor</div>
+  </div>
+  <div class="bottom">
+    <div class="name">정소미</div>
+    <div class="meta">가짜연구소 LeanAgent 스터디<br>2026년 10월 11일</div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <h1>다음 행동은 컴파일 결과로 결정</h1>
+  <p class="sub">Verifier-guided Agent · 모델의 자기 평가 대신 Lean 컴파일러의 판정을 따르는 에이전트</p>
+  <svg class="chart" viewBox="-3 0 1158 310" role="img" aria-label="수정, 검증, 교정, 채택의 순서도">
+    <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6B7480"/></marker></defs>
+    <path class="edge" d="M1053,70 V26 H85 V66" marker-end="url(#ah2)"/>
+    <text class="s" x="569" y="18">채택된 후보에서 다음 수정</text>
+    <rect class="node" x="0" y="70" width="170" height="64" rx="10"/><text class="t" x="85" y="109">후보 작성</text>
+    <path class="edge" d="M170,102 H236" marker-end="url(#ah2)"/>
+    <rect class="node key" x="240" y="70" width="200" height="64" rx="10"/><text class="t" x="340" y="109">파일 전체 컴파일</text>
+    <path class="edge" d="M440,102 H496" marker-end="url(#ah2)"/>
+    <polygon class="node" points="500,102 570,56 640,102 570,148"/><text class="t" x="570" y="109">통과?</text>
+    <path class="edge" d="M640,102 H716" marker-end="url(#ah2)"/><text class="l" x="668" y="94">예</text>
+    <polygon class="node" points="712,102 800,52 888,102 800,152"/><text class="t" x="800" y="109">점수 향상?</text>
+    <path class="edge" d="M888,102 H950" marker-end="url(#ah2)"/><text class="l" x="908" y="94">예</text>
+    <rect class="node key" x="954" y="70" width="198" height="64" rx="10"/><text class="t" x="1053" y="109">채택</text>
+    <path class="edge" d="M800,152 V212" marker-end="url(#ah2)"/><text class="l" x="812" y="188">아니오</text>
+    <rect class="node" x="700" y="216" width="200" height="58" rx="10"/><text class="t" x="800" y="252">기각하고 기록</text>
+    <path class="edge" d="M570,148 V212" marker-end="url(#ah2)"/><text class="l" x="582" y="188">아니오</text>
+    <rect class="node" x="450" y="216" width="240" height="58" rx="10"/><text class="t" x="570" y="252">오류 메시지로 교정</text>
+    <path class="edge" d="M450,245 H340 V138" marker-end="url(#ah2)"/><text class="s" x="395" y="237">최대 3회</text>
+    <text class="s" x="570" y="300">3회 안에 통과하지 못하면 건너뛰고 기록</text>
+  </svg>
+  <div class="band cols" style="margin-top:calc(var(--u)*10); padding-top:calc(var(--u)*16); padding-bottom:calc(var(--u)*10)">
+    <div>
+      <div class="label accent">이 절차로 실행한 시도</div>
+      <div class="big" style="margin-top:calc(var(--u)*6)">9번 13건 · 4번 12건</div>
+    </div>
+    <div>
+      <div class="label accent">컴파일이 걸러 낸 실패</div>
+      <div class="big" style="margin-top:calc(var(--u)*6)">2건 <span class="mid muted" style="font-weight:400">두 건 모두 첫 교정에서 통과</span></div>
+    </div>
+  </div>
+  <div class="foot">스터디의 분야 설명: Lean 도구 연결과 검증 피드백을 이용한 증명 생성·오류 분석·반복 수정·최적화. 이번 발표는 그중 검증·수정 반복 구조를 다룸.</div>
+  <div class="num">02</div>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <h1>두 증명 모두 토큰과 heartbeat 감소</h1>
+  <p class="sub">증명 토큰과 heartbeat를 함께 측정한 로컬 결과</p>
+  <div class="cols">
+    <div>
+      <div class="label">4번 · PhysLib</div>
+      <div class="hero">123</div>
+      <div class="hero-cap">851토큰에서 85.55% 감소</div>
+    </div>
+    <div>
+      <div class="label">9번 · CSLib</div>
+      <div class="hero">79</div>
+      <div class="hero-cap">251토큰에서 68.53% 감소</div>
+    </div>
+  </div>
+  <div class="band cols" style="margin-top:calc(var(--u)*26); padding-top:calc(var(--u)*18); padding-bottom:calc(var(--u)*18)">
+    <div>
+      <div class="mid muted">4번 heartbeat · <code>v4.32.0</code></div>
+      <div class="big">11,947 → 1,411</div>
+      <div class="mid">88.19% 감소 · 지정 버전 1/1 통과</div>
+      <div class="mid muted">로컬 문제 점수 91.25</div>
+    </div>
+    <div>
+      <div class="mid muted">9번 heartbeat · <code>v4.33.0-rc2</code></div>
+      <div class="big">3,858 → 510</div>
+      <div class="mid">86.78% 감소 · 지정 버전 3/3 통과</div>
+      <div class="mid muted">로컬 문제 점수 85.10</div>
+    </div>
+  </div>
+  <div class="foot">참조 증명: 대회가 문제마다 준 원래 증명. 증명 토큰: <code>:=</code> 뒤의 증명을 대회 규칙으로 나눈 조각 수. heartbeat: Lean이 정리 하나를 처리하며 쓴 작업량. 문제 점수: 토큰 감소율, heartbeat 감소율, 지정 버전 통과율의 평균. 모두 로컬 측정값이며 공식 점수가 아님.</div>
+  <div class="num">03</div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <h1>측정기부터 참조 증명으로 검증</h1>
+  <p class="sub">측정 스크립트는 새로 작성 · 재는 규칙은 주최 측이 공개한 것</p>
+  <div class="split">
+    <div class="card">
+      <div class="label">공식 토큰 수 재현</div>
+      <div class="hero">15/15</div>
+      <div class="mid">웜업 참조 증명 전체</div>
+      <div class="mid muted" style="margin-top:calc(var(--u)*16)">처음에는 12/15. 논문 HTML이 연산자 <code>⁻¹</code>을 <code>-1</code>로 표시</div>
+    </div>
+    <table>
+      <tr><th>확인 항목</th><th>방법</th><th>확인한 것</th></tr>
+      <tr><td>증명 토큰</td><td>논문 부록 J의 계산법을 다시 구현</td><td>15문제의 공식 값과 일치</td></tr>
+      <tr><td>heartbeat</td><td>논문 부록 L과 같은 방법: 선언 앞에 <code>#count_heartbeats in</code></td><td>참조 증명에서 공식 기준값과 일치<br><span class="muted">9번은 최신 버전(<code>v4.33.0-rc2</code>)에서만 일치</span></td></tr>
+      <tr><td>컴파일</td><td>원본 정리를 후보로 교체하고 파일 전체를 검사</td><td>뒤따르는 정리가 깨져도 실패로 판정</td></tr>
+      <tr><td>유효성</td><td>명제 보존 · 금지 패턴 · <code>#print axioms</code></td><td>두 후보 모두 참조 증명과 같은 공리</td></tr>
+    </table>
+  </div>
+  <div class="num">04</div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <h1>방향만 다른 반복을 하나로</h1>
+  <p class="sub">9번 · 두 프로세스가 똑같이 행동하면 같은 선택지를 붙여도 똑같이 행동 · 참조 증명 62줄 중 54줄이 반복</p>
+  <table>
+    <tr><th>시도</th><th>수정한 구조</th><th>결과와 배운 점</th></tr>
+    <tr><td>1</td><td><code>exists</code>·<code>constructor</code>·<code>apply</code> 묶음을 익명 생성자 <code>⟨_, _, _⟩</code>로</td><td>토큰 251 → 262, heartbeat 3,856 → 497<br><span class="muted">길어져도 싸질 수 있음</span></td></tr>
+    <tr><td>2</td><td><code>obtain</code> 없이 <code>follow_fst</code>·<code>follow_snd</code>를 가정에 직접 적용</td><td>토큰 262 → 198</td></tr>
+    <tr><td>3 → 4</td><td><code>rintro s (t | t)</code> 실패(Unknown identifier <code>t</code>) → <code>intro s t; cases t</code></td><td>패턴만 고쳐 198 → 169<br><span class="muted">갈래 수는 생성자 수와 맞아야 함 (<code>Tr</code>은 8개)</span></td></tr>
+    <tr><td>5~6</td><td>두 방향의 <code>intro</code>·<code>cases</code>를 <code>&lt;;&gt;</code>로 합치고, <code>obtain</code> + <code>exact</code>를 <code>Exists.imp</code>·<code>And.imp</code> 항으로</td><td>토큰 169 → 124</td></tr>
+    <tr><td>7~9</td><td>같은 잎을 합치고, 두 방향을 <code>.imp</code> 항 하나로 통합</td><td>토큰 124 → 89</td></tr>
+    <tr class="hl"><td>10~12 · 최종</td><td>증인 제시를 줄이고, 경우 분석을 <code>repeat' first</code>로 통합</td><td>토큰 89 → 79 · 세 버전 통과 · 읽기는 어려움</td></tr>
+    <tr><td>13 · 기각</td><td><code>bisim</code> 경우를 <code>grind</code>로 닫은 비교용 후보</td><td>시도 7(120토큰, 부록 A) 대비 토큰 −17, heartbeat +889<br><span class="muted">짧아져도 비싸질 수 있음</span></td></tr>
+  </table>
+  <div class="foot">대상 정리: <code>Cslib.CCS.bisimilarity_congr_choice</code>. 시도 단계의 heartbeat는 <code>v4.32.0</code>의 값(참조 3,856). 최종 후보의 510은 <code>v4.33.0-rc2</code>의 값.</div>
+  <div class="num">05</div>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <h1>126줄의 논증을 Mathlib 정리 하나로 교체</h1>
+  <p class="sub">4번 · 모든 시험함수와의 내적 적분이 0인 연속함수 f는 0 · 시험함수는 매끄럽고 콤팩트 지지를 갖는 함수</p>
+  <table>
+    <tr><th>시도</th><th>수정한 구조</th><th>결과와 배운 점</th></tr>
+    <tr><td>1~3</td><td>줄 단위 수정 세 번: 쓰이지 않는 성분 삭제, 전술 블록을 항으로, <code>nlinarith</code> → <code>linarith</code></td><td>토큰 851 → 806<br><span class="muted"><code>linarith</code>로 바꾼 한 번이 heartbeat −3,039</span></td></tr>
+    <tr><td>4</td><td><code>WithLp 2 V</code> 우회 대신 <code>isOpen_lt</code> 사용</td><td>토큰 806 → 543</td></tr>
+    <tr><td>5 → 6</td><td><code>ContDiffBump</code> 직접 사용. 실패(<code>Application type mismatch</code>) 뒤 반지름 부등식 교정</td><td>토큰 543 → 427</td></tr>
+    <tr><td>7</td><td>지지집합·적분 가능성·측도 양수성 단계를 Mathlib 정리 하나로</td><td>토큰 427 → 185</td></tr>
+    <tr><td>8~12</td><td>도입부와 혹 함수(한 점 주변에서만 양수인 함수) 구성 정리. 시도 12는 기각</td><td>단계별 수정의 끝: 141토큰, heartbeat 1,483</td></tr>
+    <tr class="hl"><td>R1 → R3 · 최종</td><td>Mathlib의 변분법 기본 보조정리로 전체 교체. <code>BorelSpace</code> 조건은 <code>μ.trim</code>으로 맞춤</td><td>토큰 176 → 139 → 123</td></tr>
+  </table>
+  <div class="foot">대상 정리: <code>fundamental_theorem_of_variational_calculus'</code>. 두 감소율의 평균은 단계별 수정(시도 1~12) 85.51%, 전체 교체(R1~R3) 86.87%. R1~R3는 단계별 수정과 별도로 조사한 후보.</div>
+  <div class="num">06</div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <h1>효과가 큰 수정부터 탐색</h1>
+  <p class="sub">라이브러리 검색 → 구조 교체 → 줄 다듬기</p>
+  <table>
+    <tr><th>방법</th><th>4·9번의 근거</th><th>하네스에 반영</th></tr>
+    <tr><td>라이브러리 검색 먼저</td><td>4번의 시도 1~3과 R1 → R3 비교</td><td>수정 전에 Mathlib과 같은 파일의 증명부터 검색</td></tr>
+    <tr><td>두 지표를 함께 측정</td><td>9번의 시도 1과 시도 13</td><td>후보마다 토큰과 heartbeat를 모두 측정. 자동화 전술은 넣은 판과 뺀 판을 비교</td></tr>
+    <tr><td>토큰 규칙에 맞는 수정</td><td>이름은 길이와 무관하게 1토큰, 괄호·쉼표·꺾쇠는 각각 1토큰</td><td>전술 묶음을 항으로, 대칭 블록을 한 번으로</td></tr>
+    <tr><td>점수 환산으로 판단</td><td>점수로 환산하면 토큰 1개 ≈ heartbeat 약 14(4번), 약 15(9번)</td><td>heartbeat가 조금 늘어도 이득인지 계산</td></tr>
+    <tr><td>멈출 시점 계산</td><td>증명을 비워도 드는 heartbeat: 4번 537, 9번 39<br>남은 여지 약 2.4점, 약 4.1점</td><td>여지가 작으면 예산을 다른 문제에 배분</td></tr>
+  </table>
+  <div class="foot">남은 여지는 토큰을 고정했을 때 heartbeat만의 추정. 빈 증명의 비용은 참고값이며 유효한 증명이 도달할 수 있는 하한은 아님.</div>
+  <div class="num">07</div>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <h1>논문에서 가져온 것과 다르게 한 것</h1>
+  <p class="sub">Lean Refactor(대회 주최 측의 논문) · 추가 학습 없이 아래 단계를 반복해 증명을 줄임</p>
+  <div class="stages">
+    <div class="stage"><div class="ref">§3.1~3.2</div><b class="name">전략 검색</b><div class="paper">고유 전략 9,237개의 전략 은행에서 검색</div><div class="ours"><span class="tag diff">미적용</span><br>공개 저장소에 없음. Mathlib을 직접 검색</div></div>
+    <div class="stage"><div class="ref">§3.3 · Algorithm 1</div><b class="name">계획·수정</b><div class="paper">계획의 한 단계씩 증명을 고침</div><div class="ours"><span class="tag diff">일부 적용</span><br>전략으로 세운 계획은 없음. 참조 증명을 읽고 정한 수정을 작게 나눠 적용</div></div>
+    <div class="stage"><div class="ref">§3.3 · §4.3</div><b class="name">Lean 검증</b><div class="paper">컴파일로 판정. 버전 실험은 경시 수학 문제(PutnamBench, miniF2F)</div><div class="ours"><span class="tag diff">확장</span><br>최종 후보를 지정 버전 전부에서 컴파일</div></div>
+    <div class="stage"><div class="ref">부록 I.4 · O.3</div><b class="name">교정</b><div class="paper">컴파일러 오류를 돌려주고 최대 3회. 이미 줄인 부분은 유지</div><div class="ours"><span class="tag same">그대로</span><br>같은 한도(3회)를 적용. R1~R3을 만든 조사에는 이 규칙이 없음</div></div>
+    <div class="stage"><div class="ref">§3.3</div><b class="name">채택</b><div class="paper">통과하고 길이가 줄면 채택</div><div class="ours"><span class="tag diff">변경</span><br>통과하고 토큰과 heartbeat 감소율의 평균이 오르면 채택</div></div>
+    <div class="stage"><div class="ref">부록 I.4</div><b class="name">종료</b><div class="paper">호출 예산 30회 또는 목표 길이</div><div class="ours"><span class="tag diff">변경</span><br>검증 실행 14회 한도. R1~R3을 만든 조사는 Lean 실행 24회</div></div>
+  </div>
+  <div class="line-note"><b class="accent">채택 기준을 바꾼 이유</b> · 길이(토큰)만 줄이면 컴파일 비용이 늘어남: miniF2F 컴파일 시간 평균 약 2배(상대 감소율 −103.98%, Table 4), PhysLean heartbeat도 증가(−21.97%, Table 12)</div>
+  <div class="line-note" style="margin-top:calc(var(--u)*8)"><b class="accent">버전</b> · 전략의 버전 주석은 <code>v4.14.0</code>·<code>v4.16.0</code>·<code>v4.22.0</code>·<code>v4.24.0</code>이고, 웜업 버전은 그 범위 밖</div>
+  <div class="foot">상자의 위 칸은 논문, 아래 칸은 이번 실행. 논문 수치는 보고값이며 이번 프로젝트의 측정값이 아님. 논문이 보고한 길이의 상대 감소는 miniF2F 88.40%, PutnamBench 70.38%, PhysLean 27.69%(Table 1·2). Jialin Lu et al., arXiv:2605.20244v2. 논문의 PhysLean은 4번의 출처 PhysLib과 같은 저장소.</div>
+  <div class="num">08</div>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <h1>먼저 확보할 것은 유효한 제출</h1>
+  <p class="sub">줄이기 전에, 통과하는 증명을 예산 안에서 제출</p>
+  <svg class="chart" viewBox="-3 0 1158 296" role="img" aria-label="제출 전 검사의 순서도">
+    <defs><marker id="ah9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6B7480"/></marker></defs>
+    <rect class="node" x="0" y="40" width="130" height="64" rx="10"/><text class="t" x="65" y="79">후보 증명</text>
+    <path class="edge" d="M130,72 H176" marker-end="url(#ah9)"/>
+    <polygon class="node" points="180,72 290,16 400,72 290,128"/><text class="t2" x="290" y="67">명제 보존</text><text class="t2" x="290" y="90">금지 패턴 없음</text>
+    <path class="edge" d="M400,72 H446" marker-end="url(#ah9)"/><text class="l" x="414" y="62">예</text>
+    <polygon class="node" points="450,72 560,16 670,72 560,128"/><text class="t2" x="560" y="67">지정 버전</text><text class="t2" x="560" y="90">전부 컴파일</text>
+    <path class="edge" d="M670,72 H716" marker-end="url(#ah9)"/><text class="l" x="684" y="62">예</text>
+    <polygon class="node" points="720,72 830,16 940,72 830,128"/><text class="t2" x="830" y="67">문제당 비용</text><text class="t2" x="830" y="90">US$3 이하</text>
+    <path class="edge" d="M940,72 H996" marker-end="url(#ah9)"/><text class="l" x="954" y="62">예</text>
+    <rect class="node key" x="1000" y="40" width="152" height="64" rx="10"/><text class="t" x="1076" y="79">제출</text>
+    <path class="edge" d="M290,128 V190 H830 V128 M560,128 V190"/>
+    <path class="edge" d="M560,190 V226" marker-end="url(#ah9)"/>
+    <text class="l" x="300" y="166">아니오</text><text class="l" x="570" y="166">아니오</text><text class="l" x="840" y="166">아니오</text>
+    <rect class="node key" x="380" y="230" width="360" height="60" rx="10"/><text class="t" x="560" y="267">참조 증명을 제출 · 33.3점</text>
+  </svg>
+  <div class="notes3">
+    <div><b>유효한 제출</b>미제출·컴파일 실패·명제 변경·금지 패턴은 세 축 모두 0점</div>
+    <div><b>버전 호환성</b>지정 버전의 통과율이 점수의 3분의 1. 환경은 미리 준비(저장소 사본 하나 약 7.7GB)</div>
+    <div><b>문제별 비용</b>문제당 최댓값이 US$3를 넘으면 탈락. 재시도와 버린 후보도 정가로 포함</div>
+  </div>
+  <div class="line-note"><b class="accent">재현 보고서</b> · Approach, Models, Budget accounting, Reproduction 네 절이 필수이고 쓴 모델을 모두 공개. 시도 기록과 재현 코드를 처음부터 남김</div>
+  <div class="foot">채점 코드 <code>leaderboard.py</code>의 <code>problem_axes</code>와 공개 규칙 기준. 33.3점은 줄이지 못해도 통과하면 받는 호환성 점수의 계산값이며, 제출로 확인한 값이 아님.</div>
+  <div class="num">09</div>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <h1>13편 중 1편을 적용, 다음 후보는 5편</h1>
+  <p class="sub">Verifier-guided Agent 분야 논문의 현재 상태와 가져올 것</p>
+  <div class="split">
+    <div class="card" style="padding-top:calc(var(--u)*12); padding-bottom:calc(var(--u)*12)">
+      <div class="stat"><b>1</b><span>깊이 읽고 4·9번에 적용<br><span class="muted">Lean Refactor</span></span></div>
+      <div class="stat"><b>5</b><span>예비 조사(정독 전)<br><span class="muted">오른쪽 표</span></span></div>
+      <div class="stat"><b>7</b><span>초록만 확인<br><span class="muted">부록 C</span></span></div>
+    </div>
+    <table>
+      <tr><th>다음 후보</th><th>가져올 것</th><th>채울 빈 곳</th></tr>
+      <tr><td>APOLLO</td><td>실패한 부분만 <code>sorry</code>로 떼어 낸 뒤 따로 고치기</td><td>교정</td></tr>
+      <tr><td>Learning to Repair</td><td>교정 입력에 오류 지점의 증명 상태를 추가</td><td>교정</td></tr>
+      <tr><td>LeanExplore</td><td>Mathlib·PhysLean 선언 검색(로컬 모드, MCP)</td><td>수정 전 검색</td></tr>
+      <tr><td>Numina-Lean-Agent</td><td>한 지점에서 후보 여러 개를 한 번에 시험하는 Lean 도구</td><td>도구 연결</td></tr>
+      <tr><td>VeriSoftBench</td><td>증명이 실제로 쓰는 선언만 문맥으로 제공</td><td>저장소 문맥</td></tr>
+    </table>
+  </div>
+  <div class="foot">다섯 편 모두 증명을 줄이는 과제를 평가한 논문이 아니어서 효과는 미검증. 다음 단계는 분야 담당자와 나눠 읽기.</div>
+  <div class="num">10</div>
+</section>
+
+<!-- 11 -->
+<section class="slide closing">
+  <div class="top">
+    <div class="kicker">다음 실험</div>
+    <h1>공식 제출로 로컬 측정값 대조</h1>
+    <p class="sub">비용 기록을 갖추고 같은 절차를 다시 실행</p>
+  </div>
+  <div class="body">
+    <table>
+      <tr><th>남은 한계</th><th>영향</th><th>다음 행동</th></tr>
+      <tr><td>모든 실험값이 로컬</td><td>공식 평가 워커의 코드가 공개되어 있지 않아 공식 점수와 다를 수 있음</td><td>팀에서 한 번 제출하여 대조(웜업 기간, 10월 31일까지)</td></tr>
+      <tr><td>9번의 heartbeat 기준 버전은 추정</td><td>공식 기준값을 잰 버전이 다르면 점수는 85.10이 아니라 85.05</td><td>첫 공식 제출 때 확인</td></tr>
+      <tr><td>문제별 비용 미집계</td><td>예산 규칙을 충족한 실행이 아님</td><td>다시 실행할 때 문제별로 기록</td></tr>
+    </table>
+  </div>
+  <div class="foot">일정: 11월 1일 본 문제 공개, 11월 8일 제출 마감. 보고서는 OpenReview <code>VERICODEGEN_Competition</code>에 한국 시간 11월 9일 20시까지.</div>
+  <div class="num">11</div>
+</section>
+
+<!-- 부록 A -->
+<section class="slide">
+  <h1>9번의 읽기 쉬운 증명 후보</h1>
+  <p class="sub">부록 A · 시도 7의 120토큰 후보 · 최종 79토큰 후보와 별개</p>
+<pre>theorem bisimilarity_congr_choice :
+    (p ~[lts (defs := defs)] q) → (choice p r) ~[lts (defs := defs)] (choice q r) := by
+  intro h
+  refine ⟨ChoiceBisim, ChoiceBisim.choice h, ?_⟩
+  rintro _ _ (h | h) μ
+  · constructor &lt;;&gt; intro s t &lt;;&gt; cases t &lt;;&gt; rename_i t
+    · exact (h.follow_fst t).imp fun _ =&gt; And.imp Tr.choiceL ChoiceBisim.bisim
+    · exact ⟨s, Tr.choiceR t, ChoiceBisim.bisim (HomBisimilarity.refl _)⟩
+    · exact (h.follow_snd t).imp fun _ =&gt; And.imp Tr.choiceL ChoiceBisim.bisim
+    · exact ⟨s, Tr.choiceR t, ChoiceBisim.bisim (HomBisimilarity.refl _)⟩
+  · exact ⟨fun _ t =&gt; (h.follow_fst t).imp fun _ =&gt; And.imp_right ChoiceBisim.bisim,
+      fun _ t =&gt; (h.follow_snd t).imp fun _ =&gt; And.imp_right ChoiceBisim.bisim⟩</pre>
+  <div class="code-note">바깥의 두 갈래는 관계에 속한 쌍의 두 종류. 첫 갈래의 네 줄은 "어느 쪽이 움직였는가"(두 방향)와 "움직임이 <code>r</code>에서 왔는가"(두 경우)의 조합.</div>
+  <div class="num">A</div>
+</section>
+
+<!-- 부록 B -->
+<section class="slide">
+  <h1>4번의 최종 증명 후보</h1>
+  <p class="sub">부록 B · 123토큰 · "거의 어디서나 0"을 연속성으로 "모든 점에서 0"으로 확장</p>
+<pre>lemma fundamental_theorem_of_variational_calculus' {f : Y → V}
+    (μ : Measure Y) [IsFiniteMeasureOnCompacts μ] [μ.IsOpenPosMeasure]
+    [OpensMeasurableSpace Y]
+    (hf : Continuous f) (hg : ∀ g, IsTestFunction g → ∫ x, ⟪f x, g x⟫_ℝ ∂μ = 0) :
+    f = 0 := by
+  funext x
+  have hle := ‹OpensMeasurableSpace Y›.borel_le
+  have hc : Continuous fun y =&gt; ⟪f y, f x⟫_ℝ := by fun_prop
+  refine inner_self_eq_zero'.1 (congrFun ((hc.ae_eq_iff_eq μ continuous_zero).1
+    (ae_eq_of_ae_eq_trim (hm := hle) ?_)) x)
+  letI := borel Y
+  haveI : BorelSpace Y := ⟨rfl⟩
+  haveI : IsFiniteMeasureOnCompacts (μ.trim hle) := ⟨fun K hK =&gt;
+    trim_measurableSet_eq hle hK.measurableSet ▸ hK.measure_lt_top⟩
+  exact ae_eq_zero_of_integral_contDiff_smul_eq_zero hc.locallyIntegrable fun g hgs hgc =&gt;
+    (integral_trim hle (hgs.continuous.mul hc).stronglyMeasurable).symm.trans
+      (by simpa only [inner_smul_right', Pi.mul_apply] using
+        hg _ (.smul_right ⟨hgs, hgc⟩ contDiff_const))</pre>
+  <div class="code-note"><code>x</code>를 고정하고 <code>y ↦ ⟪f y, f x⟫</code>에 Mathlib 정리를 적용. 모든 <code>y</code>에서 0임을 얻고 <code>y = x</code>를 넣으면 <code>f x = 0</code>.</div>
+  <div class="num">B</div>
+</section>
+
+<!-- 부록 C -->
+<section class="slide dense">
+  <h1>나머지 7편: 초록에서 본 반영 후보</h1>
+  <p class="sub">부록 C · 초록만 읽고 정리 · 본문은 읽지 않음</p>
+  <table>
+    <tr><th>논문</th><th>초록의 핵심</th><th>하네스에 반영할 만한 것</th></tr>
+    <tr><td>SorryDB</td><td>실제 프로젝트 78개의 미완성 증명으로 만든 벤치마크. 에이전트가 가장 좋았지만 정해진 Lean 전술 목록보다 항상 낫지는 않았음</td><td>모델을 부르기 전에 정해진 전술 목록을 먼저 시도</td></tr>
+    <tr><td>Pantograph</td><td>Lean 4와 프로그램이 상호작용하는 인터페이스. 탐색 알고리즘을 쓴 증명 탐색과 증명 스케치를 지원</td><td>한 단계의 후보를 시험하고 증명 상태를 받아 교정 입력에 사용</td></tr>
+    <tr><td>LeanDojo</td><td>Lean에서 데이터를 뽑고 증명 환경과 상호작용하는 도구. 접근 가능한 전제만 골라 검색하는 증명기</td><td>검색 후보를 그 위치에서 쓸 수 있는 선언으로 제한</td></tr>
+    <tr><td>Awakening the<br>Sleeping Agent</td><td>증명 전용 모델은 미세조정 뒤 도구 호출 능력을 거의 잃고, Mathlib 검색 기록 100건으로 회복</td><td>학습이 필요해 직접 반영은 불가. 도구를 쓰는 하네스에는 범용 모델이 맞다는 근거</td></tr>
+    <tr><td>LeanArchitect</td><td>Lean 코드에서 blueprint와 선언 사이의 의존성 정보를 자동으로 추출</td><td>증명이 쓰는 선언을 뽑는 데 쓸 수 있는지 확인</td></tr>
+    <tr><td>ProofBridge</td><td>자연어 증명을 Lean으로 옮기는 과제. 유사 예시 검색과 타입 검사 피드백으로 반복 수리</td><td>과제가 달라 직접 반영할 것은 적음</td></tr>
+    <tr><td>AI4SLT</td><td>통계학습이론의 형식화. 사람이 전략을 정하고 에이전트가 전술 수준의 증명을 작성</td><td>과제가 달라 직접 반영할 것은 적음</td></tr>
+  </table>
+  <div class="foot">초록에 적힌 내용만 옮김. 반영 후보는 초록을 읽고 떠올린 것이며, 논문이 그 효과를 보인 것은 아님.</div>
+  <div class="num">C</div>
+</section>
+
+</div>
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0;
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) { s.classList.toggle('active', k === i); });
+    try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
+  }
+  var start = parseInt((location.hash || '').replace('#', ''), 10);
+  show(isNaN(start) ? 0 : start - 1);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); show(i + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp' || e.key === 'Backspace') { e.preventDefault(); show(i - 1); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(slides.length - 1); }
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+      else { document.exitFullscreen && document.exitFullscreen(); }
+    }
+  });
+  document.addEventListener('click', function (e) {
+    if (e.clientX > window.innerWidth / 2) show(i + 1); else show(i - 1);
+  });
+  window.addEventListener('hashchange', function () {
+    var n = parseInt((location.hash || '').replace('#', ''), 10);
+    if (!isNaN(n) && n - 1 !== i) show(n - 1);
+  });
+})();
+</script>
+</body>
+</html>
