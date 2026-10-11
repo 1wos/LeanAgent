@@ -33,6 +33,6 @@ theorem fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius (i : Fin ℓ) (step
   simp only [BBF_CodeDistance, Nat.add_sub_cancel, Nat.sub_mul, ← Nat.pow_add, Nat.mul_assoc,
     show ℓ + 𝓡 - (↑i + steps) + steps = ℓ + 𝓡 - i by omega,
     show ℓ - (↑i + steps) + steps = ℓ - i by omega] at h3
-  exact (_root_.mul_le_mul_right (le_trans (sInf_le ⟨g', h_g'_mem, le_rfl⟩) (ENat.coe_le_coe.2 hΔ) :
+  exact (mul_le_mul_left' (le_trans (sInf_le ⟨g', h_g'_mem, le_rfl⟩) (ENat.coe_le_coe.2 hΔ) :
     Code.distFromCode f C_i ≤ _) 2).trans_lt (mod_cast (show 2 * (d_fw * 2 ^ steps) <
       BBF_CodeDistance ℓ 𝓡 ⟨i, by omega⟩ by simp only [BBF_CodeDistance]; omega))
