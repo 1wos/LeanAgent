@@ -1,0 +1,39 @@
+{
+ "tag": "attempt_05",
+ "name": "fundamental_theorem_of_variational_calculus'",
+ "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+ "replaced_lines": [
+  99,
+  224
+ ],
+ "candidate_sha256": "941332fad04e3d6b11d3e20ffe17184d3d840e38df426ed1bc90c4b88dcbb637",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 418,
+ "declaration_lines": 47,
+ "check": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true attempt_05.check.lean",
+  "returncode": 1,
+  "seconds": 15.96,
+  "error_count": 1,
+  "first_errors": [
+   "P4/runs/attempt_05.check.lean:140:29: error: Application type mismatch: The argument"
+  ],
+  "warning_count": 0,
+  "axioms": [
+   "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": true
+ },
+ "compiled": false,
+ "heartbeat": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true attempt_05.hb.lean",
+  "returncode": 1,
+  "seconds": 4.81,
+  "heartbeats": null,
+  "error_count": 1,
+  "first_errors": [
+   "P4/runs/attempt_05.hb.lean:142:29: error: Application type mismatch: The argument"
+  ]
+ }
+}

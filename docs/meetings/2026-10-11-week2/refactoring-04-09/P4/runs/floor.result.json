@@ -1,0 +1,37 @@
+{
+ "tag": "floor",
+ "name": "fundamental_theorem_of_variational_calculus'",
+ "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+ "replaced_lines": [
+  99,
+  224
+ ],
+ "candidate_sha256": "133630a8f1b730d44aea1d35db36907fbb5614a3bab16ca7cce36aae6d27bdeb",
+ "statement_unchanged": true,
+ "forbidden_patterns": [
+  "sorry"
+ ],
+ "proof_tokens": 2,
+ "declaration_lines": 6,
+ "check": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true floor.check.lean",
+  "returncode": 0,
+  "seconds": 16.22,
+  "error_count": 0,
+  "first_errors": [],
+  "warning_count": 0,
+  "axioms": [
+   "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": true
+ },
+ "compiled": false,
+ "heartbeat": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true floor.hb.lean",
+  "returncode": 0,
+  "seconds": 6.69,
+  "heartbeats": 537,
+  "error_count": 0,
+  "first_errors": []
+ }
+}

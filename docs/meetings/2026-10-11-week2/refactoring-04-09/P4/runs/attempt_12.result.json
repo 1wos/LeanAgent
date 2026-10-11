@@ -1,0 +1,35 @@
+{
+ "tag": "attempt_12",
+ "name": "fundamental_theorem_of_variational_calculus'",
+ "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+ "replaced_lines": [
+  99,
+  224
+ ],
+ "candidate_sha256": "863e15787726ba25aa214ca83e650d400d67244a2b803ffd537ea0d8cc5b948a",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 141,
+ "declaration_lines": 20,
+ "check": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true attempt_12.check.lean",
+  "returncode": 0,
+  "seconds": 9.38,
+  "error_count": 0,
+  "first_errors": [],
+  "warning_count": 0,
+  "axioms": [
+   "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": false
+ },
+ "compiled": true,
+ "heartbeat": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true attempt_12.hb.lean",
+  "returncode": 0,
+  "seconds": 16.02,
+  "heartbeats": 1485,
+  "error_count": 0,
+  "first_errors": []
+ }
+}
