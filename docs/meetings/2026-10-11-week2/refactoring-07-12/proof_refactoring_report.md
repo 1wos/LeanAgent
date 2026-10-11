@@ -1,10 +1,11 @@
 # Proof Refactoring Report: Warm-up P7 and P12
 
-**대상 프로젝트:** Cslib, ArkLib\
-**참조 소스:** `Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean`, `ArkLib/Data/CodingTheory/ProximityGap/DG25/MainResults.lean`\
-**Lean 버전:** P7 `v4.33.0-rc2`, P12 `v4.31.0`\
-**검증 로그 기준일:** 2026-10-10\
-**자료 작성일:** 2026-10-11\
+**대상 프로젝트:** Cslib, ArkLib  
+**참조 소스:** `Cslib/Languages/LambdaCalculus/LocallyNameless/Fsub/Safety.lean`, `ArkLib/Data/CodingTheory/ProximityGap/DG25/MainResults.lean`  
+**Lean 버전:** P7 `v4.33.0-rc2`·`v4.32.0`·`v4.31.0`, P12 `v4.31.0`·`v4.30.0`·`v4.29.0`  
+**초기 검증 로그:** 2026-10-10  
+**추가 평가 기준:** 2026-10-11 17:59:41 KST  
+**자료 작성일:** 2026-10-11  
 
 [프레젠테이션용 HTML](proof_refactoring_presentation.html) — 개념 설명, 단계별 데모, 전후 코드 비교와 검증 결과를 브라우저에서 볼 수 있다.
 
@@ -12,6 +13,7 @@
 
 - [Executive Summary](#executive-summary)
 - [Overall Metrics Comparison](#overall-metrics-comparison)
+- [Evaluation on Three Criteria](#evaluation-on-three-criteria)
 - [Problem P7](#problem-p7)
 - [Problem P12](#problem-p12)
 - [Verification and Axiom Check](#verification-and-axiom-check)
@@ -22,7 +24,9 @@ P7은 `Typing`이라는 귀납적 정의를 따라 progress를 증명한다. 참
 
 P12는 interleaved affine-line proximity gap에서 tensor/multilinear correlated agreement를 유도한다. 참조 증명에는 인덱스 복원, cardinality, 형 변환, 확률 부등식 처리가 한 귀납 단계에 섞여 있었다. 사용되지 않는 cardinality 하한을 삭제하고 샘플링 변환·기저 단계·귀납 단계를 보조정리로 분리했다. **주 정리는 177줄에서 17줄로, 새 보조정리를 포함한 비교 범위 전체는 76줄로 줄었다(57.1%)**.
 
-두 문제 모두 JSONL의 `statement`를 그대로 유지했다. 원본과 수정본 네 증명이 모두 실제 Lean 검증을 통과했으며, 공리 목록은 모두 `[propext, Classical.choice, Quot.sound]`로 동일하다. 대상 정리의 `sorryAx` 의존성은 없다. 아래 검증 결과와 시간은 2026-10-10 최종 실행 로그 기준이다.
+두 문제 모두 JSONL의 `statement`를 그대로 유지했다. 2026-10-10 초기 검증에 이어, 2026-10-11에는 문제별 지정 버전 3개에서 원본·수정본을 각각 검사했다. 총 12회의 파일 검사와 12회의 별도 계측이 모두 성공했고, 수정본의 버전 호환성은 두 문제 모두 **3/3(100%)**다. 공리 목록은 모두 `[propext, Classical.choice, Quot.sound]`로 동일하며 대상 정리의 `sorryAx` 의존성은 없다.
+
+Lean lexer 기준 proof token은 **P7 406 → 301개(25.8621% 감소)**, **P12 1,329 → 745개(43.9428% 감소)**다. P12의 새 보조정리까지 포함한 수치다. Heartbeat는 버전에 따라 P7 **26.7572–27.5751%**, P12 **8.6868–12.6498%** 감소했다. 최신 평가의 수치와 근거는 [evaluation_results.json](evaluation_results.json)에 보존했다.
 
 ## Overall Metrics Comparison
 
@@ -41,7 +45,74 @@ P12는 interleaved affine-line proximity gap에서 tensor/multilinear correlated
 
 **집계 범위:** 줄 수는 정리 선언·빈 줄·주석을 포함한다. P12 수정본은 새 보조정리 블록 59줄과 주 정리 17줄의 합이며 두 블록 사이 구분용 빈 줄은 제외한다. 문자 수는 같은 범위에서 공백과 Lean 주석을 제거한 Unicode 문자 수다. import, 공통 문맥, `#check`·`#print axioms`는 제외한다. P12에서 공유하는 앞부분 1,199줄은 변경하지 않았다.
 
-시간은 최종 실행 1회의 `lake env lean` 경과 시간으로 의존성 빌드·다운로드는 제외한다. P12는 복원한 공통 보조정리도 매번 검사한다. 반복 측정이나 heartbeat 측정은 수행하지 않았으므로, 이 수치만으로 실행 속도 개선을 일반화하지 않는다.
+위 시간은 2026-10-10 초기 검증에서 기록한 `lake env lean` 1회 경과 시간으로 의존성 빌드·다운로드는 제외한다. P12는 복원한 공통 보조정리도 매번 검사한다. 이후 별도 계측으로 얻은 Heartbeat는 아래 추가 평가에 기록했다. 경과 시간과 Heartbeat는 측정 범위와 단위가 다르며, 반복 실행에 따른 분산은 측정하지 않았다.
+
+## Evaluation on Three Criteria
+
+**평가 스냅샷:** 2026-10-11 17:59:41 KST. [평가 JSON](evaluation_results.json)의 실제 로컬 실행 결과를 반영했다. 문제별 `version_info`의 고정 커밋·Lean 도구체인을 사용했으며, 공식 Arena worker 점수는 아니다. 아래 감소율은 `100 × (1 − 수정본 / 참조본)`을 소수 넷째 자리까지 계산한 값이다.
+
+### 증명 길이 감소율
+
+| 문제 | 참조 proof token | 수정 proof token | 감소율 |
+| --- | ---: | ---: | ---: |
+| P7 | 406 | 301 | 25.8621% |
+| P12 — 새 보조정리 포함 | 1,329 | 745 | 43.9428% |
+| 합계 — 문제별 한 번 집계 | 1,735 | 1,046 | 39.7118% |
+
+사용자가 선택한 **Lean lexer 기준**으로 `Lean.Parser.tokenFn`을 사용했다. 목표 정리의 선언은 제외하고 `by`부터 증명 끝까지 세며, 공백·주석은 제외한다. doc comment는 집계용 입력에서만 일반 주석으로 바꾼다. P12 수정본은 주 증명 **56개**에 새 보조정리의 선언·증명 및 필요한 `omit` 명령 **689개**를 더한 **745개**다. import, 공통 문맥, 검증 명령은 포함하지 않는다.
+
+JSONL에 기록된 `proof_length`는 P7 408, P12 1,353으로, 이번 lexer 집계의 참조값 406·1,329와 다르다. 기존 값은 JSON의 `benchmark_reference_proof_length`로 별도 보존했다. 위 감소율은 원본과 수정본을 같은 lexer로 센 값끼리 계산했으며, 앞 절의 줄 수·문자 수 감소율과도 구분한다. 토큰 수는 각 문제의 세 버전에서 동일했다.
+
+### Heartbeat 감소율
+
+| 문제 | Lean 버전 | 참조 Heartbeat | 수정 Heartbeat | 감소율 | 원본 / 수정본 검사 |
+| --- | --- | ---: | ---: | ---: | --- |
+| P7 | `v4.33.0-rc2` | 59,804 | 43,313 | 27.5751% | PASS / PASS |
+| P7 | `v4.32.0` | 61,942 | 45,358 | 26.7734% | PASS / PASS |
+| P7 | `v4.31.0` | 61,916 | 45,349 | 26.7572% | PASS / PASS |
+| P12 | `v4.31.0` | 9,167 | 8,112 | 11.5087% | PASS / PASS |
+| P12 | `v4.30.0` | 9,178 | 8,017 | 12.6498% | PASS / PASS |
+| P12 | `v4.29.0` | 10,257 | 9,366 | 8.6868% | PASS / PASS |
+
+Heartbeat는 Lean elaboration 작업량을 비교하는 지표다. 각 대상 명령의 elaboration 전후 `IO.getNumHeartbeats` 차이를 얻고, **원시값을 합산한 뒤 1,000으로 나눈 정수값**을 표에 기록했다. 참조본은 대상 정리 명령을, 수정본은 대상 정리와 새로 도입한 helper·scope 명령을 측정한다. P12 수정본의 범위는 `helper_scope`, `tensor_success_split`, `tensor_gap_one`, `tensor_gap_succ`, 주 정리의 다섯 명령이다. 원시값은 JSON의 `raw_heartbeats`와 명령별 증거에 보존했다.
+
+import, 공통 보조정리 문맥, 측정 helper 정의, 토큰 계산, `#check`·`#print axioms`는 계측에서 제외했다. 계측 시에만 `Elab.async=false`로 동기 elaboration을 사용했고 기존 `maxHeartbeats` 설정은 유지했다. 버전·변형별로 별도 프로세스에서 한 번 측정했다. 서로 다른 버전의 Heartbeat를 하나로 합산하거나 평균 내지 않았으며, 이 감소율을 파일 전체의 경과 시간 감소율로 해석하지 않는다.
+
+### 버전 호환성
+
+| 문제 | JSONL 지정 버전 | 수정 없이 통과 / 지정 버전 수 | 호환성 |
+| --- | --- | ---: | ---: |
+| P7 | `v4.33.0-rc2`, `v4.32.0`, `v4.31.0` | 3 / 3 | 100% |
+| P12 | `v4.31.0`, `v4.30.0`, `v4.29.0` | 3 / 3 | 100% |
+| 합계 | 문제·버전 조합 6개 | 6 / 6 | 100% |
+
+호환성 검사는 계측용 wrapper를 넣지 않은 **바이트 단위로 동일한 원래 파일**로 별도 수행했다. 모든 원본·수정본의 컴파일 종료 코드는 0이며, `-DwarningAsError=true`와 P12의 `-DautoImplicit=false`를 유지했다. 각 버전에서 원본·수정본의 elaborated 타입이 동일하고, 대상 정리의 공리는 `[propext, Classical.choice, Quot.sound]`이며 `sorryAx`는 없다. 지정 버전에 맞추기 위한 증명 코드 변경은 없었다.
+
+| 문제 | Lean 버전 | 고정 라이브러리 커밋 |
+| --- | --- | --- |
+| P7 | `v4.33.0-rc2` | `3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc` |
+| P7 | `v4.32.0` | `197a7be621263b84c67ca4f803f69205b36d06df` |
+| P7 | `v4.31.0` | `8ea71c8df91acd63285515a04da952b23b78d266` |
+| P12 | `v4.31.0` | `c1712f6c496d0aef04f09bae42aec13811b3273f` |
+| P12 | `v4.30.0` | `e6d77b18ca1334a91faf4d1ccf9f96d854d58ba4` |
+| P12 | `v4.29.0` | `de71a9dfd2f5a343e8895517b7efe857d9f1ce5c` |
+
+### 평가 근거와 재현
+
+[최종 JSON](evaluation_results.json), 집계 기준 (로컬 설명 자료), 계측 helper (로컬 소스), 평가 스크립트 (로컬 실행 파일), P7 증거 (로컬 검증 기록), P12 증거 (로컬 검증 기록)에 수치·실행 명령·로그·소스 해시를 보존했다. 버전별 증거 폴더에는 수정 없는 검사 파일과 계측 파일을 함께 남겼다. 기존 `P7/result.json`, `P12/result.json`과 초기 로그는 덮어쓰지 않았다.
+
+준비된 환경에서 프로젝트 루트 기준으로 실행한다.
+
+```bash
+python3 week2/evaluation/prepare_environments.py
+python3 week2/evaluation/run_evaluation.py
+```
+
+평가 스크립트는 이미 저장된 버전 결과를 재사용한다. 기존 증거로 최종 JSON만 다시 집계하려면 다음 명령을 사용한다.
+
+```bash
+python3 week2/evaluation/run_evaluation.py --aggregate-only
+```
 
 ## Problem P7
 
@@ -80,7 +151,7 @@ lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t'
 
 #### Original Proof — 선언 포함 83줄
 
-원본: `Progress.lean` (본문 코드 참조). 아래 코드는 JSONL `src` 전체다.
+원본: `Progress.lean` (로컬 소스). 아래 코드는 JSONL `src` 전체다.
 
 ```lean
 lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by
@@ -170,7 +241,7 @@ lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t'
 
 #### Refactored Proof — 선언 포함 49줄
 
-수정본: `ProgressRefactored.lean` (본문 코드 참조).
+수정본: `ProgressRefactored.lean` (로컬 소스).
 
 ```lean
 lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t' := by
@@ -295,7 +366,7 @@ theorem interleaved_affine_gaps_imply_tensor_gaps
 
 #### Original Proof — 선언 포함 177줄
 
-원본: `TensorGaps.lean` (본문 코드 참조). 아래 코드는 JSONL `src` 전체다.
+원본: `TensorGaps.lean` (로컬 소스). 아래 코드는 JSONL `src` 전체다.
 
 ```lean
 theorem interleaved_affine_gaps_imply_tensor_gaps
@@ -479,7 +550,7 @@ theorem interleaved_affine_gaps_imply_tensor_gaps
 
 #### Refactored Helpers — 59줄
 
-수정본: `TensorGapsRefactored.lean` (본문 코드 참조). 다음 보조정리와 주 정리를 함께 검증한다.
+수정본: `TensorGapsRefactored.lean` (로컬 소스). 다음 보조정리와 주 정리를 함께 검증한다.
 
 ```lean
 -- The helpers below expose the sampling and induction interfaces explicitly.
@@ -569,15 +640,15 @@ theorem interleaved_affine_gaps_imply_tensor_gaps
 
 | 시도 | 관찰한 결과 | 해결·다음 시도 |
 | --- | --- | --- |
-| 1차: 보조정리 분리 및 `Fin.snoc_init_self`로 정규화 | `simp made no progress`와 `ModuleCode`→`Set` 인자의 타입 추론 오류 | 보조정리에 `A`, `ι`를 명시하고, `snoc` 재구성을 거치지 않는 샘플링 분할 형태로 변경했다. |
-| 2차: 샘플링 등식을 `simpa only`로 한꺼번에 정규화 | 확률식 내부의 `Fin.init r`와 `fun i => r i.castSucc`가 맞지 않았다. 기저 단계의 일반적인 singleton 정리 적용도 진행되지 않았다. | 기저 단계의 사건 predicate를 명시했다. |
-| 3차: `Fin.init`를 simp 목록에 추가 | 기저 단계는 해결됐지만 확률식 내부의 표현 불일치는 남았다. | 전체 확률식을 직접 단순화하는 방식에서 벗어났다. |
-| 4차: 확률 함수에 `apply congrArg` 적용 | 고차 함수 인자의 단일화가 실패했다. | 각 샘플 `r`에서 사건 자체의 동등성을 먼저 증명하도록 바꿨다. |
-| 5차: 점별 `fold` 등식과 `simp_rw` 사용 | 재귀식 rewrite 뒤 `Fin.init`와 lambda 사이의 정의적 동등성 목표가 남았다. | 그 작은 목표를 `rfl`로 닫았다. |
-| 6차: 논리적 증명 완성 | 공리 목록에 `sorryAx`는 없었으나, sampling helper의 불필요한 `[Nonempty ι]`, `[DecidableEq ι]` 가정이 경고를 발생시켜 엄격 검증에 실패했다. | 해당 helper에만 `omit ... in`을 지정했다. 경고 검사를 끄지 않았다. |
-| 최종 재실행 | 참조본·수정본 모두 종료 코드 0, 경고 오류 없음, 대상 정리의 `sorryAx` 없음 | 최종 수정본 로그 (로컬 검증 기록)와 `결과 JSON` (로컬 검증 기록)에 기록했다. |
+| 1차 (로컬 로그): 보조정리 분리 및 `Fin.snoc_init_self`로 정규화 | `simp made no progress`와 `ModuleCode`→`Set` 인자의 타입 추론 오류 | 보조정리에 `A`, `ι`를 명시하고, `snoc` 재구성을 거치지 않는 샘플링 분할 형태로 변경했다. |
+| 2차 (로컬 로그): 샘플링 등식을 `simpa only`로 한꺼번에 정규화 | 확률식 내부의 `Fin.init r`와 `fun i => r i.castSucc`가 맞지 않았다. 기저 단계의 일반적인 singleton 정리 적용도 진행되지 않았다. | 기저 단계의 사건 predicate를 명시했다. |
+| 3차 (로컬 로그): `Fin.init`를 simp 목록에 추가 | 기저 단계는 해결됐지만 확률식 내부의 표현 불일치는 남았다. | 전체 확률식을 직접 단순화하는 방식에서 벗어났다. |
+| 4차 (로컬 로그): 확률 함수에 `apply congrArg` 적용 | 고차 함수 인자의 단일화가 실패했다. | 각 샘플 `r`에서 사건 자체의 동등성을 먼저 증명하도록 바꿨다. |
+| 5차 (로컬 로그): 점별 `fold` 등식과 `simp_rw` 사용 | 재귀식 rewrite 뒤 `Fin.init`와 lambda 사이의 정의적 동등성 목표가 남았다. | 그 작은 목표를 `rfl`로 닫았다. |
+| 6차 (로컬 로그): 논리적 증명 완성 | 공리 목록에 `sorryAx`는 없었으나, sampling helper의 불필요한 `[Nonempty ι]`, `[DecidableEq ι]` 가정이 경고를 발생시켜 엄격 검증에 실패했다. | 해당 helper에만 `omit ... in`을 지정했다. 경고 검사를 끄지 않았다. |
+| 최종 재실행 | 참조본·수정본 모두 종료 코드 0, 경고 오류 없음, 대상 정리의 `sorryAx` 없음 | 최종 수정본 로그 (로컬 로그)와 결과 JSON (로컬 검증 기록)에 기록했다. |
 
-시도별 로그는 로컬 실행 기록이며, 위 표에 오류와 해결 과정을 요약했다. 실패 로그의 줄 번호는 각 시도 당시 파일 기준이다. 컴파일 오류가 있던 시도의 공리 출력은 성공 판정에 사용하지 않았다.
+실패 로그의 줄 번호는 각 시도 당시 파일 기준이다. 컴파일 오류가 있던 시도의 공리 출력은 성공 판정에 사용하지 않았다.
 
 ### 막힌 점과 남아 있는 범위
 
@@ -587,9 +658,9 @@ ArkLib 의존성 빌드에서는 `ArkLib/Data/Fin/Basic.lean:307`과 `ArkLib/Dat
 
 ## Verification and Axiom Check
 
-### Build Verification
+### Initial Build Verification (2026-10-10)
 
-아래는 기존 로컬 작업 폴더 `leanProject`에서 검증에 사용한 실행 명령이다. 실행 스크립트와 소스·의존성 저장소는 로컬 작업 자료이며, 이 문서에는 코드와 검증 결과를 수록한다.
+프로젝트 루트인 `leanProject`에서 실행한다.
 
 ```bash
 python3 week2/P7/run_progress.py
@@ -600,10 +671,10 @@ python3 week2/P12/run_tensor_gaps.py
 
 | 문제 | 필요한 import 모듈 빌드 | 참조본 검사 | 수정본 검사 | 최종 기록 |
 | --- | --- | --- | --- | --- |
-| P7 | `Cslib.Languages.LambdaCalculus.LocallyNameless.Fsub.Typing` 성공 | PASS, 종료 코드 0 | PASS, 종료 코드 0 | 원본 로그 (로컬 검증 기록), 수정 로그 (로컬 검증 기록), `result.json` (로컬 검증 기록) |
-| P12 | `ArkLib.Data.CodingTheory.ProximityGap.DG25.Basic` 성공 | PASS, 종료 코드 0 | PASS, 종료 코드 0 | 원본 로그 (로컬 검증 기록), 수정 로그 (로컬 검증 기록), `result.json` (로컬 검증 기록) |
+| P7 | `Cslib.Languages.LambdaCalculus.LocallyNameless.Fsub.Typing` 성공 | PASS, 종료 코드 0 | PASS, 종료 코드 0 | 원본 로그 (로컬 로그), 수정 로그 (로컬 로그), `result.json` (로컬 검증 기록) |
+| P12 | `ArkLib.Data.CodingTheory.ProximityGap.DG25.Basic` 성공 | PASS, 종료 코드 0 | PASS, 종료 코드 0 | 원본 로그 (로컬 로그), 수정 로그 (로컬 로그), `result.json` (로컬 검증 기록) |
 
-`P7/cslib-progress`와 `P12/arklib`는 정의·보조정리·고정 버전 의존성·빌드 결과를 제공한다. 라이브러리 저장소의 추적 파일은 수정하지 않았으며, 검증에는 설치한 도구체인과 캐시를 사용했다. 검증 범위는 필요한 import 모듈과 두 문제의 참조본·수정본이다.
+초기 검증은 `P7/cslib-progress`와 `P12/arklib` checkout에서 정의·보조정리·고정 버전 의존성·빌드 결과를 사용했다. 추가 평가에서는 P7 `v4.33.0-rc2`에 기존 `P7/cslib-progress`를, 나머지 다섯 환경에는 `evaluation/envs/`의 별도 고정 checkout을 사용했다. 라이브러리 저장소의 추적 파일은 수정하지 않았다. 검증 범위는 필요한 import 모듈과 두 문제의 참조본·수정본이며 전체 라이브러리 CI 결과는 아니다.
 
 ### Reference Reconstruction and Environment
 

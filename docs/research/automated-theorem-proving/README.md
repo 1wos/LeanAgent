@@ -18,6 +18,6 @@
 | 작성자 | 주제 | 자료 링크 | 공유일 |
 | --- | --- | --- | --- |
 | 손지연 | ATP 논문 28편 비교와 검색·수리·최적화·평가 및 하네스 적용 제안 | [HTML 발표자료](atp_sjy.html) | 2026-10-11 예정 |
-| 손지연 | 웜업 P7·P12 증명 리팩터링: 명제·Lean 문법 해설, 전후 코드 비교와 검증 결과 | [상세 보고서](../../meetings/2026-10-11-week2/refactoring-07-12/proof_refactoring-07-12.md) · [HTML 발표자료](../../meetings/2026-10-11-week2/refactoring-07-12/proof_refactoring_presentation.html) | 2026-10-11 예정 |
+| 손지연 | 웜업 P7·P12 증명 리팩터링: 명제·Lean 문법 해설, 전후 코드 비교와 검증 결과 | [상세 보고서](../../meetings/2026-10-11-week2/refactoring-07-12/proof_refactoring_report.md) · [HTML 발표자료](../../meetings/2026-10-11-week2/refactoring-07-12/proof_refactoring_presentation.html) | 2026-10-11 예정 |
 
 자료를 이 폴더에 자유로운 형식으로 작성하고, 위 표에 링크를 추가합니다.

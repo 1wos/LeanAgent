@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="P7 progress와 P12 tensor gap 증명의 개념, 리팩터링 전후 비교와 실제 Lean 검증 결과">
+  <meta name="description" content="P7 progress와 P12 tensor gap 증명의 개념, 리팩터링 전후 비교와 proof token·Heartbeat·버전 호환성 평가">
   <title>Week 2 · P7·P12 증명 리팩터링</title>
   <style>
     :root {
@@ -345,7 +345,7 @@
       .compare .code-block.after { position: static; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
+  
     /* Forest green palette with warm paper surfaces. */
     .two-col { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
     .card > :first-child, .strategy > :first-child { margin-top:0; }
@@ -426,6 +426,8 @@
     .bar span { min-width:44px; }
     .metric-card .thm { overflow-wrap:anywhere; }
     footer a { text-decoration:underline; }
+    .evaluation-commits code { white-space:normal; overflow-wrap:anywhere; }
+    .axiom-row .delta { color:var(--good); font-variant-numeric:tabular-nums; }
 
     .toc a { border-radius:5px; border-bottom:2px solid transparent; }
     .toc a[aria-current="location"] { border-bottom-color:var(--accent); background:var(--surface-2); }
@@ -459,12 +461,12 @@
       <div class="eyebrow"><span class="pill">Week 2</span><span class="pill">Lean Proof Refactoring</span><span class="pill">Warm-up P7 · P12</span></div>
       <h1>P7·P12 증명 리팩터링</h1>
       <p class="subtitle">P7의 반복되는 case split을 합치고,<br>P12의 인덱스·확률 계산을 보조정리로 정리한 과정</p>
-      <div class="meta"><span><b>대상</b> Cslib · ArkLib</span><span><b>검증 로그</b> 2026.10.10</span><span><b>자료 작성</b> 2026.10.11</span></div>
+      <div class="meta"><span><b>대상</b> Cslib · ArkLib</span><span><b>초기 검증</b> 2026.10.10</span><span><b>추가 평가</b> 2026.10.11</span></div>
     </div>
   </header>
   <main class="wrap">
     <nav class="toc" aria-label="발표 목차">
-      <a href="#background">작업 대상</a><a href="#demo">예제 탐색</a><a href="#meaning">정리 해석</a><a href="#summary">변경 요지</a><a href="#metrics">수치 비교</a><a href="#p7">P7</a><a href="#p12">P12</a><a href="#verification">실행 기록</a>
+      <a href="#background">작업 대상</a><a href="#demo">예제 탐색</a><a href="#meaning">정리 해석</a><a href="#summary">변경 요지</a><a href="#metrics">수치 비교</a><a href="#evaluation">추가 평가</a><a href="#p7">P7</a><a href="#p12">P12</a><a href="#verification">실행 기록</a>
       <div class="presentation-tools"><button id="large-type" class="secondary" type="button" aria-pressed="false">큰 글씨</button><button id="print-page" class="secondary" type="button">인쇄</button></div>
     </nav>
 
@@ -532,17 +534,82 @@
       <div class="kpis">
         <div class="kpi"><div class="label">P7 · 정리 전체</div><div class="value">83 <small>→</small> 49 <small>줄</small></div><div class="sub">41.0% 감소</div></div>
         <div class="kpi"><div class="label">P12 · 새 보조정리 포함</div><div class="value">177 <small>→</small> 76 <small>줄</small></div><div class="sub">57.1% 감소 · 주 정리는 17줄</div></div>
-        <div class="kpi"><div class="label">원본·수정본 실제 Lean 검사</div><div class="value good">4 / 4 <small>PASS</small></div><div class="sub">종료 코드 0 · 대상 정리에 sorryAx 없음</div></div>
+        <div class="kpi"><div class="label">지정 6개 환경 · 원본·수정본 검사</div><div class="value good">12 / 12 <small>PASS</small></div><div class="sub">수정본 호환성 6/6 · 대상 정리에 sorryAx 없음</div></div>
+        <div class="kpi"><div class="label">두 문제의 proof token 합계</div><div class="value good">39.71<small>% 감소</small></div><div class="sub">1,735 → 1,046개 · P12 새 보조정리 포함</div></div>
       </div>
     </section>
 
     <section id="metrics" aria-labelledby="metrics-title">
-      <h2 id="metrics-title">증명 규모와 검사 결과</h2>
+      <h2 id="metrics-title">코드 규모와 초기 검사 기록</h2>
       <div class="metric-grid">
         <div class="card metric-card"><h4>P7 · 반복 분기를 하나로 정리</h4><div class="thm">Typing.progress · 정리 선언 포함</div><div class="metric"><div class="metric-head"><span>전체 줄 수</span><span class="delta">41.0% 감소</span></div><div class="bar before"><span style="width:100%">83</span></div><div class="bar after"><span style="width:59.04%">49</span></div></div><div class="metric"><div class="metric-head"><span>grind 출현 횟수</span><span class="delta">57.9% 감소</span></div><div class="bar before"><span style="width:100%">19</span></div><div class="bar after"><span style="width:42.11%">8</span></div></div><div class="axiom-row"><span>공리 목록</span><span class="badge">원본과 동일</span></div></div>
         <div class="card metric-card"><h4>P12 · 보조정리를 포함한 크기 변화</h4><div class="thm">interleaved_affine_gaps_imply_tensor_gaps</div><div class="metric"><div class="metric-head"><span>새 보조정리 + 주 정리</span><span class="delta">57.1% 감소</span></div><div class="bar before"><span style="width:100%">177</span></div><div class="bar after"><span style="width:42.94%">76</span></div></div><div class="metric"><div class="metric-head"><span>공백·주석 제외 문자 수</span><span class="delta">47.4% 감소</span></div><div class="bar before"><span style="width:100%">5,135</span></div><div class="bar after"><span style="width:52.62%">2,702</span></div></div><div class="axiom-row"><span>공리 목록</span><span class="badge">원본과 동일</span></div></div>
       </div>
-      <div class="card table-wrap" style="margin-top:18px"><table><caption>최종 파일과 2026-10-10 실행 로그 기준</caption><thead><tr><th scope="col">항목</th><th scope="col">P7 원본</th><th scope="col">P7 수정</th><th scope="col">P12 원본</th><th scope="col">P12 수정</th></tr></thead><tbody><tr><th scope="row">비교 범위 전체 줄 수</th><td class="num">83</td><td class="num">49</td><td class="num">177</td><td class="num">76</td></tr><tr><th scope="row">주 정리 줄 수</th><td class="num">83</td><td class="num">49</td><td class="num">177</td><td class="num">17</td></tr><tr><th scope="row">공백·주석 제외 문자 수</th><td class="num">1,243</td><td class="num">1,108</td><td class="num">5,135</td><td class="num">2,702</td></tr><tr><th scope="row">단회 파일 검사 시간</th><td class="num">4.458초</td><td class="num">3.517초</td><td class="num">10.786초</td><td class="num">10.611초</td></tr><tr><th scope="row">종료 코드 / 결과</th><td>0 / PASS</td><td>0 / PASS</td><td>0 / PASS</td><td>0 / PASS</td></tr></tbody></table><p class="note">줄 수는 선언·빈 줄·주석을 포함합니다. P12 수정본은 새 helper 블록 59줄과 주 정리 17줄의 합이며 두 블록 사이 구분용 빈 줄을 제외합니다. import·공통 문맥·검증 명령은 비교에서 제외했습니다. P12의 공통 문맥 1,199줄은 유지했습니다.</p><p class="note">시간은 의존성 빌드·다운로드를 제외한 <code>lake env lean</code> 1회 경과 시간입니다. P12는 공통 문맥도 검사합니다. 반복 측정이나 heartbeat 측정은 수행하지 않았으므로 속도 개선을 일반화하지 않습니다.</p></div>
+      <div class="card table-wrap" style="margin-top:18px"><table><caption>최종 파일과 2026-10-10 실행 로그 기준</caption><thead><tr><th scope="col">항목</th><th scope="col">P7 원본</th><th scope="col">P7 수정</th><th scope="col">P12 원본</th><th scope="col">P12 수정</th></tr></thead><tbody><tr><th scope="row">비교 범위 전체 줄 수</th><td class="num">83</td><td class="num">49</td><td class="num">177</td><td class="num">76</td></tr><tr><th scope="row">주 정리 줄 수</th><td class="num">83</td><td class="num">49</td><td class="num">177</td><td class="num">17</td></tr><tr><th scope="row">공백·주석 제외 문자 수</th><td class="num">1,243</td><td class="num">1,108</td><td class="num">5,135</td><td class="num">2,702</td></tr><tr><th scope="row">단회 파일 검사 시간</th><td class="num">4.458초</td><td class="num">3.517초</td><td class="num">10.786초</td><td class="num">10.611초</td></tr><tr><th scope="row">종료 코드 / 결과</th><td>0 / PASS</td><td>0 / PASS</td><td>0 / PASS</td><td>0 / PASS</td></tr></tbody></table><p class="note">줄 수는 선언·빈 줄·주석을 포함합니다. P12 수정본은 새 helper 블록 59줄과 주 정리 17줄의 합이며 두 블록 사이 구분용 빈 줄을 제외합니다. import·공통 문맥·검증 명령은 비교에서 제외했습니다. P12의 공통 문맥 1,199줄은 유지했습니다.</p><p class="note">위 시간은 2026-10-10 초기 검증의 <code>lake env lean</code> 1회 경과 시간이며 의존성 빌드·다운로드를 제외합니다. P12는 공통 문맥도 검사합니다. 이후 별도 계측한 Heartbeat는 다음 절에 기록했습니다. 경과 시간과 Heartbeat는 측정 범위·단위가 다르며 반복 실행에 따른 분산은 측정하지 않았습니다.</p></div>
+    </section>
+
+    <section id="evaluation" aria-labelledby="evaluation-title">
+      <h2 id="evaluation-title">세 가지 기준으로 확인한 개선</h2>
+      <p class="section-intro">2026-10-11 17:59:41 KST 평가 스냅샷 · JSONL의 지정 버전에서 실제로 실행한 로컬 결과입니다.</p>
+      <div class="metric-grid">
+        <article class="card metric-card" data-evaluation-problem="7">
+          <h4>P7 · proof token 감소</h4>
+          <div class="thm">Typing.progress · 대칭 분기와 local closure 정리</div>
+          <div class="metric"><div class="metric-head"><span>Lean lexer 기준</span><span class="delta" data-metric="token_reduction_pct">25.8621% 감소</span></div><div class="bar before"><span style="width:100%" data-metric="original_tokens">406</span></div><div class="bar after"><span style="width:74.1379%" data-metric="selected_tokens">301</span></div></div>
+          <div class="axiom-row"><span>버전별 Heartbeat 감소</span><strong class="delta" data-metric="heartbeat_range">26.7572–27.5751%</strong></div>
+          <div class="axiom-row"><span>수정 없는 버전 호환성</span><span class="badge" data-metric="compatibility">3 / 3 · 100%</span></div>
+        </article>
+        <article class="card metric-card" data-evaluation-problem="12">
+          <h4>P12 · proof token 감소</h4>
+          <div class="thm">새 보조정리·scope 포함 · 56 + 689 = 745개</div>
+          <div class="metric"><div class="metric-head"><span>Lean lexer 기준</span><span class="delta" data-metric="token_reduction_pct">43.9428% 감소</span></div><div class="bar before"><span style="width:100%" data-metric="original_tokens">1,329</span></div><div class="bar after"><span style="width:56.0572%" data-metric="selected_tokens">745</span></div></div>
+          <div class="axiom-row"><span>버전별 Heartbeat 감소</span><strong class="delta" data-metric="heartbeat_range">8.6868–12.6498%</strong></div>
+          <div class="axiom-row"><span>수정 없는 버전 호환성</span><span class="badge" data-metric="compatibility">3 / 3 · 100%</span></div>
+        </article>
+      </div>
+      <p class="note">Proof token은 공백·주석을 제외한 Lean lexer 집계입니다. P12 수정본에는 새 보조정리의 선언·증명과 필요한 <code>omit</code> 명령도 포함했습니다.</p>
+      <div class="card table-wrap" style="margin-top:18px">
+        <table id="evaluation-heartbeats">
+          <caption>버전별 elaboration Heartbeat와 원본·수정본 검증</caption>
+          <thead><tr><th scope="col">문제</th><th scope="col">Lean 버전</th><th scope="col" class="num">참조 Heartbeat</th><th scope="col" class="num">수정 Heartbeat</th><th scope="col" class="num">감소율</th><th scope="col">원본 / 수정본 검사</th></tr></thead>
+          <tbody>
+            <tr data-evaluation-problem="7" data-lean="v4.33.0-rc2"><th scope="row">P7</th><td><code>v4.33.0-rc2</code></td><td class="num" data-metric="original_heartbeat">59,804</td><td class="num" data-metric="selected_heartbeat">43,313</td><td class="num delta" data-metric="heartbeat_reduction_pct">27.5751%</td><td>PASS / PASS</td></tr>
+            <tr data-evaluation-problem="7" data-lean="v4.32.0"><th scope="row">P7</th><td><code>v4.32.0</code></td><td class="num" data-metric="original_heartbeat">61,942</td><td class="num" data-metric="selected_heartbeat">45,358</td><td class="num delta" data-metric="heartbeat_reduction_pct">26.7734%</td><td>PASS / PASS</td></tr>
+            <tr data-evaluation-problem="7" data-lean="v4.31.0"><th scope="row">P7</th><td><code>v4.31.0</code></td><td class="num" data-metric="original_heartbeat">61,916</td><td class="num" data-metric="selected_heartbeat">45,349</td><td class="num delta" data-metric="heartbeat_reduction_pct">26.7572%</td><td>PASS / PASS</td></tr>
+            <tr data-evaluation-problem="12" data-lean="v4.31.0"><th scope="row">P12</th><td><code>v4.31.0</code></td><td class="num" data-metric="original_heartbeat">9,167</td><td class="num" data-metric="selected_heartbeat">8,112</td><td class="num delta" data-metric="heartbeat_reduction_pct">11.5087%</td><td>PASS / PASS</td></tr>
+            <tr data-evaluation-problem="12" data-lean="v4.30.0"><th scope="row">P12</th><td><code>v4.30.0</code></td><td class="num" data-metric="original_heartbeat">9,178</td><td class="num" data-metric="selected_heartbeat">8,017</td><td class="num delta" data-metric="heartbeat_reduction_pct">12.6498%</td><td>PASS / PASS</td></tr>
+            <tr data-evaluation-problem="12" data-lean="v4.29.0"><th scope="row">P12</th><td><code>v4.29.0</code></td><td class="num" data-metric="original_heartbeat">10,257</td><td class="num" data-metric="selected_heartbeat">9,366</td><td class="num delta" data-metric="heartbeat_reduction_pct">8.6868%</td><td>PASS / PASS</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Heartbeat = 대상 명령의 <code>IO.getNumHeartbeats</code> 원시 차이를 합산한 뒤 1,000으로 나눈 정수값입니다. P12 수정본은 새 helper·scope 명령과 주 정리를 모두 포함합니다. 각 버전·변형을 별도 프로세스에서 한 번 측정했으며 원시값도 JSON에 보존했습니다.</p>
+      </div>
+      <div class="scope"><strong>토큰 합계 1,735 → 1,046개 · 39.7118% 감소.</strong> 각 문제를 한 번씩 더한 값입니다. 수정본의 버전 호환성은 총 6/6(100%)입니다. 서로 다른 버전의 Heartbeat는 합산하거나 평균 내지 않았습니다.</div>
+      <details class="helper-details">
+        <summary>측정 단위·집계 범위·고정 커밋 자세히 보기</summary>
+        <div class="details-content">
+          <div class="reading-notes">
+            <div class="reading-note"><h3>01 · proof token의 비교 범위</h3><p><code>Lean.Parser.tokenFn</code>으로 목표 정리의 <code>by</code>부터 증명 끝까지 셉니다. 목표 정리의 선언·공백·주석은 제외하며 doc comment는 집계용 입력에서만 일반 주석으로 바꿉니다. P12는 주 증명 56개에 새 helper의 선언·증명 및 필요한 scope 명령 689개를 더했습니다.</p><p>JSONL의 기존 <code>proof_length</code>는 P7 408, P12 1,353으로 이번 참조 lexer 집계 406·1,329와 다릅니다. 기존 값은 JSON에 별도로 보존했고, 감소율은 원본·수정본을 같은 lexer로 센 값끼리 계산했습니다. 토큰 수는 각 문제의 세 버전에서 동일했습니다.</p></div>
+            <div class="reading-note"><h3>02 · Heartbeat의 측정 범위</h3><p>참조본은 대상 정리 명령을, 수정본은 대상 정리와 새 helper·scope 명령을 측정합니다. P12 수정본은 <code>helper_scope</code>, <code>tensor_success_split</code>, <code>tensor_gap_one</code>, <code>tensor_gap_succ</code>, 주 정리의 다섯 명령입니다. 원시 차이를 합산한 뒤 <code>floor(raw / 1000)</code>으로 기록합니다.</p><p>import, 공통 보조정리 문맥, 측정 helper 정의, 토큰 계산, <code>#check</code>·<code>#print axioms</code>는 제외합니다. 계측 시에만 <code>Elab.async=false</code>를 적용하고 기존 <code>maxHeartbeats</code>는 유지했습니다. 감소율은 <code>100 × (1 − 수정본 / 참조본)</code>을 소수 넷째 자리까지 계산했습니다. Heartbeat는 elaboration 작업량 지표이며 파일 전체의 경과 시간과 구분합니다.</p></div>
+            <div class="reading-note"><h3>03 · 변경 없이 통과한 버전 비율</h3><p>분모는 각 문제의 JSONL <code>version_info</code>에 지정된 세 버전입니다. 계측 wrapper가 없는 원래 파일을 바이트 단위로 동일하게 복사해 별도 검사했습니다. <code>-DwarningAsError=true</code>와 P12의 <code>-DautoImplicit=false</code>를 유지했으며, 모든 환경에서 원본·수정본의 elaborated 타입과 공리 목록이 같고 <code>sorryAx</code>가 없습니다. 12회의 파일 검사와 12회의 별도 계측이 모두 성공했습니다.</p></div>
+          </div>
+          <div class="table-wrap evaluation-commits"><table><caption>JSONL에 지정된 Lean 버전과 라이브러리 고정 커밋</caption><thead><tr><th scope="col">문제</th><th scope="col">Lean 버전</th><th scope="col">고정 커밋</th></tr></thead><tbody>
+              <tr><th scope="row">P7</th><td><code>v4.33.0-rc2</code></td><td><code>3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc</code></td></tr>
+              <tr><th scope="row">P7</th><td><code>v4.32.0</code></td><td><code>197a7be621263b84c67ca4f803f69205b36d06df</code></td></tr>
+              <tr><th scope="row">P7</th><td><code>v4.31.0</code></td><td><code>8ea71c8df91acd63285515a04da952b23b78d266</code></td></tr>
+              <tr><th scope="row">P12</th><td><code>v4.31.0</code></td><td><code>c1712f6c496d0aef04f09bae42aec13811b3273f</code></td></tr>
+              <tr><th scope="row">P12</th><td><code>v4.30.0</code></td><td><code>e6d77b18ca1334a91faf4d1ccf9f96d854d58ba4</code></td></tr>
+              <tr><th scope="row">P12</th><td><code>v4.29.0</code></td><td><code>de71a9dfd2f5a343e8895517b7efe857d9f1ce5c</code></td></tr>
+          </tbody></table></div>
+          <h3>준비된 환경에서 평가 결과 확인하기</h3>
+          <div class="code-block"><div class="code-title">프로젝트 루트에서 실행 · 저장된 버전 결과는 재사용</div><pre tabindex="0"><code>python3 week2/evaluation/prepare_environments.py
+python3 week2/evaluation/run_evaluation.py
+
+# 기존 증거로 최종 JSON만 다시 집계
+python3 week2/evaluation/run_evaluation.py --aggregate-only</code></pre></div>
+          <p class="note">버전별 증거 폴더에 수정 없는 검사 파일, 계측 파일, 실행 명령·로그·소스 해시를 보존했습니다. 기존 P7/P12의 초기 결과와 로그는 유지했습니다. 이 자료는 단회 로컬 측정이며 공식 Arena worker 점수나 전체 라이브러리 CI 결과는 아닙니다.</p>
+        </div>
+      </details>
+      <div class="resource-links"><a href="evaluation_results.json">평가 결과 JSON</a><span>집계 기준 (로컬 설명 자료)</span><span>계측 helper (로컬 소스)</span><span>평가 스크립트 (로컬 실행 파일)</span><span>P7 평가 증거 (로컬 검증 기록)</span><span>P12 평가 증거 (로컬 검증 기록)</span></div>
     </section>
 
     <section id="p7" aria-labelledby="p7-title">
@@ -695,7 +762,7 @@
     left
     constructor
     exact wholeTyped.wf.2.1</code></pre></div><p class="code-caption">정리 전체 49줄 · grind 출현 19곳에서 8곳</p></div></div>
-      <details class="helper-details"><summary>시도 중 만난 오류와 해결</summary><div class="details-content"><p><strong>이름 충돌:</strong> 전체 typing 유도와 분기별 유도를 모두 <code>typed</code>로 부르면 귀납가설에 전체 항의 유도를 전달하는 타입 불일치가 생겼습니다. 전체 유도를 <code>wholeTyped</code>로 구분해 해결했습니다.</p><p><strong>실행 경로:</strong> 이동한 runner의 JSONL 경로를 <code>ROOT.parent</code>로 바로잡고 원본부터 다시 확인했습니다.</p><p><strong>남겨 둔 부분:</strong> 빈 환경 일반화, canonical-form 분석, 일부 <code>grind</code>를 유지했습니다. 최종 대상 증명의 미해결 오류는 없습니다.</p><div class="resource-links"><span>원본 Lean (본문 코드 참조)</span><span>수정 Lean (본문 코드 참조)</span><span>수정본 검증 로그 (로컬 검증 기록)</span></div></div></details>
+      <details class="helper-details"><summary>시도 중 만난 오류와 해결</summary><div class="details-content"><p><strong>이름 충돌:</strong> 전체 typing 유도와 분기별 유도를 모두 <code>typed</code>로 부르면 귀납가설에 전체 항의 유도를 전달하는 타입 불일치가 생겼습니다. 전체 유도를 <code>wholeTyped</code>로 구분해 해결했습니다.</p><p><strong>실행 경로:</strong> 이동한 runner의 JSONL 경로를 <code>ROOT.parent</code>로 바로잡고 원본부터 다시 확인했습니다.</p><p><strong>남겨 둔 부분:</strong> 빈 환경 일반화, canonical-form 분석, 일부 <code>grind</code>를 유지했습니다. 최종 대상 증명의 미해결 오류는 없습니다.</p><div class="resource-links"><span>원본 Lean (로컬 소스)</span><span>수정 Lean (로컬 소스)</span><span>수정본 검증 로그 (로컬 로그)</span></div></div></details>
     </section>
 
     <section id="p12" aria-labelledby="p12-title">
@@ -978,28 +1045,28 @@ private lemma tensor_gap_succ {n : ℕ}
   apply CA_split_rowwise_implies_CA (C := MC) (u := u) (e := e)
   apply hGaps (2 ^ n) Nat.one_le_two_pow (⋈|U₀) (⋈|U₁)
   exact lt_of_lt_of_le hgood (Pr_le_Pr_of_implies (D := $ᵖ F) (h_imp := hclose))</code></pre></div></div></details>
-      <details class="helper-details"><summary>여섯 차례의 시도에서 확인한 점</summary><div class="details-content table-wrap"><table><caption>실제 실패 로그와 다음 수정</caption><thead><tr><th scope="col">시도</th><th scope="col">막힌 점</th><th scope="col">해결 방향</th></tr></thead><tbody><tr><td><span>1차</span></td><td>simp 진행 없음, ModuleCode에서 Set으로의 인자 추론 실패</td><td>A·ι를 명시하고 snoc 재구성을 거치지 않는 샘플링 형태를 사용했습니다.</td></tr><tr><td><span>2차</span></td><td>확률식 내부 Fin.init와 lambda 표현 불일치</td><td>기저 단계의 사건 predicate를 명시했습니다.</td></tr><tr><td><span>3차</span></td><td>기저는 해결, 확률식 내부의 표현 불일치는 지속</td><td>전체 확률식의 일괄 단순화 대신 점별 등식으로 접근했습니다.</td></tr><tr><td><span>4차</span></td><td>확률 함수에 congrArg를 적용할 때 고차 단일화 실패</td><td>각 샘플 r에서 사건의 동등성을 먼저 증명했습니다.</td></tr><tr><td><span>5차</span></td><td>점별 rewrite 뒤 정의적 동등성 목표 잔존</td><td>Fin.init와 lambda 사이의 목표를 rfl로 닫았습니다.</td></tr><tr><td><span>6차</span></td><td>논리는 완성됐지만 unusedSectionVars 경고로 엄격 검사 실패</td><td>sampling helper에만 omit을 적용해 불필요한 가정을 제외했습니다.</td></tr><tr><td>최종</td><td colspan="2">원본과 수정본 모두 PASS. 대상 정리의 sorryAx 의존성 없음.</td></tr></tbody></table><p class="note">시도별 로그는 로컬 실행 기록이며, 위 표에 오류와 해결 과정을 요약했습니다. 실패 로그의 줄 번호는 각 시도 당시 파일 기준입니다. 오류가 있던 실행의 공리 출력은 성공 판정에 사용하지 않았습니다.</p></div></details>
+      <details class="helper-details"><summary>여섯 차례의 시도에서 확인한 점</summary><div class="details-content table-wrap"><table><caption>실제 실패 로그와 다음 수정</caption><thead><tr><th scope="col">시도</th><th scope="col">막힌 점</th><th scope="col">해결 방향</th></tr></thead><tbody><tr><td><span>1차 (로컬 로그)</span></td><td>simp 진행 없음, ModuleCode에서 Set으로의 인자 추론 실패</td><td>A·ι를 명시하고 snoc 재구성을 거치지 않는 샘플링 형태를 사용했습니다.</td></tr><tr><td><span>2차 (로컬 로그)</span></td><td>확률식 내부 Fin.init와 lambda 표현 불일치</td><td>기저 단계의 사건 predicate를 명시했습니다.</td></tr><tr><td><span>3차 (로컬 로그)</span></td><td>기저는 해결, 확률식 내부의 표현 불일치는 지속</td><td>전체 확률식의 일괄 단순화 대신 점별 등식으로 접근했습니다.</td></tr><tr><td><span>4차 (로컬 로그)</span></td><td>확률 함수에 congrArg를 적용할 때 고차 단일화 실패</td><td>각 샘플 r에서 사건의 동등성을 먼저 증명했습니다.</td></tr><tr><td><span>5차 (로컬 로그)</span></td><td>점별 rewrite 뒤 정의적 동등성 목표 잔존</td><td>Fin.init와 lambda 사이의 목표를 rfl로 닫았습니다.</td></tr><tr><td><span>6차 (로컬 로그)</span></td><td>논리는 완성됐지만 unusedSectionVars 경고로 엄격 검사 실패</td><td>sampling helper에만 omit을 적용해 불필요한 가정을 제외했습니다.</td></tr><tr><td>최종</td><td colspan="2">원본과 수정본 모두 PASS. 대상 정리의 sorryAx 의존성 없음.</td></tr></tbody></table><p class="note">실패 로그의 줄 번호는 각 시도 당시 파일 기준입니다. 오류가 있던 실행의 공리 출력은 성공 판정에 사용하지 않았습니다.</p></div></details>
       <div class="scope"><strong>남아 있는 범위:</strong> 대상 증명의 미해결 오류는 없습니다. 앞부분의 공통 보조정리 문맥 1,199줄은 그대로 복원해 사용하며, 이를 별도 라이브러리 모듈로 재편하지는 않았습니다.</div>
-      <div class="resource-links"><span>원본 Lean (본문 코드 참조)</span><span>수정 Lean (본문 코드 참조)</span><span>수정본 검증 로그 (로컬 검증 기록)</span></div>
+      <div class="resource-links"><span>원본 Lean (로컬 소스)</span><span>수정 Lean (로컬 소스)</span><span>수정본 검증 로그 (로컬 로그)</span></div>
     </section>
 
     <section id="verification" aria-labelledby="verification-title">
       <h2 id="verification-title">실행 기록과 공리 확인</h2>
-      <p class="section-intro">2026-10-10 최종 실행 결과입니다. 이번 HTML 작성 과정에서 Lean 증명을 변경하지 않았습니다.</p>
+      <p class="section-intro">아래는 2026-10-10 초기 검증 기록입니다. 2026-10-11 추가 평가에서는 원래 증명 파일을 변경하지 않고 지정된 6개 환경에서 원본·수정본을 모두 검증했습니다. 최신 수치는 <a href="#evaluation">추가 평가</a>에 정리했습니다.</p>
       <div class="verify">
-        <div class="card"><h3>P7 · Cslib</h3><p><code>Lean v4.33.0-rc2</code></p><ul class="checks"><li class="check"><span class="ok" aria-hidden="true">✓</span><span>원본·수정본 각각 종료 코드 0</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>JSONL 명제 선언 유지</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>#check·#print axioms 출력 동일</span></li></ul><div class="resource-links"><span>원본 로그 (로컬 검증 기록)</span><span>수정 로그 (로컬 검증 기록)</span><span>결과 JSON (로컬 검증 기록)</span></div></div>
-        <div class="card"><h3>P12 · ArkLib</h3><p><code>Lean v4.31.0</code></p><ul class="checks"><li class="check"><span class="ok" aria-hidden="true">✓</span><span>원본·수정본 각각 종료 코드 0</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>JSONL 명제 선언 유지</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>#check·#print axioms 출력 동일</span></li></ul><div class="resource-links"><span>원본 로그 (로컬 검증 기록)</span><span>수정 로그 (로컬 검증 기록)</span><span>결과 JSON (로컬 검증 기록)</span></div></div>
+        <div class="card"><h3>P7 · Cslib</h3><p><code>Lean v4.33.0-rc2</code></p><ul class="checks"><li class="check"><span class="ok" aria-hidden="true">✓</span><span>원본·수정본 각각 종료 코드 0</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>JSONL 명제 선언 유지</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>#check·#print axioms 출력 동일</span></li></ul><div class="resource-links"><span>원본 로그 (로컬 로그)</span><span>수정 로그 (로컬 로그)</span><span>결과 JSON (로컬 검증 기록)</span></div></div>
+        <div class="card"><h3>P12 · ArkLib</h3><p><code>Lean v4.31.0</code></p><ul class="checks"><li class="check"><span class="ok" aria-hidden="true">✓</span><span>원본·수정본 각각 종료 코드 0</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>JSONL 명제 선언 유지</span></li><li class="check"><span class="ok" aria-hidden="true">✓</span><span>#check·#print axioms 출력 동일</span></li></ul><div class="resource-links"><span>원본 로그 (로컬 로그)</span><span>수정 로그 (로컬 로그)</span><span>결과 JSON (로컬 검증 기록)</span></div></div>
       </div>
       <div class="card" style="margin-top:20px"><h3 style="margin-top:0">추가 공리 없이 유지한 의존성</h3><div class="code-block"><div class="code-title">#print axioms · P7 / P12 · 원본과 수정본</div><pre><code>[propext, Classical.choice, Quot.sound]
 
 sorryAx: 없음
 추가된 공리: 없음</code></pre></div><p>대상 정리를 포함한 모듈은 import하지 않습니다. P7은 <code>Fsub.Typing</code>만 import하고, P12는 <code>DG25.Basic</code>과 대상 정리 앞의 보조정리 문맥을 사용합니다. 수정본이 이미 증명된 동일 정리를 호출하는 구조를 피했습니다.</p></div>
-      <h3>검증에 사용한 로컬 실행 명령</h3><div class="code-block"><div class="code-title">기본값 --variant both · 원본과 수정본 검사</div><pre tabindex="0"><code>python3 week2/P7/run_progress.py
+      <h3>초기 고정 버전 검증의 실행 명령</h3><div class="code-block"><div class="code-title">기본값 --variant both · 원본과 수정본 검사</div><pre tabindex="0"><code>python3 week2/P7/run_progress.py
 python3 week2/P12/run_tensor_gaps.py</code></pre></div>
-      <p>위 명령은 기존 로컬 작업 폴더 <code>leanProject</code>에서 사용했습니다. 실행 스크립트와 소스·의존성 저장소는 로컬 작업 자료입니다. 필요한 import 모듈을 빌드한 뒤 각 파일을 <code>lake env lean</code>으로 검사합니다. 두 문제 모두 <code>-DwarningAsError=true</code>를 적용하며 P12는 <code>-DautoImplicit=false</code>도 지정합니다. runner는 수정본을 덮어쓰지 않습니다.</p>
+      <p>필요한 import 모듈을 빌드한 뒤 각 파일을 <code>lake env lean</code>으로 검사합니다. 두 문제 모두 <code>-DwarningAsError=true</code>를 적용하며 P12는 <code>-DautoImplicit=false</code>도 지정합니다. runner는 수정본을 덮어쓰지 않습니다.</p>
       <details class="helper-details"><summary>재현에 사용한 버전과 확인 범위</summary><div class="details-content"><dl class="glossary"><dt>P7 커밋</dt><dd><code>3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc</code></dd><dt>P12 커밋</dt><dd><code>c1712f6c496d0aef04f09bae42aec13811b3273f</code></dd><dt>cslib-progress</dt><dd>P7에 필요한 정의·보조정리·고정 의존성·빌드 결과를 제공하는 별도 Cslib checkout입니다.</dd><dt>검증 범위</dt><dd>필요한 import 모듈과 두 문제의 원본·수정본입니다. 전체 라이브러리 CI를 수행한 결과는 아닙니다.</dd></dl></div></details>
       <div class="scope"><strong>라이브러리의 기존 경고:</strong> ArkLib 의존성 빌드에서는 <code>Fin/Basic.lean:307</code>, <code>MvPolynomial/Interpolation.lean:258</code>의 기존 sorry 경고가 재출력됩니다. 이번 대상 정리의 전이적 공리 목록에는 원본·수정본 모두 <code>sorryAx</code>가 없습니다.</div>
-      <div class="resource-links"><a href="proof_refactoring-07-12.md">상세 Markdown 보고서</a><span>원본 benchmark JSONL (로컬 원본 데이터)</span><span>P7 실행 스크립트 (로컬 실행 파일)</span><span>P12 실행 스크립트 (로컬 실행 파일)</span></div>
+      <div class="resource-links"><a href="proof_refactoring_report.md">상세 Markdown 보고서</a><a href="evaluation_results.json">추가 평가 JSON</a><span>원본 benchmark JSONL (로컬 원본 데이터)</span><span>P7 실행 스크립트 (로컬 실행 파일)</span><span>P12 실행 스크립트 (로컬 실행 파일)</span></div>
     </section>
     <footer><span>Week 2 · Warm-up P7·P12 · 오프라인 단일 HTML</span><a href="#top">맨 위로</a></footer>
   </main>
