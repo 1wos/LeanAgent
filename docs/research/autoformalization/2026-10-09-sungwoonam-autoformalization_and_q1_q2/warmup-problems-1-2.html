@@ -370,6 +370,7 @@
       <a href="#ast">AST와 순회</a>
       <a href="#eli5">두 문제의 뜻</a>
       <a href="#summary">요약</a>
+      <a href="#simp">왜 simp를 걷어냈나</a>
       <a href="#metrics">지표 비교</a>
       <a href="#problem-1">Problem 1</a>
       <a href="#problem-2">Problem 2</a>
@@ -589,7 +590,8 @@
     <section id="summary">
       <h2>풀이의 공통 아이디어: 작은 식의 결과를 합치기</h2>
       <div class="card">
-        <p class="lead"><strong>여러 부분 식을 가진 노드는 같은 목록 결합 성질을 사용합니다.</strong> 이 성질을 <code>combine</code>이라는 작은 lemma로 한 번 적어 두면, AST의 경우마다 같은 membership 추론을 반복할 필요가 없습니다. 두 lemma의 이름은 같게 붙였지만, 다른 lemma입니다. 이런 lemma의 재사용을 통해 Lean4 컴파일러 내부의 타입 검사 엔진 부담을 덜어주고 전술 실행  횟수를 줄여 heartbeat를 줄여줍니다.</p>
+        <p class="lead"><strong>여러 부분 식을 가진 노드는 같은 목록 결합 성질을 사용합니다.</strong> 이 성질을 <code>combine</code>이라는 작은 lemma로 한 번 적어 두면, AST의 경우마다 같은 membership 추론을 반복할 필요가 없습니다. 두 lemma의 이름은 같게 붙였지만, 다른 lemma입니다.</p>
+        <p>한 번 증명한 <code>combine</code>을 각 분기에서 <code>exact</code>로 재사용하면, 분기마다 simp가 목표를 다시 탐색할 필요가 없습니다. heartbeat가 약 82% 줄어든 것은 주로 이 불필요한 반복 탐색이 사라졌기 때문입니다(아래 <a href="#simp">simp 해설</a> 참고).</p>
         <p>1번의 combine은 <strong>새 이름 h1 하나를 허용한 포함 관계</strong>를 합칩니다. 2번의 combine은 <strong>각 부분 식의 이름 안에 들어간다는 포함 관계</strong>를 합칩니다. 두 증명 모두 상수·변수·여러 부분 식·old 적용의 역할을 구분해 읽을 수 있습니다.</p>
         <details><summary>코드를 읽기 전에: 기호와 tactic 뜻</summary>
           <dl>
@@ -598,9 +600,105 @@
             <dt><code>rcases</code> / <code>split</code></dt><dd>증거의 경우를 나눕니다 / 함수 정의의 match·조건 분기를 나눕니다.</dd>
             <dt><code>List.mem_append.mp</code></dt><dd>이름이 합친 목록에 있으면 왼쪽 또는 오른쪽 목록에 있다는 사실을 꺼냅니다.</dd>
             <dt><code>List.mem_append_left</code> / <code>List.mem_append_right</code></dt><dd>왼쪽 또는 오른쪽 목록에 있는 이름을 합친 목록으로 옮깁니다.</dd>
-            <dt><code>exact</code> / <code>simp</code> / <code>&lt;;&gt;</code></dt><dd>목표에 맞는 증거를 제출합니다 / 식을 단순화합니다 / 모든 남은 목표에 다음 tactic을 적용합니다.</dd>
+            <dt><code>exact</code></dt><dd>목표와 타입이 정확히 일치하는 증거를 제출하여 목표를 즉시 종결합니다. 맞지 않으면 어디가 다른지 컴파일러가 오류로 알려줍니다.</dd>
+            <dt><code>simp</code> / <code>simp only [...]</code></dt><dd>기본 등록된 simp lemma들로 목표를 다시 씁니다 / 괄호 안에 지정한 lemma만 엄격하게 써서 다시 씁니다.</dd>
+            <dt><code>simp_all</code></dt><dd>모든 가설과 목표를 서로를 이용해 더 이상 변화가 없을 때까지 단순화합니다. 원본에서 잦은 탐색 비용 폭증을 부른 원인입니다.</dd>
+            <dt><code>&lt;;&gt;</code></dt><dd>앞선 tactic이 만든 모든 남은 목표들에 다음 tactic을 일괄 적용합니다.</dd>
           </dl>
         </details>
+      </div>
+    </section>
+
+    <!-- ========== Why Remove Simp ========== -->
+    <section id="simp">
+      <h2>왜 simp·simp_all을 걷어냈나</h2>
+      <div class="card">
+        <p class="lead"><strong>원본 증명이 길었던 이유는 경우가 많아서만이 아닙니다. 각 경우를 "일단 simp로 밀어 보고, 남은 모양을 손으로 정리"하는 방식으로 풀었기 때문입니다.</strong> 새 증명은 같은 경우를 모두 다루면서도 simp 계열 tactic을 한 번도 쓰지 않습니다.</p>
+
+        <div class="table-wrap" style="margin: 18px 0;">
+          <table>
+            <thead>
+              <tr>
+                <th>Tactic</th>
+                <th>무엇을 바꾸나</th>
+                <th>무엇을 써서 바꾸나</th>
+                <th>특징과 위험 요소</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>simp</code></td>
+                <td>목표(Goal)만</td>
+                <td><code>@[simp]</code> 속성이 붙은 기본 lemma 전체 + 괄호 안 lemma</td>
+                <td>기본 lemma 집합은 Lean 및 라이브러리 버전마다 달라짐</td>
+              </tr>
+              <tr>
+                <td><code>simp only [...]</code></td>
+                <td>목표(Goal)만</td>
+                <td>괄호 안에 명시한 lemma만</td>
+                <td>적용할 lemma가 명확해 결과를 비교적 예측 가능</td>
+              </tr>
+              <tr>
+                <td><code>simp at h</code> / <code>simp at *</code></td>
+                <td>지정한 가설 / 모든 가설과 목표</td>
+                <td><code>simp</code>와 동일</td>
+                <td>가설들을 <strong>각각 독립적으로</strong> 단순화</td>
+              </tr>
+              <tr>
+                <td><code>simp_all</code></td>
+                <td>모든 가설과 목표 전체</td>
+                <td>simp lemma + <strong>단순화된 가설들을 서로에게</strong> 적용</td>
+                <td>더 이상 안 바뀔 때까지 반복 루프. 문맥 내 가설 순서·유무에 따라 결과가 크게 흔들림</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>원본에서 실제로 일어났던 일 (Problem 1 eq 분기 예시)</h3>
+        <div class="compare" style="margin-top: 10px;">
+          <div class="code-block before">
+            <div class="code-title"><span><span class="dots"><i></i><i></i><i></i></span>원본: 취약한 non-terminal simp 체인</span></div>
+            <pre class="lean"><code>simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars] at *
+apply List.Subset.app
+. apply List.Subset.trans
+  apply ih1 &lt;;&gt; assumption
+  intros x Hin
+  simp_all
+  cases Hin &lt;;&gt; simp_all
+. apply List.Subset.trans
+  apply ih2 &lt;;&gt; assumption
+  intros x Hin
+  simp_all</code></pre>
+          </div>
+          <div class="code-block after">
+            <div class="code-title"><span><span class="dots"><i></i><i></i><i></i></span>새 증명: 명확한 논리 구조 결합</span></div>
+            <pre class="lean"><code>| eq _ _ _ ih1 ih2 =&gt; exact combine ih1 ih2</code></pre>
+          </div>
+        </div>
+        <p style="margin-top: 14px; font-size: 14.5px;">
+          <code>simp ... at *</code>가 목표와 가설을 어떤 구체적 모양으로 바꿔 놓을지는 코드에 적혀 있지 않습니다. 그런데 이어지는 <code>cases Hin</code>은 그 결과가 정확히 <code>A ∨ B</code> 모양이라고 가정합니다. Lean 버전이 올라가며 simp lemma가 하나만 바뀌어도 뒷줄 전체가 깨집니다. 반면 새 증명은 "두 부분의 포함 관계를 합친다"는 <strong>이유 자체</strong>를 <code>combine</code>이라는 이름으로 단번에 적습니다.
+        </p>
+
+        <h3>걷어내는 것이 중요한 3가지 이유</h3>
+        <div class="diag" style="margin-top: 12px;">
+          <div class="diag-item">
+            <strong>1. 연산 비용 (Heartbeat 절감)</strong>
+            <code>simp</code>는 목표의 모든 부분식을 순회하며 수천 개의 simp lemma를 매칭합니다. <code>simp_all</code>은 이를 모든 가설에 대해 고정점에 도달할 때까지 반복합니다. 9개 AST 분기에 <code>&lt;;&gt;</code>로 걸면 비용이 기하급수적으로 뜁니다. 새 증명에서 heartbeat가 약 82% 감소한 주된 요인입니다.
+          </div>
+          <div class="diag-item">
+            <strong>2. 버전 견고성 (Robustness)</strong>
+            증명을 끝내지 않는(non-terminal) simp 뒤에 <code>cases</code>, <code>rename_i</code>, <code>apply</code>를 이어 쓰면 코드가 simp의 세부 출력 형태에 강하게 종속됩니다. Mathlib 공식 스타일 가이드에서도 non-terminal simp를 금지하고 <code>simp only [...]</code>를 사용하도록 권고합니다.
+          </div>
+          <div class="diag-item">
+            <strong>3. 가독성과 디버깅 용이성</strong>
+            <code>simp_all</code>이 실패하면 원인을 알 수 없는 복잡한 잔여 목표만 남습니다. 반면 <code>exact combine ih1 ih2</code>가 실패하면 Lean 컴파일러가 어느 가설의 타입이 일치하지 않는지 즉각 정확한 위치를 집어줍니다.
+          </div>
+        </div>
+
+        <div class="strategy" style="margin-top: 20px;">
+          <strong>그렇다고 simp가 무조건 나쁜 tactic인 것은 아닙니다.</strong><br>
+          증명을 한 방에 끝내는 마지막 줄(terminal simp)로 쓰거나, 새로운 증명을 탐색할 때는 매우 훌륭한 도구입니다. 증명 탐색 시에는 <code>simp?</code>를 사용하면 Lean이 실제로 적용한 최소 lemma 목록을 <code>simp only [...]</code> 형태로 출력해 주므로, 탐색 후 이를 확정된 코드로 고정하는 것이 베스트 프랙티스입니다. 문제가 되는 것은 <strong>"일단 simp로 밀고 → 남은 모양에 맞춰 손으로 임의 수습"을 분기마다 반복하는 패턴</strong>입니다.
+        </div>
       </div>
     </section>
 
@@ -971,7 +1069,7 @@ theorem extractedOldExprInVars :
             <span style="font-size: 11px; color: #64748b; font-family: monospace;">Local Lemma Synthesis</span>
           </div>
           <p style="margin: 0; font-size: 13px; color: #cbd5e1; line-height: 1.6;">
-            식별된 반복 조작 패턴을 최소 가설만을 갖는 독립 로컬 레마(<code style="background: #0b0f19; color: #34d399; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">have combine</code>)로 합성합니다. 본체 증명에 결합하기 전에 독립적인 서브프로세스로 Lean 커널에 전달하여 타입 건전성(Soundness)을 사전에 100% 보장합니다.
+            식별된 반복 조작 패턴을 최소 가설만을 갖는 독립 로컬 레마(<code style="background: #0b0f19; color: #34d399; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">have combine</code>)로 합성합니다. 본체 증명에 결합하기 전에 독립 컴파일을 통해 해당 보조 정리가 그 자체로 건전하게 증명되는지 먼저 확인합니다.
           </p>
         </div>
       </div>
@@ -989,7 +1087,7 @@ theorem extractedOldExprInVars :
             <span style="font-size: 11px; color: #64748b; font-family: monospace;">Pattern Matching & Holes</span>
           </div>
           <p style="margin: 0; font-size: 13px; color: #cbd5e1; line-height: 1.6;">
-            버전에 매우 취약한 <code style="background: #0b0f19; color: #fb7185; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">rename_i</code>와 연산 폭증을 부르는 <code style="background: #0b0f19; color: #fb7185; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">simp_all</code>을 완전히 배제합니다. <code style="background: #0b0f19; color: #34d399; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">induction post with | ... =></code> 패턴으로 재편하고 사소한 기저 사례(<code style="background: #0b0f19; color: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">const | bvar | op</code>)를 한 줄로 압축한 뒤 복잡한 브랜치에 <code style="background: #0b0f19; color: #fbbf24; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">sorry</code> 홀을 뚫어둔 골격을 생성합니다.
+            자동 생성된 변수 이름 순서에 의존하는 <code style="background: #0b0f19; color: #fb7185; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">rename_i</code>와, 결과 모양을 예측하기 어렵고 탐색 비용이 큰 non-terminal <code style="background: #0b0f19; color: #fb7185; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">simp</code>·<code style="background: #0b0f19; color: #fb7185; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">simp_all</code>을 완전히 배제합니다. <code style="background: #0b0f19; color: #34d399; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">induction post with | ... =></code> 패턴으로 재편하고 사소한 기저 사례(<code style="background: #0b0f19; color: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">const | bvar | op</code>)를 한 줄로 압축한 뒤 복잡한 브랜치에 <code style="background: #0b0f19; color: #fbbf24; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">sorry</code> 홀을 뚫어둔 골격을 생성합니다.
           </p>
         </div>
       </div>
@@ -1025,7 +1123,7 @@ theorem extractedOldExprInVars :
             <span style="font-size: 11px; color: #64748b; font-family: monospace;">Profiling & Self-Correction</span>
           </div>
           <p style="margin: 0; font-size: 13px; color: #cbd5e1; line-height: 1.6;">
-            완성된 전체 증명을 Lean 4 커널에서 최종 검증합니다. 엄격한 <code style="background: #0b0f19; color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">maxHeartbeats</code> 한도 내 통과 여부를 체크하며, 실패 시 커널의 컴파일러 진단 에러를 하네스 프롬프트로 역주입해 자가 교정(Self-Correction) 사이클을 실행합니다.
+            완성된 전체 증명을 컴파일해 최종 검증합니다(Elaboration 후 커널 타입 검사). <code style="background: #0b0f19; color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-size: 12px; border: 1px solid #1e293b;">maxHeartbeats</code> 한도 안에서 안정적으로 통과하는지 확인하며, 실패 시 컴파일러 진단 에러를 하네스 프롬프트로 역주입해 자가 교정(Self-Correction) 사이클을 실행합니다.
           </p>
         </div>
       </div>
@@ -1079,15 +1177,15 @@ theorem extractedOldExprInVars :
         </div>
         <h4 style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #f8fafc;">Banned Tactics Enforcement<br><span style="font-size: 12px; color: #fb7185; font-weight: 500;">취약 전술 블랙리스트 강제</span></h4>
         <p style="margin: 0 0 14px 0; font-size: 12px; color: #94a3b8; line-height: 1.6;">
-          제약이 없으면 LLM은 당장 컴파일만 통과하기 위해 무거운 <code style="color: #fb7185;">simp_all</code>이나 버전 취약적인 <code style="color: #fb7185;">rename_i</code>로 쉽게 회귀합니다.
+          제약이 없으면 LLM은 당장 컴파일을 통과시키기 위해 무거운 <code style="color: #fb7185;">simp_all</code>이나 위치 기반 <code style="color: #fb7185;">rename_i</code>로 쉽게 회귀합니다. 통과는 하더라도 비용이 크고 Lean 버전 업데이트에 매우 취약한 증명이 됩니다.
         </p>
         <div style="background-color: #0b0f19; border: 1px solid #1e293b; border-radius: 8px; padding: 12px; font-size: 12px; color: #cbd5e1; line-height: 1.6;">
-          <div style="margin-bottom: 6px;"><strong style="color: #fb7185;">Strictly Banned:</strong> <code style="color: #fda4af;">rename_i</code>, <code style="color: #fda4af;">simp_all</code>, <code style="color: #fda4af;">simp at *</code></div>
-          <div><strong style="color: #34d399;">Required Target:</strong> <code style="color: #6ee7b7;">rcases</code>, <code style="color: #6ee7b7;">exact</code>, 패턴 매칭 전개</div>
+          <div style="margin-bottom: 6px;"><strong style="color: #fb7185;">Banned:</strong> <code style="color: #fda4af;">rename_i</code>, <code style="color: #fda4af;">simp_all</code>, <code style="color: #fda4af;">simp at *</code>, 중간 단계(non-terminal) <code style="color: #fda4af;">simp</code></div>
+          <div><strong style="color: #34d399;">Allowed / Target:</strong> 마지막 줄 종결(terminal) <code style="color: #6ee7b7;">simp</code>, <code style="color: #6ee7b7;">simp only [...]</code>, <code style="color: #6ee7b7;">rcases</code>, <code style="color: #6ee7b7;">exact</code></div>
         </div>
       </div>
       <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #1e293b; font-size: 11px; color: #94a3b8;">
-        🎯 효과: 버전 불변성(Portability) 및 Elaboration 속도 강제
+        🎯 효과: 버전 업데이트에 덜 깨지는 견고성(Robustness) 및 낮은 Heartbeat 강제
       </div>
     </div>
 
@@ -1175,15 +1273,15 @@ theorem extractedOldExprInVars :
         </div>
         <h4 style="margin: 0 0 8px 0; font-size: 15px; font-weight: 700; color: #f8fafc;">전술 블록 탈피: 순수 항(Term) 기술<br><span style="font-size: 12px; color: #38bdf8; font-weight: 500;">by intro ... ➔ fun ... => .elim</span></h4>
         <p style="margin: 0 0 14px 0; font-size: 12px; color: #94a3b8; line-height: 1.6;">
-          보조 정리 증명조차 Tactic 엔진(<code style="color: #cbd5e1;">by ...</code>)을 켜지 않고 순수 람다 표현식과 타입 제거자(<code style="color: #38bdf8;">.elim</code>), 항등 함수(<code style="color: #38bdf8;">fun _ hx => hx</code>)로 직결했습니다.
+          Tactic 모드가 '컴파일러에게 어떻게 증명할지 대화형으로 지시하는 방식'이라면, Term 모드는 '완성된 증명 식(함수)을 직접 적어주는 방식'입니다. 사소한 분기나 보조정리를 Tactic 블록(<code style="color: #cbd5e1;">by ...</code>) 없이 순수 람다 표현식과 타입 제거자(<code style="color: #38bdf8;">.elim</code>), 항등 함수(<code style="color: #38bdf8;">fun _ hx => hx</code>)로 직결했습니다.
         </p>
         <div style="background-color: #0b0f19; border: 1px solid #1e293b; border-radius: 8px; padding: 12px; font-size: 12px; color: #cbd5e1; line-height: 1.6;">
-          <div style="margin-bottom: 6px;"><strong style="color: #fb7185;">Before:</strong> <code style="color: #fda4af;">intros x Hin; exact Hin</code> (불필요한 Tactic 러너 기동)</div>
-          <div><strong style="color: #34d399;">After:</strong> <code style="color: #6ee7b7;">fun _ hx => hx</code> 및 명시적 Elimination 함수 직접 호출</div>
+          <div style="margin-bottom: 6px;"><strong style="color: #fb7185;">Before:</strong> <code style="color: #fda4af;">intros x Hin; exact Hin</code> (같은 의도를 불필요한 Tactic 2개로 전개)</div>
+          <div><strong style="color: #34d399;">After:</strong> <code style="color: #6ee7b7;">fun _ hx => hx</code> (항등 함수를 단일 증명 항으로 즉시 제출)</div>
         </div>
       </div>
       <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #1e293b; font-size: 11px; color: #94a3b8;">
-        🎯 효과: Elaboration 오버헤드 '0' 수렴 및 버전 파편화 완전 면역
+        🎯 효과: 증명 항의 의도가 코드에 직접 드러나며, Tactic 상태 머신 및 휴리스틱 변경에 영향받지 않는 명확성 확보
       </div>
     </div>
 
@@ -1205,7 +1303,7 @@ theorem extractedOldExprInVars :
         </div>
       </div>
       <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #1e293b; font-size: 11px; color: #94a3b8;">
-        🎯 효과: 미해결 메타변수 누수 차단 및 전술 상태 공간 단순화
+        🎯 효과: ?_ 생성 메타변수의 해결 순서에 의존하지 않고, 모순의 근거(hfalse ... rfl)를 단일 항으로 확정
       </div>
     </div>
 
