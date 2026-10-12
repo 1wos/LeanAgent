@@ -1,0 +1,9 @@
+P4/runs/attempt_05.check.lean:140:29: error: Application type mismatch: The argument
+  Metric.closedBall_subset_ball (half_lt_self hδ₂_pos) ?m.544
+has type
+  ?m.543 ∈ Metric.ball ?m.534 δ₂
+but is expected to have type
+  x ∈ Metric.ball x₀ φ.rOut
+in the application
+  ContDiffBump.pos_of_mem_ball φ (Metric.closedBall_subset_ball (half_lt_self hδ₂_pos) ?m.544)
+'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

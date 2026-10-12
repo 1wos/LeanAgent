@@ -1,0 +1,37 @@
+{
+ "tag": "floor",
+ "name": "Cslib.CCS.bisimilarity_congr_choice",
+ "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+ "replaced_lines": [
+  311,
+  372
+ ],
+ "candidate_sha256": "4fb2be6f9c38bee5b7b64b8ef22cd330809a7da1bea2cb792d01b4bb7597d781",
+ "statement_unchanged": true,
+ "forbidden_patterns": [
+  "sorry"
+ ],
+ "proof_tokens": 2,
+ "declaration_lines": 3,
+ "check": {
+  "command": "lake env lean floor.check.lean",
+  "returncode": 0,
+  "seconds": 13.12,
+  "error_count": 0,
+  "first_errors": [],
+  "warning_count": 1,
+  "axioms": [
+   "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [sorryAx]"
+  ],
+  "sorryAx": true
+ },
+ "compiled": false,
+ "heartbeat": {
+  "command": "lake env lean floor.hb.lean",
+  "returncode": 0,
+  "seconds": 6.67,
+  "heartbeats": 39,
+  "error_count": 0,
+  "first_errors": []
+ }
+}

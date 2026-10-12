@@ -1,0 +1,382 @@
+{
+  "snapshot_at": "2026-10-11T17:59:41+09:00",
+  "scope": [
+    7,
+    12
+  ],
+  "official_worker": false,
+  "provenance": "Fresh local measurements of byte-identical reference and refactored proof files in all JSONL-pinned repository/toolchain environments. Per-version logs, commands, measured copies and hashes are retained under evaluation/evidence. Previous P7/P12 result.json records were not overwritten. This is not an official Arena worker score.",
+  "metric_helper_sha256": "1c18a3fc8d8ff6656265098cbed6e83006bea209f94915cf84dcfc4829753174",
+  "runner_sha256": "6ad53f9774401fbc3e1891f11e9f94816566e3b64fc755cca017eaa2686d2c9b",
+  "heartbeat_unit": "floor(target command IO.getNumHeartbeats delta / 1000)",
+  "metric_definitions": {
+    "proof_tokens": "Native Lean Parser.tokenFn lexer count of the original by-proof source, including by and excluding target declaration, whitespace and comments. Documentation comments are normalized to ordinary comments in the counting input only. P12 selected additionally includes every new helper declaration and required omit command. The user selected Lean lexer counting. JSONL proof_length is preserved separately and is not substituted for this consistent local count.",
+    "heartbeat_scope": "Reference target declaration versus selected target plus all newly introduced helper/scope commands. Sum raw command deltas before floor division by 1000. Imports, common restored context, instrumentation definitions, token counting and #check/#print are excluded.",
+    "heartbeat_elaboration_option": "Elab.async=false for instrumentation only; original maxHeartbeats settings retained. Compatibility is a separate byte-identical uninstrumented compile with the existing strict warning flags.",
+    "reduction_pct": "100 * (1 - selected / original), rounded to 4 decimal places; heartbeat uses the recorded floor-divided integer values as in the supplied example.",
+    "compatibility": "Selected uninstrumented compile succeeds without changing any source bytes and its target axioms omit sorryAx; denominator is every version_info entry for that problem."
+  },
+  "problems": [
+    {
+      "number": 7,
+      "theorem": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "benchmark_reference_proof_length": 408,
+      "tokenizer_matches_benchmark_reference": false,
+      "source_evidence_sha256": "932901b88fb84dc6a6e2bd45d0f68c55fc439f1f6064b043c4c17196eec8b8b5",
+      "source_evidence": "evaluation/evidence/P7/result.json",
+      "statement_preserved": true,
+      "selected_source_sha256": "ba192c3ce4232496f5435a07ba48b0f7fd850a61689dbc0b22174dce11e97473",
+      "selected_source": "P7/ProgressRefactored.lean",
+      "unchanged_source_per_version": true,
+      "versions": [
+        {
+          "lean": "v4.33.0-rc2",
+          "pinned_commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+          "original": {
+            "tokens": 406,
+            "target_proof_tokens": 406,
+            "new_helper_and_scope_tokens": 0,
+            "heartbeat": 59804,
+            "raw_heartbeats": [
+              59804333
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "selected": {
+            "tokens": 301,
+            "target_proof_tokens": 301,
+            "new_helper_and_scope_tokens": 0,
+            "heartbeat": 43313,
+            "raw_heartbeats": [
+              43313273
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "token_reduction_pct": 25.8621,
+          "heartbeat_reduction_pct": 27.5751
+        },
+        {
+          "lean": "v4.32.0",
+          "pinned_commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+          "original": {
+            "tokens": 406,
+            "target_proof_tokens": 406,
+            "new_helper_and_scope_tokens": 0,
+            "heartbeat": 61942,
+            "raw_heartbeats": [
+              61942375
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "selected": {
+            "tokens": 301,
+            "target_proof_tokens": 301,
+            "new_helper_and_scope_tokens": 0,
+            "heartbeat": 45358,
+            "raw_heartbeats": [
+              45358727
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "token_reduction_pct": 25.8621,
+          "heartbeat_reduction_pct": 26.7734
+        },
+        {
+          "lean": "v4.31.0",
+          "pinned_commit": "8ea71c8df91acd63285515a04da952b23b78d266",
+          "original": {
+            "tokens": 406,
+            "target_proof_tokens": 406,
+            "new_helper_and_scope_tokens": 0,
+            "heartbeat": 61916,
+            "raw_heartbeats": [
+              61916289
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "selected": {
+            "tokens": 301,
+            "target_proof_tokens": 301,
+            "new_helper_and_scope_tokens": 0,
+            "heartbeat": 45349,
+            "raw_heartbeats": [
+              45349182
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "token_reduction_pct": 25.8621,
+          "heartbeat_reduction_pct": 26.7572
+        }
+      ],
+      "compatibility": {
+        "passed": 3,
+        "required": 3,
+        "tested": 3,
+        "pct": 100.0
+      }
+    },
+    {
+      "number": 12,
+      "theorem": "interleaved_affine_gaps_imply_tensor_gaps",
+      "benchmark_reference_proof_length": 1353,
+      "tokenizer_matches_benchmark_reference": false,
+      "source_evidence_sha256": "33bd88e2426a21a0ea2d074eaaf7b623155d7f81ac1cc2b493c8321fc129a1fd",
+      "source_evidence": "evaluation/evidence/P12/result.json",
+      "statement_preserved": true,
+      "selected_source_sha256": "1c34dde0d08885ce200353268a74f809742ef194a756f252143b3b0dbe390d80",
+      "selected_source": "P12/TensorGapsRefactored.lean",
+      "unchanged_source_per_version": true,
+      "versions": [
+        {
+          "lean": "v4.31.0",
+          "pinned_commit": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+          "original": {
+            "tokens": 1329,
+            "target_proof_tokens": 1329,
+            "new_helper_and_scope_tokens": 0,
+            "heartbeat": 9167,
+            "raw_heartbeats": [
+              9167304
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "selected": {
+            "tokens": 745,
+            "target_proof_tokens": 56,
+            "new_helper_and_scope_tokens": 689,
+            "heartbeat": 8112,
+            "raw_heartbeats": [
+              8112607
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "token_reduction_pct": 43.9428,
+          "heartbeat_reduction_pct": 11.5087
+        },
+        {
+          "lean": "v4.30.0",
+          "pinned_commit": "e6d77b18ca1334a91faf4d1ccf9f96d854d58ba4",
+          "original": {
+            "tokens": 1329,
+            "target_proof_tokens": 1329,
+            "new_helper_and_scope_tokens": 0,
+            "heartbeat": 9178,
+            "raw_heartbeats": [
+              9178349
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "selected": {
+            "tokens": 745,
+            "target_proof_tokens": 56,
+            "new_helper_and_scope_tokens": 689,
+            "heartbeat": 8017,
+            "raw_heartbeats": [
+              8017017
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "token_reduction_pct": 43.9428,
+          "heartbeat_reduction_pct": 12.6498
+        },
+        {
+          "lean": "v4.29.0",
+          "pinned_commit": "de71a9dfd2f5a343e8895517b7efe857d9f1ce5c",
+          "original": {
+            "tokens": 1329,
+            "target_proof_tokens": 1329,
+            "new_helper_and_scope_tokens": 0,
+            "heartbeat": 10257,
+            "raw_heartbeats": [
+              10257497
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "selected": {
+            "tokens": 745,
+            "target_proof_tokens": 56,
+            "new_helper_and_scope_tokens": 689,
+            "heartbeat": 9366,
+            "raw_heartbeats": [
+              9366979
+            ],
+            "valid": true,
+            "compile_exit_codes": [
+              0
+            ],
+            "measurement_exit_codes": [
+              0
+            ],
+            "recorded_independent_process_runs": 1,
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "sorryAx_absent": true
+          },
+          "token_reduction_pct": 43.9428,
+          "heartbeat_reduction_pct": 8.6868
+        }
+      ],
+      "compatibility": {
+        "passed": 3,
+        "required": 3,
+        "tested": 3,
+        "pct": 100.0
+      }
+    }
+  ],
+  "totals": {
+    "original_tokens": 1735,
+    "selected_tokens": 1046,
+    "reduction_pct": 39.7118,
+    "heartbeat_aggregation": null,
+    "compatibility_passed": 6,
+    "compatibility_required": 6
+  },
+  "evaluation_complete": true
+}

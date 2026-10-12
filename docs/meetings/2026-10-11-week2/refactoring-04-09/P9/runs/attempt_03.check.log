@@ -1,0 +1,5 @@
+P9/runs/attempt_03.check.lean:318:42: error(lean.unknownIdentifier): Unknown identifier `t`
+P9/runs/attempt_03.check.lean:320:29: error(lean.unknownIdentifier): Unknown identifier `t`
+P9/runs/attempt_03.check.lean:322:42: error(lean.unknownIdentifier): Unknown identifier `t`
+P9/runs/attempt_03.check.lean:324:29: error(lean.unknownIdentifier): Unknown identifier `t`
+'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
