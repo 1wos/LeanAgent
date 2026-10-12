@@ -1,0 +1,87 @@
+{
+ "measured_on": "2026-10-11",
+ "score": "official: mean(token reduction %, heartbeat reduction %, compatibility %) per problem",
+ "tokenizer": "lean-refactor cc_agent scripts/proof_utils.py proof_length() @ a2372ca",
+ "heartbeats": "#count_heartbeats in, set_option Elab.async false, target replaced inside original file, 3 independent runs",
+ "problems": [
+  {
+   "problem": 5,
+   "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+   "library": "https://github.com/leanprover-community/physlib",
+   "commit": "c48433678e8fb6306ebcd48453300c8e16058a62",
+   "toolchain": "leanprover/lean4:v4.32.0",
+   "mathlib": "81a5d257c8e4",
+   "reference": {
+    "tokens": 1372,
+    "heartbeats": [
+     26817,
+     26817,
+     26817
+    ],
+    "sha256": "9839fbd7f2dedf9c22190403722dc98210c990a14188a042ddf41ab5e050496c"
+   },
+   "refactored": {
+    "tokens": 721,
+    "heartbeats": [
+     11188,
+     11188,
+     11188
+    ],
+    "sha256": "294ddf305dee94ccf19c3974265b59ab5e4e354b48383555134f5e4e6b0a729c",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ],
+    "target_diagnostics": []
+   },
+   "check_identical": true,
+   "axioms_identical": true,
+   "api_cost_usd": 2.579,
+   "compatibility": {
+    "v4.32.0": "pass"
+   }
+  },
+  {
+   "problem": 10,
+   "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+   "library": "https://github.com/Verified-zkEVM/ArkLib",
+   "commit": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+   "toolchain": "leanprover/lean4:v4.31.0",
+   "mathlib": "fabf563a7c95",
+   "reference": {
+    "tokens": 1463,
+    "heartbeats": [
+     15902,
+     15902,
+     15902
+    ],
+    "sha256": "561da2e1599d85a33fddbdbdb9eca3f05f504c3dfaa7e32d367eef4eba532033"
+   },
+   "refactored": {
+    "tokens": 484,
+    "heartbeats": [
+     8802
+    ],
+    "sha256": "73cd94253cff6e1ccc075c49eccb86e828df51fe7dd7bc91f8b732a5ef3c02ed",
+    "axioms": [
+     "propext",
+     "Classical.choice",
+     "Quot.sound"
+    ],
+    "target_diagnostics": [
+     "warning: `mul_le_mul_left'` has been deprecated (compiles on all listed toolchains)"
+    ]
+   },
+   "check_identical": true,
+   "axioms_identical": true,
+   "api_cost_usd": 2.531,
+   "compatibility": {
+    "v4.31.0": "pass",
+    "v4.30.0": "pass",
+    "v4.29.0": "pass",
+    "v4.28.0": "pass"
+   }
+  }
+ ]
+}
