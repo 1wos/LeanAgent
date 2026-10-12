@@ -37,12 +37,21 @@
 
 ### 담당 문제 연구 기록
 
+- [박선영 · 8·11번 웜업 접근·실험 계획 발표자료](2026-10-11-박선영-warmup-08-11/viewer.html) · [발표 구성안](2026-10-11-박선영-warmup-08-11/slide-outline.md): 증명 구조 읽기, 개선 가설, 검증·기록 절차를 정리한 10장 슬라이드입니다. 최적화 후보의 개선 성능은 아직 측정하지 않았습니다.
 - [박성호 · 5·10번 리팩터링 기록](2026-10-11-박성호-warmup-05-10.md): 자동 파이프라인(주최 측 cc_agent + 결정적 후처리)으로 줄인 결과와 실험 비교를 정리합니다.
 - [손지연 · P7·P12 증명 리팩터링 상세 보고서](refactoring-07-12/proof_refactoring_report.md): 명제의 의미와 Lean 문법, 증명 흐름, 리팩터링 전략, 원본·수정 코드 비교, 실패 원인과 해결 과정 및 검증 결과를 정리합니다.
 - [손지연 · P7·P12 HTML 발표자료](refactoring-07-12/proof_refactoring_presentation.html): 개념·수식 해설, P7의 단계별 계산 예제, P12의 차원별 행 분할 데모, 전후 코드와 검증 결과를 브라우저에서 확인합니다. 파일을 내려받아 열 수 있으며, 목차 이동·큰 글씨·인쇄 기능을 제공합니다. 데모는 설명용이며 실제 Lean을 실행하지 않습니다.
 - 리팩터링 규모: P7 정리 전체는 **83줄 → 49줄**, `grind` 출현은 **19회 → 8회**입니다. P12 주 정리는 **177줄 → 17줄**이며, 새 보조정리를 포함한 비교 범위 전체는 **76줄**입니다.
 - [손지연 · 실행·검증 설명](refactoring-07-12/proof_refactoring_report.md#verification-and-axiom-check): 최종 검증 결과와 공리 확인, P12의 실패·해결 과정을 본문에 요약합니다. 별도 소스·스크립트·로그·JSON은 로컬 작업 자료입니다. 검증 결과는 2026-10-10 완료된 로컬 실행 기록 기준이며, 이번 자료 정리에서는 Lean을 재실행하지 않았습니다. 네 증명 모두 검증을 통과했고 대상 정리의 `sorryAx` 의존성은 없습니다. 단회 파일 검사 시간은 참고치이며 실행 속도 개선으로 일반화하지 않습니다.
 - [권주원 · 3·6·13번 HTML 학습 자료](refactoring-03-06-13.html): 문제별 페이지에서 변수 확인, 작은 예시, Lean 코드와 리팩터링 전략을 공부하고, 마지막 페이지에서 대회 지표와 세 문제의 공통 인사이트를 확인합니다.
+
+## Autoformalization 지식 공유 발표
+
+### 담당자 : 박선영
+
+- [논문 조사 문서](../../research/autoformalization/2026-10-10-sunyoung-autoformalization-survey.md): 기존 논문 목록의 8편과 추가 조사 10편을 정리합니다.
+- [HTML 발표자료](../../research/autoformalization/2026-10-10-sunyoung-autoformalization-survey/viewer.html) · [발표 구성안](../../research/autoformalization/2026-10-10-sunyoung-autoformalization-survey/slide-outline.md): 컴파일 성공과 의미 충실성을 구분해 연구 흐름을 설명하는 12장 슬라이드입니다.
+- HTML 파일을 브라우저에서 열면 발표자료와 노트를 볼 수 있습니다. 외부 논문 링크를 열 때만 인터넷 연결이 필요합니다.
 
 ## 논문 분야 담당
 

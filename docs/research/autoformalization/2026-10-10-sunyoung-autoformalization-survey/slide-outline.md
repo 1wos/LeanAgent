@@ -19,7 +19,7 @@
 - 구성: 도입 → 세 연구 흐름 → 핵심 논문 4편 → 평가 함정 → 최근 연구 → 프로젝트 적용 → 토론.
 - 구현: CLI 미설치로 CSS·JavaScript를 내장한 standalone viewer.html을 제작한다. 외부 이미지·폰트·라이브러리는 사용하지 않는다.
 - HTML 순서: 1 제목, 2 필요성, 3 세 흐름, 4 Herald, 5 PDA, 6 NL2Lean, 7 ProofBridge, 8 컴파일과 의미, 9 벤치마크·지표, 10 2026 연구, 11 적용점, 12 결론. 아래 기존 상세 메모는 이 순서로 재배치·통합한다.
-- 원문: docs/research/autoformalization/2026-10-10-sunyoung-autoformalization-survey.md
+- 원문: [Autoformalization 논문 조사 개요](../2026-10-10-sunyoung-autoformalization-survey.md)
 - 범위: 원문 전체를 압축. 웹 조사·새 사실 추가 없음. 결과 수치는 원문에서 가져온 보고값이며 독립 검증하지 않음.
 
 ## 슬라이드 구성

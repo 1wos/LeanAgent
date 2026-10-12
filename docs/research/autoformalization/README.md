@@ -16,7 +16,7 @@
 
 | 작성자 | 주제 | 자료 링크 | 공유일 |
 | --- | --- | --- | --- |
-| | | | |
 | 박선영 | Autoformalization 논문 조사 개요 (papers.md 8편 + 목록 외 최신 10편) | [2026-10-10-sunyoung-autoformalization-survey.md](2026-10-10-sunyoung-autoformalization-survey.md) | 2026-10-10 |
+| 박선영 | Autoformalization 연구 흐름: 컴파일 성공에서 의미 충실성으로 · 12장 발표자료 | [HTML 발표자료](2026-10-10-sunyoung-autoformalization-survey/viewer.html) · [발표 구성안](2026-10-10-sunyoung-autoformalization-survey/slide-outline.md) | 2026-10-11 |
 
 자료를 이 폴더에 자유로운 형식으로 작성하고, 위 표에 링크를 추가합니다.
