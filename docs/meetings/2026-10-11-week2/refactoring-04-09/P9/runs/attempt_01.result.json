@@ -1,0 +1,35 @@
+{
+ "tag": "attempt_01",
+ "name": "Cslib.CCS.bisimilarity_congr_choice",
+ "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+ "replaced_lines": [
+  311,
+  372
+ ],
+ "candidate_sha256": "a861045bcb00dc6a79acf452743cfba696a248999796670a044a76d0bc353deb",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 262,
+ "declaration_lines": 38,
+ "check": {
+  "command": "lake env lean attempt_01.check.lean",
+  "returncode": 0,
+  "seconds": 39.19,
+  "error_count": 0,
+  "first_errors": [],
+  "warning_count": 0,
+  "axioms": [
+   "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": false
+ },
+ "compiled": true,
+ "heartbeat": {
+  "command": "lake env lean attempt_01.hb.lean",
+  "returncode": 0,
+  "seconds": 24.69,
+  "heartbeats": 497,
+  "error_count": 0,
+  "first_errors": []
+ }
+}
