@@ -15,7 +15,7 @@
 
 | 발표자 | 확인 결과 | 보관·연결 방식 |
 | --- | --- | --- |
-| 권주원 | 3·6·13 발표와 ATP 발표는 별도 파일 | [Warm-up](warmup/권주원/README.md) · [ATP](../automated-theorem-proving/권주원/README.md) |
+| 권주원 | 3·6·13 발표와 ATP 발표는 별도 파일. 입문 학습 노트는 두 주제를 함께 다루는 진행 중 보조 자료 | [Warm-up](warmup/권주원/README.md) · [ATP](../automated-theorem-proving/권주원/README.md) |
 | 손지연 | 7·12 발표·보고서와 ATP 발표가 분리됨 | [Warm-up](warmup/손지연/README.md) · [ATP](../automated-theorem-proving/손지연/README.md) |
 | 박채원 | 14·15 보고서와 MIL·LeanDojo 연구 문서가 분리됨 | [Warm-up](warmup/박채원/README.md) · [Lean&Mathlib](../lean-mathlib/박채원/README.md) |
 | 박선영 | 8·11 발표와 Autoformalization 조사·발표가 분리됨 | [Warm-up](warmup/박선영/README.md) · [Autoformalization](../autoformalization/박선영/README.md) |
