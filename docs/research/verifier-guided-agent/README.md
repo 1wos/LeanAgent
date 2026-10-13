@@ -19,4 +19,4 @@ Lean 도구 연결과 검증 피드백을 이용한 증명 생성·오류 분석
 | --- | --- | --- | --- |
 | 정소미 | Lean Refactor 논문의 수정·검증·교정 반복 구조와 담당 문제 적용 기록 | [논문 분석](정소미/report.md) · [공유 슬라이드](../refactoring/warmup/정소미/presentation.html) | 2026-10-11 |
 
-개인별 자료는 발표자 폴더에 보관합니다. [폴더·파일명 지침](../../STRUCTURE.md)을 따릅니다. 정소미의 공유 슬라이드는 Warm-up 실험과 논문 조사를 함께 담아 [Refactoring](../refactoring/README.md)에 원본을 둡니다.
+개인별 자료는 발표자 폴더에 보관합니다. [폴더·파일명 지침](../../STRUCTURE.md)을 따릅니다. 정소미님의 공유 슬라이드는 Warm-up 실험과 논문 조사를 함께 담아 [Refactoring](../refactoring/README.md)에 원본을 둡니다.
