@@ -1,6 +1,6 @@
 # LeanAgent 연구 자료
 
-네 주제별로 1–2명이 조사 자료, 논문 리뷰, 발표자료와 실행 예제를 공유합니다. 담당자 이름과 개인별 자료 링크는 각 폴더의 README에 기록합니다.
+논문·학습 자료는 분야별 발표자 폴더에, 대회 문제 자료는 `refactoring/세트/발표자/`에 보관합니다. 모임 README는 각 발표자의 공유 자료를 연결하는 목차로 사용합니다.
 
 - [논문 목록 · 37편](papers.md): 논문별 관련 분야 태그와 핵심 주제.
 
@@ -13,8 +13,11 @@
 | `Automated Theorem Proving` (ATP) | 권주원 · 손지연 | [automated-theorem-proving](automated-theorem-proving/README.md) |
 | `Verifier-guided Agent` | 정소미 · 박성호 | [verifier-guided-agent](verifier-guided-agent/README.md) |
 
-## 자료 공유 방법
+## 문제 연구
 
-1. 개인별 자료는 해당 폴더에 `YYYY-MM-DD-name-topic.md`로 작성합니다. 발표자료·예제는 같은 이름의 하위 폴더에 함께 보관할 수 있습니다.
-2. 폴더 README의 공유 자료 표에 작성한 파일 또는 외부 발표자료 링크를 추가합니다.
-3. 개념, 작은 예제, 우리 프로젝트에 적용할 점을 담고, 실행한 예제는 Lean·Mathlib 버전과 결과를 기록합니다.
+- [Refactoring](refactoring/README.md): 세트별 자료 안내와 Warm-up·논문 조사 혼합 여부.
+- [Warm-up](refactoring/warmup/README.md): 15문제의 담당자별 발표·보고서·검증 기록.
+
+## 공통 경로와 파일명
+
+[폴더·파일명 지침](../STRUCTURE.md)에 경로, 대표 파일명, 모임 목차, 혼합 자료와 원본 보존 기준을 모았습니다. 규칙을 변경할 때는 해당 지침을 갱신합니다.

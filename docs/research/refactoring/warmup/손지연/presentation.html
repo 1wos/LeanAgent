@@ -609,7 +609,7 @@ python3 week2/evaluation/run_evaluation.py --aggregate-only</code></pre></div>
           <p class="note">버전별 증거 폴더에 수정 없는 검사 파일, 계측 파일, 실행 명령·로그·소스 해시를 보존했습니다. 기존 P7/P12의 초기 결과와 로그는 유지했습니다. 이 자료는 단회 로컬 측정이며 공식 Arena worker 점수나 전체 라이브러리 CI 결과는 아닙니다.</p>
         </div>
       </details>
-      <div class="resource-links"><a href="evaluation_results.json">평가 결과 JSON</a><span>집계 기준 (로컬 설명 자료)</span><span>계측 helper (로컬 소스)</span><span>평가 스크립트 (로컬 실행 파일)</span><span>P7 평가 증거 (로컬 검증 기록)</span><span>P12 평가 증거 (로컬 검증 기록)</span></div>
+      <div class="resource-links"><a href="metrics.json">평가 결과 JSON</a><span>집계 기준 (로컬 설명 자료)</span><span>계측 helper (로컬 소스)</span><span>평가 스크립트 (로컬 실행 파일)</span><span>P7 평가 증거 (로컬 검증 기록)</span><span>P12 평가 증거 (로컬 검증 기록)</span></div>
     </section>
 
     <section id="p7" aria-labelledby="p7-title">
@@ -1066,7 +1066,7 @@ python3 week2/P12/run_tensor_gaps.py</code></pre></div>
       <p>필요한 import 모듈을 빌드한 뒤 각 파일을 <code>lake env lean</code>으로 검사합니다. 두 문제 모두 <code>-DwarningAsError=true</code>를 적용하며 P12는 <code>-DautoImplicit=false</code>도 지정합니다. runner는 수정본을 덮어쓰지 않습니다.</p>
       <details class="helper-details"><summary>재현에 사용한 버전과 확인 범위</summary><div class="details-content"><dl class="glossary"><dt>P7 커밋</dt><dd><code>3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc</code></dd><dt>P12 커밋</dt><dd><code>c1712f6c496d0aef04f09bae42aec13811b3273f</code></dd><dt>cslib-progress</dt><dd>P7에 필요한 정의·보조정리·고정 의존성·빌드 결과를 제공하는 별도 Cslib checkout입니다.</dd><dt>검증 범위</dt><dd>필요한 import 모듈과 두 문제의 원본·수정본입니다. 전체 라이브러리 CI를 수행한 결과는 아닙니다.</dd></dl></div></details>
       <div class="scope"><strong>라이브러리의 기존 경고:</strong> ArkLib 의존성 빌드에서는 <code>Fin/Basic.lean:307</code>, <code>MvPolynomial/Interpolation.lean:258</code>의 기존 sorry 경고가 재출력됩니다. 이번 대상 정리의 전이적 공리 목록에는 원본·수정본 모두 <code>sorryAx</code>가 없습니다.</div>
-      <div class="resource-links"><a href="proof_refactoring_report.md">상세 Markdown 보고서</a><a href="evaluation_results.json">추가 평가 JSON</a><span>원본 benchmark JSONL (로컬 원본 데이터)</span><span>P7 실행 스크립트 (로컬 실행 파일)</span><span>P12 실행 스크립트 (로컬 실행 파일)</span></div>
+      <div class="resource-links"><a href="report.md">상세 Markdown 보고서</a><a href="metrics.json">추가 평가 JSON</a><span>원본 benchmark JSONL (로컬 원본 데이터)</span><span>P7 실행 스크립트 (로컬 실행 파일)</span><span>P12 실행 스크립트 (로컬 실행 파일)</span></div>
     </section>
     <footer><span>Week 2 · Warm-up P7·P12 · 오프라인 단일 HTML</span><a href="#top">맨 위로</a></footer>
   </main>

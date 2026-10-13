@@ -7,7 +7,7 @@
 **추가 평가 기준:** 2026-10-11 17:59:41 KST  
 **자료 작성일:** 2026-10-11  
 
-[프레젠테이션용 HTML](proof_refactoring_presentation.html) — 개념 설명, 단계별 데모, 전후 코드 비교와 검증 결과를 브라우저에서 볼 수 있다.
+[프레젠테이션용 HTML](presentation.html) — 개념 설명, 단계별 데모, 전후 코드 비교와 검증 결과를 브라우저에서 볼 수 있다.
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ P12는 interleaved affine-line proximity gap에서 tensor/multilinear correlated
 
 두 문제 모두 JSONL의 `statement`를 그대로 유지했다. 2026-10-10 초기 검증에 이어, 2026-10-11에는 문제별 지정 버전 3개에서 원본·수정본을 각각 검사했다. 총 12회의 파일 검사와 12회의 별도 계측이 모두 성공했고, 수정본의 버전 호환성은 두 문제 모두 **3/3(100%)**다. 공리 목록은 모두 `[propext, Classical.choice, Quot.sound]`로 동일하며 대상 정리의 `sorryAx` 의존성은 없다.
 
-Lean lexer 기준 proof token은 **P7 406 → 301개(25.8621% 감소)**, **P12 1,329 → 745개(43.9428% 감소)**다. P12의 새 보조정리까지 포함한 수치다. Heartbeat는 버전에 따라 P7 **26.7572–27.5751%**, P12 **8.6868–12.6498%** 감소했다. 최신 평가의 수치와 근거는 [evaluation_results.json](evaluation_results.json)에 보존했다.
+Lean lexer 기준 proof token은 **P7 406 → 301개(25.8621% 감소)**, **P12 1,329 → 745개(43.9428% 감소)**다. P12의 새 보조정리까지 포함한 수치다. Heartbeat는 버전에 따라 P7 **26.7572–27.5751%**, P12 **8.6868–12.6498%** 감소했다. 최신 평가의 수치와 근거는 [evaluation_results.json](metrics.json)에 보존했다.
 
 ## Overall Metrics Comparison
 
@@ -49,7 +49,7 @@ Lean lexer 기준 proof token은 **P7 406 → 301개(25.8621% 감소)**, **P12 1
 
 ## Evaluation on Three Criteria
 
-**평가 스냅샷:** 2026-10-11 17:59:41 KST. [평가 JSON](evaluation_results.json)의 실제 로컬 실행 결과를 반영했다. 문제별 `version_info`의 고정 커밋·Lean 도구체인을 사용했으며, 공식 Arena worker 점수는 아니다. 아래 감소율은 `100 × (1 − 수정본 / 참조본)`을 소수 넷째 자리까지 계산한 값이다.
+**평가 스냅샷:** 2026-10-11 17:59:41 KST. [평가 JSON](metrics.json)의 실제 로컬 실행 결과를 반영했다. 문제별 `version_info`의 고정 커밋·Lean 도구체인을 사용했으며, 공식 Arena worker 점수는 아니다. 아래 감소율은 `100 × (1 − 수정본 / 참조본)`을 소수 넷째 자리까지 계산한 값이다.
 
 ### 증명 길이 감소율
 
@@ -99,7 +99,7 @@ import, 공통 보조정리 문맥, 측정 helper 정의, 토큰 계산, `#check
 
 ### 평가 근거와 재현
 
-[최종 JSON](evaluation_results.json), 집계 기준 (로컬 설명 자료), 계측 helper (로컬 소스), 평가 스크립트 (로컬 실행 파일), P7 증거 (로컬 검증 기록), P12 증거 (로컬 검증 기록)에 수치·실행 명령·로그·소스 해시를 보존했다. 버전별 증거 폴더에는 수정 없는 검사 파일과 계측 파일을 함께 남겼다. 기존 `P7/result.json`, `P12/result.json`과 초기 로그는 덮어쓰지 않았다.
+[최종 JSON](metrics.json), 집계 기준 (로컬 설명 자료), 계측 helper (로컬 소스), 평가 스크립트 (로컬 실행 파일), P7 증거 (로컬 검증 기록), P12 증거 (로컬 검증 기록)에 수치·실행 명령·로그·소스 해시를 보존했다. 버전별 증거 폴더에는 수정 없는 검사 파일과 계측 파일을 함께 남겼다. 기존 `P7/result.json`, `P12/result.json`과 초기 로그는 덮어쓰지 않았다.
 
 준비된 환경에서 프로젝트 루트 기준으로 실행한다.
 

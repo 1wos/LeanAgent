@@ -3,17 +3,17 @@
 - 분야: `Lean&Mathlib`
 - 공유일: 2026-10-09 (초안) · 발표: 2026-10-11 W02
 - 교재: Jeremy Avigad, Patrick Massot, [*Mathematics in Lean*](https://leanprover-community.github.io/mathematics_in_lean/) 2장 (Apache License 2.0)
-- 풀이 파일: [2026-10-11-박채원-lean-mathlib/](2026-10-11-박채원-lean-mathlib/) — 원본 연습문제의 `sorry` 자리에 답안과 한국어 주석 추가함
+- 풀이 파일: [mil-ch2/](mil-ch2/) — 원본 연습문제의 `sorry` 자리에 답안과 한국어 주석 추가함
 
 ## 절별 정리
 
 | 절 | 핵심 | 파일 |
 | --- | --- | --- |
-| 2.1 Calculating | 등식은 `rw` 로 바꿔 쓰고, 길면 `calc` 로 단계 나눔. 환 계산은 `ring` | [S01_Calculating.lean](2026-10-11-박채원-lean-mathlib/S01_Calculating.lean) |
-| 2.2 Algebraic Structures | 환·군의 공리만으로 성질 증명. `have`, `apply`, `symm` | [S02_Proving_Identities_in_Algebraic_Structures.lean](2026-10-11-박채원-lean-mathlib/S02_Proving_Identities_in_Algebraic_Structures.lean) |
-| 2.3 Theorems and Lemmas | 등식은 `rw`, 부등식은 `apply` / `exact`. 부등식 n개 잇기는 추이 정리 n−1번, `linarith` | [S03_Using_Theorems_and_Lemmas.lean](2026-10-11-박채원-lean-mathlib/S03_Using_Theorems_and_Lemmas.lean) |
-| 2.4 Order and Divisibility | 등식 = `≤` 두 방향 (`le_antisymm`). min/max, `∣`, gcd. `repeat` | [S04_More_on_Order_and_Divisibility.lean](2026-10-11-박채원-lean-mathlib/S04_More_on_Order_and_Divisibility.lean) |
-| 2.5 Algebraic Structures | 2.4 증명을 격자(⊓/⊔)·순서환·거리공간에서 다시 함. `trans` | [S05_Proving_Facts_about_Algebraic_Structures.lean](2026-10-11-박채원-lean-mathlib/S05_Proving_Facts_about_Algebraic_Structures.lean) · [설명 md](2026-10-11-박채원-lean-mathlib/S05_Proving_Facts_about_Algebraic_Structures.md) |
+| 2.1 Calculating | 등식은 `rw` 로 바꿔 쓰고, 길면 `calc` 로 단계 나눔. 환 계산은 `ring` | [S01_Calculating.lean](mil-ch2/S01_Calculating.lean) |
+| 2.2 Algebraic Structures | 환·군의 공리만으로 성질 증명. `have`, `apply`, `symm` | [S02_Proving_Identities_in_Algebraic_Structures.lean](mil-ch2/S02_Proving_Identities_in_Algebraic_Structures.lean) |
+| 2.3 Theorems and Lemmas | 등식은 `rw`, 부등식은 `apply` / `exact`. 부등식 n개 잇기는 추이 정리 n−1번, `linarith` | [S03_Using_Theorems_and_Lemmas.lean](mil-ch2/S03_Using_Theorems_and_Lemmas.lean) |
+| 2.4 Order and Divisibility | 등식 = `≤` 두 방향 (`le_antisymm`). min/max, `∣`, gcd. `repeat` | [S04_More_on_Order_and_Divisibility.lean](mil-ch2/S04_More_on_Order_and_Divisibility.lean) |
+| 2.5 Algebraic Structures | 2.4 증명을 격자(⊓/⊔)·순서환·거리공간에서 다시 함. `trans` | [S05_Proving_Facts_about_Algebraic_Structures.lean](mil-ch2/S05_Proving_Facts_about_Algebraic_Structures.lean) · [설명 md](mil-ch2/S05_Proving_Facts_about_Algebraic_Structures.md) |
 
 ## 작은 예제
 

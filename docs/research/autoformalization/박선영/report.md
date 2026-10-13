@@ -1,8 +1,8 @@
 # Autoformalization 논문 조사 개요
 
 - 작성: 박선영 · 2026-10-10 (LeanAgent Week 2 조사 자료)
-- 발표자료: [HTML 슬라이드](2026-10-10-sunyoung-autoformalization-survey/viewer.html) · [발표 구성안](2026-10-10-sunyoung-autoformalization-survey/slide-outline.md)
-- 범위: [papers.md](../papers.md)에서 `Autoformalization` 태그가 붙은 8편
+- 발표자료: [HTML 슬라이드](presentation.html) · [발표 구성안](outline.md)
+- 범위: [papers.md](../../papers.md)에서 `Autoformalization` 태그가 붙은 8편
 - 추가 조사: papers.md 목록 밖의 최신 논문 10편 — 6장
   - 03 Process-Driven Autoformalization in Lean 4 · 04 An Evaluation Benchmark for Autoformalization in Lean4 · 05 TheoremLlama · 08 Herald · 19 ProofBridge · 22 miniF2F-Lean Revisited · 23 NL2Lean · 33 LLM-Generated Conjectures to Lean (SOS)
 - 근거 표시: 03·04·08·19·22·23번은 arXiv abstract(23번은 논문 PDF)를 직접 확인해 요약했다. 05·33번은 abstract 확인에 실패해 papers.md 설명만 사용했으며 해당 항목에 표시했다. 03번 세부 구성은 공식 GitHub README로 보강했다. 6장의 10편은 2026-10-10에 arXiv API("autoformalization" + "Lean")로 검색해 abstract를 직접 확인했다.
@@ -197,6 +197,6 @@ papers.md의 8편이 2024~2025년 중심인 데 비해, 2026년 논문은 ①의
 
 프로젝트 내 문서:
 
-- [전체 논문 목록](../papers.md) · [연구 자료 안내](../README.md) · [Autoformalization 폴더 README](README.md) · [Week 2 안내](../../meetings/2026-10-11-week2/README.md)
+- [전체 논문 목록](../../papers.md) · [연구 자료 안내](../../README.md) · [Autoformalization 폴더 README](../README.md) · [Week 2 안내](../../../meetings/2026-10-11-week2/README.md)
 
 비고: 이 폴더는 박선영·남성우 공동 담당이며, 조사 흐름 요약(3장)은 남성우 담당 논문과 비교해 보면 좋다. 05·33번 abstract와 miniF2F 원판의 문항 수 등 미확인 세부는 추후 원문 확인이 필요하다.

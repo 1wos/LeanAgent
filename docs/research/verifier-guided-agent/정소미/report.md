@@ -1,7 +1,7 @@
 # Lean Refactor: 검증 결과로 수정을 되먹이는 반복 구조
 
 - 작성: 정소미 · 발표: 2026-10-11 2주차 모임(W02)
-- 분야: 스터디의 [논문 목록](../papers.md)에서 `Verifier-guided Agent` 태그가 붙은 논문이다. `Automated Theorem Proving` 태그도 붙어 있다.
+- 분야: 스터디의 [논문 목록](../../papers.md)에서 `Verifier-guided Agent` 태그가 붙은 논문이다. `Automated Theorem Proving` 태그도 붙어 있다.
 - 논문: Jialin Lu et al., [Lean Refactor: Multi-Objective Controllable Proof Optimization via Agentic Strategy Search](https://arxiv.org/abs/2605.20244), arXiv:2605.20244v2 (2026-08-04). 우리가 참가하는 대회 [Lean Refactor Arena](https://huggingface.co/spaces/delta-lab-ai/lean-refactor-arena)의 주최 측이 쓴 논문이다.
 - 코드: [delta-lab-ai/lean-refactor](https://github.com/delta-lab-ai/lean-refactor). 논문 본문에는 저장소 주소가 없다. 저장소 설명이 논문 제목과 같고 README가 논문의 arXiv 번호를 연결한다. 확인한 커밋은 `a2372ca`다.
 - 정리 범위: 3절(방법)과 Algorithm 1, 4절(평가), 6절(한계), 부록 I.4(설정값), J(토큰 계산), L(heartbeat 측정), O(프롬프트)를 읽었다.
@@ -70,7 +70,7 @@ Lean 컴파일러가 돌려주는 것은 성공 여부와 오류 메시지다. �
 
 ## 5. 작은 예제: 담당 문제에 적용한 기록
 
-논문의 반복 구조 가운데 수정, Lean 검증, 교정, 채택 단계를 담당 문제에 적용했다. 전략 은행 검색은 적용하지 않았다. 이 구조로 실행한 것은 9번의 시도 13건과 4번 첫째 갈래의 시도 12건이다. 4번 둘째 갈래(R1–R3)는 구조를 바꾸는 방법을 따로 조사하면서 만든 후보다. 아래는 [4·9번 리팩터링 기록](../../meetings/2026-10-11-week2/refactoring-04-09.md)에 있는 9번의 시도 3과 시도 4다. 환경은 Lean `v4.32.0`, cslib 커밋 `197a7be`, Mathlib 커밋 `81a5d25`다.
+논문의 반복 구조 가운데 수정, Lean 검증, 교정, 채택 단계를 담당 문제에 적용했다. 전략 은행 검색은 적용하지 않았다. 이 구조로 실행한 것은 9번의 시도 13건과 4번 첫째 갈래의 시도 12건이다. 4번 둘째 갈래(R1–R3)는 구조를 바꾸는 방법을 따로 조사하면서 만든 후보다. 아래는 [4·9번 리팩터링 기록](../../refactoring/warmup/정소미/report.md)에 있는 9번의 시도 3과 시도 4다. 환경은 Lean `v4.32.0`, cslib 커밋 `197a7be`, Mathlib 커밋 `81a5d25`다.
 
 **수정 (시도 3)**: 경우 분석을 `rintro` 패턴 한 줄로 썼다.
 
@@ -113,7 +113,7 @@ Lean 컴파일러가 돌려주는 것은 성공 여부와 오류 메시지다. �
 
 이번 기록에서는 다음을 이미 적용했다.
 
-- **검증 명령을 하나로 고정했다.** 명제 보존, 금지 패턴, 컴파일과 공리, 토큰, heartbeat를 한 번에 확인하는 [검증 스크립트](../../meetings/2026-10-11-week2/refactoring-04-09/verify_candidate.py)를 두었다. 후보를 재기 전에 참조 증명에서 공식 기준값이 나오는지 먼저 확인했다.
+- **검증 명령을 하나로 고정했다.** 명제 보존, 금지 패턴, 컴파일과 공리, 토큰, heartbeat를 한 번에 확인하는 [검증 스크립트](../../refactoring/warmup/정소미/evidence/verify_candidate.py)를 두었다. 후보를 재기 전에 참조 증명에서 공식 기준값이 나오는지 먼저 확인했다.
 - **채택 기준을 대회 채점식에 가깝게 잡았다.** 지정 환경 통과를 전제로 두고 토큰 감소율과 heartbeat 감소율의 평균으로 후보를 비교했다.
 - **교정에 한도를 두었다.** 수정 하나에 교정 3회를 넘기면 건너뛰고 기록한다. 교정할 때는 이미 얻은 단축을 유지한다.
 - **시도 기록의 단위를 루프에 맞췄다.** 시도마다 바꾼 내용, Lean 결과와 오류 원문, 토큰, heartbeat, 채택 여부를 남겼다.
@@ -131,4 +131,4 @@ Lean 컴파일러가 돌려주는 것은 성공 여부와 오류 메시지다. �
 - 논문의 PhysLean은 웜업 4번의 출처인 PhysLib과 같은 저장소다. GitHub가 `HEPLean/PhysLean`을 `leanprover-community/physlib`으로 연결한다.
 - 부록 A, E, G와 부록 B의 대부분(B.5 제외)은 읽지 않았다. 그림은 캡션과 본문의 설명만 확인했다.
 - 같은 분야의 시작 자료로 지정된 APOLLO(arXiv:2505.05758)와 Learning to Repair Lean Proofs from Compiler Feedback(arXiv:2602.02990)은 초록만 확인했다. 앞의 논문은 실패한 부분 증명을 분리하여 다시 증명하고 재결합하는 반복을 다룬다. 뒤의 논문은 틀린 증명과 컴파일러 피드백에서 고친 증명을 예측하도록 학습하는 데이터셋 APRIL을 다룬다.
-- 이 문서를 쓴 뒤에 분야의 다른 논문을 예비 조사했고, 그 결과를 발표 자료([refactoring-04-09.html](../../meetings/2026-10-11-week2/refactoring-04-09.html))의 10번 슬라이드와 부록 C에 정리했다. 예비 조사는 정독이 아니며, 정독한 논문은 이 문서의 한 편이다.
+- 이 문서를 쓴 뒤에 분야의 다른 논문을 예비 조사했고, 그 결과를 [공유 발표자료](../../refactoring/warmup/정소미/presentation.html)의 10번 슬라이드와 부록 C에 정리했다. 예비 조사는 정독이 아니며, 정독한 논문은 이 문서의 한 편이다.

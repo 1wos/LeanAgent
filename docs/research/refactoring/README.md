@@ -1,0 +1,26 @@
+# Refactoring 연구 자료
+
+대회 문제의 명제 해석, 참조 증명 분석, 개선 시도, 검증 결과와 발표자료를 세트별로 모읍니다.
+
+- [Warm-up 15문제](warmup/README.md): Week 2 담당자별 자료.
+- [폴더·파일명 지침](../../STRUCTURE.md).
+
+## 분류 기준
+
+`refactoring/<세트>/<발표자>/`를 사용합니다. 현재 세트는 `warmup`입니다. 발표자료가 여러 문제를 함께 설명하므로 작성자별 묶음을 유지하며, 문제별 증명과 로그는 각 묶음의 `evidence/`에서 관리합니다. 모임 날짜와 문제 번호는 README에 기록합니다.
+
+## 공유 파일의 Warm-up·논문 조사 혼합 여부
+
+2026-10-13에 Week 2 공유 자료를 확인했습니다. 논문을 인용하거나 일반적인 적용 아이디어를 설명하는 것과, 담당 문제 연구 및 논문 조사 발표를 한 파일에 넣은 경우를 구분합니다.
+
+| 발표자 | 확인 결과 | 보관·연결 방식 |
+| --- | --- | --- |
+| 권주원 | 3·6·13 발표와 ATP 발표는 별도 파일 | [Warm-up](warmup/권주원/README.md) · [ATP](../automated-theorem-proving/권주원/README.md) |
+| 손지연 | 7·12 발표·보고서와 ATP 발표가 분리됨 | [Warm-up](warmup/손지연/README.md) · [ATP](../automated-theorem-proving/손지연/README.md) |
+| 박채원 | 14·15 보고서와 MIL·LeanDojo 연구 문서가 분리됨 | [Warm-up](warmup/박채원/README.md) · [Lean&Mathlib](../lean-mathlib/박채원/README.md) |
+| 박선영 | 8·11 발표와 Autoformalization 조사·발표가 분리됨 | [Warm-up](warmup/박선영/README.md) · [Autoformalization](../autoformalization/박선영/README.md) |
+| 남성우 | 실제 1·2 풀이 파일은 별도. 연구 발표는 Autoformalization과 Arena 적용·실험 제안을 함께 설명함 | [Warm-up](warmup/남성우/README.md) · [Autoformalization](../autoformalization/남성우/README.md) |
+| 정소미 | 같은 슬라이드에 4·9 실험과 Lean Refactor 및 관련 논문 예비 조사가 포함됨. 논문 MD는 별도로 존재 | [공유 슬라이드](warmup/정소미/presentation.html)를 Warm-up에 두고 [연구 폴더](../verifier-guided-agent/정소미/README.md)에서도 연결 |
+| 박성호 | 5·10 보고서에 방법·논문 적용과 참고문헌이 포함됨. 별도 논문 조사 발표파일은 현재 없음 | [Warm-up](warmup/박성호/README.md) |
+
+혼합된 슬라이드의 본문은 분할하지 않았습니다. 각 발표의 흐름을 유지하며 한 원본을 공유합니다.
