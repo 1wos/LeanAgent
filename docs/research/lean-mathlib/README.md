@@ -17,7 +17,7 @@ Lean 문법과 증명 상태, Mathlib 구조, 정리 탐색·활용을 조사하
 
 | 작성자 | 주제 | 자료 링크 | 공유일 |
 | --- | --- | --- | --- |
-| 박채원 | Mathematics in Lean 2장 Basics 풀이·개념 정리 (2.1–2.5: `rw`·`calc`·`ring`, `apply`·`exact`, `le_antisymm`, 격자·순서환·거리공간) | [2026-10-11-박채원-lean-mathlib.md](2026-10-11-박채원-lean-mathlib.md) | 2026-10-09 |
-| 박채원 | LeanDojo 논문 정리: Lean 기본 개념(증명 상태·tactic·premise), ReProver, 저자 세미나의 ProofOptimizer(증명 축약)와 대회 적용점 | [2026-10-11-박채원-leandojo.md](2026-10-11-박채원-leandojo.md) | 2026-10-10 |
+| 박채원 | Mathematics in Lean 2장 Basics 풀이·개념 정리 (2.1–2.5: `rw`·`calc`·`ring`, `apply`·`exact`, `le_antisymm`, 격자·순서환·거리공간) | [개념·풀이 안내](박채원/report.md) | 2026-10-09 |
+| 박채원 | LeanDojo 논문 정리: Lean 기본 개념(증명 상태·tactic·premise), ReProver, 저자 세미나의 ProofOptimizer(증명 축약)와 대회 적용점 | [논문 분석](박채원/leandojo.md) | 2026-10-10 |
 
-자료를 이 폴더에 자유로운 형식으로 작성하고, 위 표에 링크를 추가합니다.
+개인별 자료는 발표자 폴더에 보관합니다. [폴더·파일명 지침](../../STRUCTURE.md)을 따릅니다. [Warm-up 14·15](../refactoring/warmup/박채원/README.md)는 Refactoring에서 관리합니다.

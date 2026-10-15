@@ -17,8 +17,10 @@
 
 | 작성자 | 주제 | 자료 링크 | 공유일 |
 | --- | --- | --- | --- |
-| 손지연 | ATP 논문 28편 비교와 검색·수리·최적화·평가 및 하네스 적용 제안 | [HTML 발표자료](lean_atp_presentation.html) | 2026-10-11 예정 |
-| 손지연 | 웜업 P7·P12 증명 리팩터링: 명제·Lean 문법 해설, 전후 코드 비교와 검증 결과 | [상세 보고서](../../meetings/2026-10-11-week2/refactoring-07-12/proof_refactoring_report.md) · [HTML 발표자료](../../meetings/2026-10-11-week2/refactoring-07-12/proof_refactoring_presentation.html) | 2026-10-11 예정 |
-| 권주원 | ATP 논문 4편의 핵심 방법과 증명 리팩터링 적용 아이디어 | [HTML 발표자료](atp.html) | 2026-10-11 예정 |
+| 손지연 | ATP 논문 28편 비교와 검색·수리·최적화·평가 및 하네스 적용 제안 | [HTML 발표자료](손지연/presentation.html) | 2026-10-11 예정 |
+| 권주원 | ATP 논문 4편의 핵심 방법과 증명 리팩터링 적용 아이디어 | [HTML 발표자료](권주원/presentation.html) | 2026-10-11 예정 |
+| 권주원 | ATP 입문 · LeanDojo · Warm-up 3·6·13 학습 노트 (진행 중) | [학습 노트](권주원/studies/2026-10-06/report.md) | 2026-10-06 |
 
-자료를 이 폴더에 자유로운 형식으로 작성하고, 위 표에 링크를 추가합니다.
+개인별 자료는 발표자 폴더에 보관합니다. [폴더·파일명 지침](../../STRUCTURE.md)을 따릅니다.
+
+관련 문제 자료: [권주원 3·6·13](../refactoring/warmup/권주원/README.md) · [손지연 7·12](../refactoring/warmup/손지연/README.md).
