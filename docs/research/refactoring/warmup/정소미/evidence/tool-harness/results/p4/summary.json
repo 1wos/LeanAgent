@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "run_id": "0c3858c5-8532-4c11-b8d1-db87caafd507",
+  "problem": 4,
+  "objective": "length",
+  "attempts": 2,
+  "accepted": 0,
+  "selected": "reference",
+  "selected_candidate": "reference.lean",
+  "selected_cost": 851,
+  "reference_cost": 851,
+  "reduction": 0.0,
+  "cost_usd": null,
+  "cost_status": "not_reported",
+  "finished_utc": "2026-10-18T12:27:38.809581+00:00",
+  "selected_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd"
+}

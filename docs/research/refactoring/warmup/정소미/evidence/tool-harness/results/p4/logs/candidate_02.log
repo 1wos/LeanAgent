@@ -1,0 +1,97 @@
+
+=== candidate_02 ===
+verifier return code: 1
+
+{
+ "tag": "candidate_02",
+ "name": "fundamental_theorem_of_variational_calculus'",
+ "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+ "replaced_lines": [
+  99,
+  224
+ ],
+ "candidate_sha256": "68a62c4aeec8ae576c258a6fbf90eef8cc382dcb02500252c72cf0dee3afac49",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 848,
+ "declaration_lines": 100,
+ "check": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true candidate_02.check.lean",
+  "returncode": 1,
+  "seconds": 9.84,
+  "timed_out": false,
+  "error_count": 2,
+  "first_errors": [
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.check.lean:103:13: error: unsolved goals",
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.check.lean:105:4: error: unexpected identifier; expected command"
+  ],
+  "warning_count": 0,
+  "axioms": [
+   "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": true
+ },
+ "compiled": false,
+ "heartbeat": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true candidate_02.hb.lean",
+  "returncode": 1,
+  "seconds": 4.01,
+  "timed_out": false,
+  "heartbeats": null,
+  "measurement_ambiguous": false,
+  "error_count": 2,
+  "first_errors": [
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.hb.lean:105:13: error: unsolved goals",
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.hb.lean:107:4: error: unexpected identifier; expected command"
+  ]
+ }
+}
+
+
+
+--- check ---
+
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.check.lean:103:13: error: unsolved goals
+V : Type u_2
+inst✝⁹ : NormedAddCommGroup V
+inst✝⁸ : NormedSpace ℝ V
+inst✝⁷ : InnerProductSpace' ℝ V
+Y : Type u_1
+inst✝⁶ : NormedAddCommGroup Y
+inst✝⁵ : InnerProductSpace ℝ Y
+inst✝⁴ : FiniteDimensional ℝ Y
+inst✝³ : MeasurableSpace Y
+f : Y → V
+μ : Measure Y
+inst✝² : IsFiniteMeasureOnCompacts μ
+inst✝¹ : μ.IsOpenPosMeasure
+inst✝ : OpensMeasurableSpace Y
+hf : Continuous f
+hg : ∀ (g : Y → V), IsTestFunction g → ∫ (x : Y), ⟪f x, g x⟫_ℝ ∂μ = 0
+⊢ ∀ (x : Y), f x = 0 x
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.check.lean:105:4: error: unexpected identifier; expected command
+'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+
+
+--- hb ---
+
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.hb.lean:105:13: error: unsolved goals
+V : Type u_2
+inst✝⁹ : NormedAddCommGroup V
+inst✝⁸ : NormedSpace ℝ V
+inst✝⁷ : InnerProductSpace' ℝ V
+Y : Type u_1
+inst✝⁶ : NormedAddCommGroup Y
+inst✝⁵ : InnerProductSpace ℝ Y
+inst✝⁴ : FiniteDimensional ℝ Y
+inst✝³ : MeasurableSpace Y
+f : Y → V
+μ : Measure Y
+inst✝² : IsFiniteMeasureOnCompacts μ
+inst✝¹ : μ.IsOpenPosMeasure
+inst✝ : OpensMeasurableSpace Y
+hf : Continuous f
+hg : ∀ (g : Y → V), IsTestFunction g → ∫ (x : Y), ⟪f x, g x⟫_ℝ ∂μ = 0
+⊢ ∀ (x : Y), f x = 0 x
+Used 546 heartbeats, which is less than the current maximum of 200000.
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.hb.lean:107:4: error: unexpected identifier; expected command
