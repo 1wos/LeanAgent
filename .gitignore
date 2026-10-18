@@ -1,0 +1,16 @@
+.gjc
+.claude/
+__pycache__/
+*.pyc
+
+.DS_Store
+
+# Keep personal settings, screenshots and runtime locks local.
+# Share only the documented warm-up JSON evidence and text logs.
+metrics/**
+!metrics/README.md
+!metrics/warmup/
+!metrics/warmup/박선영/
+!metrics/warmup/박선영/**/
+!metrics/warmup/박선영/**/*.json
+!metrics/warmup/박선영/**/*.log
