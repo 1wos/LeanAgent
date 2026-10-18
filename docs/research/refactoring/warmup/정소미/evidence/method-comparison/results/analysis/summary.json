@@ -1,0 +1,12 @@
+{
+  "pool_attempts": 28,
+  "pool_valid": 26,
+  "pool_reference_runs": 2,
+  "limitations": [
+    "adaptive historical pool, not IID samples",
+    "two pool problems",
+    "one fresh verification per candidate",
+    "no model or full algorithm comparison"
+  ],
+  "pool_results_sha256": "31aab79454ce11421a1e243b7453779e4d017a9553dbb16bf75a10f0a6982a19"
+}

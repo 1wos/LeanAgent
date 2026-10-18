@@ -1,0 +1,20 @@
+[
+  {
+    "problem": 4,
+    "length_weight_low": 0.0,
+    "length_weight_high": 1.0,
+    "selected": "research_03"
+  },
+  {
+    "problem": 9,
+    "length_weight_low": 0.0,
+    "length_weight_high": 0.20558366707033354,
+    "selected": "attempt_07"
+  },
+  {
+    "problem": 9,
+    "length_weight_low": 0.20558366707033354,
+    "length_weight_high": 1.0,
+    "selected": "attempt_12"
+  }
+]

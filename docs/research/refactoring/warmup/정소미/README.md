@@ -1,9 +1,10 @@
 # 정소미 Warm-up 4·9
 
-PhysLib 변분법 보조정리와 CSLib 쌍모사 합동성의 리팩터링·평가 기록입니다. 2026-10-11 Week 2에는 증명 수정 과정을, 2026-10-18 Week 3에는 같은 증명의 반복 실행과 버전별 측정을 공유합니다.
+PhysLib 변분법 보조정리와 CSLib 쌍모사 합동성의 리팩터링·평가 기록입니다. 2026-10-11 Week 2에는 증명 수정 과정을, 2026-10-18 Week 3에는 후보 선택·실패 집계 방식에 따른 평가 차이를 공유합니다.
 
-- [Week 3 공유 보고서 · 반복 실행과 평가 기록](reproducibility.md): 4·9번의 네 지정 환경에서 참조·최종 증명을 각각 3번 실행한 결과.
-- [Week 3 실행 방법과 근거](evidence/reproducibility/README.md): 고정 조건, 실행 도구, 결과 표, 환경 기록과 Lean 출력.
+- [Week 3 공유 보고서 · 후보 선택과 실패 집계](reproducibility.md): 기존 후보 28개의 새 검증, 논문 기반 평가 방법 적용, 선택 기준과 분모에 따른 결과 차이.
+- [Week 3 평가 방법 실험과 근거](evidence/method-comparison/README.md): 고정 후보·환경, 실행 코드, 원시 결과와 표 재생성.
+- [기초 반복 실행과 근거](evidence/reproducibility/README.md): 고정 조건, 실행 도구, 결과 표, 환경 기록과 Lean 출력.
 
 - [Week 2 발표자료](presentation.html): 4·9 실험과 Lean Refactor 및 관련 논문 조사를 함께 담습니다.
 - [Week 2 상세 보고서](report.md).

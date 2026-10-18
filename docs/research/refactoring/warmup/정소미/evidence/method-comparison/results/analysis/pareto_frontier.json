@@ -1,0 +1,38 @@
+[
+  {
+    "problem": 4,
+    "candidate": "research_03",
+    "proof_tokens": 123,
+    "heartbeat": 1411
+  },
+  {
+    "problem": 9,
+    "candidate": "attempt_10",
+    "proof_tokens": 87,
+    "heartbeat": 502
+  },
+  {
+    "problem": 9,
+    "candidate": "attempt_07",
+    "proof_tokens": 120,
+    "heartbeat": 353
+  },
+  {
+    "problem": 9,
+    "candidate": "attempt_12",
+    "proof_tokens": 79,
+    "heartbeat": 516
+  },
+  {
+    "problem": 9,
+    "candidate": "attempt_08",
+    "proof_tokens": 107,
+    "heartbeat": 422
+  },
+  {
+    "problem": 9,
+    "candidate": "attempt_09",
+    "proof_tokens": 89,
+    "heartbeat": 500
+  }
+]
