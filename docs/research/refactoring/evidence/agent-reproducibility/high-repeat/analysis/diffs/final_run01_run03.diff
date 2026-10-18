@@ -1,0 +1,47 @@
+--- run01
++++ run03
+@@ -1,26 +1,20 @@
+ by
+-  have appendSub {a b c d : List Expression.Ident}
+-      (ha : a.Subset b) (hc : c.Subset d) : (a ++ c).Subset (b ++ d) :=
+-    List.Subset.app
+-      (fun _ hx => List.mem_append.mpr (.inl (ha hx)))
+-      (fun _ hx => List.mem_append.mpr (.inr (hc hx)))
++  have app {a b c d : List Expression.Ident} (ha : a.Subset c) (hb : b.Subset d) :
++      (a ++ b).Subset (c ++ d) := by
++    intro x hx
++    simp only [List.mem_append] at hx ⊢
++    exact hx.elim (fun h => Or.inl (ha h)) (fun h => Or.inr (hb h))
+   intro h
+-  induction h with
+-  | const | op | bvar | fvar =>
+-    intro x hx
+-    cases hx
+-  | abs h ih => exact ih
+-  | quant h1 h2 ih1 ih2 => exact appendSub ih1 ih2
+-  | ite h1 h2 h3 ih1 ih2 ih3 => exact appendSub (appendSub ih1 ih2) ih3
+-  | eq h1 h2 ih1 ih2 => exact appendSub ih1 ih2
+-  | app h1 h2 hOld ih1 ih2 =>
+-    unfold extractOldExprVars
+-    split
+-    · exact fun _ hx => hx
+-    · next hfalse =>
+-        exfalso
+-        have hf := hOld IsOldPred.oldPred
+-        cases hf
+-        apply hfalse
+-        rfl
+-    · exact appendSub ih1 ih2
++  induction h <;>
++    try (solve | exact List.nil_subset _ | assumption | exact app ‹_› ‹_› |
++      exact app (app ‹_› ‹_›) ‹_›)
++  rename_i hn ihfn ihe
++  unfold extractOldExprVars
++  split
++  · exact fun _ hx => hx
++  · next hbad =>
++      cases hn (by constructor)
++      exfalso
++      apply hbad
++      rfl
++  · exact app ihfn ihe

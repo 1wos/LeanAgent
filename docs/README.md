@@ -12,7 +12,7 @@
 
 ## 팀 도구
 
-- [Arena 개발·실험·운영 가이드(HTML)](research/refactoring/arena-guide.html): 에이전트 개발 개요, 문제별 환경 고정 가안·파일럿 검증, 대시보드 사용·데이터 갱신·배포, 6개 데이터 출처와 후보군 분석.
+- [Arena 개발·실험·운영 가이드(HTML)](research/refactoring/arena-guide.html): 에이전트 개발 개요, 문제별 환경 고정 가안·파일럿 검증, 대시보드 사용·데이터 갱신·배포, 6개 데이터 출처·후보군 분석, 서브에이전트 effort 비교·재현성 실험.
 
 ## 모임 자료
 

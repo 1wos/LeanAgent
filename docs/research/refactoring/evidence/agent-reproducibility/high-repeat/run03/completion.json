@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "reasoning_effort": "high",
+  "submissions": 8,
+  "protocol_deviations": [],
+  "strategy_summary": "NormalizedOldExpr induction with explicit append monotonicity, definitional reduction for structural cases, and a split of the old-application matcher. Candidates 04, 05, and 07 validated; candidate 07 achieved the lowest observed valid local score.",
+  "best_valid_candidate": "candidates/07.lean",
+  "best_valid_local_score": 0.4995441998947194
+}

@@ -1,0 +1,9 @@
+{
+  "checked_at_utc": "2026-10-15T07:07:01.049567+00:00",
+  "run_records_checked": 315,
+  "imported_artifacts_checked": 2199,
+  "frozen_files_checked": 18,
+  "mismatches": [],
+  "passed": true,
+  "scope": "File integrity and recorded validity consistency; not a complete security audit or independent kernel implementation."
+}

@@ -1,0 +1,374 @@
+{
+  "generated_at_utc": "2026-10-15T07:06:38.737397+00:00",
+  "classification": "Heuristic category from saved diagnostics; all 67 failed candidate attempts included.",
+  "arms": {
+    "high": {
+      "categories": {
+        "other_lean_error": 7,
+        "type_mismatch": 6,
+        "no_progress": 4,
+        "unsolved_goals": 1,
+        "case_tag": 1
+      },
+      "details": [
+        {
+          "result": "high/runs/P01/c01_simp_grind/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Tactic `split` failed: Could not split an `if` or `match` expression in the goal\\n\\nHint: Use `set_option trace.split.failure true` to display additional diagnostic information\\n\\ncase fvar\\nh2 : Expression.Ident\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nh1 :\\n  Lambda.Identifier\\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\\nty :"
+        },
+        {
+          "result": "high/runs/P01/c05_structural_combine/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Function expected at\\n  ha ?m.86\\nbut this term has type\\n  ?m.85 ∈ b ∨ ?m.85 ∈ [h1]\\n\\nNote: Expected a function because this term is being applied to the argument\\n  h', 'endPos': {'column': 30, 'line': 3114}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P01/c05_structural_combine/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', '"
+        },
+        {
+          "result": "high/runs/P01/c06_combine_implicit/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Type mismatch\\n  combine e_ih✝ e_ih✝\\nhas type\\n  (Lambda.LExpr.LExpr.getVars (substOld h2 (Lambda.LExpr.fvar m h1 ty) e✝) ++\\n        Lambda.LExpr.LExpr.getVars (substOld h2 (Lambda.LExpr.fvar m h1 ty) e✝)).Subset\\n    (Lambda.LExpr.LExpr.getVars e✝ ++ Lambda.LExpr.LExpr.getVars e✝ ++ [h1])\\nbut is expected to have type\\n  ∀ ⦃a : CoreIdent⦄,\\n    a ∈\\n        Lambda.LExpr.LExpr.getVars\\n          (Lambda.LExpr.app m✝ (substOld h2 (Lambda.LExpr.fvar m h1 ty) fn✝)\\n      "
+        },
+        {
+          "result": "high/runs/P01/c13_generic_transitivity/result.json",
+          "category": "no_progress",
+          "first_error": "{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 52, 'line': 3114}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P01/c13_generic_transitivity/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 14, 'line': 3114}, 'severity': 'error'}\n{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 52, 'line': 311"
+        },
+        {
+          "result": "high/runs/P01/c23_trans_dsimp/result.json",
+          "category": "no_progress",
+          "first_error": "{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 65, 'line': 3121}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P01/c23_trans_dsimp/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 33, 'line': 3121}, 'severity': 'error'}\n{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 65, 'line': 3121}, 'file"
+        },
+        {
+          "result": "high/runs/P01/c24_trans_subst_dsimp/result.json",
+          "category": "no_progress",
+          "first_error": "{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 65, 'line': 3121}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P01/c24_trans_subst_dsimp/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 33, 'line': 3121}, 'severity': 'error'}\n{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 65, 'line': 3121},"
+        },
+        {
+          "result": "high/runs/P02/c01_normalized_induction/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Tactic `split` failed: Could not split an `if` or `match` expression in the goal\\n\\nHint: Use `set_option trace.split.failure true` to display additional diagnostic information\\n\\npost : Expression.Expr\\ncombine : ∀ {a b c d : List Expression.Ident}, a.Subset b → c.Subset d → (a ++ c).Subset (b ++ d)\\nfn✝ fn : Expression.Expr\\ne : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nHfn : NormalizedOldExpr fn✝\\nH"
+        },
+        {
+          "result": "high/runs/P02/c02_normalized_unfold/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Application type mismatch: The argument\\n  rfl\\nhas type\\n  ?m.241 = ?m.241\\nof sort `Prop` but is expected to have type\\n  { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nof sort `Type` in the application\\n  Hfalse rfl', 'endPos': {'column': 36, 'line': 2896}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/"
+        },
+        {
+          "result": "high/runs/P02/c03_expression_induction_default/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Type mismatch\\n  ih\\nhas type\\n  NormalizedOldExpr (Lambda.LExpr.abs m✝ ty✝ e✝)\\nbut is expected to have type\\n  (extractOldExprVars e✝).Subset (Lambda.LExpr.LExpr.getVars e✝)', 'endPos': {'column': 27, 'line': 2886}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P02/c03_expression_induction_default/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': "
+        },
+        {
+          "result": "high/runs/P02/c06_membership_automation/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': '`grind` failed\\ncase grind.1\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nk : Lambda.QuantifierKind\\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\\ne : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\\ne_ih : ∀ ⦃a : Lambda.Identifier Visibility⦄, a ∈ extractOldExprVars "
+        },
+        {
+          "result": "high/runs/P02/c08_controlled_membership/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': 'unsolved goals\\ncase h_3\\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nfn✝ e✝ : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\\nfn_ih✝ : ∀ ⦃a : CoreIdent⦄, a ∈ extractOldExprVars fn✝ → a ∈ Lambda.LExpr.LExpr.getVars fn✝\\ne_ih✝ : ∀ ⦃a : CoreIdent⦄, a ∈ extractOldExprVars e✝ → a ∈ Lambda.LExpr.LExpr.getVars e✝\\ne1✝ e2✝ : Lambda.LExpr { base"
+        },
+        {
+          "result": "high/runs/P02/c09_restricted_subset_simp/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Tactic `unfold` failed to unfold `extractOldExprVars` in\\n  True ∧ True', 'endPos': {'column': 29, 'line': 2884}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P02/c09_restricted_subset_simp/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 11, 'line': 2884}, 'severity': 'error'}"
+        },
+        {
+          "result": "high/runs/P02/c10_all_restricted_subset_simp/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Tactic `unfold` failed to unfold `extractOldExprVars` in\\n  True ∧ True', 'endPos': {'column': 29, 'line': 2884}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P02/c10_all_restricted_subset_simp/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 11, 'line': 2884}, 'severity': 'error'}"
+        },
+        {
+          "result": "high/runs/P02/c16_pointwise_helper/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Application type mismatch: The argument\\n  ha\\nhas type\\n  a.Subset b\\nbut is expected to have type\\n  ?m.26 → x✝ ∈ b\\nin the application\\n  Or.imp ha', 'endPos': {'column': 47, 'line': 2879}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P02/c16_pointwise_helper/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 45, "
+        },
+        {
+          "result": "high/runs/P02/c17_composition_helper/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Application type mismatch: The argument\\n  ha\\nhas type\\n  a.Subset b\\nbut is expected to have type\\n  ?m.31 → x✝ ∈ b\\nin the application\\n  Or.imp ha', 'endPos': {'column': 46, 'line': 2879}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P02/c17_composition_helper/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 44"
+        },
+        {
+          "result": "high/runs/P02/c18_stronger_sublist/result.json",
+          "category": "case_tag",
+          "first_error": "{'caption': '', 'data': 'Case tag `const` not found.\\n\\nHint: Available tags:\\n  • `a.const._@._internal._hyg.0`: a̲.̲const.̲_̲@̲.̲_̲i̲n̲t̲e̲r̲n̲a̲l̲.̲_̲h̲y̲g̲.̲0̲\\n  • `a.op._@._internal._hyg.0`: c̵o̵n̵s̵t̵a̲.̲o̲p̲.̲_̲@̲.̲_̲i̲n̲t̲e̲r̲n̲a̲l̲.̲_̲h̲y̲g̲.̲0̲\\n  • `a.bvar._@._internal._hyg.0`: c̵o̵n̵s̵t̵a̲.̲b̲v̲a̲r̲.̲_̲@̲.̲_̲i̲n̲t̲e̲r̲n̲a̲l̲.̲_̲h̲y̲g̲.̲0̲\\n  • `a.fvar._@._internal._hyg.0`: c̵o̵n̵s̵t̵a̲.̲f̲v̲a̲r̲.̲_̲@̲.̲_̲i̲n̲t̲e̲r̲n̲a̲l̲.̲_̲h̲y̲g̲.̲0̲\\n  • `a.abs._@._internal._hyg.0`: c̵o̵n̵s̵t̵a̲.̲"
+        },
+        {
+          "result": "high/runs/P02/c23_sublist_explicit_goal/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': \"unexpected token '+'; expected term\", 'endPos': {'column': 43, 'line': 2879}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P02/c23_sublist_explicit_goal/context.lean', 'isSilent': False, 'keepFullRange': True, 'kind': '[anonymous]', 'pos': {'column': 42, 'line': 2879}, 'severity': 'error'}\n{'caption': '', 'data': \"elaboration function for `Lean.Parser.Term.suffice"
+        },
+        {
+          "result": "high/runs/P03/c01_functional_commutation/result.json",
+          "category": "no_progress",
+          "first_error": "{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 41, 'line': 966}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/high/runs/P03/c01_functional_commutation/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 6, 'line': 966}, 'severity': 'error'}"
+        },
+        {
+          "result": "high/runs/P03/c07_relational_induction/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': \"Tactic `rewrite` failed: Did not find an occurrence of the pattern\\n  updatedStates' (updatedState ?m.165 ?m.166 ?m.167) ?m.168\\nin the target expression\\n  UpdateState P (updatedStates σ ks' vs') x v (updatedStates (updatedState σ x v) ks' vs')\\n\\ncase update_some\\nP : PureExpr\\nσ✝ σ' : SemanticStore P\\nks ks' : List P.Ident\\nvs✝ vs' : List P.Expr\\nσ : SemanticStore P\\nx : P.Ident\\nv : P.Expr\\nσ₀ : SemanticStore P\\nxs : List P.Ident\\nvs : List P.Expr\\nσ₁ : SemanticStore"
+        }
+      ]
+    },
+    "xhigh": {
+      "categories": {
+        "other_lean_error": 9,
+        "case_tag": 2,
+        "unsolved_goals": 3,
+        "no_progress": 1
+      },
+      "details": [
+        {
+          "result": "xhigh/runs/P01/a01_simp_grind/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Tactic `split` failed: Could not split an `if` or `match` expression in the goal\\n\\nHint: Use `set_option trace.split.failure true` to display additional diagnostic information\\n\\ncase fvar\\nh2 : Expression.Ident\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nh1 :\\n  Lambda.Identifier\\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\\nty :"
+        },
+        {
+          "result": "xhigh/runs/P01/a05_join_helper/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Tactic `assumption` failed\\n\\ncase ha\\nh2 : Expression.Ident\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nh1 :\\n  Lambda.Identifier\\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\\njoin : ∀ {a b c d : List CoreIdent}, "
+        },
+        {
+          "result": "xhigh/runs/P01/a17_distinct_member/result.json",
+          "category": "case_tag",
+          "first_error": "{'caption': '', 'data': 'Case tag `app` not found.\\n\\nHint: Available tags:\\n  • `neg.const._@.context.148099446._hygCtx._hyg.102`: a̵p̵p̵n̲e̲g̲.̲c̲o̲n̲s̲t̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g̲C̲t̲x̲.̲_̲h̲y̲g̲.̲1̲0̲2̲\\n  • `neg.op._@.context.148099446._hygCtx._hyg.102`: a̵p̵p̵n̲e̲g̲.̲o̲p̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g̲C̲t̲x̲.̲_̲h̲y̲g̲.̲1̲0̲2̲\\n  • `neg.bvar._@.context.148099446._hygCtx._hyg.102`: a̵p̵p̵n̲e̲g̲.̲b̲v̲a̲r̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲"
+        },
+        {
+          "result": "xhigh/runs/P01/a18_constructive_or/result.json",
+          "category": "case_tag",
+          "first_error": "{'caption': '', 'data': 'Case tag `app` not found.\\n\\nHint: Available tags:\\n  • `neg.const._@.context.148099446._hygCtx._hyg.102`: a̵p̵p̵n̲e̲g̲.̲c̲o̲n̲s̲t̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g̲C̲t̲x̲.̲_̲h̲y̲g̲.̲1̲0̲2̲\\n  • `neg.op._@.context.148099446._hygCtx._hyg.102`: a̵p̵p̵n̲e̲g̲.̲o̲p̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g̲C̲t̲x̲.̲_̲h̲y̲g̲.̲1̲0̲2̲\\n  • `neg.bvar._@.context.148099446._hygCtx._hyg.102`: a̵p̵p̵n̲e̲g̲.̲b̲v̲a̲r̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲"
+        },
+        {
+          "result": "xhigh/runs/P01/a23_elimination_search/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'failed', 'endPos': {'column': 62, 'line': 3117}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/xhigh/runs/P01/a23_elimination_search/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 6, 'line': 3117}, 'severity': 'error'}\n{'caption': '', 'data': 'failed', 'endPos': {'column': 62, 'line': 3117}, 'fileName': '/Users/jwkweon/00_w"
+        },
+        {
+          "result": "xhigh/runs/P02/b01_normalized_induction/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Tactic `split` failed: Could not split an `if` or `match` expression in the goal\\n\\nHint: Use `set_option trace.split.failure true` to display additional diagnostic information\\n\\npost fn✝ e✝ : Expression.Expr\\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\na✝² : NormalizedOldExpr fn✝\\na✝¹ : NormalizedOldExpr e✝\\na✝ : IsOldPred fn✝ → IsFvar e✝\\na_ih✝¹ : ∀ ⦃a : CoreIdent⦄, a ∈ extractOldExprVars fn✝ → a"
+        },
+        {
+          "result": "xhigh/runs/P02/b06_datatype_grind/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 51, 'line': 2879}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/xhigh/runs/P02/b06_datatype_grind/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 21, 'line': 2879}, 'severity': 'error'}\n{'caption': '', 'data': 'unsolved goals\\ncase eq\\npost : Expression.Expr\\nx : CoreIdent\\ne1✝"
+        },
+        {
+          "result": "xhigh/runs/P02/b07_unfold_once/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': '`grind` failed\\ncase grind\\npost :\\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\\n      Expr :=\\n        Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy },\\n      Ty := Lambda.LTy, TyEnv := Lambda.TEnv Visibility,\\n      TyContext := Lambda.LContext { Metadata := ExpressionMetadata, IDMeta := Visibility },\\n      EvalEnv := Lambda.LState { Metadata := ExpressionMeta"
+        },
+        {
+          "result": "xhigh/runs/P02/b08_function_induction/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': '`grind` failed\\ncase grind\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\ne2 : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\\nm_1 : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambd"
+        },
+        {
+          "result": "xhigh/runs/P02/b15_old_predicate_first/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': 'unsolved goals\\ncase pos.oldPred.fvar\\npost : Expression.Expr\\nx : CoreIdent\\nm m✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nty✝¹ : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\\nhfn : NormalizedOldExpr (Lambda.LExpr.op m✝ (CoreIdent.unres \"old\") ty✝¹)\\nihfn :\\n  x ∈ extractOldExprVars (Lambda.LExpr.op m✝ (CoreIdent.unres \"old\") ty✝¹)"
+        },
+        {
+          "result": "xhigh/runs/P02/b18_predicate_unfold_fix/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': 'unsolved goals\\ncase pos.oldPred.fvar\\npost : Expression.Expr\\nx : CoreIdent\\nm m✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nty✝¹ : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\\nhfn : NormalizedOldExpr (Lambda.LExpr.op m✝ (CoreIdent.unres \"old\") ty✝¹)\\nihfn :\\n  x ∈ extractOldExprVars (Lambda.LExpr.op m✝ (CoreIdent.unres \"old\") ty✝¹)"
+        },
+        {
+          "result": "xhigh/runs/P03/c05_definitional_rewrite/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': \"Tactic `rewrite` failed: Did not find an occurrence of the pattern\\n  updatedStates' (updatedStates' ?m.73 ?m.74) ?m.75\\nin the target expression\\n  UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')\\n\\nP : PureExpr\\nσ σ' σ'' : SemanticStore P\\nks ks' : List P.Ident\\nvs vs' : List P.Expr\\nhu : UpdateStates σ ks vs σ'\\nhi : InitStates σ' ks' vs' σ''\\nlu : ks.length = vs.length\\nli : ks'.length = vs'.length\\n⊢ UpdateStates (updated"
+        },
+        {
+          "result": "xhigh/runs/P03/c06_combined_rw/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': \"Tactic `rewrite` failed: Did not find an occurrence of the pattern\\n  updatedStates' (updatedStates' ?m.73 ?m.74) ?m.75\\nin the target expression\\n  UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')\\n\\nP : PureExpr\\nσ σ' σ'' : SemanticStore P\\nks ks' : List P.Ident\\nvs vs' : List P.Expr\\nhu : UpdateStates σ ks vs σ'\\nhi : InitStates σ' ks' vs' σ''\\nlu : ks.length = vs.length\\nli : ks'.length = vs'.length\\n⊢ UpdateStates (updated"
+        },
+        {
+          "result": "xhigh/runs/P03/c07_trim_induction_motive/result.json",
+          "category": "no_progress",
+          "first_error": "{'caption': '', 'data': 'simp_all made no progress', 'endPos': {'column': 20, 'line': 994}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/xhigh/runs/P03/c07_trim_induction_motive/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 12, 'line': 994}, 'severity': 'error'}"
+        },
+        {
+          "result": "xhigh/runs/P03/c08_equality_transport/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': \"invalid `▸` notation, expected result type of cast is \\n  UpdateStates (updatedStates σ ks' vs') ks vs (updatedStates (updatedStates σ ks vs) ks' vs')\\nhowever, the equality \\n  Eq.symm (updatedStatesComm ?m.76)\\nof type \\n  updatedStates' (updatedStates' ?m.73 ?m.75) ?m.74 = updatedStates' (updatedStates' ?m.73 ?m.74) ?m.75\\ndoes not contain the expected result type on either the left or the right hand side\", 'endPos': {'column': 58, 'line': 961}, 'fileName': '/Users/jw"
+        }
+      ]
+    },
+    "ultra": {
+      "categories": {
+        "unknown_tactic": 1,
+        "unsolved_goals": 10,
+        "other_lean_error": 15,
+        "case_tag": 2,
+        "heartbeat_limit": 1,
+        "type_mismatch": 4
+      },
+      "details": [
+        {
+          "result": "ultra/runs/P01/a01_simp_grind/result.json",
+          "category": "unknown_tactic",
+          "first_error": "{'caption': '', 'data': 'unknown tactic', 'endPos': None, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P01/a01_simp_grind/context.lean', 'isSilent': False, 'keepFullRange': True, 'kind': '[anonymous]', 'pos': {'column': 9, 'line': 3113}, 'severity': 'error'}"
+        },
+        {
+          "result": "ultra/runs/P01/a02_cases_grind/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': 'unsolved goals\\ncase h_1.isTrue\\nh2 : Expression.Ident\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nh1 :\\n  Lambda.Identifier\\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\\nm✝² : { base := { Metadata := ExpressionMet"
+        },
+        {
+          "result": "ultra/runs/P01/a03_subset_simp/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': 'unsolved goals\\ncase h_1.isTrue\\nh2 : Expression.Ident\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nh1 :\\n  Lambda.Identifier\\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\\nm✝² : { base := { Metadata := ExpressionMet"
+        },
+        {
+          "result": "ultra/runs/P01/a05_omega/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'omega could not prove the goal:\\nNo usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants.', 'endPos': {'column': 13, 'line': 3115}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P01/a05_omega/context.lean', '"
+        },
+        {
+          "result": "ultra/runs/P01/a06_pointwise/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': 'unsolved goals\\ncase h_1.isTrue\\nh2 : Expression.Ident\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nh1 :\\n  Lambda.Identifier\\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\\nx : Expression.Ident\\nm✝² : { base := { Met"
+        },
+        {
+          "result": "ultra/runs/P01/a07_pointwise_simp_only/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': 'unsolved goals\\ncase h_1.isTrue\\nh2 : Expression.Ident\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nh1 :\\n  Lambda.Identifier\\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\\nty : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\\nx : Expression.Ident\\nm✝² : { base := { Met"
+        },
+        {
+          "result": "ultra/runs/P01/a13_grind_definitions/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': '`grind` failed\\ncase grind.1\\nh2 :\\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\\n      Expr :=\\n        Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy },\\n      Ty := Lambda.LTy, TyEnv := Lambda.TEnv Visibility,\\n      TyContext := Lambda.LContext { Metadata := ExpressionMetadata, IDMeta := Visibility },\\n      EvalEnv := Lambda.LState { Metadata := ExpressionMeta"
+        },
+        {
+          "result": "ultra/runs/P01/a15_exclude_replacement/result.json",
+          "category": "case_tag",
+          "first_error": "{'caption': '', 'data': 'Case tag `app` not found.\\n\\nHint: Available tags:\\n  • `neg.quant._@.context.148099446._hygCtx._hyg.101`: a̵p̵p̵n̲e̲g̲.̲q̲u̲a̲n̲t̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g̲C̲t̲x̲.̲_̲h̲y̲g̲.̲1̲0̲1̲\\n  • `neg.app._@.context.148099446._hygCtx._hyg.101`: n̲e̲g̲.̲app.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g̲C̲t̲x̲.̲_̲h̲y̲g̲.̲1̲0̲1̲\\n  • `neg.ite._@.context.148099446._hygCtx._hyg.101`: a̵p̵p̵n̲e̲g̲.̲i̲t̲e̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g"
+        },
+        {
+          "result": "ultra/runs/P01/a19_exclude_scoped/result.json",
+          "category": "case_tag",
+          "first_error": "{'caption': '', 'data': 'Case tag `app` not found.\\n\\nHint: Available tags:\\n  • `neg.quant._@.context.148099446._hygCtx._hyg.101`: a̵p̵p̵n̲e̲g̲.̲q̲u̲a̲n̲t̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g̲C̲t̲x̲.̲_̲h̲y̲g̲.̲1̲0̲1̲\\n  • `neg.app._@.context.148099446._hygCtx._hyg.101`: n̲e̲g̲.̲app.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g̲C̲t̲x̲.̲_̲h̲y̲g̲.̲1̲0̲1̲\\n  • `neg.ite._@.context.148099446._hygCtx._hyg.101`: a̵p̵p̵n̲e̲g̲.̲i̲t̲e̲.̲_̲@̲.̲c̲o̲n̲t̲e̲x̲t̲.̲1̲4̲8̲0̲9̲9̲4̲4̲6̲.̲_̲h̲y̲g"
+        },
+        {
+          "result": "ultra/runs/P01/a27_unfold_then_grind/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': '`grind` failed\\ncase grind\\nh2 :\\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\\n      Expr :=\\n        Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy },\\n      Ty := Lambda.LTy, TyEnv := Lambda.TEnv Visibility,\\n      TyContext := Lambda.LContext { Metadata := ExpressionMetadata, IDMeta := Visibility },\\n      EvalEnv := Lambda.LState { Metadata := ExpressionMetada"
+        },
+        {
+          "result": "ultra/runs/P01/a31_constructor_search/result.json",
+          "category": "heartbeat_limit",
+          "first_error": "{'caption': '', 'data': 'failed', 'endPos': {'column': 57, 'line': 3114}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P01/a31_constructor_search/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 6, 'line': 3114}, 'severity': 'error'}\n{'caption': '', 'data': '(deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been"
+        },
+        {
+          "result": "ultra/runs/P01/a35_single_split/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': '`grind` failed\\ncase grind.1\\nh2 :\\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\\n      Expr :=\\n        Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy },\\n      Ty := Lambda.LTy, TyEnv := Lambda.TEnv Visibility,\\n      TyContext := Lambda.LContext { Metadata := ExpressionMetadata, IDMeta := Visibility },\\n      EvalEnv := Lambda.LState { Metadata := ExpressionMeta"
+        },
+        {
+          "result": "ultra/runs/P02/a01_normalized_induction/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Application type mismatch: The argument\\n  rfl\\nhas type\\n  ?m.198 = ?m.198\\nof sort `Prop` but is expected to have type\\n  { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nof sort `Type` in the application\\n  hfalse rfl', 'endPos': {'column': 36, 'line': 2888}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra"
+        },
+        {
+          "result": "ultra/runs/P02/a02_normalized_structural/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Application type mismatch: The argument\\n  rfl\\nhas type\\n  ?m.202 = ?m.202\\nof sort `Prop` but is expected to have type\\n  { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nof sort `Type` in the application\\n  hfalse rfl', 'endPos': {'column': 36, 'line': 2889}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra"
+        },
+        {
+          "result": "ultra/runs/P02/a04_original_induction_compact/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'No goals to be solved', 'endPos': {'column': 31, 'line': 2885}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P02/a04_original_induction_compact/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 6, 'line': 2885}, 'severity': 'error'}\n{'caption': '', 'data': 'No goals to be solved', 'endPos': {'column': 31, 'line': 2"
+        },
+        {
+          "result": "ultra/runs/P02/a09_cases_contradiction/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Tactic `contradiction` failed\\n\\ncase h_2.fvar\\npost : Expression.Expr\\nx : CoreIdent\\nm✝¹ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\ne1✝ e2✝ : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nty✝¹ : Option { base := { Metada"
+        },
+        {
+          "result": "ultra/runs/P02/a14_grind_nil/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': '`grind` failed\\ncase grind\\npost :\\n  { Ident := Lambda.Identifier Visibility, EqIdent := instDecidableEqIdentifierCoreLParams,\\n      Expr :=\\n        Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy },\\n      Ty := Lambda.LTy, TyEnv := Lambda.TEnv Visibility,\\n      TyContext := Lambda.LContext { Metadata := ExpressionMetadata, IDMeta := Visibility },\\n      EvalEnv := Lambda.LState { Metadata := ExpressionMeta"
+        },
+        {
+          "result": "ultra/runs/P02/a16_expression_induction/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': 'unsolved goals\\ncase fvar.fvar\\nx : CoreIdent\\nm✝ : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\nname✝ :\\n  Lambda.Identifier\\n    { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.IDMeta\\nty✝ : Option { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.TypeType\\n⊢ x ∈ [] → x ∈ [name✝]', 'endPos': {'column': 1"
+        },
+        {
+          "result": "ultra/runs/P02/a18_total_extractor/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Application type mismatch: The argument\\n  ihfn\\nhas type\\n  NormalizedOldExpr e✝ → x ∈ extractOldExprVars e✝ → x ∈ Lambda.LExpr.LExpr.getVars e✝\\nbut is expected to have type\\n  x ∈ extractOldExprVars fn✝ → x ∈ Lambda.LExpr.LExpr.getVars fn✝\\nin the application\\n  Or.imp ihfn', 'endPos': {'column': 25, 'line': 2889}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/"
+        },
+        {
+          "result": "ultra/runs/P02/a19_total_uniform/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 53, 'line': 2879}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P02/a19_total_uniform/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 23, 'line': 2879}, 'severity': 'error'}\n{'caption': '', 'data': 'unsolved goals\\ncase eq\\nx : CoreIdent\\nm✝ : { base := { Metadata :="
+        },
+        {
+          "result": "ultra/runs/P02/a21_total_nofun/result.json",
+          "category": "type_mismatch",
+          "first_error": "{'caption': '', 'data': 'Application type mismatch: The argument\\n  ihfn\\nhas type\\n  NormalizedOldExpr e✝ → x ∈ extractOldExprVars e✝ → x ∈ Lambda.LExpr.LExpr.getVars e✝\\nbut is expected to have type\\n  x ∈ extractOldExprVars fn✝ → x ∈ Lambda.LExpr.LExpr.getVars fn✝\\nin the application\\n  Or.imp ihfn', 'endPos': {'column': 25, 'line': 2888}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/"
+        },
+        {
+          "result": "ultra/runs/P02/a29_shared_case_tail/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 53, 'line': 2881}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P02/a29_shared_case_tail/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 23, 'line': 2881}, 'severity': 'error'}\n{'caption': '', 'data': 'unsolved goals\\ncase eq\\nx : CoreIdent\\nm✝ : { base := { Metadata"
+        },
+        {
+          "result": "ultra/runs/P02/a30_panic_defeq_simp/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': '`simp` made no progress', 'endPos': {'column': 53, 'line': 2881}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P02/a30_panic_defeq_simp/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 23, 'line': 2881}, 'severity': 'error'}\n{'caption': '', 'data': 'unsolved goals\\ncase eq\\nx : CoreIdent\\nm✝ : { base := { Metadata"
+        },
+        {
+          "result": "ultra/runs/P02/a36_fixed_total_tail/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Missing cases:\\n_', 'endPos': {'column': 25, 'line': 2887}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P02/a36_fixed_total_tail/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 20, 'line': 2887}, 'severity': 'error'}\n{'caption': '', 'data': 'Missing cases:\\n(Or.inr _)\\n(Or.inl _)', 'endPos': {'column': 25, 'line"
+        },
+        {
+          "result": "ultra/runs/P02/a37_fixed_panic_tail/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': '`grind` failed\\ncase grind\\nx : Lambda.Identifier Visibility\\nm : { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }.base.Metadata\\ne : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoTy }\\ne_ih : x ∈ extractOldExprVars e → x ∈ Lambda.LExpr.LExpr.getVars e\\ne1 e2 : Lambda.LExpr { base := { Metadata := ExpressionMetadata, IDMeta := Visibility }, TypeType := Lambda.LMonoT"
+        },
+        {
+          "result": "ultra/runs/P02/a38_normalized_shared_tail/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Missing cases:\\n_', 'endPos': {'column': 25, 'line': 2885}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P02/a38_normalized_shared_tail/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 20, 'line': 2885}, 'severity': 'error'}\n{'caption': '', 'data': 'Missing cases:\\n(Or.inr _)\\n(Or.inl _)', 'endPos': {'column': 25,"
+        },
+        {
+          "result": "ultra/runs/P02/a39_deferred_projection/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Missing cases:\\n_', 'endPos': {'column': 25, 'line': 2884}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P02/a39_deferred_projection/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 20, 'line': 2884}, 'severity': 'error'}\n{'caption': '', 'data': 'Missing cases:\\n(Or.inr _)\\n(Or.inl _)', 'endPos': {'column': 25, 'l"
+        },
+        {
+          "result": "ultra/runs/P02/a41_constructive_tail/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Missing cases:\\n_', 'endPos': {'column': 45, 'line': 2885}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P02/a41_constructive_tail/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 40, 'line': 2885}, 'severity': 'error'}\n{'caption': '', 'data': 'Missing cases:\\n(Or.inr _)\\n(Or.inl _)', 'endPos': {'column': 45, 'lin"
+        },
+        {
+          "result": "ultra/runs/P02/a42_reduced_constructive_tail/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'Missing cases:\\n_', 'endPos': {'column': 45, 'line': 2885}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P02/a42_reduced_constructive_tail/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 40, 'line': 2885}, 'severity': 'error'}\n{'caption': '', 'data': 'Missing cases:\\n(Or.inr _)\\n(Or.inl _)', 'endPos': {'column': "
+        },
+        {
+          "result": "ultra/runs/P03/a04_simp_disjoint/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': \"unsolved goals\\nP : PureExpr\\nσ σ' σ'' : SemanticStore P\\nks ks' : List P.Ident\\nvs vs' : List P.Expr\\nhup : UpdateStates σ ks vs σ'\\nhi : InitStates σ' ks' vs' σ''\\nnd : ∀ (v : P.Ident), v ∈ ks' → σ' v = none\\nd : ∀ (v : P.Ident), v ∈ ks → (σ' v).isSome = true\\n⊢ ∀ ⦃a : P.Ident⦄, a ∈ ks → ¬a ∈ ks'\", 'endPos': {'column': 55, 'line': 963}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoni"
+        },
+        {
+          "result": "ultra/runs/P03/a07_rule_init/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': 'failed', 'endPos': {'column': 85, 'line': 959}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/ultra/runs/P03/a07_rule_init/context.lean', 'isSilent': False, 'keepFullRange': False, 'kind': '[anonymous]', 'pos': {'column': 6, 'line': 959}, 'severity': 'error'}"
+        },
+        {
+          "result": "ultra/runs/P03/a09_init_apply_search/result.json",
+          "category": "unsolved_goals",
+          "first_error": "{'caption': '', 'data': \"unsolved goals\\ncase refine_2\\nP : PureExpr\\nσ σ' σ'' : SemanticStore P\\nks ks' : List P.Ident\\nvs vs' : List P.Expr\\nhup : UpdateStates σ ks vs σ'\\nhi : InitStates σ' ks' vs' σ''\\nlu : ks.length = vs.length\\nli : ks'.length = vs'.length\\nnd : isNotDefined σ' ks'\\n⊢ UpdateStates (updatedStates σ ks' vs') ks vs σ''\", 'endPos': {'column': 10, 'line': 962}, 'fileName': '/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/20"
+        },
+        {
+          "result": "ultra/runs/P03/a20_bulk_automation/result.json",
+          "category": "other_lean_error",
+          "first_error": "{'caption': '', 'data': \"`grind` failed\\ncase grind\\nP : PureExpr\\nσ σ' σ'' : P.Ident → Option P.Expr\\nks ks' : List P.Ident\\nvs vs' : List P.Expr\\nhup : UpdateStates σ ks vs σ'\\nhi : InitStates σ' ks' vs' σ''\\nlu : ks.length = vs.length\\nli : ks'.length = vs'.length\\nnd : isNotDefined σ ks'\\nd : isDefined σ ks\\ndis : ks.Disjoint ks'\\ncomm :\\n  updatedStates' (updatedStates' σ (ks.zip vs)) (ks'.zip vs') =\\n    updatedStates' (updatedStates' σ (ks'.zip vs')) (ks.zip vs)\\ninit : InitStates σ ks' v"
+        }
+      ]
+    }
+  }
+}

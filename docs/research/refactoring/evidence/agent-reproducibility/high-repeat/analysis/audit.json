@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "mismatches": [],
+  "frozen_files_checked": 16,
+  "imported_artifacts_checked": 2199,
+  "run_records_checked": 42,
+  "observed_verifier_overlaps": 0,
+  "packet_hash_identical": true,
+  "all_submission_counts_eight": true,
+  "all_feedback_within_cap": true,
+  "agent_filesystem_isolation": "instruction-only; completion reports are self-reports",
+  "checked_at_utc": "2026-10-15T08:40:18.572527+00:00"
+}

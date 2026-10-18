@@ -1,0 +1,13 @@
+{
+  "recorded_at_utc": "2026-10-15T08:32:31.197487+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "python_version": "3.9.6",
+  "python_executable": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+  "cpu_count": 10,
+  "environment_script": "/Users/jwkweon/00_work/00_project/env/use.sh",
+  "project_key": "05_pseudolab/LeanAgent",
+  "installed_dependencies": false,
+  "shared_host": true,
+  "global_lean_lock": true
+}

@@ -1,0 +1,404 @@
+{
+  "generated_at_utc": "2026-10-15T07:06:38.737397+00:00",
+  "scope": "One agent trajectory per effort; final score uses five saved final verification runs.",
+  "schedule": {
+    "start_utc": "2026-10-15T05:59:23.653029+00:00",
+    "deadline_utc": "2026-10-15T06:59:23.653029+00:00",
+    "duration_seconds": 3600,
+    "reasoning_efforts": [
+      "high",
+      "xhigh",
+      "ultra"
+    ],
+    "model": "inherited parent model, unchanged across arms",
+    "design": "one independent coding agent per effort, identical initial prompt; repeated Lean verification within each arm"
+  },
+  "totals": {
+    "candidate_attempts": 243,
+    "valid_candidate_attempts": 176,
+    "invalid_candidate_attempts": 67,
+    "baseline_runs": 27,
+    "final_runs": 45,
+    "main_verifier_runs": 315
+  },
+  "rows": [
+    {
+      "arm": "high",
+      "problem": 1,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "baseline_proof_tokens": 313,
+      "baseline_median_raw_heartbeats": 5180169,
+      "selected_path": "high/final/P01.lean",
+      "proof_sha256": "79314ba5872c3e008c3eccd9605eed8298839294ba54b9d4d535f3fc963408a7",
+      "proof_tokens": 149,
+      "raw_heartbeats": {
+        "values": [
+          1141277,
+          1141289,
+          1141297,
+          1141294,
+          1141300
+        ],
+        "min": 1141277,
+        "median": 1141294,
+        "max": 1141300,
+        "spread": 23
+      },
+      "score": 0.34817908882204757,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "candidate_attempts": {
+        "tested": 34,
+        "valid": 28,
+        "invalid": 6
+      },
+      "final_runs": [
+        "high/runs/P01/final_repeat_1/result.json",
+        "high/runs/P01/final_repeat_2/result.json",
+        "high/runs/P01/final_repeat_3/result.json",
+        "high/runs/P01/final_repeat_4/result.json",
+        "high/runs/P01/final_repeat_5/result.json"
+      ],
+      "final_valid_count": 5
+    },
+    {
+      "arm": "high",
+      "problem": 2,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "baseline_proof_tokens": 222,
+      "baseline_median_raw_heartbeats": 2585163,
+      "selected_path": "high/final/P02.lean",
+      "proof_sha256": "90a03b109b97b66bfcb2d524b7a578588133900295c264749a194f6816e3abc4",
+      "proof_tokens": 40,
+      "raw_heartbeats": {
+        "values": [
+          438674,
+          438674,
+          438674,
+          438674,
+          438674
+        ],
+        "min": 438674,
+        "median": 438674,
+        "max": 438674,
+        "spread": 0
+      },
+      "score": 0.17493464341225973,
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "candidate_attempts": {
+        "tested": 40,
+        "valid": 29,
+        "invalid": 11
+      },
+      "final_runs": [
+        "high/runs/P02/final_repeat_1/result.json",
+        "high/runs/P02/final_repeat_2/result.json",
+        "high/runs/P02/final_repeat_3/result.json",
+        "high/runs/P02/final_repeat_4/result.json",
+        "high/runs/P02/final_repeat_5/result.json"
+      ],
+      "final_valid_count": 5
+    },
+    {
+      "arm": "high",
+      "problem": 3,
+      "name": "Core.InitsUpdatesComm",
+      "baseline_proof_tokens": 224,
+      "baseline_median_raw_heartbeats": 4668409,
+      "selected_path": "high/final/P03.lean",
+      "proof_sha256": "ed7e2ff184acec0fadc82cbcab1f73244d0ab98b01bfd7f0aa61c9984263f2ba",
+      "proof_tokens": 87,
+      "raw_heartbeats": {
+        "values": [
+          159871,
+          159871,
+          159871,
+          159871,
+          159871
+        ],
+        "min": 159871,
+        "median": 159871,
+        "max": 159871,
+        "spread": 0
+      },
+      "score": 0.21131907142470044,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "candidate_attempts": {
+        "tested": 16,
+        "valid": 14,
+        "invalid": 2
+      },
+      "final_runs": [
+        "high/runs/P03/final_repeat_1/result.json",
+        "high/runs/P03/final_repeat_2/result.json",
+        "high/runs/P03/final_repeat_3/result.json",
+        "high/runs/P03/final_repeat_4/result.json",
+        "high/runs/P03/final_repeat_5/result.json"
+      ],
+      "final_valid_count": 5
+    },
+    {
+      "arm": "xhigh",
+      "problem": 1,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "baseline_proof_tokens": 313,
+      "baseline_median_raw_heartbeats": 5180170,
+      "selected_path": "xhigh/candidates/P01/a15_singleton_simp.lean",
+      "proof_sha256": "a4ce058d3b46cb0637c1b63930967f75616b8890eb48365fcd4bb9c856d94953",
+      "proof_tokens": 45,
+      "raw_heartbeats": {
+        "values": [
+          1892121,
+          1892150,
+          1891956,
+          1891886,
+          1892037
+        ],
+        "min": 1891886,
+        "median": 1892037,
+        "max": 1892150,
+        "spread": 264
+      },
+      "score": 0.25450804465870436,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "candidate_attempts": {
+        "tested": 24,
+        "valid": 19,
+        "invalid": 5
+      },
+      "final_runs": [
+        "xhigh/runs/P01/final_01/result.json",
+        "xhigh/runs/P01/final_02/result.json",
+        "xhigh/runs/P01/final_03/result.json",
+        "xhigh/runs/P01/final_04/result.json",
+        "xhigh/runs/P01/final_05/result.json"
+      ],
+      "final_valid_count": 5
+    },
+    {
+      "arm": "xhigh",
+      "problem": 2,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "baseline_proof_tokens": 222,
+      "baseline_median_raw_heartbeats": 2585163,
+      "selected_path": "xhigh/candidates/P02/b20_close_special_app.lean",
+      "proof_sha256": "079b64a0a839e9d92899a9cb0963e27b55c2edc9fe5e99f76784cd58de7d4e48",
+      "proof_tokens": 61,
+      "raw_heartbeats": {
+        "values": [
+          1005796,
+          1005723,
+          1005758,
+          1005800,
+          1005906
+        ],
+        "min": 1005723,
+        "median": 1005796,
+        "max": 1005906,
+        "spread": 183
+      },
+      "score": 0.331919801784468,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "candidate_attempts": {
+        "tested": 21,
+        "valid": 15,
+        "invalid": 6
+      },
+      "final_runs": [
+        "xhigh/runs/P02/final_01/result.json",
+        "xhigh/runs/P02/final_02/result.json",
+        "xhigh/runs/P02/final_03/result.json",
+        "xhigh/runs/P02/final_04/result.json",
+        "xhigh/runs/P02/final_05/result.json"
+      ],
+      "final_valid_count": 5
+    },
+    {
+      "arm": "xhigh",
+      "problem": 3,
+      "name": "Core.InitsUpdatesComm",
+      "baseline_proof_tokens": 224,
+      "baseline_median_raw_heartbeats": 4668407,
+      "selected_path": "xhigh/candidates/P03/c10_canonical_state_cases.lean",
+      "proof_sha256": "9de120d8e261484fe388017ecab32bf9318edbf56bcaca19dccdec58f7fe1b24",
+      "proof_tokens": 85,
+      "raw_heartbeats": {
+        "values": [
+          180078,
+          180078,
+          180078,
+          180078,
+          180078
+        ],
+        "min": 180078,
+        "median": 180078,
+        "max": 180078,
+        "spread": 0
+      },
+      "score": 0.20901902165755593,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "candidate_attempts": {
+        "tested": 12,
+        "valid": 8,
+        "invalid": 4
+      },
+      "final_runs": [
+        "xhigh/runs/P03/final_01/result.json",
+        "xhigh/runs/P03/final_02/result.json",
+        "xhigh/runs/P03/final_03/result.json",
+        "xhigh/runs/P03/final_04/result.json",
+        "xhigh/runs/P03/final_05/result.json"
+      ],
+      "final_valid_count": 5
+    },
+    {
+      "arm": "ultra",
+      "problem": 1,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "baseline_proof_tokens": 313,
+      "baseline_median_raw_heartbeats": 5180168,
+      "selected_path": "ultra/candidates/P01/a26_reduced_membership.lean",
+      "proof_sha256": "fa2e79beaf12f6edb32547bde8563b56ff4e5e4b2c7cb6a0c7d6ba2e07750978",
+      "proof_tokens": 31,
+      "raw_heartbeats": {
+        "values": [
+          2327376,
+          2327414,
+          2327423,
+          2327552,
+          2327527
+        ],
+        "min": 2327376,
+        "median": 2327423,
+        "max": 2327552,
+        "spread": 176
+      },
+      "score": 0.2741682106398483,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "candidate_attempts": {
+        "tested": 35,
+        "valid": 23,
+        "invalid": 12
+      },
+      "final_runs": [
+        "ultra/runs/P01/final_01/result.json",
+        "ultra/runs/P01/final_02/result.json",
+        "ultra/runs/P01/final_03/result.json",
+        "ultra/runs/P01/final_04/result.json",
+        "ultra/runs/P01/final_05/result.json"
+      ],
+      "final_valid_count": 5
+    },
+    {
+      "arm": "ultra",
+      "problem": 2,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "baseline_proof_tokens": 222,
+      "baseline_median_raw_heartbeats": 2585163,
+      "selected_path": "ultra/candidates/P02/a22_total_clear.lean",
+      "proof_sha256": "0da3cd039fc4477b9581902aae97649c87c60c974e23d6ae820c5fa635c7ef2b",
+      "proof_tokens": 55,
+      "raw_heartbeats": {
+        "values": [
+          981299,
+          981361,
+          981362,
+          981377,
+          981339
+        ],
+        "min": 981299,
+        "median": 981361,
+        "max": 981377,
+        "spread": 78
+      },
+      "score": 0.31368028066524445,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "candidate_attempts": {
+        "tested": 37,
+        "valid": 20,
+        "invalid": 17
+      },
+      "final_runs": [
+        "ultra/runs/P02/final_01/result.json",
+        "ultra/runs/P02/final_02/result.json",
+        "ultra/runs/P02/final_03/result.json",
+        "ultra/runs/P02/final_04/result.json",
+        "ultra/runs/P02/final_05/result.json"
+      ],
+      "final_valid_count": 5
+    },
+    {
+      "arm": "ultra",
+      "problem": 3,
+      "name": "Core.InitsUpdatesComm",
+      "baseline_proof_tokens": 224,
+      "baseline_median_raw_heartbeats": 4668407,
+      "selected_path": "ultra/candidates/P03/a23_telescope_update.lean",
+      "proof_sha256": "e7bdd3bd937238af0fbfc1170c7afad67f5daa8f5ac551e6ef33c5d306db1f66",
+      "proof_tokens": 83,
+      "raw_heartbeats": {
+        "values": [
+          179942,
+          179942,
+          179942,
+          179942,
+          179942
+        ],
+        "min": 179942,
+        "median": 179942,
+        "max": 179942,
+        "spread": 0
+      },
+      "score": 0.20454016994677507,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "candidate_attempts": {
+        "tested": 24,
+        "valid": 20,
+        "invalid": 4
+      },
+      "final_runs": [
+        "ultra/runs/P03/final_01/result.json",
+        "ultra/runs/P03/final_02/result.json",
+        "ultra/runs/P03/final_03/result.json",
+        "ultra/runs/P03/final_04/result.json",
+        "ultra/runs/P03/final_05/result.json"
+      ],
+      "final_valid_count": 5
+    }
+  ],
+  "post_window_control": "analysis/same-path-control/summary.json"
+}
