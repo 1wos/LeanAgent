@@ -1,0 +1,30 @@
+{
+  "integrated_on": "2026-10-18",
+  "source_repository": "LeanAgent-LeanRefactorArena",
+  "source_directory": "docs/research/corpus-deep-dive",
+  "original_analysis_directory": "LEArN/week3-experiments/reports/corpus-deep-dive",
+  "files_sha256": {
+    "index.html": "13db05c69f7705d4af74228344e71fce1838f786be3245bc9b757a0152a02b39",
+    "results.json": "17cc8cd73e24753c4d321c0eb0235bbac9d64a84d981263d17b1bd3b2bf32d82",
+    "validation.json": "c7fa1a463c8e0e729000a65f263cb99b37e99d5b6d656c7b4656228bb209147c",
+    "analyze.py": "c7f1e83250a29fb3060cc7979b3c2bf70a3fb4c8fa98f3d1c2ff3db324978627",
+    "verify.py": "bf12ba8827bc35e0cc77a83ae0a43e3afccb9e024cd7993114c5db565ae1b6f7",
+    "render_report.py": "6bf4eec8c445b9b65eaba83d74e4dfc690cd9ceae951b015af069ea32d4e54de",
+    "length-selection.svg": "f0bdedaf2fd5b1fecf9eb87dfbfdee50ef25366936fa7f64ab6cc7449fcdfab9"
+  },
+  "integration_checks": {
+    "existing_validation_output_hashes": "all 6 present referenced outputs match",
+    "historical_validation_output_not_in_bundle": [
+      "split-overlap.svg"
+    ],
+    "statistical_analysis_rerun": false,
+    "lean_rerun": false
+  },
+  "reproduction_note": "analyze.py and verify.py require the original LEArN/week3-experiments corpus layout. render_report.py uses the adjacent results.json and requires reportlab. validation.json is the pre-existing analysis record, not the result of this document integration.",
+  "distribution": {
+    "shared_document": "../../arena-guide.html",
+    "original_report_included": false,
+    "original_archives_included": false,
+    "evidence_files_preserved": true
+  }
+}

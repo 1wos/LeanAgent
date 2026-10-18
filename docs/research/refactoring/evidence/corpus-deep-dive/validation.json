@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "joined_primary_records": 323207,
+  "long_candidate_proof_and_src_hashes_verified": 48519,
+  "expected_input_hashes_verified": 5,
+  "source_counts_match": true,
+  "inputs_unchanged": true,
+  "outputs": {
+    "results.json": "17cc8cd73e24753c4d321c0eb0235bbac9d64a84d981263d17b1bd3b2bf32d82",
+    "analyze.py": "c7f1e83250a29fb3060cc7979b3c2bf70a3fb4c8fa98f3d1c2ff3db324978627",
+    "render_report.py": "6bf4eec8c445b9b65eaba83d74e4dfc690cd9ceae951b015af069ea32d4e54de",
+    "verify.py": "bf12ba8827bc35e0cc77a83ae0a43e3afccb9e024cd7993114c5db565ae1b6f7",
+    "index.html": "13db05c69f7705d4af74228344e71fce1838f786be3245bc9b757a0152a02b39",
+    "split-overlap.svg": "de17fe34fd7fdde1d3332b89cc138958bbc58bcd5e9b4d7d92026afed4f0eb49",
+    "length-selection.svg": "f0bdedaf2fd5b1fecf9eb87dfbfdee50ef25366936fa7f64ab6cc7449fcdfab9"
+  },
+  "statistical_formula_and_integrity_tests": {
+    "passed": 6,
+    "command": "python3 verify.py"
+  },
+  "deterministic_rebuild": {
+    "status": "passed",
+    "results_sha256": "17cc8cd73e24753c4d321c0eb0235bbac9d64a84d981263d17b1bd3b2bf32d82"
+  },
+  "report_static_checks": {
+    "status": "passed",
+    "sections": 7,
+    "charts": 1,
+    "duplicate_ids": 0,
+    "links": "all targets exist",
+    "training_evaluation_split_language": "absent",
+    "candidate_pool_scope": "final 50 problems",
+    "presence_not_count_of_have": "explicit"
+  },
+  "report_scope": {
+    "candidate_pool": "collected proofs from the six sources",
+    "final_problem_count": 50,
+    "candidate_identity": "proposition, assumptions and context; proof text alone is insufficient",
+    "same_proof_body": "reused proof expression; do not discard candidates on this basis",
+    "prior_statistics": "preserved; report does not present split experiments"
+  },
+  "previous_browser_review": {
+    "status": "passed",
+    "browser": "Codex in-app browser",
+    "url": "http://127.0.0.1:8877/",
+    "viewport_width": 603,
+    "document_width": 603,
+    "disclosure_test": "100-run split table opens",
+    "console_errors_or_warnings": 0,
+    "direct_file_open": "not tested",
+    "pdf_print": "not tested",
+    "charts_in_dom": 2,
+    "screenshot_inspected": "split-overlap chart and tables; report text and appendix"
+  },
+  "browser": {
+    "status": "not rerun after narrative edit",
+    "reason": "prior preview tab expired; static report checks passed",
+    "layout_styles": "unchanged"
+  }
+}

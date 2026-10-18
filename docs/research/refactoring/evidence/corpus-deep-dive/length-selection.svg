@@ -1,0 +1,100 @@
+<svg width="700" height="310" preserveAspectRatio="xMinYMin meet" viewBox="0 0 700 310" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>Proofs containing have: population vs long subset (%)</title>
+	<desc>Two-series comparison; exact values are in the adjacent report table.</desc>
+	<clipPath id="length-selection-clip">
+		<rect x="0" y="0" width="700" height="310"/>
+	</clipPath>
+	<g id="length-selection-group" transform="scale(1,-1) translate(0,-310)" style="clip-path: url(#length-selection-clip)">
+		<g transform="">
+			<text x="32" y="289" style="font-family: Helvetica-Bold; font-size: 14px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,578) scale(1,-1)">Proofs containing have: population vs long subset (%)</text>
+			<g transform="">
+				<path d="M 55,58 L 665,58 Z" style="stroke: rgb(89%,91%,92%); stroke-linecap: butt; stroke-width: 0.25;"/>
+				<path d="M 55,99 L 665,99 Z" style="stroke: rgb(89%,91%,92%); stroke-linecap: butt; stroke-width: 0.25;"/>
+				<path d="M 55,140 L 665,140 Z" style="stroke: rgb(89%,91%,92%); stroke-linecap: butt; stroke-width: 0.25;"/>
+				<path d="M 55,181 L 665,181 Z" style="stroke: rgb(89%,91%,92%); stroke-linecap: butt; stroke-width: 0.25;"/>
+				<path d="M 55,222 L 665,222 Z" style="stroke: rgb(89%,91%,92%); stroke-linecap: butt; stroke-width: 0.25;"/>
+				<path d="M 55,263 L 665,263 Z" style="stroke: rgb(89%,91%,92%); stroke-linecap: butt; stroke-width: 0.25;"/>
+				<g transform="">
+					<rect x="67.2" y="58.0" width="48.8" height="77.40517241379308" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,41%,41%); fill-rule: evenodd;"/>
+					<rect x="189.2" y="58.0" width="48.80000000000001" height="49.81414701803051" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,41%,41%); fill-rule: evenodd;"/>
+					<rect x="311.2" y="58.0" width="48.80000000000001" height="41.4141414141414" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,41%,41%); fill-rule: evenodd;"/>
+					<rect x="433.2" y="58.0" width="48.80000000000001" height="84.37765205091938" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,41%,41%); fill-rule: evenodd;"/>
+					<rect x="555.2" y="58.0" width="48.799999999999955" height="81.70364104732977" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,41%,41%); fill-rule: evenodd;"/>
+					<rect x="116.0" y="58.0" width="48.80000000000001" height="176.72413793103448" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(82%,57%,25%); fill-rule: evenodd;"/>
+					<rect x="238.0" y="58.0" width="48.80000000000001" height="177.53267973856208" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(82%,57%,25%); fill-rule: evenodd;"/>
+					<rect x="360.0" y="58.0" width="48.80000000000001" height="158.1428571428571" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(82%,57%,25%); fill-rule: evenodd;"/>
+					<rect x="482.0" y="58.0" width="48.799999999999955" height="194.72144846796655" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(82%,57%,25%); fill-rule: evenodd;"/>
+					<rect x="604.0" y="58.0" width="48.799999999999955" height="175.85860500379073" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(82%,57%,25%); fill-rule: evenodd;"/>
+					<g transform=""/>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 55,58 L 665,58 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 55,58 L 55,53 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 177,58 L 177,53 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 299,58 L 299,53 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 421,58 L 421,53 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 543,58 L 543,53 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 665,58 L 665,53 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,116,53)">
+							<text x="-13.34" y="-10.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-20) scale(1,-1)">Strata</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,238,53)">
+							<text x="-17.785" y="-10.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-20) scale(1,-1)">PhysLib</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,360,53)">
+							<text x="-13.614999999999998" y="-10.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-20) scale(1,-1)">CSLib</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,482,53)">
+							<text x="-14.17" y="-10.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-20) scale(1,-1)">ArkLib</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,604,53)">
+							<text x="-21.125" y="-10.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-20) scale(1,-1)">LeanPool</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 55,58 L 55,263 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 55,58 L 50,58 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 55,99 L 50,99 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 55,140 L 50,140 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 55,181 L 50,181 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 55,222 L 50,222 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 55,263 L 50,263 Z" style="stroke: rgb(0%,0%,0%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,50,58)">
+							<text x="-4.5" y="-3.6000000000000005" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-7) scale(1,-1)">0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,50,99)">
+							<text x="-9.0" y="-3.6000000000000005" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-7) scale(1,-1)">20</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,50,140)">
+							<text x="-9.0" y="-3.6000000000000005" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-7) scale(1,-1)">40</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,50,181)">
+							<text x="-9.0" y="-3.6000000000000005" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-7) scale(1,-1)">60</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,50,222)">
+							<text x="-9.0" y="-3.6000000000000005" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-7) scale(1,-1)">80</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,50,263)">
+							<text x="-13.5" y="-3.6000000000000005" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-7) scale(1,-1)">100</text>
+						</g>
+					</g>
+				</g>
+			</g>
+			<rect x="55" y="15" width="12" height="12" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,41%,41%); fill-rule: evenodd;"/>
+			<text x="74" y="16" style="font-family: Times-Roman; font-size: 10px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,32) scale(1,-1)">All eligible proofs</text>
+			<rect x="315" y="15" width="12" height="12" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(82%,57%,25%); fill-rule: evenodd;"/>
+			<text x="334" y="16" style="font-family: Times-Roman; font-size: 10px;fill: rgb(9%,17%,22%); stroke:none;" transform="translate(0,32) scale(1,-1)">Proof length &gt;= 200</text>
+		</g>
+	</g>
+</svg>
