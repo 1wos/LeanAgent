@@ -1,0 +1,170 @@
+import Mathlib.RingTheory.Int.Basic
+import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Tactic.Ring
+import Mathlib.RingTheory.Coprime.Lemmas
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Linarith
+import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Data.Int.GCD
+import Mathlib.Util.CountHeartbeats
+import Aesop
+
+set_option maxHeartbeats 100000000
+set_option Elab.async false
+
+#count_heartbeats in
+theorem putnam_1995_a3
+(relation : (Fin 9 → ℤ) → (Fin 9 → ℤ) → Prop)
+(digits_to_num : (Fin 9 → ℤ) → ℤ)
+(hdigits_to_num : digits_to_num = fun dig => ∑ i : Fin 9, (dig i) * 10^i.1)
+(hrelation : ∀ d e : (Fin 9 → ℤ), relation d e ↔ (∀ i : Fin 9, d i < 10 ∧ d i ≥ 0 ∧ e i < 10 ∧ e i ≥ 0) ∧ (∀ i : Fin 9, 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then e j else d j))))
+: ∀ d e f : (Fin 9 → ℤ), ((relation d e) ∧ (relation e f)) → (∀ i : Fin 9, 7 ∣ d i - f i) := by
+  intro d e f h
+  obtain ⟨-, h₃⟩ := (hrelation d e).mp h.1
+  obtain ⟨-, h₄⟩ := (hrelation e f).mp h.2
+
+  have h₅ : ∀ (i : Fin 9), 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := by
+    intro i
+    have h₆ : 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then e j else d j)) := h₃ i
+    have h₇ : (digits_to_num (fun j : Fin 9 => if j = i then e j else d j)) = digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by
+      calc
+        (digits_to_num (fun j : Fin 9 => if j = i then e j else d j)) = ∑ j : Fin 9, (if j = i then e j else d j) * (10 : ℤ) ^ (j : ℕ) := by
+          simp [hdigits_to_num]
+          <;>
+          rfl
+        _ = ∑ j : Fin 9, (if j = i then e j else d j) * (10 : ℤ) ^ (j : ℕ) := rfl
+        _ = (∑ j : Fin 9, d j * (10 : ℤ) ^ (j : ℕ)) + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by
+          calc
+            (∑ j : Fin 9, (if j = i then e j else d j) * (10 : ℤ) ^ (j : ℕ)) = ∑ j : Fin 9, (d j * (10 : ℤ) ^ (j : ℕ) + (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ)) := by
+              apply Finset.sum_congr rfl
+              intro j _
+              by_cases h : j = i
+              · simp [h]
+                <;> ring
+              · simp [h]
+                <;> ring
+            _ = (∑ j : Fin 9, d j * (10 : ℤ) ^ (j : ℕ)) + ∑ j : Fin 9, (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ) := by
+              rw [Finset.sum_add_distrib]
+            _ = (∑ j : Fin 9, d j * (10 : ℤ) ^ (j : ℕ)) + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by
+              have h₈ : ∑ j : Fin 9, (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ) = (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by
+                calc
+                  _ = ∑ j : Fin 9, (if j = i then (e j - d j) else 0) * (10 : ℤ) ^ (j : ℕ) := rfl
+                  _ = (if i = i then (e i - d i) else 0) * (10 : ℤ) ^ (i : ℕ) := by
+
+                    simp [Finset.sum_ite_eq', Finset.mem_univ, i.is_lt]
+                  _ = (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by simp
+              rw [h₈]
+              <;> simp [hdigits_to_num]
+              <;>
+              rfl
+        _ = digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by
+          simp [hdigits_to_num]
+          <;>
+          rfl
+    have h₈ : 7 ∣ digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by
+      rw [h₇] at h₆
+      exact h₆
+
+    have h₉ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := by
+
+      have h₁₀ : (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d = digits_to_num d + (e i - d i) * (10 : ℤ) ^ (i : ℕ) := by ring
+      rw [h₁₀]
+      exact h₈
+    exact h₉
+
+  have h₆ : ∀ (i : Fin 9), 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := by
+    intro i
+    have h₇ : 7 ∣ (digits_to_num (fun j : Fin 9 => if j = i then f j else e j)) := h₄ i
+    have h₈ : (digits_to_num (fun j : Fin 9 => if j = i then f j else e j)) = digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by
+      calc
+        (digits_to_num (fun j : Fin 9 => if j = i then f j else e j)) = ∑ j : Fin 9, (if j = i then f j else e j) * (10 : ℤ) ^ (j : ℕ) := by
+          simp [hdigits_to_num]
+          <;>
+          rfl
+        _ = ∑ j : Fin 9, (if j = i then f j else e j) * (10 : ℤ) ^ (j : ℕ) := rfl
+        _ = (∑ j : Fin 9, e j * (10 : ℤ) ^ (j : ℕ)) + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by
+          calc
+            (∑ j : Fin 9, (if j = i then f j else e j) * (10 : ℤ) ^ (j : ℕ)) = ∑ j : Fin 9, (e j * (10 : ℤ) ^ (j : ℕ) + (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ)) := by
+              apply Finset.sum_congr rfl
+              intro j _
+              by_cases h : j = i
+              · simp [h]
+                <;> ring
+              · simp [h]
+                <;> ring
+            _ = (∑ j : Fin 9, e j * (10 : ℤ) ^ (j : ℕ)) + ∑ j : Fin 9, (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ) := by
+              rw [Finset.sum_add_distrib]
+            _ = (∑ j : Fin 9, e j * (10 : ℤ) ^ (j : ℕ)) + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by
+              have h₉ : ∑ j : Fin 9, (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ) = (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by
+                calc
+                  _ = ∑ j : Fin 9, (if j = i then (f j - e j) else 0) * (10 : ℤ) ^ (j : ℕ) := rfl
+                  _ = (if i = i then (f i - e i) else 0) * (10 : ℤ) ^ (i : ℕ) := by
+
+                    simp [Finset.sum_ite_eq', Finset.mem_univ, i.is_lt]
+                  _ = (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by simp
+              rw [h₉]
+              <;> simp [hdigits_to_num]
+              <;>
+              rfl
+        _ = digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by
+          simp [hdigits_to_num]
+          <;>
+          rfl
+    have h₉ : 7 ∣ digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by
+      rw [h₈] at h₇
+      exact h₇
+
+    have h₁₀ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := by
+
+      have h₁₁ : (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e = digits_to_num e + (f i - e i) * (10 : ℤ) ^ (i : ℕ) := by ring
+      rw [h₁₁]
+      exact h₉
+    exact h₁₀
+
+  have h₇ : 7 ∣ digits_to_num e + digits_to_num d := by
+    have hS := Finset.dvd_sum (s := .univ) fun i _ => h₅ i
+    subst hdigits_to_num
+    simp only [Finset.sum_add_distrib, sub_mul, Finset.sum_sub_distrib, Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul] at hS ⊢
+    convert dvd_sub hS (dvd_mul_right 7 (∑ i : Fin 9, d i * 10 ^ (i : ℕ))) using 1
+    push_cast
+    ring
+
+  have h₈ : ∀ (i : Fin 9), 7 ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := by
+    intro i
+    have h₉ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := h₆ i
+    have h₁₀ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := h₅ i
+    have h₁₁ : 7 ∣ digits_to_num e + digits_to_num d := h₇
+
+    have h₁₂ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d := by
+
+
+      have h₁₃ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e := h₆ i
+      have h₁₄ : 7 ∣ digits_to_num e + digits_to_num d := h₇
+
+      have h₁₅ : 7 ∣ ((f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e) - (digits_to_num e + digits_to_num d) := by
+        exact dvd_sub h₁₃ h₁₄
+
+      have h₁₆ : ((f i - e i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num e) - (digits_to_num e + digits_to_num d) = (f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d := by
+        ring
+      rw [h₁₆] at h₁₅
+      exact h₁₅
+
+    have h₁₃ : 7 ∣ (f i - d i) * (10 : ℤ) ^ (i : ℕ) := by
+      have h₁₄ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d := h₁₂
+      have h₁₅ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d := h₅ i
+
+      have h₁₆ : 7 ∣ ((f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d) + ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) := by
+        exact dvd_add h₁₄ h₁₅
+
+      have h₁₇ : ((f i - e i) * (10 : ℤ) ^ (i : ℕ) - digits_to_num d) + ((e i - d i) * (10 : ℤ) ^ (i : ℕ) + digits_to_num d) = (f i - d i) * (10 : ℤ) ^ (i : ℕ) := by
+        ring
+      rw [h₁₇] at h₁₆
+      exact h₁₆
+    exact h₁₃
+
+  have h₉ : ∀ (i : Fin 9), 7 ∣ d i - f i := fun i =>
+    dvd_sub_comm.mp ((IsCoprime.pow_right ⟨3, -2, by norm_num⟩).dvd_of_dvd_mul_right (h₈ i))
+
+  exact h₉
+
+#print axioms putnam_1995_a3

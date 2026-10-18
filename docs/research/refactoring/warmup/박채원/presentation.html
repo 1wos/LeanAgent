@@ -281,6 +281,103 @@ simp only [key] at h1 h2</pre>
   <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>11</span></div>
 </section>
 
+<!-- exp-design -->
+<section class="slide">
+  <div class="kicker">추가 실험 ① 설계 · 15번 참조 증명 · 논문 부록 C의 한계인 "전략별 기여 분리"를 길이 축에서 시도</div>
+  <h2>블록 5개마다 "참조 증명" 또는 "짧은 증명"을 끼워 32개 조합을 만듦</h2>
+  <table class="small">
+    <tr><th style="width:10%">블록</th><th style="width:22%">참조 증명의 위치</th><th>나눈 기준</th></tr>
+    <tr><td>E</td><td><code>h_main</code>, <code>h₁</code>–<code>h₄</code> · 16–25줄, 끝 288–291줄</td><td>목표와 가정을 이름만 바꿔 다시 적는 도입부와 그 마무리</td></tr>
+    <tr><td>A</td><td><code>h₅</code> 27–74줄, <code>h₆</code> 76–123줄</td><td>변수만 다른 같은 논증. 짧은 증명이 보조정리 <code>key</code> 하나를 함께 쓰므로 한 블록으로 묶음</td></tr>
+    <tr><td>B</td><td><code>h₇</code> 125–198줄</td><td><code>have</code> 하나</td></tr>
+    <tr><td>C</td><td><code>h₈</code> 200–231줄</td><td><code>have</code> 하나</td></tr>
+    <tr><td>D</td><td><code>h₉</code> 233–286줄</td><td><code>have</code> 하나</td></tr>
+  </table>
+  <ol class="steps small" style="margin-top:12px">
+    <li><b>블록 경계</b>: 참조 증명의 <code>have</code> 들여쓰기 경계. PR #15 <code>block_tokens.py</code>의 줄 범위와 같음</li>
+    <li><b>짧은 증명</b>: 블록의 <code>have</code> 명제는 그대로 두고 그 아래 증명만 다시 쓴 것. 명제가 같으니 뒤 블록이 그대로 동작해 어떤 조합도 컴파일됨</li>
+    <li><b>파일 생성</b>: Python 스크립트가 참조 파일을 읽어, 블록마다 참조 줄 범위 또는 짧은 증명 텍스트를 골라 이어 붙임. 2⁵ = 32개 Lean 파일</li>
+  </ol>
+  <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>12</span></div>
+</section>
+
+<!-- exp-short -->
+<section class="slide">
+  <div class="kicker">추가 실험 ② 블록별 짧은 증명 · <code>have</code> 명제 줄은 참조 증명과 같음</div>
+  <h2>짧은 증명 5개와 출처</h2>
+  <div class="grid2">
+    <div>
+<pre style="font-size:11.5px;line-height:1.4">-- E  (수정한 증명과 같은 방식)
+intro d e f h
+obtain ⟨-, h₃⟩ := (hrelation d e).mp h.1
+obtain ⟨-, h₄⟩ := (hrelation e f).mp h.2
+…  exact h₉
+
+-- A  (key는 수정한 증명에서, 각 have 2줄은 새로 씀)
+have key : ∀ x y i,
+    digits_to_num (fun j =&gt; if j = i then y j else x j)
+      = digits_to_num x + (y i - x i) * 10 ^ (i:ℕ) :=
+  … 수정한 증명의 key 증명 …
+have h₅ : … := fun i =&gt; by
+  have := h₃ i
+  rwa [key, add_comm] at this
+have h₆ : … := (같은 2줄, h₄)</pre>
+    </div>
+    <div>
+<pre style="font-size:11.5px;line-height:1.4">-- B  (이번 실험용으로 새로 씀)
+have h₇ : 7 ∣ digits_to_num e + digits_to_num d := by
+  have hS := Finset.dvd_sum (s := .univ) fun i _ =&gt; h₅ i
+  subst hdigits_to_num
+  simp only [Finset.sum_add_distrib, …] at hS ⊢
+  convert dvd_sub hS
+    (dvd_mul_right 7 (∑ i, d i * 10 ^ (i:ℕ))) using 1
+  push_cast
+  ring
+
+-- C  (이번 실험용으로 새로 씀)
+have h₈ : ∀ i, 7 ∣ (f i - d i) * 10 ^ (i:ℕ) := fun i =&gt; by
+  convert dvd_sub (dvd_add (h₅ i) (h₆ i)) h₇ using 1
+  ring
+
+-- D  (수정한 증명의 마지막 줄과 같음)
+have h₉ : ∀ i, 7 ∣ d i - f i := fun i =&gt;
+  dvd_sub_comm.mp ((IsCoprime.pow_right ⟨3, -2, by norm_num⟩)
+    .dvd_of_dvd_mul_right (h₈ i))</pre>
+    </div>
+  </div>
+  <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>13</span></div>
+</section>
+
+<!-- exp -->
+<section class="slide">
+  <div class="kicker">추가 실험 ③ 결과 · 공식 점수의 길이 축만 · 토큰은 공식 <code>proof_length</code> 규칙</div>
+  <h2>블록별 길이 감소는 정확히 더해짐</h2>
+  <div class="grid2">
+    <div>
+      <table class="small">
+        <tr><th>짧은 증명으로 바꾼 블록</th><th class="num">토큰 감소</th><th class="num">길이 감소율</th></tr>
+        <tr><td>A <code>h₅</code>·<code>h₆</code> → <code>key</code></td><td class="num">1,391</td><td class="num">34.05%</td></tr>
+        <tr><td>B <code>h₇</code></td><td class="num">1,082</td><td class="num">26.49%</td></tr>
+        <tr><td>D <code>h₉</code></td><td class="num">483</td><td class="num">11.82%</td></tr>
+        <tr><td>C <code>h₈</code></td><td class="num">467</td><td class="num">11.43%</td></tr>
+        <tr><td>E 도입부</td><td class="num">219</td><td class="num">5.36%</td></tr>
+        <tr><td><b>다섯 블록 모두</b> · 4,085 → 443</td><td class="num"><b>3,642</b></td><td class="num"><b>89.16%</b></td></tr>
+      </table>
+      <p class="small muted" style="margin-top:6px">길이 감소율 = 토큰 감소 ÷ 참조 증명 4,085</p>
+    </div>
+    <div>
+      <ul class="small">
+        <li><b>확인</b>: 32개 조합 모두 로컬 v4.26.0에서 컴파일, 공리 표준 3개. 전체 <code>import Mathlib</code>이 아니라 필요한 모듈만 import함. 모든 블록이 참조 증명인 조합은 4,085토큰으로 공식 값과 같음</li>
+        <li><b>결과</b>: 32개 조합 모두에서 토큰 = 4,085 − 바꾼 블록들의 감소 합. 블록끼리 상호작용 0</li>
+        <li><b>이유</b>: <code>proof_length</code>는 줄마다 센 값을 더하고, 각 블록은 자기 줄만 바꿈</li>
+        <li><b>뜻</b>: 길이 축의 기여는 블록 하나씩 바꿔 재면 그대로 나눠짐</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">heartbeat 감소율과 zero-shot 호환성은 공식 채점 환경에서 재지 않아 넣지 않음.</div>
+  <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>14</span></div>
+</section>
+
 <!-- 11 -->
 <section class="slide">
   <div class="kicker">비교하거나 다시 실행할 때</div>
@@ -291,7 +388,7 @@ simp only [key] at h1 h2</pre>
     <li>후보는 명제가 같고, <code>sorry</code>가 없고, 컴파일되는지 먼저 확인. 지정 버전 중 그대로 컴파일되는 비율은 zero-shot %로 따로 점수에 들어감</li>
     <li>변경은 증명의 줄 범위와 함께 기록하고, 효과를 나누려면 한 번에 하나씩 바꿔 잼</li>
   </ol>
-  <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>12</span></div>
+  <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>15</span></div>
 </section>
 
 <!-- next1 -->
@@ -308,7 +405,7 @@ simp only [key] at h1 h2</pre>
   </table>
   <p class="small" style="margin-top:10px">14·15의 수정한 증명에 아직 써 보지 않은 tactic임. 토큰이 실제로 줄어드는지는 시도한 뒤 공식 <code>proof_length</code> 규칙으로 확인함.</p>
   <p class="small muted" style="margin-top:6px">출처: <code>exact?</code>·<code>apply?</code>·<code>rw?</code>·<code>simp?</code> Lean <code>Init/Tactics.lean</code> · <code>aesop?</code> Aesop <code>Frontend/Tactic.lean</code> · <code>says</code> Mathlib <code>Tactic/Says.lean</code></p>
-  <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>13</span></div>
+  <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>16</span></div>
 </section>
 
 <!-- next2 -->
@@ -326,11 +423,11 @@ simp only [key] at h1 h2</pre>
     <tr><td><code>fin_cases</code> · <code>interval_cases</code></td><td>유한 타입·범위의 값마다 경우를 나눔 (Mathlib). Lean Refactor 부록 D의 짧지만 20배 느린 증명이 <code>interval_cases b &lt;;&gt; simp_all &lt;;&gt; nlinarith</code>였음</td></tr>
   </table>
   <p class="small muted" style="margin-top:10px">원칙: 지금 올린 증명은 그대로 두고, 한 번에 한 곳만 바꾼 복사본으로 컴파일·토큰·heartbeat를 같은 환경에서 비교.</p>
-  <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>14</span></div>
+  <div class="footer"><span>Warm-up 14·15 블록별 비교</span><span>17</span></div>
 </section>
 
 </main>
-<div class="nav"><button id="prev" aria-label="이전">←</button><button id="pos" disabled>1 / 14</button><button id="next" aria-label="다음">→</button></div>
+<div class="nav"><button id="prev" aria-label="이전">←</button><button id="pos" disabled>1 / 17</button><button id="next" aria-label="다음">→</button></div>
 <script>
 (function(){
   var s=[].slice.call(document.querySelectorAll('.slide')),i=0,pos=document.getElementById('pos');
