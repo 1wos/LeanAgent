@@ -1,0 +1,1074 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Lean 검증·수리 시스템 비교, 작은 예제의 성공 판정, P7·P12 실행과 실제 모델 수리 실험"><title>LeanAgent · 검증·수리 설계와 실행</title><style>
+    :root {
+      --bg: #f4f7ef;
+      --surface: #ffffff;
+      --surface-2: #edf2e8;
+      --text: #21392e;
+      --muted: #607264;
+      --border: #d8e2d4;
+      --accent: #245c43;
+      --accent-2: #548665;
+      --accent-soft: #e5eee0;
+      --good: #276749;
+      --good-soft: #e4f0e5;
+      --bad: #865e28;
+      --bad-soft: #f7f0e2;
+      --code-bg: #11251d;
+      --code-text: #dce8dc;
+      --radius: 10px;
+      --shadow: 0 2px 12px rgba(34, 63, 39, .045);
+      --mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+      --sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c1711;
+        --surface: #14241a;
+        --surface-2: #1d3023;
+        --text: #e5eee0;
+        --muted: #a1b59e;
+        --border: #304634;
+        --accent: #9ccda4;
+        --accent-2: #c3dec0;
+        --accent-soft: #243b29;
+        --good: #a2d6b1;
+        --good-soft: #1d3525;
+        --bad: #e0be7f;
+        --bad-soft: #342c1c;
+        --code-bg: #0c1b13;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { font-family: var(--mono); font-size: .88em; }
+    :not(pre) > code {
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: .1em .4em;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      background: radial-gradient(ellipse at 90% 10%, rgba(174, 201, 132, .16), transparent 52%), linear-gradient(115deg, #143727 0%, #24503a 62%, #3c6144 100%);
+      color: #fff;
+      padding: 56px 24px 88px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "P7 / P12";
+      position: absolute;
+      right: 28px;
+      top: 86px;
+      font-size: clamp(54px, 10vw, 154px);
+      letter-spacing: -.06em;
+      opacity: .055;
+      font-family: var(--mono);
+      line-height: 1;
+    }
+    .hero-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .pill {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      padding: 4px 12px;
+      border-radius: 5px;
+      background: rgba(215, 230, 189, .09);
+      border: 1px solid rgba(219, 235, 201, .24);
+    }
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.25;
+      margin: 0 0 12px;
+      letter-spacing: -.02em;
+    }
+    .hero p { margin: 0; opacity: .9; max-width: 720px; }
+    .hero .meta {
+      margin-top: 22px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      opacity: .92;
+    }
+    .hero .meta b { font-weight: 600; }
+    .hero code { background: rgba(255, 255, 255, .15); color: #fff; }
+
+    /* ---------- Layout ---------- */
+    .wrap { max-width: 1080px; margin: -56px auto 0; padding: 0 24px 80px; position: relative; z-index: 2; }
+    nav.toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 10px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+    nav.toc a {
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    nav.toc a:hover { background: var(--surface-2); color: var(--text); text-decoration: none; }
+
+    section { margin-top: 48px; scroll-margin-top: 80px; }
+    h2 {
+      font-size: 24px;
+      margin: 0 0 18px;
+      letter-spacing: -.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h2 .num {
+      display: inline-grid;
+      place-items: center;
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 15px;
+    }
+    h3 { font-size: 17px; margin: 28px 0 10px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 26px;
+    }
+    .lead { font-size: 16.5px; }
+    .muted { color: var(--muted); }
+
+    /* ---------- KPI ---------- */
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+    .kpi .label { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .kpi .value { font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin-top: 2px; }
+    .kpi .value.good { color: var(--good); }
+    .kpi .sub { font-size: 13px; color: var(--muted); }
+
+    /* ---------- Metric bars ---------- */
+    .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 18px; }
+    @media (max-width: 560px) { .metric-grid { grid-template-columns: 1fr; } }
+    .metric-card h4 { margin: 0 0 4px; font-size: 16px; }
+    .metric-card .thm { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+    .metric { margin: 14px 0; }
+    .metric-head { display: flex; justify-content: space-between; font-size: 13.5px; margin-bottom: 6px; }
+    .metric-head .delta { font-weight: 700; color: var(--good); }
+    .bar {
+      position: relative;
+      height: 22px;
+      background: var(--surface-2);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .bar span {
+      position: absolute; inset: 0 auto 0 0;
+      display: flex; align-items: center;
+      padding-left: 8px;
+      font-size: 12px; font-weight: 600; color: #fff;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .bar.before span { background: linear-gradient(90deg, #677c68, #80947d); }
+    .bar.after span  { background: linear-gradient(90deg, #276749, #41825a); min-width: 34px; }
+    .axiom-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 12px; margin-top: 16px;
+      border-top: 1px dashed var(--border);
+      font-size: 13.5px;
+    }
+    .badge {
+      font-size: 12px; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px;
+      background: var(--good-soft); color: var(--good);
+    }
+
+    /* ---------- Table ---------- */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    thead th { font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); background: var(--surface-2); }
+    tbody tr:hover { background: var(--surface-2); }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.delta { color: var(--good); font-weight: 700; }
+    td.group { font-weight: 700; vertical-align: top; }
+
+    /* ---------- Diagnosis ---------- */
+    .diag { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+    .diag-item {
+      background: var(--bad-soft);
+      border: 1px solid color-mix(in srgb, var(--bad) 20%, transparent);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 14.5px;
+    }
+    .diag-item strong { display: block; color: var(--bad); margin-bottom: 4px; font-size: 15px; }
+    .strategy {
+      background: var(--good-soft);
+      border-left: 4px solid var(--good);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 15px;
+    }
+    .pipeline {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+      margin-top: 12px; font-size: 13px;
+    }
+    .pipeline code { white-space: nowrap; }
+    .pipeline .arrow { color: var(--muted); font-family: var(--mono); }
+
+    /* ---------- Code ---------- */
+    pre {
+      margin: 0;
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 18px 20px;
+      border-radius: 0 0 12px 12px;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.65;
+      tab-size: 2;
+    }
+    .code-block { border-radius: 12px; overflow: hidden; border: 1px solid #2c4635; margin: 10px 0; }
+    .code-title {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #1b3528; color: #adc2ab;
+      padding: 9px 16px;
+      font-size: 12.5px; font-family: var(--mono);
+    }
+    .code-title .dots { display: inline-flex; gap: 6px; margin-right: 12px; }
+    .code-title .dots i { width: 10px; height: 10px; border-radius: 50%; background: #4c6752; display: inline-block; }
+    .code-title .tag { padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+    .tag.before { background: rgba(174, 142, 86, .18); color: #e0c38b; }
+    .tag.after  { background: rgba(127, 188, 143, .16); color: #a4dab7; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    @media (max-width: 900px) { .compare { grid-template-columns: 1fr; } }
+    .compare .code-block.before pre { max-height: 520px; }
+    .compare .code-block.after { position: sticky; top: 80px; }
+
+    /* Lean token colors */
+    .tk-kw  { color: #b8d5a0; }
+    .tk-tac { color: #94d5ba; }
+    .tk-comb{ color: #ddc58e; font-weight: 600; }
+    .tk-id  { color: #d8ca94; }
+    .tk-num { color: #e6b98d; }
+    .tk-com { color: #8ba18e; font-style: italic; }
+
+    /* ---------- Verification ---------- */
+    .verify { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .check { display: flex; gap: 12px; align-items: flex-start; margin: 10px 0; font-size: 14.5px; }
+    .check .ok {
+      flex: none; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--good); color: #fff;
+      display: grid; place-items: center; font-size: 13px; font-weight: 700;
+      margin-top: 2px;
+    }
+
+    footer {
+      margin-top: 64px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--muted);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .ast-demo { display: grid; grid-template-columns: minmax(230px, .8fr) minmax(0, 1.2fr); gap: 24px; }
+    .tree { border-radius: 12px; }
+    .tree [data-node] { border-radius: 4px; padding: 2px 4px; }
+    .tree .visited { color: #b7d6a9; }
+    .tree .active { background: #ddc58e; color: #192f22; }
+    button { font: inherit; cursor: pointer; border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; background: var(--accent); color: var(--surface); }
+    button:disabled { opacity: .5; cursor: default; }
+    button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+    .demo-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+    #ast-status { min-height: 3.4em; font-weight: 600; }
+    summary { cursor: pointer; padding: 12px 16px; background: var(--surface-2); }
+    caption { text-align: left; font-weight: 600; padding-bottom: 12px; }
+    .compare > *, .diag > *, .verify > * { min-width: 0; }
+    h2 { overflow-wrap: anywhere; }
+    h2 code, .hero code { white-space: normal; overflow-wrap: anywhere; }
+    @media (max-width: 600px) {
+      .ast-demo { grid-template-columns: 1fr; }
+      .wrap { padding-inline: 14px; }
+      .card { padding: 18px; }
+      :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
+      .verify { grid-template-columns: 1fr; }
+      nav.toc { position: static; }
+      nav.toc a { padding: 6px 8px; font-size: 13px; }
+      .compare .code-block.after { position: static; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    /* Forest green palette with warm paper surfaces. */
+    .two-col { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .card > :first-child, .strategy > :first-child { margin-top:0; }
+    .card > :last-child, .strategy > :last-child { margin-bottom:0; }
+    .section-intro { color:var(--muted); margin:-8px 0 20px; }
+    .eyebrow, .hero .meta { position:relative; }
+    .hero .subtitle { font-size:18px; max-width:780px; }
+    .toc a[aria-current="location"] { background:var(--accent-soft); color:var(--accent); font-weight:700; }
+    section { scroll-margin-top:110px; }
+    h2 .num { flex:none; }
+    h2 code { font-size:.72em; }
+    .two-col > *, .metric-grid > *, .demo-panel > * { min-width:0; }
+    .kpi .value small { font-size:16px; font-weight:500; }
+    .kpi .value { font-variant-numeric:tabular-nums; }
+    .note { color:var(--muted); font-size:13.5px; }
+    .statement pre { font-size:14px; }
+    dl.glossary { display:grid; grid-template-columns:155px minmax(0,1fr); gap:10px 18px; margin:16px 0; }
+    dt { font-weight:700; } dd { margin:0; }
+    .term { background:var(--surface-2); padding:16px 20px; border:1px solid var(--border); border-radius:10px; font-family:var(--mono); font-size:20px; overflow-x:auto; white-space:nowrap; }
+    .demo-panel { display:grid; grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr); gap:24px; align-items:start; }
+    .demo-panel pre.tree { padding:22px; font-size:15px; line-height:2; border-radius:10px; }
+    .tree [data-node] { display:inline-block; }
+    .demo-status { min-height:5.1em; font-weight:600; }
+    .demo-controls { margin-top:18px; }
+    .secondary { background:var(--surface-2); color:var(--text); }
+    button { background:#245c43; color:#fff; }
+    .dim-controls { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+    .dim-controls button { background:var(--surface-2); color:var(--text); }
+    .dim-controls button[aria-pressed="true"] { background:#245c43; color:white; border-color:#245c43; }
+    .stack-diagram { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .stack-half { border:1px solid var(--border); border-radius:10px; padding:14px; background:var(--surface-2); }
+    .stack-half h4 { margin:0 0 10px; font-size:15px; }
+    .stack-half:last-child { background:var(--accent-soft); }
+    .word-row { display:flex; align-items:center; gap:10px; margin:6px 0; font-family:var(--mono); }
+    .word-label { min-width:32px; color:var(--accent); font-weight:700; }
+    .word-cells { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; flex:1; }
+    .word-cell { background:var(--surface); border:1px solid var(--border); text-align:center; border-radius:4px; color:var(--muted); font-size:12px; padding:3px; }
+    .equation { font-family:var(--mono); background:var(--surface-2); padding:16px 20px; border-radius:10px; margin:16px 0; overflow-x:auto; font-size:15px; }
+    .equation strong { color:var(--accent); }
+    .concept-card { border-top:4px solid var(--accent); }
+    .concept-card h3 { margin-top:0; font-size:19px; }
+    .concept-card .plain { font-size:19px; font-weight:650; }
+    .concept-card .mini-label { color:var(--muted); font-size:12px; letter-spacing:.06em; font-weight:700; }
+    .compare .code-block.before pre, .compare .code-block.after pre { max-height:520px; }
+    .compare .code-block.after { top:110px; }
+    .compare { margin-top:12px; }
+    .code-title { gap:12px; }
+    .code-title > span:first-child { min-width:0; overflow-wrap:anywhere; }
+    .code-title .tag { flex:none; }
+    .code-block pre:focus-visible { outline:3px solid #94d5ba; outline-offset:-3px; }
+    .tk-com { color:#92aa95; }
+    .code-caption { color:var(--muted); font-size:13px; margin:4px 0 14px; }
+    .helper-details { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:18px 0; background:var(--surface); }
+    .helper-details > summary { font-weight:650; }
+    .details-content { padding:18px 22px; }
+    .details-content .code-block { margin:0; }
+    .helper-map { margin-top:18px; }
+    .process { background:#173d2b; color:#e3ebdc; border-radius:14px; padding:28px; margin:22px 0; }
+    .process h3 { color:#fff; margin:0 0 18px; font-size:20px; }
+    .process ol { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; counter-reset:step; }
+    .process li { border-top:2px solid #5b8b67; padding-top:14px; counter-increment:step; font-size:14px; }
+    .process li::before { content:'0' counter(step); display:block; color:#c7dbab; font-family:var(--mono); margin-bottom:7px; font-size:13px; }
+    .process strong { display:block; color:#fff; font-size:16px; margin-bottom:8px; }
+    .process code { background:#2a5038; color:#c4dfb7; overflow-wrap:anywhere; white-space:normal; }
+    .process .note { color:#bdceba; margin-bottom:0; }
+    .checks { padding:0; list-style:none; margin:16px 0 0; }
+    .checks .check { margin:12px 0; }
+    .verify h3 { margin-top:0; }
+    .scope { background:var(--surface-2); border-left:3px solid var(--accent); padding:16px 20px; border-radius:8px; margin:20px 0; }
+    .resource-links { display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:14px; font-size:14px; }
+    .resource-links a { text-decoration:underline; text-underline-offset:3px; }
+    .skip { position:absolute; top:-100px; left:16px; z-index:100; padding:10px 16px; background:var(--surface); border-radius:8px; }
+    .skip:focus { top:12px; }
+    .presentation-tools { display:flex; align-items:center; gap:8px; margin-left:auto; }
+    .presentation-tools button { padding:6px 10px; font-size:13px; }
+    .presentation-tools .secondary { background:var(--surface-2); color:var(--text); }
+    #page-progress { position:fixed; top:0; left:0; height:3px; width:0; background:#60925f; z-index:50; pointer-events:none; }
+    .bar span { min-width:44px; }
+    .metric-card .thm { overflow-wrap:anywhere; }
+    footer a { text-decoration:underline; }
+
+    .toc a { border-radius:5px; border-bottom:2px solid transparent; }
+    .toc a[aria-current="location"] { border-bottom-color:var(--accent); background:var(--surface-2); }
+    h2 { letter-spacing:-.025em; }
+    h2 .num { background:#245c43; color:#fff; border-radius:5px; width:38px; height:30px; font-family:var(--mono); font-size:13px; }
+    .kpi { border-top:3px solid var(--accent); }
+    .metric-card { border-top:3px solid var(--border); }
+    .code-block, .helper-details, .stack-half { border-radius:8px; }
+    .concept-card { border-top-width:3px; }
+    .tree .active { background:#d9d7a4; color:#192f22; }
+    .check .ok { background:#276749; color:#fff; }
+    .reading-notes { margin:18px 0 28px; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+    .reading-note { padding:22px 26px; background:var(--surface); }
+    .reading-note + .reading-note { background:var(--surface-2); border-top:1px solid var(--border); }
+    .reading-note h3 { font-size:17px; margin:0 0 12px; color:var(--accent); }
+    .reading-note h3 span { display:inline-block; margin-right:10px; font-size:11px; letter-spacing:.1em; vertical-align:2px; color:var(--muted); font-weight:600; }
+    .reading-note p { margin:10px 0 0; line-height:1.85; }
+    .reading-note p:first-of-type { margin-top:0; }
+    @media (max-width:600px) { .reading-note { padding:18px; } }
+    @media (min-width:1200px) { body.large-type .wrap, body.large-type .hero-inner { max-width:1280px; } body.large-type { font-size:19px; } body.large-type .lead { font-size:20px; } body.large-type h2 { font-size:29px; } body.large-type h3 { font-size:21px; } body.large-type pre { font-size:15px; } body.large-type .diag-item, body.large-type .strategy, body.large-type table { font-size:17px; } body.large-type .reading-note h3 { font-size:21px; } }
+    @media (max-width:800px) { .two-col, .demo-panel { grid-template-columns:1fr; } .process ol { grid-template-columns:1fr 1fr; } .presentation-tools { margin-left:0; } }
+    @media (max-width:600px) { .hero { padding:38px 20px 80px; } .hero .subtitle { font-size:16px; } .hero .meta { gap:8px 20px; } .process { padding:22px; } .process ol { grid-template-columns:1fr; } .stack-diagram { grid-template-columns:1fr; } dl.glossary { grid-template-columns:1fr; gap:4px; } dd { margin-bottom:10px; } section { scroll-margin-top:20px; } h2 { font-size:22px; align-items:flex-start; } h2 .num { margin-top:3px; } .term { font-size:17px; } .details-content { padding:14px; } .table-wrap { padding:16px; } th,td { padding:10px; } .presentation-tools { display:none; } }
+    @media print { :root { --bg:white; --surface:white; --surface-2:#f0f4ec; --text:#21392e; --muted:#536750; --border:#d4dece; --accent:#245c43; --accent-soft:#e6eee0; --good:#276749; --good-soft:#e4f0e5; --bad:#865e28; --bad-soft:#f7f0e2; --code-bg:#f0f4ec; --code-text:#253c2c; } @page { size:A4; margin:15mm; } body { font-size:10pt; } .hero { padding:26px; background:#245c43 !important; print-color-adjust:exact; -webkit-print-color-adjust:exact; } .hero h1 { font-size:26pt; } .wrap { margin:0 auto; padding:0; } nav.toc, #page-progress, .demo-controls, .dim-controls, .skip { display:none; } section { margin-top:28px; } h2 { font-size:17pt; break-after:avoid; } h3 { break-after:avoid; } .card,.kpi { box-shadow:none; } .compare { grid-template-columns:1fr; } .compare .code-block.after { position:static; } .compare .code-block pre { max-height:none; overflow:visible; } pre { white-space:pre-wrap; overflow-wrap:anywhere; font-size:8pt; } .code-title { print-color-adjust:exact; -webkit-print-color-adjust:exact; } .tk-kw,.tk-tac,.tk-id,.tk-num,.tk-com,.tk-comb { color:inherit; } .process { print-color-adjust:exact; -webkit-print-color-adjust:exact; } .two-col { grid-template-columns:1fr 1fr; } a { color:inherit; } footer { margin-top:30px; } }
+
+
+/* Continuous report layout, using the reference's forest-green and paper palette. */
+html { scroll-padding-top:110px; }
+body { font-size:16px; }
+.hero { padding:58px 24px 91px; }
+.hero::after { content:"VERIFY / REPAIR"; top:94px; font-size:clamp(48px,8vw,116px); opacity:.045; }
+.hero h1 { font-size:clamp(30px,4vw,43px); max-width:850px; }
+.hero .subtitle { font-size:18px; line-height:1.75; max-width:830px; }
+.hero .eyebrow { margin-bottom:20px; }
+.hero-inner { max-width:1080px; }
+nav.toc { align-items:center; gap:3px; }
+nav.toc > a { padding:8px 10px; font-size:13.5px; }
+.presentation-tools button { font-size:12.5px; white-space:nowrap; }
+section { margin-top:64px; }
+section.chapter { padding-top:4px; }
+h2 { font-size:27px; line-height:1.45; margin-bottom:12px; }
+h2 .num { width:38px; height:32px; }
+.section-intro { line-height:1.85; margin:0 0 25px; max-width:980px; font-size:16px; }
+.report-summary { margin-top:27px; }
+.report-summary .lead { margin-top:0; line-height:1.8; }
+.report-summary h3 { margin:0 0 12px; }
+.summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:18px; }
+.summary-grid .kpi { border-top:3px solid var(--accent); }
+.summary-grid .value { font-size:23px; line-height:1.5; margin:5px 0; }
+.summary-grid .sub { font-size:13px; line-height:1.7; }
+.topic { margin-top:33px; }
+.topic + .topic { margin-top:42px; }
+.topic-title { font-size:20px; line-height:1.55; margin:0 0 8px; letter-spacing:-.025em; }
+.topic-intro { color:var(--muted); margin:0 0 18px; line-height:1.8; }
+.topic-content { display:flex; flex-direction:column; gap:18px; }
+.topic-content > * { margin-top:0; margin-bottom:0; }
+.grid2,.grid3,.grid4 { display:grid; gap:16px; align-items:stretch; }
+.grid2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.grid3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.grid4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.grid2 > *, .grid3 > *, .grid4 > *, .stack > *, .topic-content > * { min-width:0; }
+.stack { display:flex; flex-direction:column; gap:16px; }
+.stack.tight { gap:12px; }
+.card { padding:22px 24px; }
+.card h4 { font-size:17px; margin:10px 0 12px; line-height:1.6; letter-spacing:-.01em; }
+p { line-height:1.8; }
+.card p { margin:10px 0 0; }
+.card.subtle { background:var(--surface-2); box-shadow:none; }
+.card.teal { background:var(--good-soft); border-color:var(--border); }
+.card.amber,.card.red { background:var(--bad-soft); }
+.card.dark { background:#173d2b; color:#e3ebdc; border-color:#244d34; }
+.card.dark .eyebrow,.card.dark .label { color:#bad1ac; }
+.card.dark code:not(pre code) { background:#2a5038; color:#d7e7cb; }
+.card.dark h4 { color:white; }
+.label,.metric-label { font-size:12px; font-weight:650; letter-spacing:.035em; color:var(--muted); }
+.label { margin-bottom:10px; }
+.small { font-size:14.5px; }
+.minor,.metric-note { font-size:13px; color:var(--muted); line-height:1.8; }
+.metric-note { margin-top:4px; }
+.num:not(h2 .num):not(td):not(th) { font-variant-numeric:tabular-nums; }
+.card > .num { font-size:32px; font-weight:750; letter-spacing:-.02em; color:var(--accent); line-height:1.5; margin-top:4px; }
+.card > .num > span { font-size:15px; font-weight:500; margin-left:3px; }
+.callout { background:var(--surface-2); border-left:3px solid var(--accent); padding:16px 20px; border-radius:7px; font-size:14.5px; line-height:1.85; }
+.callout.amber { background:var(--bad-soft); border-color:var(--bad); }
+.callout.blue { background:var(--accent-soft); }
+.splitline { height:1px; background:var(--border); opacity:.8; margin:17px 0; }
+.card.dark .splitline { background:#4d6c50; }
+.table-wrap { border:1px solid var(--border); border-radius:10px; background:var(--surface); }
+table { font-size:14px; line-height:1.8; }
+th,td { padding:13px 15px; vertical-align:top; }
+thead th { font-size:12px; text-transform:none; }
+td:first-child { font-weight:600; }
+tbody tr:last-child td { border-bottom:0; }
+td .subcell { display:block; font-size:12px; color:var(--muted); line-height:1.7; margin-top:6px; font-weight:400; }
+td code { white-space:normal; overflow-wrap:anywhere; word-break:normal; }
+.tag { display:inline-block; padding:2px 9px; border-radius:4px; font-size:11px; font-weight:750; letter-spacing:.04em; }
+.tag.pass { background:var(--good-soft); color:var(--good); }
+.tag.fail,.tag.warn { background:var(--bad-soft); color:var(--bad); }
+code { font-size:.87em; }
+:not(pre)>code { white-space:normal; overflow-wrap:anywhere; }
+pre { border-radius:8px; font-size:13px; line-height:1.8; padding:18px 20px; }
+pre code { font-size:inherit; background:none; color:inherit; padding:0; border-radius:0; }
+pre.light { background:var(--surface-2); color:var(--text); border:1px solid var(--border); }
+pre.compact { font-size:12.5px; padding:16px 18px; }
+.code-title { border-radius:7px 7px 0 0; }
+.code-title + pre { border-radius:0 0 7px 7px; }
+.tab-panel { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); border:1px solid var(--border); border-radius:0 0 10px 10px; overflow:hidden; background:var(--surface); }
+[hidden] { display:none !important; }
+.tabs { display:flex; gap:0; border:1px solid var(--border); border-bottom:0; border-radius:10px 10px 0 0; overflow:hidden; background:var(--surface-2); }
+.tabs button { border:0; border-radius:0; padding:11px 21px; background:transparent; color:var(--muted); font-size:14px; }
+.tabs button[aria-selected=true] { background:#245c43; color:white; }
+.tab-panel > pre { border-radius:0; min-height:245px; padding:27px 24px; font-size:14px; display:block; }
+.tab-result { padding:22px 24px; }
+.tab-result h4 { font-size:19px; margin:7px 0 10px; color:var(--good); }
+.tab-result.bad h4,.tab-result.warning h4 { color:var(--bad); }
+.tab-result p { font-size:14px; margin:0; }
+.tab-result .label { margin-bottom:4px; }
+.tab-result pre { font-size:12.5px; padding:13px 16px; line-height:1.65; }
+.horizontal-flow { display:flex; gap:8px; align-items:stretch; padding:23px; background:#173d2b; border-radius:11px; }
+.flowbox { flex:1; min-width:0; border:1px solid #53755a; background:#234b35; border-radius:7px; padding:14px 13px; color:#e8f0e1; }
+.flowbox.active { background:#2e5940; }
+.flowbox.model { background:#3e5c39; border-color:#8cae76; }
+.flowbox .eyebrow { display:block; font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.06em; color:#bdd4aa; margin:0 0 9px; }
+.flowbox strong { display:block; font-size:15px; color:#fff; margin-bottom:7px; }
+.flowbox small { font-size:12px; line-height:1.8; display:block; }
+.flow-arrow { flex:none; align-self:center; color:#a5c391; font-size:17px; }
+.loopback { background:var(--accent-soft); border:1px dashed var(--accent-2); border-radius:7px; padding:13px 17px; font-size:13px; line-height:1.9; color:var(--accent); }
+.step { display:flex; gap:14px; padding:17px 20px; background:var(--surface); border:1px solid var(--border); border-radius:9px; }
+.step-id,.timeline .node { width:27px; height:27px; flex:none; display:grid; place-items:center; background:var(--accent-soft); color:var(--accent); border-radius:5px; font:600 13px var(--mono); }
+.step h4,.timeline h4 { margin:0 0 6px; font-size:15px; line-height:1.6; }
+.step p,.timeline p { margin:0; font-size:13.5px; line-height:1.8; }
+.timeline { display:grid; grid-template-columns:29px minmax(0,1fr); gap:23px 16px; padding:25px 24px; border:1px solid var(--border); background:var(--surface); border-radius:10px; align-content:start; }
+.hash { font-family:var(--mono); font-size:12px; line-height:1.9; overflow-wrap:anywhere; margin-top:10px; }
+.reference-line { display:flex; flex-wrap:wrap; gap:5px 11px; align-items:center; font-size:12px; color:var(--muted); margin:15px 0 0; }
+.reference-line a { text-decoration:underline; text-underline-offset:3px; }
+.helper-details { margin:17px 0 0; }
+.helper-details > summary { font-size:13.5px; padding:13px 18px; background:var(--surface-2); }
+.details-content { padding:22px; }
+.evidence-item + .evidence-item { margin-top:25px; }
+.evidence-item h4 { font-size:15px; margin:0 0 4px; }
+.evidence-item pre { max-height:410px; font-size:12px; white-space:pre-wrap; overflow-wrap:anywhere; }
+.evidence-path { margin:0 0 12px; }
+.reading-note h4 { font-size:16px; margin:0 0 11px; color:var(--accent); }
+.reading-note p { font-size:14.5px; margin:0; }
+.reading-notes { margin-top:20px; margin-bottom:0; }
+.ref-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 25px; }
+.ref-entry { padding:15px 0; border-bottom:1px solid var(--border); min-width:0; scroll-margin-top:120px; }
+.ref-entry a { display:block; font-size:14px; font-weight:600; overflow-wrap:anywhere; }
+.ref-entry span { display:block; color:var(--muted); font-size:12px; margin-top:5px; }
+.ref-entry .ref-id { display:inline; font-family:var(--mono); color:var(--accent); margin-right:7px; }
+.chapter-takeaway { margin-top:27px; padding:17px 21px; border-left:4px solid var(--accent); background:var(--accent-soft); border-radius:7px; font-size:15px; line-height:1.9; }
+.extended-history .topic { margin:0; }
+.extended-history .topic-title { font-size:17px; }
+#s08 .grid3 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+#s08 .grid3 > .card:last-child { grid-column:1 / -1; }
+#s08 .grid3 > .card:last-child pre { font-size:13px; }
+#s13 .grid2 { grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); }
+#s01 table th:first-child { width:24%; }
+#s01 table th:nth-child(2) { width:27%; }
+#s01 table th:nth-child(3) { width:31%; }
+#s01 table th:last-child { width:18%; }
+#s06 table th:first-child { width:20%; }
+#s06 table th:last-child { width:26%; }
+#s12 table th:nth-child(2) { width:31%; }
+#s10 .scope-row { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+#s10 .scope-box { min-width:0; padding:22px; border:1px solid var(--border); border-top:3px solid var(--border); border-radius:10px; background:var(--surface); }
+#s10 .scope-box.edit { border-top-color:var(--accent); background:var(--good-soft); }
+#s10 .scope-box h4 { font-size:17px; margin:12px 0; }
+#s10 .scope-box p { margin:0; }
+#s10 .scopebox .scope-title { font-size:17px; font-weight:700; line-height:1.6; margin:10px 0; }
+#s10 .scopebox .scope-desc { font-size:14px; line-height:1.8; }
+footer { margin-top:45px; }
+@media(min-width:1200px) {
+ body.large-type .wrap,body.large-type .hero-inner { max-width:1260px; }
+ body.large-type .topic-title { font-size:25px; }
+ body.large-type .topic-intro,body.large-type .section-intro,body.large-type .small,body.large-type .callout,body.large-type .reading-note p { font-size:17px; }
+ body.large-type table { font-size:16px; }
+ body.large-type pre,body.large-type pre.compact { font-size:14px; }
+ body.large-type .card h4 { font-size:20px; }
+}
+@media(max-width:900px) {
+ .grid3 { grid-template-columns:1fr; }
+ .grid4 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .horizontal-flow { flex-wrap:wrap; }
+ .flowbox { flex:1 1 140px; }
+ .flow-arrow { display:none; }
+ .presentation-tools { margin-left:auto; }
+}
+@media(max-width:700px) {
+ .grid2,.grid3,#s08 .grid3,#s13 .grid2,#s10 .scope-row,.summary-grid,.tab-panel,.ref-list { grid-template-columns:1fr; }
+ #s08 .grid3>.card:last-child { grid-column:auto; }
+ .tabs button { padding:10px 13px; font-size:13px; flex:1; }
+ .tab-panel > pre { min-height:0; font-size:12.5px; padding:20px; }
+ .card,.tab-result { padding:19px; }
+ .topic-title { font-size:18px; }
+ .hero h1 { font-size:29px; }
+ .hero .subtitle { font-size:16px; }
+ .hero { padding-top:40px; }
+ h2 { font-size:23px; }
+ .topic { margin-top:27px; }
+ .table-wrap { padding:0; }
+ table { min-width:600px; }
+ #s04 table,#s05 table,#s09 table { min-width:500px; }
+ .grid4 .card { padding:16px; }
+ .card > .num { font-size:28px; }
+ .details-content { padding:16px; }
+ .horizontal-flow { padding:16px; }
+ .flowbox { flex-basis:125px; }
+ section { margin-top:45px; }
+ nav.toc a { font-size:12.5px; padding:6px 8px; }
+ .evidence-item pre { font-size:11.5px; }
+}
+@media print {
+ nav.toc,.tabs,.reference-line,#page-progress,.presentation-tools,.skip { display:none !important; }
+ .hero { padding:24px; }
+ .hero h1 { font-size:24pt; }
+ section.chapter { margin-top:30px; }
+ .topic { margin-top:23px; }
+ .topic-title { font-size:14pt; }
+ .topic-intro,.section-intro,.small,.minor,.callout,table { font-size:9.5pt; }
+ .card,.step,.timeline { break-inside:avoid; }
+ .grid3,.grid4 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .table-wrap { overflow:visible; }
+ table { min-width:0; }
+ .horizontal-flow { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+ pre { white-space:pre-wrap; overflow-wrap:anywhere; font-size:8pt !important; }
+ .tab-panel { display:block; break-inside:avoid; }
+ .tab-panel[hidden] { display:block !important; margin-top:13px; }
+ .tab-panel > pre { min-height:0; }
+ .evidence-details { display:none; }
+ .helper-details:not([open]) { display:none; }
+ a { text-decoration:none; }
+}
+</style></head><body>
+<a class="skip" href="#systems">본문으로 이동</a><div id="page-progress" aria-hidden="true"></div>
+<header class="hero" id="top"><div class="hero-inner"><div class="eyebrow"><span class="pill">LeanAgent</span><span class="pill">Verification &amp; Repair</span><span class="pill">P7 · P12</span></div><h1>Lean 검증·수리 설계와 실행</h1><p class="subtitle">작은 예제에서 확인한 성공 판정 기준을<br>P7·P12의 검증과 실제 모델 수리 루프로 연결한다.</p></div></header>
+<main class="wrap"><nav class="toc" aria-label="보고서 목차"><a href="#systems">선행시스템</a><a href="#small-example">작은 Lean 예제</a><a href="#project-cases">P7·P12 실행</a><a href="#minimal-design">최소 설계</a><a href="#model-repair">모델 수리</a><div class="presentation-tools"><button id="large-type" class="secondary" type="button" aria-pressed="false">큰 글씨</button><button id="print-page" class="secondary" type="button">인쇄</button></div></nav>
+<div class="report-summary"><div class="card"><p class="lead"><strong>수리의 완료는 모델의 응답이 아니라, 수정이 반영된 원래 정리의 검증으로 결정한다.</strong> Lean의 오류를 읽고 수정 후보를 적용하는 과정에서 무엇을 관측하고, 어떤 조건으로 수락할지 정리한다.</p><div class="pipeline"><code>선행시스템</code><span class="arrow">→</span><code>작은 예제</code><span class="arrow">→</span><code>P7·P12 실행</code><span class="arrow">→</span><code>최소 설계</code><span class="arrow">→</span><code>실제 모델 수리</code></div></div>
+<div class="summary-grid"><div class="kpi"><div class="label">작은 예제에서 확인</div><div class="value">세 신호의 차이</div><div class="sub">종료 코드 · goals · sorry<br>단일 신호로는 성공을 판정하지 않는다.</div></div><div class="kpi"><div class="label">P7·P12 통제 실험</div><div class="value">정상 → 오류 → 수정</div><div class="sub">알려진 수정으로 복구하고<br>전체 파일과 대상 공리를 확인했다.</div></div><div class="kpi"><div class="label">P7 실제 모델 수리</div><div class="value good">첫 후보 검증 통과</div><div class="sub">실제 응답의 본문을 그대로 적용했다.<br>실패 후 모델 재시도는 미관측이다.</div></div></div></div>
+<section class="chapter" id="systems" aria-labelledby="systems-title"><h2 id="systems-title"><span class="num">01</span><span>선행시스템 비교</span></h2><p class="section-intro">Lean 인터페이스, 수리 정책, 실행 하네스는 서로 다른 역할이다. 필요한 책임을 구분해 최소 구조를 정한다.</p><article class="topic" id="s01" aria-labelledby="s01-title"><h3 class="topic-title" id="s01-title">시스템마다 맡는 역할이 다르다</h3><p class="topic-intro">Lean과 상호작용하는 통로, 수정 후보를 만드는 정책, 실행을 관리하는 하네스를 나누어 비교한다.</p><div class="topic-content"><div class="table-wrap"><table class="compact-table"><thead><tr><th scope="col">층위 / 대상</th><th scope="col">Lean과 상호작용하는 방식</th><th scope="col">우리 설계에 가져올 부분</th><th scope="col">이번 실행 범위</th></tr></thead><tbody><tr><td><span class="system-name">LeanAgent / LeanDojo 계열</span><span class="subcell">증명 탐색·학습 환경 [R01–02]</span></td><td>proof state에서 tactic을 제안하고 실행한다.</td><td>후보 생성과 Lean 상태 전이를 분리한다.</td><td>구조 조사</td></tr><tr><td><span class="system-name">REPL · LeanInteract · Pantograph</span><span class="subcell">Lean 상호작용 인터페이스 [R03–05]</span></td><td>전체 명령·파일 또는 tactic을 보내 진단·상태를 받는다.</td><td>backend별 출력을 공통 검증 결과로 정리한다.</td><td>REPL만 작은 예제 실행</td></tr><tr><td><span class="system-name">APOLLO</span><span class="subcell">컴파일러 피드백 기반 수리 [R06]</span></td><td>실패 부분을 나누고 수리한 뒤 전체를 재조립한다.</td><td>국소 수정과 전체 재검증을 함께 둔다.</td><td>구조 조사</td></tr><tr><td><span class="system-name">APRIL</span><span class="subcell">수리 데이터·모델 학습 [R07]</span></td><td>실패 proof와 compiler feedback으로 수리를 학습한다.</td><td>오류·후보·진단을 재사용 가능한 데이터로 남긴다.</td><td>구조 조사</td></tr><tr><td><span class="system-name">mini-Lean-agent</span><span class="subcell">최소 코딩 에이전트 기준선 [R08]</span></td><td>모델은 bash로 작업하고 별도 evaluator가 결과를 검사한다.</td><td>모델의 종료와 검증기의 수락을 분리한다.</td><td>구조 조사</td></tr><tr><td><span class="system-name">Codex exec / Claude Agent SDK</span><span class="subcell">일반 에이전트 실행 도구 [R09–10]</span></td><td>호출·이벤트·도구·예산을 관리한다.</td><td>Lean 고유의 성공 조건은 별도 구현한다.</td><td>Codex exec 실제 연결</td></tr></tbody></table></div></div><div class="reference-line"><span>참고문헌</span><a href="#ref-R01">R01</a><a href="#ref-R02">R02</a><a href="#ref-R03">R03</a><a href="#ref-R04">R04</a><a href="#ref-R05">R05</a><a href="#ref-R06">R06</a><a href="#ref-R07">R07</a><a href="#ref-R08">R08</a><a href="#ref-R09">R09</a><a href="#ref-R10">R10</a></div></article><article class="topic" id="s02" aria-labelledby="s02-title"><h3 class="topic-title" id="s02-title">국소 수정과 전체 재검증</h3><p class="topic-intro">정상 부분을 유지하며 실패한 부분에 집중하되, 최종 수락은 독립된 검증 절차에서 결정한다.</p><div class="topic-content"><div class="horizontal-flow"><div class="flowbox"><span class="eyebrow">APOLLO 1</span><strong>구문 정리</strong><small>문법 오류를 정규화한다.</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox"><span class="eyebrow">APOLLO 2</span><strong>실패 분리</strong><small>남은 부분을 sorry로 표시한다.</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox"><span class="eyebrow">APOLLO 3</span><strong>부분 수리</strong><small>자동 tactic과 LLM을 사용한다.</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox active"><span class="eyebrow">APOLLO 4</span><strong>재조립·검증</strong><small>완성 proof 전체를 확인한다.</small></div></div><div class="grid2"><div class="card blue"><div class="label">APOLLO에서 가져온 질문</div><h4>정상 부분을 버리지 않고<br/>실패한 부분만 고칠 수 있는가?</h4><p class="small">중간 <code>sorry</code>는 작업을 나누기 위한 표시일 수 있다. 그러나 그 중간 상태를 최종 성공으로 인정해서는 안 된다.</p></div><div class="card teal"><div class="label">mini-Lean-agent에서 가져온 질문</div><h4>모델이 작업을 끝내는 것과<br/>증명이 완성되는 것은 같은가?</h4><p class="small">최종 결과는 별도의 신뢰하는 평가기가 검사한다. 우리도 모델에게 최종 성공 판정권을 주지 않는다.</p></div></div><div class="callout">이번 최소 구현은 <b>재귀적 부분문제 분해나 탐색 트리 없이</b>, 승인된 proof body 하나와 제한된 후보 반복에서 시작한다.</div></div><div class="reference-line"><span>참고문헌</span><a href="#ref-R06">R06</a><a href="#ref-R08">R08</a></div></article><div class="chapter-takeaway">수리 정책과 Lean 인터페이스는 바뀔 수 있어도, 원래 정리를 최종 검증하는 절차는 공통으로 유지한다.</div></section><section class="chapter" id="small-example" aria-labelledby="small-example-title"><h2 id="small-example-title"><span class="num">02</span><span>작은 Lean 예제의 실행과 성공 판정</span></h2><p class="section-intro">정상·오류·수정을 먼저 실행하고, 종료 코드·goals·sorry가 뜻하는 바를 구분한다. 여기서 얻은 검증 기준을 이후 모든 사례에 적용한다.</p><article class="topic" id="s03" aria-labelledby="s03-title"><h3 class="topic-title" id="s03-title">정상 → 오류 → 수정 → sorry</h3><p class="topic-intro"><code>h : P ∧ Q</code>로 <code>Q ∧ P</code>를 증명한다. 첫 번째 목표에 어떤 증거를 주었는지 비교한다.</p><div class="topic-content"><div class="demo-tabs"><div aria-label="작은 예제 실행 기록" class="tabs" role="tablist"><button aria-controls="demo-baseline" aria-selected="false" data-tab="demo-baseline" id="tab-demo-baseline" role="tab" tabindex="-1">정상 기록</button><button aria-controls="demo-broken" aria-selected="true" data-tab="demo-broken" id="tab-demo-broken" role="tab" tabindex="0">오류 기록</button><button aria-controls="demo-repaired" aria-selected="false" data-tab="demo-repaired" id="tab-demo-repaired" role="tab" tabindex="-1">수정 기록</button><button aria-controls="demo-sorry" aria-selected="false" data-tab="demo-sorry" id="tab-demo-sorry" role="tab" tabindex="-1">sorry 기록</button></div><div aria-labelledby="tab-demo-baseline" class="tab-panel" hidden="" id="demo-baseline" role="tabpanel"><pre class="" tabindex="0"><code>theorem and_swap (P Q : Prop)
+    (h : P ∧ Q) : Q ∧ P := by
+  constructor
+  · exact h.2
+  · exact h.1</code></pre><div class="tab-result"><div class="label">실제 저장된 실행 결과</div><h4>CLI 종료 코드 0</h4><p>h.2는 Q의 증거, h.1은 P의 증거다.</p><div style="height:14px"></div><pre class="compact light" tabindex="0"><code>전체 proof 검사: error 없음</code></pre></div></div><div aria-labelledby="tab-demo-broken" class="tab-panel" id="demo-broken" role="tabpanel"><pre class="" tabindex="0"><code>theorem and_swap (P Q : Prop)
+    (h : P ∧ Q) : Q ∧ P := by
+  constructor
+  · exact h.1
+  · exact h.1</code></pre><div class="tab-result bad"><div class="label">실제 저장된 실행 결과</div><h4>CLI 종료 코드 1</h4><p>Q가 필요한 첫 목표에 P의 증거를 전달했다.</p><div style="height:14px"></div><pre class="compact light" tabindex="0"><code>type mismatch
+  h.left
+has type
+  P : Prop
+but is expected to have type
+  Q : Prop</code></pre></div></div><div aria-labelledby="tab-demo-repaired" class="tab-panel" hidden="" id="demo-repaired" role="tabpanel"><pre class="" tabindex="0"><code>theorem and_swap (P Q : Prop)
+    (h : P ∧ Q) : Q ∧ P := by
+  constructor
+  · exact h.2
+  · exact h.1</code></pre><div class="tab-result"><div class="label">실제 저장된 실행 결과</div><h4>CLI 종료 코드 0</h4><p>첫 번째 exact를 h.2로 복원했다.</p><div style="height:14px"></div><pre class="compact light" tabindex="0"><code>전체 proof 검사: error 없음</code></pre></div></div><div aria-labelledby="tab-demo-sorry" class="tab-panel" hidden="" id="demo-sorry" role="tabpanel"><pre class="" tabindex="0"><code>theorem and_swap (P Q : Prop)
+    (h : P ∧ Q) : Q ∧ P := by
+  sorry</code></pre><div class="tab-result warning"><div class="label">실제 저장된 실행 결과</div><h4>CLI 종료 코드 0 · 경고</h4><p>종료 코드는 정상이지만 실제 증명을 제공하지 않았다.</p><div style="height:14px"></div><pre class="compact light" tabindex="0"><code>warning: declaration uses 'sorry'</code></pre></div></div></div><div class="grid3"><div class="card subtle"><div class="label">GOAL</div><h4>지금 필요한 것</h4><p class="small">첫 번째 목표는 <code>Q</code>다.</p></div><div class="card subtle"><div class="label">CONTEXT</div><h4>이미 가진 것</h4><p class="small"><code>h : P ∧ Q</code>에서<br/><code>h.1 : P</code>, <code>h.2 : Q</code>.</p></div><div class="card subtle"><div class="label">REPAIR</div><h4>올바른 증거 선택</h4><p class="small">명제는 그대로 두고<br/><code>h.1</code>을 <code>h.2</code>로 바꾼다.</p></div></div><p class="minor">Lean 4.19.0 · community REPL v4.19.0 · Mathlib와 모델은 사용하지 않았다. 버튼은 저장된 실행 기록을 보여주며, 브라우저에서 Lean을 실행하지 않는다.</p></div><details class="helper-details evidence-details"><summary>CLI 정상·오류·수정·sorry 기록</summary><div class="details-content"><div class="evidence-item"><h4>작은 예제: 환경·종료 코드</h4><p class="note evidence-path"><code>summary.json</code></p><pre tabindex="0"><code>{
+  &quot;runtime&quot;: &quot;leanprover-community/repl&quot;,
+  &quot;repl_tag&quot;: &quot;v4.19.0&quot;,
+  &quot;repl_commit&quot;: &quot;3b27c8543a48444ffab4077f47526d91849cca3d&quot;,
+  &quot;lean_version&quot;: &quot;Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)&quot;,
+  &quot;system&quot;: &quot;Linux-6.18.55-x86_64-with-glibc2.39&quot;,
+  &quot;model_called&quot;: false,
+  &quot;mathlib_used&quot;: false,
+  &quot;proof_statement&quot;: &quot;theorem and_swap (P Q : Prop) (h : P ∧ Q) : Q ∧ P := by&quot;,
+  &quot;repl_returncode&quot;: 0,
+  &quot;protocol_records&quot;: 12,
+  &quot;compiler&quot;: [
+    {
+      &quot;label&quot;: &quot;baseline&quot;,
+      &quot;command&quot;: [
+        &quot;lean-4.19.0-linux/bin/lean&quot;,
+        &quot;baseline.lean&quot;
+      ],
+      &quot;returncode&quot;: 0,
+      &quot;stdout&quot;: &quot;&quot;,
+      &quot;stderr&quot;: &quot;&quot;,
+      &quot;elapsed_seconds&quot;: 0.099091
+    },
+    {
+      &quot;label&quot;: &quot;broken&quot;,
+      &quot;command&quot;: [
+        &quot;lean-4.19.0-linux/bin/lean&quot;,
+        &quot;broken.lean&quot;
+      ],
+      &quot;returncode&quot;: 1,
+      &quot;stdout&quot;: &quot;broken.lean:3:4: error: type mismatch\n  h.left\nhas type\n  P : Prop\nbut is expected to have type\n  Q : Prop\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;,
+      &quot;elapsed_seconds&quot;: 0.115419
+    },
+    {
+      &quot;label&quot;: &quot;repaired&quot;,
+      &quot;command&quot;: [
+        &quot;lean-4.19.0-linux/bin/lean&quot;,
+        &quot;repaired.lean&quot;
+      ],
+      &quot;returncode&quot;: 0,
+      &quot;stdout&quot;: &quot;&quot;,
+      &quot;stderr&quot;: &quot;&quot;,
+      &quot;elapsed_seconds&quot;: 0.11558
+    },
+    {
+      &quot;label&quot;: &quot;sorry&quot;,
+      &quot;command&quot;: [
+        &quot;lean-4.19.0-linux/bin/lean&quot;,
+        &quot;sorry.lean&quot;
+      ],
+      &quot;returncode&quot;: 0,
+      &quot;stdout&quot;: &quot;sorry.lean:1:8: warning: declaration uses &#x27;sorry&#x27;\n&quot;,
+      &quot;stderr&quot;: &quot;&quot;,
+      &quot;elapsed_seconds&quot;: 0.102397
+    }
+  ]
+}</code></pre></div></div></details></article><article class="topic" id="s04" aria-labelledby="s04-title"><h3 class="topic-title" id="s04-title">종료 코드, 빈 goals, 정보 부재의 차이</h3><p class="topic-intro">세 값은 서로 다른 상태를 나타낸다. 어느 하나만으로 증명 완성을 판정하지 않는다.</p><div class="topic-content"><div class="grid3"><div class="card"><div class="label">01 · PROCESS</div><h4>종료 코드가 0이다</h4><pre class="compact" tabindex="0"><code>returncode: 0
+warning: declaration uses 'sorry'</code></pre><p class="small" style="margin-top:14px">CLI가 오류 없이 종료했다는 뜻이지, 요구한 증명을 완성했다는 뜻은 아니다.</p></div><div class="card"><div class="label">02 · GOALS</div><h4>goals가 비었다</h4><pre class="compact" tabindex="0"><code>"goals": [],
+"proofStatus":
+  "Incomplete: contains sorry"</code></pre><p class="small" style="margin-top:14px">목표를 <code>sorry</code>로 닫은 경우에도 빈 목록이 반환됐다.</p></div><div class="card"><div class="label">03 · FIELD ABSENCE</div><h4>goals 필드가 없다</h4><pre class="compact" tabindex="0"><code>{
+  "message": "Lean error: …"
+}</code></pre><p class="small" style="margin-top:14px">실패한 tactic 응답에는 goals가 없었다. 이를 빈 목록으로 바꾸면 안 된다.</p></div></div><div class="table-wrap"><table class="compact-table"><thead><tr><th scope="col">관측된 값</th><th scope="col">해석</th><th scope="col">허용하지 않을 판정</th></tr></thead><tbody><tr><td><code>goals = null</code></td><td>목표 정보를 받지 못함 / 해당 backend가 제공하지 않음</td><td>목표가 0개라고 간주</td></tr><tr><td><code>goals = []</code></td><td>backend가 실제 빈 목록을 반환</td><td>이 값만으로 최종 성공 선언</td></tr><tr><td><code>goals = […]</code></td><td>남은 목표 또는 수집된 상태 정보가 있음</td><td>진단 문맥과 완성 판정을 혼동</td></tr></tbody></table></div><p class="minor">REPL 프로세스도 내부 요청에 Lean 오류가 있었지만 종료 코드는 0이었다. 프로세스 상태와 요청별 진단을 분리해야 한다. JSON의 “…”는 메시지 발췌 표시다.</p></div><div class="reference-line"><span>참고문헌</span><a href="#ref-R03">R03</a><a href="#ref-R12">R12</a></div></article><article class="topic" id="s05" aria-labelledby="s05-title"><h3 class="topic-title" id="s05-title">완성된 proof state와 실제 선언도 다르다</h3><p class="topic-intro">REPL 내부에서 목표를 끝내는 것과 원래 환경의 정리를 수정하는 것은 별개였다.</p><div class="topic-content"><div class="grid2"><div class="card red"><div class="label">REPL 내부 상태 완성</div><pre class="compact" tabindex="0"><code>"proofStatus": "Completed",
+"goals": []
+
+#print axioms and_swap
+-- original env: [sorryAx]</code></pre><p class="small" style="margin-top:12px">완성한 proof state가 원래 environment의 선언을 자동으로 교체하지 않았다.</p></div><div class="card teal"><div class="label">전체 proof를 다시 조립한 뒤</div><pre class="compact" tabindex="0"><code>수정 proof를 포함한 전체 선언 재입력
+
+#print axioms and_swap
+-- does not depend on any axioms</code></pre><p class="small" style="margin-top:12px">실제로 반영한 전체 선언을 재검증한 뒤에야 원래 정리의 완성을 확인했다.</p></div></div><div class="table-wrap"><table class="compact-table"><thead><tr><th scope="col">작은 예제에서 얻은 기준</th><th scope="col">P7·P12 및 실제 모델 실험에 적용</th></tr></thead><tbody><tr><td>V1 · 프로세스와 진단을 함께 확인</td><td>종료 코드, timeout, 원시 오류를 각각 저장한다.</td></tr><tr><td>V2 · 미완성과 정보 부재를 구분</td><td>CLI의 goals 미제공을 성공으로 해석하지 않는다. trace는 진단 복사본에서 수집한다.</td></tr><tr><td>V3 · 실제 산출물과 대상 정리 검사</td><td>후보를 원본 문맥에 반영하고 전체 파일 + 대상 정리의 전이적 공리를 확인한다.</td></tr></tbody></table></div></div><details class="helper-details evidence-details"><summary>REPL 요청·응답 기록</summary><div class="details-content"><div class="evidence-item"><h4>작은 예제: 12개 REPL 요청·응답</h4><p class="note evidence-path"><code>trace.jsonl</code></p><pre tabindex="0"><code>{&quot;label&quot;: &quot;base_environment&quot;, &quot;request&quot;: {&quot;cmd&quot;: &quot;import Lean&quot;}, &quot;response&quot;: {&quot;env&quot;: 0}, &quot;elapsed_seconds&quot;: 0.454046}
+{&quot;label&quot;: &quot;full_baseline&quot;, &quot;request&quot;: {&quot;cmd&quot;: &quot;theorem and_swap (P Q : Prop) (h : P ∧ Q) : Q ∧ P := by\n  constructor\n  · exact h.2\n  · exact h.1\n&quot;, &quot;env&quot;: 0}, &quot;response&quot;: {&quot;messages&quot;: [{&quot;severity&quot;: &quot;info&quot;, &quot;pos&quot;: {&quot;line&quot;: 1, &quot;column&quot;: 0}, &quot;endPos&quot;: {&quot;line&quot;: 4, &quot;column&quot;: 13}, &quot;data&quot;: &quot;Goals accomplished!&quot;}], &quot;env&quot;: 1}, &quot;elapsed_seconds&quot;: 0.034221}
+{&quot;label&quot;: &quot;full_broken&quot;, &quot;request&quot;: {&quot;cmd&quot;: &quot;theorem and_swap (P Q : Prop) (h : P ∧ Q) : Q ∧ P := by\n  constructor\n  · exact h.1\n  · exact h.1\n&quot;, &quot;env&quot;: 0}, &quot;response&quot;: {&quot;messages&quot;: [{&quot;severity&quot;: &quot;error&quot;, &quot;pos&quot;: {&quot;line&quot;: 3, &quot;column&quot;: 4}, &quot;endPos&quot;: {&quot;line&quot;: 3, &quot;column&quot;: 13}, &quot;data&quot;: &quot;type mismatch\n  h.left\nhas type\n  P : Prop\nbut is expected to have type\n  Q : Prop&quot;}], &quot;env&quot;: 2}, &quot;elapsed_seconds&quot;: 0.033488}
+{&quot;label&quot;: &quot;full_repaired&quot;, &quot;request&quot;: {&quot;cmd&quot;: &quot;theorem and_swap (P Q : Prop) (h : P ∧ Q) : Q ∧ P := by\n  constructor\n  · exact h.2\n  · exact h.1\n&quot;, &quot;env&quot;: 0}, &quot;response&quot;: {&quot;messages&quot;: [{&quot;severity&quot;: &quot;info&quot;, &quot;pos&quot;: {&quot;line&quot;: 1, &quot;column&quot;: 0}, &quot;endPos&quot;: {&quot;line&quot;: 4, &quot;column&quot;: 13}, &quot;data&quot;: &quot;Goals accomplished!&quot;}], &quot;env&quot;: 3}, &quot;elapsed_seconds&quot;: 0.034073}
+{&quot;label&quot;: &quot;full_sorry_false_success_probe&quot;, &quot;request&quot;: {&quot;cmd&quot;: &quot;theorem and_swap (P Q : Prop) (h : P ∧ Q) : Q ∧ P := by\n  sorry\n&quot;, &quot;env&quot;: 0}, &quot;response&quot;: {&quot;sorries&quot;: [{&quot;proofState&quot;: 0, &quot;pos&quot;: {&quot;line&quot;: 2, &quot;column&quot;: 2}, &quot;goal&quot;: &quot;P Q : Prop\nh : P ∧ Q\n⊢ Q ∧ P&quot;, &quot;endPos&quot;: {&quot;line&quot;: 2, &quot;column&quot;: 7}}], &quot;messages&quot;: [{&quot;severity&quot;: &quot;warning&quot;, &quot;pos&quot;: {&quot;line&quot;: 1, &quot;column&quot;: 8}, &quot;endPos&quot;: {&quot;line&quot;: 1, &quot;column&quot;: 16}, &quot;data&quot;: &quot;declaration uses &#x27;sorry&#x27;&quot;}], &quot;env&quot;: 4}, &quot;elapsed_seconds&quot;: 0.033389}
+{&quot;label&quot;: &quot;tactic_constructor&quot;, &quot;request&quot;: {&quot;tactic&quot;: &quot;constructor&quot;, &quot;proofState&quot;: 0}, &quot;response&quot;: {&quot;proofStatus&quot;: &quot;Incomplete: open goals remain&quot;, &quot;proofState&quot;: 1, &quot;goals&quot;: [&quot;case left\nP Q : Prop\nh : P ∧ Q\n⊢ Q&quot;, &quot;case right\nP Q : Prop\nh : P ∧ Q\n⊢ P&quot;]}, &quot;elapsed_seconds&quot;: 0.000881}
+{&quot;label&quot;: &quot;tactic_wrong_projection&quot;, &quot;request&quot;: {&quot;tactic&quot;: &quot;exact h.1&quot;, &quot;proofState&quot;: 1}, &quot;response&quot;: {&quot;message&quot;: &quot;Lean error:\ntype mismatch\n  h.left\nhas type\n  P : Prop\nbut is expected to have type\n  Q : Prop&quot;}, &quot;elapsed_seconds&quot;: 0.000821}
+{&quot;label&quot;: &quot;tactic_repaired_projection&quot;, &quot;request&quot;: {&quot;tactic&quot;: &quot;exact h.2&quot;, &quot;proofState&quot;: 1}, &quot;response&quot;: {&quot;proofStatus&quot;: &quot;Incomplete: open goals remain&quot;, &quot;proofState&quot;: 2, &quot;goals&quot;: [&quot;case right\nP Q : Prop\nh : P ∧ Q\n⊢ P&quot;]}, &quot;elapsed_seconds&quot;: 0.000623}
+{&quot;label&quot;: &quot;tactic_complete&quot;, &quot;request&quot;: {&quot;tactic&quot;: &quot;exact h.1&quot;, &quot;proofState&quot;: 2}, &quot;response&quot;: {&quot;proofStatus&quot;: &quot;Completed&quot;, &quot;proofState&quot;: 3, &quot;goals&quot;: []}, &quot;elapsed_seconds&quot;: 0.000485}
+{&quot;label&quot;: &quot;tactic_sorry_false_success_probe&quot;, &quot;request&quot;: {&quot;tactic&quot;: &quot;sorry&quot;, &quot;proofState&quot;: 0}, &quot;response&quot;: {&quot;sorries&quot;: [{&quot;proofState&quot;: 4, &quot;goal&quot;: &quot;P Q : Prop\nh : P ∧ Q\n⊢ Q ∧ P&quot;}], &quot;proofStatus&quot;: &quot;Incomplete: contains sorry&quot;, &quot;proofState&quot;: 5, &quot;goals&quot;: []}, &quot;elapsed_seconds&quot;: 0.000756}
+{&quot;label&quot;: &quot;original_environment_after_tactic_completion&quot;, &quot;request&quot;: {&quot;cmd&quot;: &quot;#print axioms and_swap&quot;, &quot;env&quot;: 4}, &quot;response&quot;: {&quot;messages&quot;: [{&quot;severity&quot;: &quot;info&quot;, &quot;pos&quot;: {&quot;line&quot;: 1, &quot;column&quot;: 0}, &quot;endPos&quot;: {&quot;line&quot;: 1, &quot;column&quot;: 6}, &quot;data&quot;: &quot;&#x27;and_swap&#x27; depends on axioms: [sorryAx]&quot;}], &quot;env&quot;: 5}, &quot;elapsed_seconds&quot;: 0.029236}
+{&quot;label&quot;: &quot;assembled_final_revalidation&quot;, &quot;request&quot;: {&quot;cmd&quot;: &quot;theorem and_swap (P Q : Prop) (h : P ∧ Q) : Q ∧ P := by\n  constructor\n  · exact h.2\n  · exact h.1\n\n#print axioms and_swap&quot;, &quot;env&quot;: 0}, &quot;response&quot;: {&quot;messages&quot;: [{&quot;severity&quot;: &quot;info&quot;, &quot;pos&quot;: {&quot;line&quot;: 1, &quot;column&quot;: 0}, &quot;endPos&quot;: {&quot;line&quot;: 4, &quot;column&quot;: 13}, &quot;data&quot;: &quot;Goals accomplished!&quot;}, {&quot;severity&quot;: &quot;info&quot;, &quot;pos&quot;: {&quot;line&quot;: 6, &quot;column&quot;: 0}, &quot;endPos&quot;: {&quot;line&quot;: 6, &quot;column&quot;: 6}, &quot;data&quot;: &quot;&#x27;and_swap&#x27; does not depend on any axioms&quot;}], &quot;env&quot;: 6}, &quot;elapsed_seconds&quot;: 0.035076}</code></pre></div></div></details></article><div class="chapter-takeaway">V1 · 프로세스와 진단을 분리한다. V2 · 빈 목표와 정보 부재를 구분한다. V3 · 실제 수정이 반영된 전체 파일과 대상 정리를 검사한다.</div></section><section class="chapter" id="project-cases" aria-labelledby="project-cases-title"><h2 id="project-cases-title"><span class="num">03</span><span>P7·P12 원본 프로젝트에서 실행</span></h2><p class="section-intro">알려진 수정으로 오류를 재현하고 복구하는 통제 실험이다. 실제 모델이 수정 후보를 만드는 실험과 구분한다.</p><article class="topic" id="s06" aria-labelledby="s06-title"><h3 class="topic-title" id="s06-title">원본 환경에서 세 파일을 각각 검사</h3><p class="topic-intro">P7은 Cslib, P12는 ArkLib의 고정 toolchain을 사용했다. 각 정상본·오류본·수정본은 별도 파일로 실행했다.</p><div class="topic-content"><div class="table-wrap"><table class=""><thead><tr><th scope="col">사례 / 고정 환경</th><th scope="col">정상본</th><th scope="col">오류본</th><th scope="col">알려진 수정본</th><th scope="col">실험의 의미</th></tr></thead><tbody><tr><td>P7 · Cslib<span class="subcell">Lean 4.33.0-rc2<br/>commit 3aa9d441…</span></td><td><span class="tag pass">PASS</span><span class="subcell">6.422 s · exit 0</span></td><td><span class="tag fail">FAIL</span><span class="subcell">3.328 s · exit 1</span></td><td><span class="tag pass">PASS</span><span class="subcell">3.231 s · exit 0</span></td><td>typing 증거 인자 오류를 재현하고 복구</td></tr><tr><td>P12 · ArkLib<span class="subcell">Lean 4.31.0<br/>commit c1712f6c…</span></td><td><span class="tag pass">PASS</span><span class="subcell">20.907 s · exit 0</span></td><td><span class="tag fail">FAIL</span><span class="subcell">10.600 s · exit 1</span></td><td><span class="tag pass">PASS</span><span class="subcell">10.377 s · exit 0</span></td><td>추론 실패를 보강 진단한 뒤 표현 변환 복원</td></tr></tbody></table></div><div class="grid2"><div class="card"><div class="label">실제 실행 범위</div><h4>원본과 같은 고정 환경,<br/>실험 파일은 별도 복사본</h4><p class="small">소스와 의존성 환경을 보존하고, 대상 파일을 명시하여 검사했다. import 빌드 성공만으로 대상 검증을 대신하지 않았다.</p></div><div class="card amber"><div class="label">해석의 경계</div><h4>여기서는 모델이<br/>수정 방법을 찾지 않았다</h4><p class="small">수정본은 정상본과 바이트 단위로 동일하다. 알려진 수정으로 실행·검증 경로를 확인한 통제 실험이다.</p></div></div><p class="minor">시간은 해당 단일 실행의 기록이다. 워밍업·캐시·프로젝트 크기가 달라 P7/P12의 성능 비교나 수리 속도 향상으로 해석하지 않는다.</p></div></article><article class="topic" id="s07" aria-labelledby="s07-title"><h3 class="topic-title" id="s07-title">P7 · 귀납가설이 요구하는 증거를 바로잡기</h3><p class="topic-intro"><code>Typing.progress</code>는 잘 타입이 붙은 닫힌 항이 값이거나 한 단계 계산할 수 있음을 보인다.</p><div class="topic-content"><div class="grid2 gwide"><div class="stack"><div><div class="code-title">Lean 오류 · 잘못 전달한 인자</div><pre class="" tabindex="0"><code>Application type mismatch: The argument
+  wholeTyped
+has type
+  Typing [] (t₁.app t₂) τ✝
+but is expected to have type
+  Typing [] t₁ (σ✝.arrow τ✝)</code></pre></div><div class="callout blue">귀납가설은 <b>부분항 t₁</b>의 typing 증거를 요구한다.<br/>오류본은 <b>전체 application</b>의 증거를 전달했다.</div></div><div class="stack"><div class="card"><div class="label">실제로 수집한 문맥에서 비교</div><pre class="compact" tabindex="0"><code>leftTyped : Typing [] t₁ (σ✝.arrow τ✝)
+wholeTyped : Typing [] (t₁.app t₂) τ✝
+ihLeft : [] = [] →
+  Typing [] t₁ (σ✝.arrow τ✝) →
+  t₁.Value ∨ ∃ t', t₁ ⭢βᵛ t'</code></pre></div><div class="card teal"><div class="label">고친 부분 · 실제 diff에서 발췌</div><pre class="compact" tabindex="0"><code>- rcases ihLeft rfl wholeTyped with ...
++ rcases ihLeft rfl leftTyped with ...</code></pre><p class="minor" style="margin-top:12px">“...”는 동일한 후속 분기의 생략 표시다.</p></div></div></div></div><div class="reading-notes"><div class="reading-note"><h4>작은 예제와 같은 오류 구조</h4><p>작은 예제에서는 <code>Q</code>의 증거가 필요한데 <code>P</code>의 증거를 제출했다. P7에서는 <code>t₁</code>의 typing 증거가 필요한데 <code>t₁.app t₂</code> 전체의 typing 증거를 제출했다. 두 경우 모두 <strong>기대하는 타입과 전달한 증거의 타입을 비교해 올바른 인자를 선택</strong>한다.</p></div></div><details class="helper-details evidence-details"><summary>P7 오류·문맥·수정 diff·최종 로그</summary><div class="details-content"><div class="evidence-item"><h4>P7: 실제 타입 불일치</h4><p class="note evidence-path"><code>01_broken.stdout.log</code></p><pre tabindex="0"><code>01_broken.lean:45:22: error: Application type mismatch: The argument
+  wholeTyped
+has type
+  Typing [] (t₁.app t₂) τ✝
+but is expected to have type
+  Typing [] t₁ (σ✝.arrow τ✝)
+in the application
+  ihLeft rfl wholeTyped
+Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress.{u_1} {Var : Type u_1} [HasFresh Var] [DecidableEq Var]
+  {t : Term Var} {τ : Ty Var} (der : Typing [] t τ) : t.Value ∨ ∃ t&#x27;, t ⭢βᵛ t&#x27;
+&#x27;Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress&#x27; depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]</code></pre></div><div class="evidence-item"><h4>P7: 실패 지점의 실제 문맥</h4><p class="note evidence-path"><code>context.stdout.log</code></p><pre tabindex="0"><code>01_broken_context.lean:46:22: error: Application type mismatch: The argument
+  wholeTyped
+has type
+  Typing [] (t₁.app t₂) τ✝
+but is expected to have type
+  Typing [] t₁ (σ✝.arrow τ✝)
+in the application
+  ihLeft rfl wholeTyped
+Var : Type u_1
+inst✝¹ : HasFresh Var
+inst✝ : DecidableEq Var
+t : Term Var
+τ : Ty Var
+Γ : List ((_ : Var) × Binding Var)
+t₁ : Term Var
+σ✝ τ✝ : Ty Var
+t₂ : Term Var
+leftTyped : Typing [] t₁ (σ✝.arrow τ✝)
+rightTyped : Typing [] t₂ σ✝
+ihLeft : [] = [] → Typing [] t₁ (σ✝.arrow τ✝) → t₁.Value ∨ ∃ t&#x27;, t₁ ⭢βᵛ t&#x27;
+ihRight : [] = [] → Typing [] t₂ σ✝ → t₂.Value ∨ ∃ t&#x27;, t₂ ⭢βᵛ t&#x27;
+wholeTyped : Typing [] (t₁.app t₂) τ✝
+⊢ ∃ t&#x27;, t₁.app t₂ ⭢βᵛ t&#x27;
+Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress.{u_1} {Var : Type u_1} [HasFresh Var] [DecidableEq Var]
+  {t : Term Var} {τ : Ty Var} (der : Typing [] t τ) : t.Value ∨ ∃ t&#x27;, t ⭢βᵛ t&#x27;
+&#x27;Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress&#x27; depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]</code></pre></div><div class="evidence-item"><h4>P7: 알려진 수정 diff</h4><p class="note evidence-path"><code>01_broken_to_02_repaired.patch</code></p><pre tabindex="0"><code>--- 01_broken.lean
++++ 02_repaired.lean
+@@ -42,7 +42,7 @@
+   case var =&gt; grind
+   case app t₁ _ _ t₂ leftTyped rightTyped ihLeft ihRight =&gt;
+     right
+-    rcases ihLeft rfl wholeTyped with leftValue | ⟨t₁&#x27;, step⟩
++    rcases ihLeft rfl leftTyped with leftValue | ⟨t₁&#x27;, step⟩
+     · rcases ihRight rfl rightTyped with rightValue | ⟨t₂&#x27;, step⟩
+       · obtain ⟨σ, body, rfl⟩ := leftTyped.canonical_form_abs leftValue
+         exact ⟨_, Red.abs leftValue.lc rightValue⟩</code></pre></div><div class="evidence-item"><h4>P7: 수정본 대상 정리·공리 출력</h4><p class="note evidence-path"><code>02_repaired.stdout.log</code></p><pre tabindex="0"><code>Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress.{u_1} {Var : Type u_1} [HasFresh Var] [DecidableEq Var]
+  {t : Term Var} {τ : Ty Var} (der : Typing [] t τ) : t.Value ∨ ∃ t&#x27;, t ⭢βᵛ t&#x27;
+&#x27;Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress&#x27; depends on axioms: [propext, Classical.choice, Quot.sound]</code></pre></div></div></details></article><article class="topic" id="s08" aria-labelledby="s08-title"><h3 class="topic-title" id="s08-title">P12 · 추론 실패를 좁힌 뒤 표현을 연결하기</h3><p class="topic-intro"><code>tensor_success_split</code>은 확률 사건을 마지막 좌표와 나머지 좌표의 샘플링으로 분할한다.</p><div class="topic-content"><div class="grid3"><div class="card red"><div class="label">1 · 최초 오류 실행</div><h4>추론이 먼저 멈춤</h4><pre class="compact" tabindex="0"><code>simpa only using
+  (prob_split_last_uniform_sampling_of_finFun _)</code></pre><div style="height:12px"></div><pre class="compact light" tabindex="0"><code>typeclass instance problem is stuck
+  Nonempty ?m.99</code></pre></div><div class="card amber"><div class="label">2 · 인자를 명시한 보강</div><h4>표현 불일치 관측</h4><p class="small"><code>F</code>, 차원, predicate를 명시해 추론 문제를 좁힌 뒤에도 <b>Type mismatch</b>가 발생했다.</p><div style="height:15px"></div><p class="minor">확률 사건의 실제 표현과 분할 정리가 제공하는 표현이 일치하지 않았다.</p></div><div class="card teal"><div class="label">3 · 알려진 수정</div><h4>점별 등식으로 연결</h4><pre class="compact" tabindex="0"><code>  have fold (r : Fin (n + 1) → F) :
+      (Δ₀(multilinearCombine u r, MC) ≤ e) =
+        multilinearCombine_affineComb_split_last_close (MC := MC) u e
+          (r (Fin.last n)) (fun i =&gt; r i.castSucc) := by
+    unfold multilinearCombine_affineComb_split_last_close
+    rw [multilinearCombine_recursive_form]
+    rfl
+  simp_rw [fold]
+  exact prob_split_last_uniform_sampling_of_finFun _</code></pre></div></div><div class="callout"><strong>인자 추론이 멈춘 오류와, 인자를 명시한 뒤 드러난 표현 불일치를 구분했다.</strong> 점별 사건 등식 <code>fold</code>로 두 표현을 연결한 후 분할 정리를 적용했다.</div><p class="minor">수정 위치는 주 정리 앞에 따로 선언된 <code>private lemma tensor_success_split</code>의 proof body다. 주 정리와 가정은 유지했다.</p></div><details class="helper-details"><summary>tensor_success_split 전체 증명</summary><div class="details-content"><div class="code-block"><div class="code-title">정상본·알려진 수정본의 보조정리</div><pre class="lean" tabindex="0"><code>private lemma tensor_success_split {n : ℕ}
+    (u : WordStack A (Fin (2 ^ (n + 1))) ι) :
+    Pr_{let r ← $ᵖ (Fin (n + 1) → F)}[Δ₀(multilinearCombine u r, MC) ≤ e] =
+    Pr_{let r_last ← $ᵖ F; let r_init ← $ᵖ (Fin n → F)}[
+      multilinearCombine_affineComb_split_last_close (MC := MC) u e r_last r_init] := by
+  classical
+  have fold (r : Fin (n + 1) → F) :
+      (Δ₀(multilinearCombine u r, MC) ≤ e) =
+        multilinearCombine_affineComb_split_last_close (MC := MC) u e
+          (r (Fin.last n)) (fun i =&gt; r i.castSucc) := by
+    unfold multilinearCombine_affineComb_split_last_close
+    rw [multilinearCombine_recursive_form]
+    rfl
+  simp_rw [fold]
+  exact prob_split_last_uniform_sampling_of_finFun _</code></pre></div></div></details><details class="helper-details evidence-details"><summary>P12 최초 오류·보강 진단·수정·최종 로그</summary><div class="details-content"><div class="evidence-item"><h4>P12: 최초 암시 인자 추론 오류</h4><p class="note evidence-path"><code>01_broken.stdout.log</code></p><pre tabindex="0"><code>01_broken.lean:1211:20: error: typeclass instance problem is stuck
+  Nonempty ?m.99
+
+Note: Lean will not try to resolve this typeclass instance problem because the type argument to `Nonempty` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+interleaved_affine_gaps_imply_tensor_gaps.{l} {ι : Type l} [Fintype ι] [Nonempty ι] [DecidableEq ι] {F : Type}
+  [CommRing F] [Fintype F] {A : Type} [DecidableEq A] [AddCommGroup A] [Module F A] (MC : ModuleCode ι F A) {e ε : ℕ}
+  (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat (↑MC) e ε)
+  (h_interleaved_gaps :
+    ∀ m ≥ 1, e_ε_correlatedAgreementAffineLinesNat (↑(CodeInterleavable.interleaveCode MC (Fin m))) e ε)
+  (ϑ : ℕ) (hϑ_gt_0 : ϑ &gt; 0) : δ_ε_multilinearCorrelatedAgreement_Nat (↑MC) ϑ e ε
+&#x27;interleaved_affine_gaps_imply_tensor_gaps&#x27; depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]</code></pre></div><div class="evidence-item"><h4>P12: 타입 명시 후 실제 표현 불일치</h4><p class="note evidence-path"><code>explicit.stdout.log</code></p><pre tabindex="0"><code>01b_broken_explicit.lean:1211:2: error: Type mismatch: After simplification, term
+  prob_split_last_uniform_sampling_of_finFun (multilinearCombine_affineComb_split_last_close MC u e)
+ has type
+  (do
+        let r ← $ᵖ (Fin (n + 1) → F)
+        pure (multilinearCombine_affineComb_split_last_close MC u e (r (Fin.last n)) fun i =&gt; r i.castSucc))
+      True =
+    (do
+        let r_last ← $ᵖ F
+        let r_init ← $ᵖ (Fin n → F)
+        pure (multilinearCombine_affineComb_split_last_close MC u e r_last r_init))
+      True
+but is expected to have type
+  (do
+        let r ← $ᵖ (Fin (n + 1) → F)
+        pure (Δ₀(multilinearCombine u r, ↑MC) ≤ ↑e))
+      True =
+    (do
+        let r_last ← $ᵖ F
+        let r_init ← $ᵖ (Fin n → F)
+        pure (multilinearCombine_affineComb_split_last_close MC u e r_last r_init))
+      True
+interleaved_affine_gaps_imply_tensor_gaps.{l} {ι : Type l} [Fintype ι] [Nonempty ι] [DecidableEq ι] {F : Type}
+  [CommRing F] [Fintype F] {A : Type} [DecidableEq A] [AddCommGroup A] [Module F A] (MC : ModuleCode ι F A) {e ε : ℕ}
+  (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat (↑MC) e ε)
+  (h_interleaved_gaps :
+    ∀ m ≥ 1, e_ε_correlatedAgreementAffineLinesNat (↑(CodeInterleavable.interleaveCode MC (Fin m))) e ε)
+  (ϑ : ℕ) (hϑ_gt_0 : ϑ &gt; 0) : δ_ε_multilinearCorrelatedAgreement_Nat (↑MC) ϑ e ε
+&#x27;interleaved_affine_gaps_imply_tensor_gaps&#x27; depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]</code></pre></div><div class="evidence-item"><h4>P12: fold·rewrite 복원 diff</h4><p class="note evidence-path"><code>01_broken_to_02_repaired.patch</code></p><pre tabindex="0"><code>--- 01_broken.lean
++++ 02_repaired.lean
+@@ -1208,7 +1208,15 @@
+     Pr_{let r_last ← $ᵖ F; let r_init ← $ᵖ (Fin n → F)}[
+       multilinearCombine_affineComb_split_last_close (MC := MC) u e r_last r_init] := by
+   classical
+-  simpa only using (prob_split_last_uniform_sampling_of_finFun _)
++  have fold (r : Fin (n + 1) → F) :
++      (Δ₀(multilinearCombine u r, MC) ≤ e) =
++        multilinearCombine_affineComb_split_last_close (MC := MC) u e
++          (r (Fin.last n)) (fun i =&gt; r i.castSucc) := by
++    unfold multilinearCombine_affineComb_split_last_close
++    rw [multilinearCombine_recursive_form]
++    rfl
++  simp_rw [fold]
++  exact prob_split_last_uniform_sampling_of_finFun _
+
+ /-- The one-coordinate tensor statement is exactly the affine-line statement. -/
+ private lemma tensor_gap_one</code></pre></div><div class="evidence-item"><h4>P12: 최종 주 정리의 공리 출력</h4><p class="note evidence-path"><code>02_repaired.stdout.log</code></p><pre tabindex="0"><code>interleaved_affine_gaps_imply_tensor_gaps.{l} {ι : Type l} [Fintype ι] [Nonempty ι] [DecidableEq ι] {F : Type}
+  [CommRing F] [Fintype F] {A : Type} [DecidableEq A] [AddCommGroup A] [Module F A] (MC : ModuleCode ι F A) {e ε : ℕ}
+  (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat (↑MC) e ε)
+  (h_interleaved_gaps :
+    ∀ m ≥ 1, e_ε_correlatedAgreementAffineLinesNat (↑(CodeInterleavable.interleaveCode MC (Fin m))) e ε)
+  (ϑ : ℕ) (hϑ_gt_0 : ϑ &gt; 0) : δ_ε_multilinearCorrelatedAgreement_Nat (↑MC) ϑ e ε
+&#x27;interleaved_affine_gaps_imply_tensor_gaps&#x27; depends on axioms: [propext, Classical.choice, Quot.sound]</code></pre></div></div></details></article><article class="topic" id="s09" aria-labelledby="s09-title"><h3 class="topic-title" id="s09-title">작은 예제의 검증 기준을 P7·P12에 적용</h3><p class="topic-intro">CLI에서는 REPL의 goals 필드 대신 실제 진단, 전체 파일, 대상 정리의 전이적 공리를 함께 확인한다.</p><div class="topic-content"><div class="table-wrap"><table class="compact-table"><thead><tr><th scope="col">기준</th><th scope="col">작은 예제</th><th scope="col">P7·P12에 적용한 검사</th></tr></thead><tbody><tr><td>프로세스 성공 ≠ 증명 성공</td><td>sorry가 있어도 CLI exit 0</td><td>각 파일의 exit와 실제 오류를 모두 확인</td></tr><tr><td>빈/누락 goals ≠ 수락</td><td>빈 goals + Incomplete, 또는 필드 없음</td><td>CLI 진단과 별도 trace를 구분; 미수집 상태를 성공으로 간주하지 않음</td></tr><tr><td>전체 파일의 정확한 대상</td><td>조립 후 and_swap의 공리 확인</td><td>정상·수정본의 주 정리 #check + #print axioms</td></tr><tr><td>전이적 sorryAx 검사</td><td>원래 env에는 sorryAx가 남음</td><td>오류본에는 sorryAx 출력; 정상·수정본의 대상에는 없음</td></tr></tbody></table></div><div class="grid2"><div class="card teal"><div class="label">P7 / P12 · 정상본과 수정본의 대상 공리</div><pre class="compact" tabindex="0"><code>[propext, Classical.choice, Quot.sound]</code></pre><p class="small" style="margin-top:13px"><code>sorryAx</code> 없음 · 정상본 대비 추가 공리 없음.<br/>오류 복구 과정에서 나온 <code>#check</code> 출력만으로는 통과시키지 않았다.</p></div><div class="card amber"><div class="label">무엇을 주장하지 않는가</div><p class="small">P12 의존성 빌드에는 <code>sorry</code> 경고가 있었다. 그러나 최종 대상 정리의 전이적 공리에는 <code>sorryAx</code>가 없었다.</p><p class="small" style="margin-top:13px"><b>“프로젝트 전체에 sorry가 없다”</b>고 말하는 것은 아니다.</p></div></div></div><details class="helper-details evidence-details"><summary>P12 의존성 경고 기록</summary><div class="details-content"><div class="evidence-item"><h4>P12: 의존성 빌드의 sorry 경고</h4><p class="note evidence-path"><code>setup_build.stdout.log</code></p><pre tabindex="0"><code>⚠ [1302/1410] Replayed ArkLib.Data.Fin.Basic
+warning: ArkLib/Data/Fin/Basic.lean:307:4: declaration uses `sorry`
+⚠ [2827/3016] Replayed ArkLib.Data.MvPolynomial.Interpolation
+warning: ArkLib/Data/MvPolynomial/Interpolation.lean:258:14: declaration uses `sorry`
+ℹ [3310/3401] Replayed ArkLib.Data.Polynomial.Bivariate
+info: ArkLib/Data/Polynomial/Bivariate.lean:52:17: Try these:
+  [apply] [grind =] for pattern: [@Finset.Nonempty #3 (@Finsupp.support _ #2 #1 #0)]
+  [apply] [grind! .] for pattern: [@Finsupp.support #3 #2 #1 #0]
+info: ArkLib/Data/Polynomial/Bivariate.lean:52:17: Try these:
+  [apply] [grind
+    .] for pattern: [@LE.le `[ℕ] `[instLENat] (@natDegree #3 #2 (@HMul.hMul (Polynomial _ _) (Polynomial _ _) (Polynomial _ _) _ #1 #0)) (@HAdd.hAdd `[ℕ] `[ℕ] `[ℕ] `[instHAdd] (@natDegree _ _ #1) (@natDegree _ _ #0))]
+  [apply] [grind!
+    .] for pattern: [@natDegree #3 #2 (@HMul.hMul (Polynomial _ _) (Polynomial _ _) (Polynomial _ _) _ #1 #0)]
+info: ArkLib/Data/Polynomial/Bivariate.lean:52:17: Try these:
+  [apply] [grind =] for pattern: [@degree #2 #1 #0, @Bot.bot `[WithBot ℕ] `[WithBot.bot]]
+  [apply] [grind .] for pattern: [@degree #2 #1 #0]</code></pre></div></div></details></article><div class="chapter-takeaway">P7·P12의 정상본과 알려진 수정본은 전체 파일 검증을 통과했다. 이 단계는 모델의 수리 성능이 아니라 검증 경로를 확인한 통제 실험이다.</div></section><section class="chapter" id="minimal-design" aria-labelledby="minimal-design-title"><h2 id="minimal-design-title"><span class="num">04</span><span>프로젝트용 최소 검증·수리 설계</span></h2><p class="section-intro">승인된 증명 본문만 바꾸고 전체 파일을 검사한다. 모델의 후보 생성과 실행기의 최종 수락을 분리한다.</p><article class="topic" id="s10" aria-labelledby="s10-title"><h3 class="topic-title" id="s10-title">읽는 범위 · 수정 범위 · 검증 대상을 분리</h3><p class="topic-intro">proof body는 정리의 <code>:=</code> 오른쪽에 오는 증명 항이다. 이번 모델은 <code>by</code>로 시작하는 본문 전체를 반환한다.</p><div class="topic-content"><div class="scope-row"><div class="scope-box"><div class="label">READ · 모델에게 보여주는 것</div><h4>문제와 필요한 문맥</h4><p class="small">정리문, 오류 파일, 관련 정의·문맥, 실제 Lean 진단, 확보한 goal과 가정.</p></div><div class="scope-box edit"><div class="label">WRITE · 모델이 바꾸는 것</div><h4>승인된 선언의 proof body</h4><p class="small">응답은 <code>diagnosis</code>와 <code>proof_body</code>.<br/>import·명제·가정·정의는 고정한다.</p></div><div class="scope-box"><div class="label">VERIFY · 실행기가 검사하는 것</div><h4>전체 파일과 최종 대상</h4><p class="small">수정 body를 고정 문맥에 넣고, 정확한 최종 정리의 검사와 공리를 확인한다.</p></div></div><div class="table-wrap"><table class="compact-table"><thead><tr><th scope="col">사례</th><th scope="col">수정 대상으로 지정할 선언</th><th scope="col">최종 검증 대상으로 지정할 정리</th></tr></thead><tbody><tr><td>P7</td><td><code>Typing.progress</code>의 body</td><td><code>Typing.progress</code></td></tr><tr><td>P12</td><td><code>tensor_success_split</code>의 body</td><td><code>interleaved_affine_gaps_imply_tensor_gaps</code></td></tr></tbody></table></div><div class="callout">“파일 전체를 읽는다”와 “파일 전체를 수정한다”는 다르다.<br/>P12를 수용하려면 <b>수정할 선언</b>과 <b>최종 검증할 정리</b>를 별도 필드로 둔다.</div><p class="minor">실제 모델 연결은 P7의 단일 선언에만 구현했다. P12의 승인된 보조정리 수정 인터페이스는 이 사례에서 도출한 프로젝트 확장 제안이다.</p></div><div class="reading-notes"><article class="reading-note"><h4>파일 전체를 보여주는 것과 전체를 수정하게 하는 것은 다르다</h4><p>모델은 import와 정의, 정리문, 기존 증명, 오류를 읽을 수 있다. 그러나 반환할 수 있는 내용은 승인된 선언의 <code>proof_body</code>로 제한한다. 실행기는 그 본문을 원래 파일 문맥에 넣어 전체 파일을 검사한다.</p></article><article class="reading-note"><h4>P12에서는 수정할 선언과 검증할 정리가 다르다</h4><p><code>tensor_success_split</code>은 주 정리 앞의 별도 보조정리다. 이 보조정리의 본문을 수정하더라도 최종 수락 대상은 이를 사용하는 <code>interleaved_affine_gaps_imply_tensor_gaps</code>다. 정리문 자체의 결함 가능성은 proof 수리와 구분해 별도 검토 대상으로 보고한다.</p></article></div></article><article class="topic" id="s11" aria-labelledby="s11-title"><h3 class="topic-title" id="s11-title">모델은 수정 후보를 제안하고 실행기가 검사</h3><p class="topic-intro">하나의 Python 실행기 안에서 입력 고정, 모델 호출, 후보 적용, 검증, 반복 제어의 책임을 분리했다.</p><div class="topic-content"><div class="horizontal-flow"><div class="flowbox"><span class="eyebrow">TASK</span><strong>고정 입력</strong><small>config · 오류 파일<br/>대상·버전·예산</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox active"><span class="eyebrow">VERIFY</span><strong>Lean evaluator</strong><small>전체 파일 진단<br/>trace_state · 공리</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox model"><span class="eyebrow">REPAIR</span><strong>Codex adapter</strong><small>새 exec 호출<br/>JSON proof body</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox"><span class="eyebrow">APPLY</span><strong>후보 적용</strong><small>parser guard<br/>고정 prefix/suffix</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox active"><span class="eyebrow">ACCEPT</span><strong>최종 검증</strong><small>새 Lean 프로세스<br/>동일 후보 재검사</small></div></div><div class="loopback">구현된 반복 경로: proof 오류 / 미완성 → 실제 피드백 → 다음 후보 요청 · 실제 모델 실행은 첫 후보에서 종료</div><div class="table-wrap"><table class="compact-table"><thead><tr><th scope="col">논리적 책임</th><th scope="col">실제 파일</th><th scope="col">무엇을 분리했는가</th></tr></thead><tbody><tr><td>입력·환경 고정</td><td><code>run.py</code>, <code>task_config.json</code></td><td>문제 정의·도구체인·모델 호출 예산</td></tr><tr><td>반복·종료 관리</td><td><code>controller.py</code></td><td>모델 응답과 성공 판정</td></tr><tr><td>후보 생성</td><td><code>codex_adapter.py</code></td><td>실제 요청·원시 이벤트·최종 응답</td></tr><tr><td>검증·구문 범위 제한</td><td><code>lean_evaluator.py</code>, <code>ProofBodyGuard.lean</code></td><td>후보 구문 검사를 전체 proof 검증과 구분</td></tr><tr><td>실행·기록</td><td><code>processes.py</code>, <code>reporting.py</code></td><td>명령·시간·원시 로그·해시·종료 사유</td></tr></tbody></table></div></div></article><article class="topic" id="s12" aria-labelledby="s12-title"><h3 class="topic-title" id="s12-title">증명 오류와 실행 장애를 따로 처리</h3><p class="topic-intro">증명 내용의 실패에는 Lean 피드백을 돌려주고, 환경·모델 호출·시간 제한 문제는 별도 상태로 남긴다.</p><div class="topic-content"><div class="table-wrap"><table class="compact-table"><thead><tr><th scope="col">구분</th><th scope="col">예시 상태 / 실제 구현 명칭</th><th scope="col">처리 방향</th></tr></thead><tbody><tr><td>증명 내용의 실패</td><td><code>proof_error</code>, <code>incomplete_proof</code></td><td>실제 진단을 전달하고 남은 예산 안에서 새 후보 요청</td></tr><tr><td>후보 형식·범위의 실패</td><td><code>response_format_rejected</code>, <code>guard_rejected</code>, <code>duplicate_rejected</code></td><td>후보 거절 이유를 기록; 요청 예산은 소비</td></tr><tr><td>검사 근거 부족</td><td><code>verification_incomplete</code></td><td>대상·공리·출력 판독 여부 점검; 성공으로 처리하지 않음</td></tr><tr><td>실행 기반의 실패</td><td>환경 / 프로세스 / 모델 미지원 / timeout</td><td>정리가 틀렸다고 판단하지 않고 해당 종료 사유로 분리</td></tr></tbody></table></div><div class="grid4"><div class="card"><div class="metric-label">후보 요청 상한</div><div class="num">3 <span>회</span></div><div class="metric-note">실험별 요청 한도</div></div><div class="card"><div class="metric-label">Lean / 모델 각각</div><div class="num">300 <span>초</span></div><div class="metric-note">프로세스별 제한</div></div><div class="card"><div class="metric-label">환경 준비</div><div class="num">600 <span>초</span></div><div class="metric-note">준비와 실험을 분리</div></div><div class="card"><div class="metric-label">준비 이후 전체 실험</div><div class="num">1800 <span>초</span></div><div class="metric-note">관측 시간과 한도는 다름</div></div></div><p class="minor">최종 검증 실패는 예비 통과보다 우선한다. 이번 구현은 일반 경고도 <code>-DwarningAsError=true</code>로 거부하는 보수적 정책을 사용했다. 이는 Lean 증명 완성과 별개의 프로젝트 정책이다.</p></div><details class="helper-details"><summary>현재 오류 분류의 제한</summary><div class="details-content"><p><code>verification_incomplete</code>에는 대상·공리·출력을 충분히 판독하지 못한 경우도 포함된다. 현재 controller는 후보 단계에서 이 상태를 재후보 경로로 보낸다. 후속 설계에서는 <strong>증명 내용의 오류와 검증기 관측 부족을 더 세분</strong>할 필요가 있다. 환경 오류 분류 역시 문자열 휴리스틱이며 범용 진단기는 아니다.</p></div></details></article><article class="topic" id="s13" aria-labelledby="s13-title"><h3 class="topic-title" id="s13-title">최종 수락 조건</h3><p class="topic-intro">모델의 설명이 아니라 실제 코드, 고정 문맥, 대상 정리, 허용 공리와 재검증 결과로 수락한다.</p><div class="topic-content"><div class="grid2 gwide"><div class="stack tight"><div class="step"><div class="step-id">1</div><div><h4>원시 모델 응답과 후보의 연결</h4><p>JSON에서 읽은 proof body를 사람이 고치지 않고 그대로 사용한다.</p></div></div><div class="step"><div class="step-id">2</div><div><h4>고정 문맥과 편집 범위</h4><p>단일 term/EOF · 보수적 AST 검사 · prefix/suffix 보존을 확인한다.</p></div></div><div class="step"><div class="step-id">3</div><div><h4>정확한 전체 파일 검증</h4><p>Lean 오류·미완성 여부와 실제 대상 선언의 출력이 있는지 본다.</p></div></div><div class="step"><div class="step-id">4</div><div><h4>허용 공리 정책</h4><p>대상 정리에 sorryAx가 없고 정상본 대비 추가 공리가 없는지 본다.</p></div></div><div class="step"><div class="step-id">5</div><div><h4>새 프로세스에서 최종 재검증</h4><p>같은 후보를 다시 검사하고 성공 파일의 해시까지 연결한다.</p></div></div></div><div class="stack"><div class="card dark"><div class="eyebrow">ACCEPTANCE CONTRACT</div><h4 style="margin-top:12px">원래 문제를<br/>그 후보가 해결했는가?</h4><p class="small">어떤 명제인지, 어떤 코드를 검사했는지, 무엇을 믿고 통과시켰는지를 함께 기록한다.</p><div class="splitline"></div><pre class="compact" tabindex="0"><code>goals == []
+# 위 조건 하나가 아니다.
+
+response → body → file
+→ Lean → target axioms
+→ fresh final check</code></pre></div><div class="card amber"><p class="small">현재 guard는 <b>P7에 맞춘 보수적 규칙</b>이다. 범용 Lean 코드나 적대적 메타프로그래밍에 대한 완전한 보안 검증기가 아니다.</p></div></div></div></div><div class="reference-line"><span>참고문헌</span><a href="#ref-R11">R11</a><a href="#ref-R12">R12</a></div></article><div class="chapter-takeaway">모델은 승인된 본문의 후보를 반환한다. 실행기는 그 후보의 적용, 오류 피드백, 반복 예산, 최종 수락을 책임진다.</div></section><section class="chapter" id="model-repair" aria-labelledby="model-repair-title"><h2 id="model-repair-title"><span class="num">05</span><span>실제 모델이 오류를 받아 수정하는 실험</span></h2><p class="section-intro">P7의 Lean 오류와 문맥을 새 Codex 호출에 전달했다. 반환된 첫 후보를 추가 수정 없이 적용해 최종 검증했다.</p><article class="topic" id="s14" aria-labelledby="s14-title"><h3 class="topic-title" id="s14-title">P7 · 실제 모델 후보가 검증을 통과</h3><p class="topic-intro">별도 Codex 호출의 응답을 받아, 실행기가 수정 본문을 적용하고 전체 파일을 재검증했다.</p><div class="topic-content"><div class="grid4"><div class="card"><div class="metric-label">새 실험의 실제 후보 요청</div><div class="num">1 <span>회</span></div><div class="metric-note">완료 모델 turn 1회</div></div><div class="card"><div class="metric-label">모델 생성 후보</div><div class="num">1 <span>개</span></div><div class="metric-note">첫 후보 전체 검증 통과</div></div><div class="card"><div class="metric-label">전체 파일 Lean 검증</div><div class="num">4 <span>회</span></div><div class="metric-note">정상·오류·후보·최종 각 1회</div></div><div class="card"><div class="metric-label">수동 후보 수정</div><div class="num">0 <span>회</span></div><div class="metric-note">원시 proof body 그대로 적용</div></div></div><div class="horizontal-flow"><div class="flowbox"><span class="eyebrow">INPUT</span><strong>오류 재현</strong><small>P7 오류본<br/>exit 1 · 실제 진단</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox"><span class="eyebrow">CONTEXT</span><strong>상태 수집</strong><small>trace_state 1회<br/>goal·가정 확보</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox model"><span class="eyebrow">MODEL</span><strong>후보 생성</strong><small>별도 Codex exec<br/>JSON 응답 1개</small></div><div aria-hidden="true" class="flow-arrow">→</div><div class="flowbox active"><span class="eyebrow">VERIFY</span><strong>전체 검사</strong><small>guard → 후보 검사<br/>새 프로세스 최종 검사</small></div></div><div class="grid2"><div class="card teal"><h4>관측: 실제 모델 후보가 수락됐다</h4><p class="small">모델 CLI 구간 <b>8.826초</b> · 준비 제외 전체 실험 <b>36.713초</b>.<br/>별도 parser 검사 2회는 전체 파일 검증 4회에 합산하지 않았다.</p></div><div class="card amber"><h4>미관측: 실패 후 모델 재수리</h4><p class="small">첫 후보가 통과해 즉시 종료했다. 두 번째 후보 요청은 없었고, 남은 요청 예산 2회는 사용하지 않았다.</p></div></div></div></article><article class="topic" id="s15" aria-labelledby="s15-title"><h3 class="topic-title" id="s15-title">오류와 문맥을 입력하고 수정 본문을 받기</h3><p class="topic-intro">오류가 있는 파일과 실제 Lean 진단·문맥을 전달하고, 모델 응답에서 전체 proof body를 추출했다.</p><div class="topic-content"><div class="grid2"><div class="card"><div class="label">모델 입력</div><h4>오류 코드 + 방금 얻은 피드백</h4><pre class="compact" tabindex="0"><code>status: proof_error
+actual:   Typing [] (t₁.app t₂) τ✝
+expected: Typing [] t₁ (σ✝.arrow τ✝)
+
+goal/local context:
+  leftTyped : Typing [] t₁ (σ✝.arrow τ✝)
+  wholeTyped : Typing [] (t₁.app t₂) τ✝
+  ...</code></pre><p class="minor" style="margin-top:12px">고정 정리문·오류 파일 전체·trace 문맥을 전달했다.<br/>정상본·알려진 수정본·정답 diff는 어댑터 입력에서 제외했다.</p></div><div class="card teal"><div class="label">모델 응답</div><h4>전체 본문을 JSON으로 반환</h4><pre class="compact" tabindex="0"><code>- rcases ihLeft rfl wholeTyped with ...
++ rcases ihLeft rfl leftTyped with ...</code></pre><p class="small" style="margin-top:15px">모델 진단 요지: 전체 application의 typing이 아니라, <code>t₁</code>의 typing인 <code>leftTyped</code>를 전달해야 한다.</p><p class="minor" style="margin-top:12px">위 표시는 코드·입력의 발췌다. 실제 변경에는 끝의 빈 줄 제거도 포함된다. 전체 JSON과 diff를 보존했다.</p></div></div><div class="callout blue">요청 설정: <code>gpt-5.6-sol</code> / <code>high</code> · Codex CLI <code>0.145.0</code>.<br/>이벤트의 실제 model ID·effort는 별도로 제공되지 않아 <code>null</code>로 기록했다.</div></div><details class="helper-details evidence-details"><summary>실제 모델 응답과 적용된 diff</summary><div class="details-content"><div class="evidence-item"><h4>P7 모델의 원시 최종 JSON</h4><p class="note evidence-path"><code>response.json</code></p><pre tabindex="0"><code>{&quot;diagnosis&quot;:&quot;The application case passes `wholeTyped`, which types the entire term `t₁.app t₂`, to `ihLeft`, whose second argument must type `t₁`. Pass `leftTyped` instead. The rest of the supplied proof is unchanged.&quot;,&quot;proof_body&quot;:&quot;by\n  generalize eq : [] = Γ at der\n  -- Retain the typing derivation to recover local closure after induction.\n  have wholeTyped : Typing Γ t τ := der\n  induction der &lt;;&gt; subst eq\n  case var =&gt; grind\n  case app t₁ _ _ t₂ leftTyped rightTyped ihLeft ihRight =&gt;\n    right\n    rcases ihLeft rfl leftTyped with leftValue | ⟨t₁&#x27;, step⟩\n    · rcases ihRight rfl rightTyped with rightValue | ⟨t₂&#x27;, step⟩\n      · obtain ⟨σ, body, rfl⟩ := leftTyped.canonical_form_abs leftValue\n        exact ⟨_, Red.abs leftValue.lc rightValue⟩\n      · exact ⟨_, Red.appᵣ leftValue step⟩\n    · exact ⟨_, Red.appₗ rightTyped.wf.2.1 step⟩\n  case tapp σ&#x27; typed _ ih =&gt;\n    right\n    rcases ih rfl typed with value | ⟨t&#x27;, step⟩\n    · obtain ⟨_, body, eq⟩ := typed.canonical_form_tabs value\n      exists body ^ᵗᵞ σ&#x27;\n      grind\n    · exists .tapp t&#x27; σ&#x27;\n      grind\n  case let&#x27; t₁ σ t₂ τ L typed _ ih _ =&gt;\n    right\n    rcases ih rfl typed with value | ⟨t₁&#x27;, step⟩\n    · exists t₂ ^ᵗᵗ t₁\n      grind\n    · exists t₁&#x27;.let&#x27; t₂\n      grind\n  case inl typed _ ih | inr typed _ ih =&gt;\n    -- The two injections share the same value and congruence-step argument.\n    rcases ih rfl typed with value | ⟨t&#x27;, step⟩\n    · left\n      constructor\n      exact value\n    · right\n      exact ⟨_, by constructor; exact step⟩\n  case case t₁ _ _ t₂ _ t₃ _ typed _ _ ih _ _ =&gt;\n    right\n    rcases ih rfl typed with value | ⟨t₁&#x27;, step⟩\n    · obtain ⟨t₁, side⟩ := typed.canonical_form_sum value\n      cases side &lt;;&gt; [exists t₂ ^ᵗᵗ t₁; exists t₃ ^ᵗᵗ t₁] &lt;;&gt; grind\n    · exists t₁&#x27;.case t₂ t₃\n      grind\n  case sub =&gt; grind\n  case abs | tabs =&gt;\n    left\n    constructor\n    exact wholeTyped.wf.2.1&quot;}</code></pre></div><div class="evidence-item"><h4>실제 모델 후보가 만든 변경</h4><p class="note evidence-path"><code>change.patch</code></p><pre tabindex="0"><code>--- previous.lean
++++ candidate.lean
+@@ -42,7 +42,7 @@
+   case var =&gt; grind
+   case app t₁ _ _ t₂ leftTyped rightTyped ihLeft ihRight =&gt;
+     right
+-    rcases ihLeft rfl wholeTyped with leftValue | ⟨t₁&#x27;, step⟩
++    rcases ihLeft rfl leftTyped with leftValue | ⟨t₁&#x27;, step⟩
+     · rcases ihRight rfl rightTyped with rightValue | ⟨t₂&#x27;, step⟩
+       · obtain ⟨σ, body, rfl⟩ := leftTyped.canonical_form_abs leftValue
+         exact ⟨_, Red.abs leftValue.lc rightValue⟩
+@@ -83,7 +83,6 @@
+     left
+     constructor
+     exact wholeTyped.wf.2.1
+-
+ #check Typing.progress
+ #print axioms Typing.progress
+ </code></pre></div></div></details></article><article class="topic" id="s16" aria-labelledby="s16-title"><h3 class="topic-title" id="s16-title">응답에서 최종 증명까지 같은 코드인지 확인</h3><p class="topic-intro">원시 모델 응답 → proof body → 전체 후보 → 최종 검증 파일 → 성공 파일을 연결했다.</p><div class="topic-content"><div class="grid2 gwide"><div class="timeline"><div class="node">1</div><div><h4>실제 Codex 이벤트</h4><p><code>agent_message</code>의 JSON과 <code>response.json</code> 객체가 일치</p></div><div class="node">2</div><div><h4>응답의 proof_body</h4><p>별도 저장한 <code>proof_body.txt</code>와 바이트 단위 일치</p></div><div class="node">3</div><div><h4>고정 문맥에 삽입한 후보</h4><p>prefix + 원시 body + suffix가 실제 <code>candidate.lean</code>과 일치</p></div><div class="node">4</div><div><h4>최종 재검증 파일과 성공 파일</h4><p>같은 후보 바이트 · 새로운 Lean 프로세스 exit 0</p></div></div><div class="stack"><div class="card dark"><div class="eyebrow">FINAL TARGET AXIOMS</div><pre class="compact" tabindex="0"><code>[propext, Classical.choice, Quot.sound]</code></pre><p class="small" style="margin-top:15px">대상에 <code>sorryAx</code> 없음.<br/>정상본 대비 추가 공리 없음.</p></div><div class="card"><div class="label">최종 후보 / 성공 파일 SHA256</div><div class="hash">81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf</div><div class="splitline"></div><p class="small">응답의 본문, 고정 prefix/suffix, 검증한 최종 파일이 일치한다.</p></div></div></div></div><details class="helper-details evidence-details"><summary>최종 검증과 후보 동일성 기록</summary><div class="details-content"><div class="evidence-item"><h4>최종 새 프로세스 검증 명령·종료</h4><p class="note evidence-path"><code>attempt_01_final.meta.json</code></p><pre tabindex="0"><code>{
+  &quot;command&quot;: [
+    &quot;lake&quot;,
+    &quot;env&quot;,
+    &quot;lean&quot;,
+    &quot;--json&quot;,
+    &quot;-DwarningAsError=true&quot;,
+    &quot;--root=&lt;LOCAL_PROJECT&gt;/week3/p7_auto_repair/runs/20261018T094007+0900&quot;,
+    &quot;candidate.lean&quot;
+  ],
+  &quot;cwd&quot;: &quot;&lt;LOCAL_PROJECT&gt;/week2/P7/cslib-progress&quot;,
+  &quot;kind&quot;: &quot;whole_file_verification&quot;,
+  &quot;started_at_utc&quot;: &quot;2026-10-18T00:40:44.753108+00:00&quot;,
+  &quot;configured_timeout_seconds&quot;: 300,
+  &quot;effective_timeout_seconds&quot;: 300,
+  &quot;executed&quot;: true,
+  &quot;returncode&quot;: 0,
+  &quot;timed_out&quot;: false,
+  &quot;process_error&quot;: null,
+  &quot;stdout&quot;: &quot;attempt_01_final.stdout.log&quot;,
+  &quot;stderr&quot;: &quot;attempt_01_final.stderr.log&quot;,
+  &quot;streams_combined&quot;: false,
+  &quot;elapsed_seconds&quot;: 3.277
+}</code></pre></div><div class="evidence-item"><h4>최종 모델 후보의 Lean 출력</h4><p class="note evidence-path"><code>attempt_01_final.stdout.log</code></p><pre tabindex="0"><code>{&quot;caption&quot;:&quot;&quot;,&quot;data&quot;:&quot;Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress.{u_1} {Var : Type u_1} [HasFresh Var] [DecidableEq Var]\n  {t : Term Var} {τ : Ty Var} (der : Typing [] t τ) : t.Value ∨ ∃ t&#x27;, t ⭢βᵛ t&#x27;&quot;,&quot;endPos&quot;:{&quot;column&quot;:6,&quot;line&quot;:86},&quot;fileName&quot;:&quot;candidate.lean&quot;,&quot;isSilent&quot;:false,&quot;keepFullRange&quot;:false,&quot;kind&quot;:&quot;[anonymous]&quot;,&quot;pos&quot;:{&quot;column&quot;:0,&quot;line&quot;:86},&quot;severity&quot;:&quot;information&quot;}
+{&quot;caption&quot;:&quot;&quot;,&quot;data&quot;:&quot;&#x27;Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress&#x27; depends on axioms: [propext, Classical.choice, Quot.sound]&quot;,&quot;endPos&quot;:{&quot;column&quot;:6,&quot;line&quot;:87},&quot;fileName&quot;:&quot;candidate.lean&quot;,&quot;isSilent&quot;:false,&quot;keepFullRange&quot;:false,&quot;kind&quot;:&quot;[anonymous]&quot;,&quot;pos&quot;:{&quot;column&quot;:0,&quot;line&quot;:87},&quot;severity&quot;:&quot;information&quot;}</code></pre></div><div class="evidence-item"><h4>모델 후보의 고정 문맥 보존</h4><p class="note evidence-path"><code>scope.json</code></p><pre tabindex="0"><code>{
+  &quot;prefix_preserved&quot;: true,
+  &quot;suffix_preserved&quot;: true,
+  &quot;body_sha256&quot;: &quot;e1ace38e257ec5511a111c6274f433b21ef7daf6ba9a35dcda4d7cf65af7b2e8&quot;,
+  &quot;file_sha256&quot;: &quot;81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf&quot;,
+  &quot;body_exactly_from_response&quot;: true,
+  &quot;boundary_assurance&quot;: &quot;fixed byte context plus separate Lean parser EOF/AST guard; not an adversarial proof sandbox&quot;
+}</code></pre></div><div class="evidence-item"><h4>원시 응답→후보 연결 해시</h4><p class="note evidence-path"><code>results.json</code></p><pre tabindex="0"><code>JSON path: $.response_candidate_link
+{
+  &quot;raw_response_file&quot;: &quot;response.json&quot;,
+  &quot;raw_response_file_sha256&quot;: &quot;c8c99c31e1b55d7b1910deb3e402e70be3b2df9e882df2651ca09619e1adde76&quot;,
+  &quot;proof_body_sha256&quot;: &quot;e1ace38e257ec5511a111c6274f433b21ef7daf6ba9a35dcda4d7cf65af7b2e8&quot;,
+  &quot;candidate_file&quot;: &quot;candidate.lean&quot;,
+  &quot;final_checked_file&quot;: &quot;candidate.lean&quot;,
+  &quot;final_checked_sha256&quot;: &quot;81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf&quot;,
+  &quot;successful_file_sha256&quot;: &quot;81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf&quot;,
+  &quot;exact_model_body_preserved&quot;: true,
+  &quot;manual_candidate_edits&quot;: false,
+  &quot;fixed_prefix_suffix_preserved&quot;: {
+    &quot;prefix_preserved&quot;: true,
+    &quot;suffix_preserved&quot;: true,
+    &quot;body_sha256&quot;: &quot;e1ace38e257ec5511a111c6274f433b21ef7daf6ba9a35dcda4d7cf65af7b2e8&quot;,
+    &quot;file_sha256&quot;: &quot;81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf&quot;,
+    &quot;body_exactly_from_response&quot;: true,
+    &quot;boundary_assurance&quot;: &quot;fixed byte context plus separate Lean parser EOF/AST guard; not an adversarial proof sandbox&quot;
+  }
+}</code></pre></div></div></details></article><details class="helper-details extended-history"><summary>후보 생성 이전의 모델 호출 장애와 예산 기록</summary><div class="details-content"><article class="topic" id="s17" aria-labelledby="s17-title"><h3 class="topic-title" id="s17-title">호출 장애는 증명 수리 실패가 아니다</h3><p class="topic-intro">모델을 호출한 횟수, 실제 후보를 받은 횟수, Lean으로 후보를 검사한 횟수는 다르게 센다.</p><div class="topic-content"><div class="table-wrap"><table class="compact-table"><thead><tr><th scope="col">예산 / 호출</th><th scope="col">실제 관측</th><th scope="col">후보 생성</th><th scope="col">해석</th></tr></thead><tbody><tr><td>사전 실행 · 요청 1</td><td>MCP 설정 오류</td><td><span class="tag warn">없음</span></td><td>CLI 설정 장애</td></tr><tr><td>사전 실행 · 요청 2</td><td>sandbox 안 app-server 초기화 권한 오류</td><td><span class="tag warn">없음</span></td><td>실행 기반 장애</td></tr><tr><td>사전 실행 · 요청 3</td><td>요청 모델의 ChatGPT 미지원 · HTTP 400</td><td><span class="tag warn">없음</span></td><td>모델 호출 거부</td></tr><tr><td>본 실험 · 요청 1</td><td>지원 목록 확인 후 후보 응답 + Lean 최종 통과</td><td><span class="tag pass">1개</span></td><td>첫 실제 후보 수락</td></tr></tbody></table></div><div class="grid3"><div class="card"><div class="metric-label">전체 이력의 CLI 후보 요청</div><div class="num">4 <span>회</span></div><div class="metric-note">사전 실행 3회 + 본 실험 1회</div></div><div class="card"><div class="metric-label">완료된 모델 turn</div><div class="num">1 <span>회</span></div><div class="metric-note">설정 실패와 추론 완료를 분리</div></div><div class="card"><div class="metric-label">본 실험의 남은 요청</div><div class="num">2 <span>회</span></div><div class="metric-note">성공 후 사용하지 않음</div></div></div><div class="callout amber">“세 번 증명에 실패한 뒤 네 번째로 고쳤다”가 아니다.<br/>이전 세 요청은 후보가 없었고, <b>새 실험의 첫 실제 후보가 성공</b>했다.</div></div></article></div></details><article class="topic" id="s18" aria-labelledby="s18-title"><h3 class="topic-title" id="s18-title">실행 결과와 해석의 범위</h3><p class="topic-intro">검증된 후보의 유효성과 정답을 독립적으로 찾는 일반적인 모델 성능을 구분한다.</p><div class="topic-content"><div class="grid2"><div class="card teal"><div class="label">이번에 말할 수 있는 것</div><h4>P7의 실제 모델 생성 후보<br/>한 개가 최종 검증을 통과했다</h4><p class="small">오류 입력 → 신규 응답 → 무수정 적용 → 전체 파일·공리 검사 → 새 프로세스 최종 검사라는 연결을 확인했다.</p><div class="splitline"></div><p class="small">테스트도 분리했다: mock controller <b>13개</b>, 최신 event+controller 회귀 <b>22개</b>, parser fixture <b>15개</b>.<br/><span class="minor">22개에는 위 13개 controller 시험이 포함된다.</span></p></div><div class="card amber"><div class="label">아직 입증하지 않은 것</div><h4>일반 수리 성능,<br/>피드백의 인과적 효과</h4><p class="small">실제 실패 후 모델 재시도와 P12 모델 수리는 미실행이다. 정확한 자동 주입 prompt·tool schema를 완전히 감사하지 못했다.</p><div class="splitline"></div><pre class="compact" tabindex="0"><code>isolation_verified = false
+independent_success_counted = false</code></pre></div></div><div class="callout blue"><b>다음 비교 제안:</b> 같은 오류 코드·모델·예산에서<br/>A = 진단 메시지 / B = 진단 + 실제 goal·가정. 여러 오류 사례와 반복 실행으로 비교한다.</div><p class="minor">이번에는 B에 해당하는 입력으로 한 사례를 실행했을 뿐, A/B 비교를 수행하지 않았다. 토큰 사용량은 기록했지만 금액은 제공되지 않아 추가 비용 0원을 주장하지 않는다.</p></div></article><div class="chapter-takeaway">실제 모델 생성 후보로 P7의 검증 경로를 완주했다. 다음 확인 대상은 실제 실패 후 재후보 생성과 피드백 구성에 대한 통제 비교다.</div></section>
+<div style="margin-top:40px"><details class="helper-details" id="references"><summary>참고문헌 · 논문과 공식 문서</summary><div class="details-content ref-list"><div class="ref-entry" id="ref-R01"><a href="https://arxiv.org/html/2410.06209v8" target="_blank" rel="noopener noreferrer"><span class="ref-id">R01</span>LeanAgent: Lifelong Learning for Formal Theorem Proving</a><span>논문 · v8 · LeanDojo 계열의 상태 기반 탐색</span></div><div class="ref-entry" id="ref-R02"><a href="https://github.com/lean-dojo/LeanDojo-v2" target="_blank" rel="noopener noreferrer"><span class="ref-id">R02</span>LeanDojo-v2 — official repository</a><span>공식 저장소 · 추출·학습·평가·추론 통합</span></div><div class="ref-entry" id="ref-R03"><a href="https://github.com/leanprover-community/repl" target="_blank" rel="noopener noreferrer"><span class="ref-id">R03</span>community REPL — command / tactic modes</a><span>공식 저장소 · 실험은 v4.19.0 고정</span></div><div class="ref-entry" id="ref-R04"><a href="https://github.com/augustepoiroux/LeanInteract" target="_blank" rel="noopener noreferrer"><span class="ref-id">R04</span>LeanInteract — Python interface</a><span>공식 저장소 · Lean REPL의 Python 인터페이스</span></div><div class="ref-entry" id="ref-R05"><a href="https://github.com/stanford-centaur/PyPantograph" target="_blank" rel="noopener noreferrer"><span class="ref-id">R05</span>PyPantograph — machine-to-machine Lean interface</a><span>공식 저장소 · 목표·전술 상호작용</span></div><div class="ref-entry" id="ref-R06"><a href="https://arxiv.org/html/2505.05758v5" target="_blank" rel="noopener noreferrer"><span class="ref-id">R06</span>APOLLO — compiler-guided proof repair</a><span>논문 · §3 · 구문 정리·부분문제 수리·재조립</span></div><div class="ref-entry" id="ref-R07"><a href="https://arxiv.org/abs/2602.02990" target="_blank" rel="noopener noreferrer"><span class="ref-id">R07</span>Learning to Repair Lean Proofs from Compiler Feedback</a><span>APRIL · 수리 학습과 compiler feedback</span></div><div class="ref-entry" id="ref-R08"><a href="https://arxiv.org/abs/2610.17331" target="_blank" rel="noopener noreferrer"><span class="ref-id">R08</span>mini-Lean-agent: A Coding-Agent Baseline for Lean</a><span>논문 · bash + 별도 evaluator</span></div><div class="ref-entry" id="ref-R09"><a href="https://learn.chatgpt.com/docs/non-interactive-mode" target="_blank" rel="noopener noreferrer"><span class="ref-id">R09</span>Codex — Non-interactive mode</a><span>OpenAI 공식 문서 · exec·JSONL·schema</span></div><div class="ref-entry" id="ref-R10"><a href="https://code.claude.com/docs/en/agent-sdk/agent-loop" target="_blank" rel="noopener noreferrer"><span class="ref-id">R10</span>Claude Agent SDK — agent loop</a><span>공식 문서 · 도구 루프·턴·예산 관리</span></div><div class="ref-entry" id="ref-R11"><a href="https://lean-lang.org/doc/reference/latest/ValidatingProofs/" target="_blank" rel="noopener noreferrer"><span class="ref-id">R11</span>Lean — Validating a Lean Proof</a><span>공식 문서 · 원래 명제와 신뢰 범위</span></div><div class="ref-entry" id="ref-R12"><a href="https://lean-lang.org/doc/reference/latest/Axioms/" target="_blank" rel="noopener noreferrer"><span class="ref-id">R12</span>Lean — Axioms / Displaying Axiom Dependencies</a><span>공식 문서 · 전이적 공리 의존성 검사</span></div></div></details></div>
+<footer><span>LeanAgent · Verification &amp; Repair</span><a href="#top">맨 위로</a></footer></main><script>
+(() => {
+ 'use strict';
+ const sections=[...document.querySelectorAll('main > section.chapter')];
+ const links=[...document.querySelectorAll('nav.toc > a')];
+ const progress=document.getElementById('page-progress');
+ let pending=false;
+ function updatePosition(){
+   const range=document.documentElement.scrollHeight-innerHeight;
+   progress.style.width=(range>0 ? 100*scrollY/range : 0)+'%';
+   let current=sections[0]?.id;
+   for(const s of sections)if(s.getBoundingClientRect().top<=160)current=s.id;
+   for(const a of links){if(a.hash==='#'+current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');}
+   pending=false;
+ }
+ addEventListener('scroll',()=>{if(!pending){pending=true;requestAnimationFrame(updatePosition);}},{passive:true});
+ addEventListener('resize',updatePosition);
+ function setTab(button,focus=false){
+   const group=button.closest('.demo-tabs');
+   for(const b of group.querySelectorAll('[data-tab]')){
+     const active=b===button;b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1;
+   }
+   for(const panel of group.querySelectorAll('.tab-panel')) panel.hidden=panel.id!==button.dataset.tab;
+   if(focus)button.focus();updatePosition();
+ }
+ document.querySelectorAll('[data-tab]').forEach(b=>{
+   b.addEventListener('click',()=>setTab(b));
+   b.addEventListener('keydown',e=>{
+     const bs=[...b.closest('.tabs').querySelectorAll('[data-tab]')];let ix=bs.indexOf(b);
+     if(e.key==='ArrowRight')ix=(ix+1)%bs.length;else if(e.key==='ArrowLeft')ix=(ix+bs.length-1)%bs.length;
+     else if(e.key==='Home')ix=0;else if(e.key==='End')ix=bs.length-1;else return;
+     e.preventDefault();setTab(bs[ix],true);
+   });
+ });
+ document.getElementById('large-type').addEventListener('click',e=>{
+   const active=document.body.classList.toggle('large-type');
+   e.currentTarget.setAttribute('aria-pressed',String(active));
+   e.currentTarget.textContent=active?'기본 글씨':'큰 글씨';updatePosition();
+ });
+ document.getElementById('print-page').addEventListener('click',()=>window.print());
+ function revealTarget(hash){
+   const target=document.getElementById(hash.slice(1));if(!target)return;
+   let p=target.parentElement;while(p){if(p.tagName==='DETAILS')p.open=true;p=p.parentElement;}
+   target.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+ }
+ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+   if(!document.getElementById(a.hash.slice(1)))return;
+   e.preventDefault();history.replaceState(null,'',a.hash);revealTarget(a.hash);
+ }));
+ if(location.hash)requestAnimationFrame(()=>revealTarget(location.hash));
+ const kws=new Set(['theorem','lemma','private','open','in','case','with','have','fun','match','by','at','let','def','omit']);
+ const tacs=new Set(['induction','simp','simp_rw','intro','exact','apply','cases','rcases','unfold','constructor','rfl','generalize','subst','right','left','obtain','exists','grind','omega','rw','rwa','simpa','classical']);
+ const lex=/(--[^\n]*)|([A-Za-z_][\w'.]*)|(\d+)/g;
+ const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ document.querySelectorAll('.tab-panel > pre code,pre.lean code').forEach(el=>{
+   const src=el.textContent;let out='',last=0;
+   for(const m of src.matchAll(lex)){
+     out+=esc(src.slice(last,m.index));const cl=m[1]?'tk-com':m[3]?'tk-num':kws.has(m[2])?'tk-kw':tacs.has(m[2])?'tk-tac':'';
+     out+=cl?'<span class="'+cl+'">'+esc(m[0])+'</span>':esc(m[0]);last=m.index+m[0].length;
+   }
+   el.innerHTML=out+esc(src.slice(last));
+ });
+ updatePosition();
+})();
+</script></body></html>

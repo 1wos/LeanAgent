@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "record_type": "summary_of_previous_execution",
+  "summarized_on": "2026-10-18",
+  "timezone": "Asia/Seoul",
+  "raw_artifacts_retained": false,
+  "rerun_in_this_task": false,
+  "record_created_at_Asia_Seoul": "2026-10-18T09:40:07.162999+09:00",
+  "environment": {
+    "library": "Cslib",
+    "commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+    "lean_toolchain": "leanprover/lean4:v4.33.0-rc2",
+    "manifest_sha256": "c5acf9a59cf6956eb89589ff09b6a35adbc79fb220886f61442fe02d8b21aae0"
+  },
+  "status": "verified",
+  "requested_model": "gpt-5.6-sol",
+  "requested_reasoning_effort": "high",
+  "observed_model_id": null,
+  "candidate_request_cli_invocations": 1,
+  "completed_model_turns": 1,
+  "actual_model_retry_observed": false,
+  "lean_call_counts": {
+    "whole_file_verification": 4,
+    "proof_state_diagnostic": 1,
+    "proof_body_parser": 2
+  },
+  "model_cli_elapsed_seconds": 8.826,
+  "experiment_elapsed_seconds_excluding_preparation": 36.713,
+  "final_checked_sha256": "81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf",
+  "successful_file_sha256": "81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf",
+  "exact_model_body_preserved": true,
+  "manual_candidate_edits": false,
+  "final_target_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "isolation_verified": false,
+  "independent_success_counted": false,
+  "cost": null,
+  "measurement_date": "2026-10-18",
+  "run_id": "20261018T094007+0900",
+  "config": {
+    "project_commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+    "lean_toolchain": "leanprover/lean4:v4.33.0-rc2",
+    "manifest_sha256": "c5acf9a59cf6956eb89589ff09b6a35adbc79fb220886f61442fe02d8b21aae0",
+    "module": "Cslib.Languages.LambdaCalculus.LocallyNameless.Fsub.Typing",
+    "target": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+    "declaration": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t'",
+    "max_model_calls": 3,
+    "lean_timeout_seconds": 300,
+    "model_timeout_seconds": 300,
+    "experiment_timeout_seconds": 1800,
+    "setup_timeout_seconds": 600,
+    "warning_as_error": true
+  },
+  "controller": {
+    "status": "verified",
+    "model_call_count": 1,
+    "actual_model_retry_observed": false,
+    "lean_failure_feedback_retry_requested": false,
+    "successful_attempt": 1,
+    "termination_reason": "whole-file final recheck passed"
+  },
+  "initial_diagnostic": {
+    "status": "proof_error",
+    "expected_actual_types": {
+      "actual": "Typing [] (t₁.app t₂) τ✝",
+      "expected": "Typing [] t₁ (σ✝.arrow τ✝)",
+      "source": "literal excerpts from actual Lean diagnostic"
+    },
+    "goal_excerpt": "⊢ ∃ t', t₁.app t₂ ⭢βᵛ t'"
+  },
+  "model_call": {
+    "started_at_utc": "2026-10-18T00:40:30.451103+00:00",
+    "executed": true,
+    "returncode": 0,
+    "elapsed_seconds": 8.826,
+    "timed_out": false,
+    "requested_model": "gpt-5.6-sol",
+    "requested_reasoning_effort": "high",
+    "observed_model_id": null,
+    "observed_reasoning_effort": null,
+    "usage_provided": [
+      {
+        "input_tokens": 9351,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 817,
+        "reasoning_output_tokens": 113
+      }
+    ],
+    "cost_provided": null,
+    "model_turns_started": 1,
+    "completed_turns": 1,
+    "inference_observed": true,
+    "final_response_present": true
+  },
+  "repair": {
+    "diagnosis": "The application case passes `wholeTyped`, which types the entire term `t₁.app t₂`, to `ihLeft`, whose second argument must type `t₁`. Pass `leftTyped` instead. The rest of the supplied proof is unchanged.",
+    "changed_statement": "ihLeft rfl wholeTyped → ihLeft rfl leftTyped",
+    "other_observed_change": "one trailing empty line removed",
+    "manual_candidate_edits": false
+  },
+  "parser_guard": {
+    "accepted": true,
+    "parser_checked": true,
+    "policy_version": "p7-parse-only-allowlist-v2",
+    "consumes_complete_input": true,
+    "candidate_elaborated": false,
+    "parser_ok": true,
+    "root_is_by": true
+  },
+  "stages": {
+    "baseline": {
+      "status": "verified",
+      "label": "evaluator_baseline",
+      "file_sha256": "ba192c3ce4232496f5435a07ba48b0f7fd850a61689dbc0b22174dce11e97473",
+      "theorem_check_seen": true,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "added_axioms": null,
+      "axiom_output_observed": true,
+      "warnings_as_errors": true,
+      "instrumented": false,
+      "process": {
+        "kind": "whole_file_verification",
+        "started_at_utc": "2026-10-18T00:40:11.318852+00:00",
+        "executed": true,
+        "returncode": 0,
+        "elapsed_seconds": 6.494,
+        "timed_out": false,
+        "process_error": null
+      }
+    },
+    "initial": {
+      "status": "proof_error",
+      "label": "initial_broken",
+      "file_sha256": "ddbd4db1fdc876dc6f9c2c864d44a4bfacc1793892bd70d04baa24f451b411c1",
+      "theorem_check_seen": true,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext",
+        "sorryAx"
+      ],
+      "added_axioms": [
+        "sorryAx"
+      ],
+      "axiom_output_observed": true,
+      "warnings_as_errors": true,
+      "instrumented": false,
+      "process": {
+        "kind": "whole_file_verification",
+        "started_at_utc": "2026-10-18T00:40:17.816136+00:00",
+        "executed": true,
+        "returncode": 1,
+        "elapsed_seconds": 3.272,
+        "timed_out": false,
+        "process_error": null
+      }
+    },
+    "candidate": {
+      "status": "verified",
+      "label": "attempt_01",
+      "file_sha256": "81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf",
+      "theorem_check_seen": true,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "added_axioms": [],
+      "axiom_output_observed": true,
+      "warnings_as_errors": true,
+      "instrumented": false,
+      "proof_body_sha256": "e1ace38e257ec5511a111c6274f433b21ef7daf6ba9a35dcda4d7cf65af7b2e8",
+      "process": {
+        "kind": "whole_file_verification",
+        "started_at_utc": "2026-10-18T00:40:41.488552+00:00",
+        "executed": true,
+        "returncode": 0,
+        "elapsed_seconds": 3.263,
+        "timed_out": false,
+        "process_error": null
+      }
+    },
+    "final": {
+      "status": "verified",
+      "label": "attempt_01_final",
+      "file_sha256": "81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf",
+      "theorem_check_seen": true,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "added_axioms": [],
+      "axiom_output_observed": true,
+      "warnings_as_errors": true,
+      "instrumented": false,
+      "proof_body_sha256": "e1ace38e257ec5511a111c6274f433b21ef7daf6ba9a35dcda4d7cf65af7b2e8",
+      "process": {
+        "kind": "whole_file_verification",
+        "started_at_utc": "2026-10-18T00:40:44.753108+00:00",
+        "executed": true,
+        "returncode": 0,
+        "elapsed_seconds": 3.277,
+        "timed_out": false,
+        "process_error": null
+      }
+    }
+  },
+  "response_candidate_identity": {
+    "raw_response_file_sha256": "c8c99c31e1b55d7b1910deb3e402e70be3b2df9e882df2651ca09619e1adde76",
+    "proof_body_sha256": "e1ace38e257ec5511a111c6274f433b21ef7daf6ba9a35dcda4d7cf65af7b2e8",
+    "final_checked_sha256": "81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf",
+    "successful_file_sha256": "81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf",
+    "exact_model_body_preserved": true,
+    "manual_candidate_edits": false,
+    "fixed_prefix_suffix_preserved": {
+      "prefix_preserved": true,
+      "suffix_preserved": true,
+      "body_exactly_from_response": true,
+      "boundary_assurance": "fixed byte context plus separate Lean parser EOF/AST guard; not an adversarial proof sandbox"
+    }
+  },
+  "prior_cli_requests": [
+    {
+      "run_id": "20261018T091105+0900",
+      "failure_category": "mcp_config_invalid_transport",
+      "requested_model": "gpt-6.1-sol",
+      "returncode": 1,
+      "elapsed_seconds": 0.135,
+      "completed_turns": 0,
+      "inference_observed": false,
+      "final_response_present": false
+    },
+    {
+      "run_id": "20261018T091724+0900",
+      "failure_category": "app_server_initialization_permission_error",
+      "requested_model": "gpt-6.1-sol",
+      "returncode": 1,
+      "elapsed_seconds": 0.203,
+      "completed_turns": 0,
+      "inference_observed": false,
+      "final_response_present": false
+    },
+    {
+      "run_id": "20261018T092930+0900",
+      "failure_category": "requested_model_not_supported",
+      "requested_model": "gpt-6.1-sol",
+      "returncode": 1,
+      "elapsed_seconds": 1.7,
+      "completed_turns": 0,
+      "inference_observed": false,
+      "final_response_present": false
+    }
+  ],
+  "cli_request_count_including_prior": 4,
+  "remaining_candidate_requests": 2,
+  "limitations": [
+    "No observed retry after an actual failed model candidate.",
+    "P12 model repair and diagnostic-only vs diagnostic-plus-goals A/B comparison were not executed.",
+    "Exact auto-injected prompt and tool schema could not be fully audited.",
+    "No observed tool calls does not prove an empty tool schema.",
+    "Possible pretraining exposure was not ruled out.",
+    "Cost was not provided; no zero-cost claim."
+  ],
+  "provenance": [
+    {
+      "original_relative_path": "model-repair/20261018T094007+0900/results.json",
+      "sha256": "3cbf8bf8245d270eb55aa58cac5f9ca6abfc5bc44783a7aa9d603044be481e02",
+      "retained": false
+    },
+    {
+      "original_relative_path": "model-repair/20261018T094007+0900/model/attempt_01/response.json",
+      "sha256": "c8c99c31e1b55d7b1910deb3e402e70be3b2df9e882df2651ca09619e1adde76",
+      "retained": false
+    },
+    {
+      "original_relative_path": "model-repair/20261018T094007+0900/attempts/attempt_01/change.patch",
+      "sha256": "6caea1c12f92bd36f06f1aabf5851ec6828a13906754081eecf86f328427969d",
+      "retained": false
+    }
+  ]
+}
