@@ -23,11 +23,19 @@
 
 이번 재실행에 사용한 LLM은 없다. 입력 증명은 2주차에 공개한 고정 파일이며, 새 후보 생성·검색·수리를 요청하지 않았다. 검증에는 표의 Lean 버전을 사용했다.
 
-### 지표와 참고문헌
+### 논문에서 가져온 방법과 적용 범위
 
-공통 [논문 목록](../../../papers.md)의 34번인 [Lean Refactor §4.2–4.3](https://www.alphaxiv.org/pdf/2605.20244)은 증명 길이, 컴파일 비용, 버전 호환성을 각각 평가한다. 특히 연구용 저장소의 증명에서는 heartbeat를 “deterministic proxy for elaboration work”로 사용한다. proof length는 대회 방식으로 센 증명 길이이고, heartbeat는 Lean이 증명 처리에 쓴 작업량을 나타낸다. 이번에도 두 값을 따로 기록하고, 버전별로 참조·최종 증명을 함께 실행했다.
+현재 적용한 것은 두 논문의 평가·기록 방법이다. 논문별 연결은 아래와 같다. proof length는 구문 단위로 센 증명 길이이고, heartbeat는 Lean이 증명 처리에 쓴 작업량이다.
 
-[Arvan 등의 재현성 연구](https://aclanthology.org/2022.emnlp-main.150.pdf#page=2)는 결과를 다시 만드는 실행·처리 스크립트와 입력·환경·실험 기록을 함께 제공할 것을 권한다. 이를 참고해 실행 조건을 JSON에 고정하고, 결과 JSON에서 표를 다시 만들도록 했다. 두 논문에서 가져온 것은 평가 지표와 기록 방법이다.
+| 논문·위치 | 참고한 방법 | 이번 구현·실행 | 확인한 결과와 적용 범위 |
+| --- | --- | --- | --- |
+| [Lean Refactor](https://www.alphaxiv.org/pdf/2605.20244), §4.2·부록 J·L. 공통 [논문 목록](../../../papers.md)의 34번 | 길이와 컴파일 비용을 각각 측정한다. 연구용 프로젝트의 선언에는 `Elab.async false`와 `#count_heartbeats`를 적용한다. | 2주차의 길이 계산기와 heartbeat 검증기를 재사용하고, 네 환경의 참조·최종 증명을 각 3회 실행했다. | 8개 조건 모두 길이와 heartbeat가 반복마다 같았다. 지표와 계측 방법을 적용했으며, 논문의 전략 검색·재정렬 효과는 실험하지 않았다. |
+| Lean Refactor, §4.3 | 같은 증명을 여러 toolchain에서 수정 없이 다시 컴파일해 호환성을 확인한다. | 9번의 고정된 증명 두 개를 지정된 Lean·CSLib 환경 세 개에서 검사했다. | 모두 통과했다. 최종 heartbeat 516·516·510은 지난주 결과의 재확인이다. 논문의 데이터셋·버전과 다르며, 버전 정보를 이용한 전략 필터링은 구현하지 않았다. |
+| Arvan·Pina·Parde, [Reproducibility in Computational Linguistics: Is Source Code Enough?](https://aclanthology.org/2022.emnlp-main.150.pdf#page=2), EMNLP 2022, §3 | 소스 코드와 함께 입력·실행 환경·원시 결과·실험 및 표 생성 스크립트를 제공한다. | [실행 조건](evidence/reproducibility/protocol.json), [환경 기록](evidence/reproducibility/results/environment.json), [실행·집계 도구](evidence/reproducibility/run_replay.py), 로그와 재실행 안내를 함께 두었다. | 저장된 결과에서 표를 다시 생성해 일치함을 확인했다. 사전 준비한 로컬 환경에서만 실행했으며, 논문이 설명하는 독립 실행 패키지·컨테이너나 다른 사람의 재현 검증까지 갖춘 것은 아니다. |
+
+3회 반복, 파일 해시 대조, 환경 불일치 차단, 실패 입력 4종은 이번 실행 도구를 확인하기 위해 정한 구현·검사 방법이다. 두 논문이 그대로 제시한 실험 설정이나 알고리즘으로 소개하지 않는다. Lean Refactor의 경시 수학 실험은 import를 제외한 컴파일 시간을 5회 측정한다. 이번의 3회 반복과 전체 프로세스 시간은 그 설정을 재현한 것이 아니다.
+
+논문별 방법의 성능을 비교하거나, 이 기록 방식을 쓰기 전후의 재현 성공률을 비교한 실험은 아직 없다. 현재 근거는 위 방법을 적용한 실행·기록 절차가 4·9번에서 작동한다는 확인이다. Lean Refactor의 에이전트 구조와 2주차 적용 기록은 [별도 논문 문서](../../../verifier-guided-agent/정소미/report.md)에 있다.
 
 ## 2. 비교 조건
 
