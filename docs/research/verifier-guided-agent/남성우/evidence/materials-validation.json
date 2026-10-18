@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-10-18",
+  "relative_links_checked": 58,
+  "preserved_evidence_files": 2393,
+  "evidence_source_commit": "0570f0e31a05e1f6f1e1f9695139384ae1794e99",
+  "metric_summary_matches": true,
+  "browser_checks": [
+    "narrow reading layout",
+    "1280x900 desktop layout and no horizontal overflow",
+    "table of contents navigation",
+    "presentation mode: one visible section",
+    "next button and ArrowRight",
+    "Escape returns to reading mode",
+    "duplicate HTML ids absent"
+  ],
+  "issues": []
+}
