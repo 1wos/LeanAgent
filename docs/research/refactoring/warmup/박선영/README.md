@@ -9,9 +9,11 @@ Week 2 공유 자료. 증명 구조 분석과 리팩터링 후보, 검증·측�
 - 발표자료: [Lean Warmup 실험노트](presentation.html) — 구조·전략 연구 중심 본문 11장 + 배경·초기 결과 부록 6장. 하단의 ‘본문 끝’·‘부록’ 버튼으로 이동할 수 있습니다.
 - 후속 실험: [A/C 효과 분리 확인 보고서](evidence/agent/p11-20261017-ac-check4/report.md) · [앞선 순차 탐색 보고서](evidence/agent/p11-20261017-adaptive3/report.md).
 - 상세 보고서: [원본 실측·후보 변경점·재현 명령](report.md).
-- 측정 기록: [루트 metrics 집계](../../../../../metrics/warmup/박선영/metrics.json) · [환경·실행 승인·검증기 수정 이력](../../../../../metrics/warmup/박선영/environment-status.json).
-- 검증 근거: [원본·초안·재현 코드](evidence/) · [측정 저장 위치 안내](../../../../../metrics/README.md).
-- 구조·전략 실험: 로컬 `/lean-refactor` skill을 사용했습니다. skill·세션 helper 소스는 이번 공유에 포함하지 않습니다. 후보·가설은 `evidence/agent/<session>/`, 세션 상태·실측·회고는 루트 `metrics/warmup/박선영/agent/<session>/`에 보존하며, 공개된 개별 후보 검증은 `evidence/run_experiments.py`를 사용합니다.
+- 측정 기록: [개인 evidence/metrics 집계](evidence/metrics/metrics.json) · [환경·실행 승인·검증기 수정 이력](evidence/metrics/environment-status.json).
+- 검증 근거: [원본·초안·재현 코드](evidence/) · [측정 저장 위치 안내](evidence/metrics/README.md).
+- 구조·전략 실험: 로컬 `/lean-refactor` skill을 사용했습니다. skill·세션 helper 소스는 이번 공유에 포함하지 않으며 이번 경로 정리에서도 변경하지 않습니다. 후보·가설은 `evidence/agent/<session>/`, 세션 상태·실측·회고는 `evidence/metrics/agent/<session>/`에 보존하며, 공개된 개별 후보 검증은 `evidence/run_experiments.py`를 사용합니다.
 - 관련 자료: [별도 Autoformalization 조사·발표](../../../autoformalization/박선영/README.md).
 
-증명·재현 코드는 이 폴더의 `evidence/`에, 실행별 JSON·원시 로그는 저장소 루트 `metrics/warmup/박선영/`에 보관합니다. 미검증 초안을 검증된 선택 후보로 표시하지 않습니다.
+증명·재현 코드는 이 폴더의 `evidence/`에, 실행별 JSON·원시 로그는 그 안의 `evidence/metrics/`에 보관합니다. 미검증 초안을 검증된 선택 후보로 표시하지 않습니다.
+
+이동한 원시 JSON·로그·snapshot은 내용 그대로 보존했습니다. 내부의 과거 출력 경로와 해시·fingerprint는 원래 실행 시점의 기록이며 현재 트리의 경로나 동일성 보장이 아닙니다. 기존 세션을 자동 재개하거나 원장을 새 경로로 고쳐 이어 실행하지 않으며, 후속 실행은 별도 승인·환경 확인 후 새 세션에서 진행합니다.

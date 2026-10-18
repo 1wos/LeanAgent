@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce P8/P11 experiments; keep measurements in repository-root metrics/."""
+"""Reproduce P8/P11 experiments; keep measurements in this author's evidence/metrics/."""
 from __future__ import annotations
 
 import argparse
@@ -18,7 +18,7 @@ import time
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[5]
-OUTPUT = ROOT / "metrics/warmup/박선영"
+OUTPUT = HERE / "metrics"
 SHARED = HERE.parent.parent / "정소미/evidence"
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 MARKERS = ("<!-- experiment-results:start -->", "<!-- experiment-results:end -->")
@@ -310,6 +310,16 @@ def aggregate() -> dict:
             "problems": summaries}
 
 
+def recorded_output_path(output: str) -> Path:
+    """Resolve relocated evidence without rewriting historical result JSON."""
+    path = Path(output)
+    try:
+        suffix = path.relative_to("metrics/warmup/박선영")
+    except ValueError:
+        return ROOT / path
+    return OUTPUT / suffix
+
+
 def render_table(data: dict) -> str:
     lines = ['<div class="scroll"><table><caption>원본 → 선택 후보 · 로컬 측정 / 미검증 초안 토큰은 별도 표기</caption><thead><tr><th>문제 / 환경</th><th>증명 토큰</th><th>heartbeat</th><th>원본 / 후보 상태</th><th>후보 지정 버전 통과</th><th>근거</th></tr></thead><tbody>']
     for item in data["problems"]:
@@ -326,7 +336,7 @@ def render_table(data: dict) -> str:
                 return text + f" ({abs(pct):.2f}% {direction})"
             compat = item["compatibility"]
             record = candidate or baseline
-            link = os.path.relpath(ROOT / record["output"] / "result.json", HERE.parent) if record else ""
+            link = os.path.relpath(recorded_output_path(record["output"]) / "result.json", HERE.parent) if record else ""
             evidence = f'<a href="{html.escape(link, quote=True)}">실행 기록</a>' if link else "기록 없음"
             states = {"passed": "통과", "failed": "실패", "timeout": "timeout",
                       "measurement_failed": "검증 통과·측정 실패"}

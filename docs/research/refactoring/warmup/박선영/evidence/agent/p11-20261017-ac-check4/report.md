@@ -35,7 +35,7 @@
 - 저장소: [Verified-zkEVM/ArkLib](https://github.com/Verified-zkEVM/ArkLib), 기존 준비된 checkout.
 - 커밋: `c1712f6c496d0aef04f09bae42aec13811b3273f`, Lean **v4.31.0**.
 - 소스: `ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean`.
-- 정책: [v1 snapshot](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/policy-snapshot.json), 유효성 → 최소 heartbeat → 동률이면 최소 tokens.
+- 정책: [v1 snapshot](../../metrics/agent/p11-20261017-ac-check4/policy-snapshot.json), 유효성 → 최소 heartbeat → 동률이면 최소 tokens.
 - 예산: 후보 4개, 원본 별도 1회, subprocess당 timeout 180초, patience 4. best 갱신 여부 때문에 지정 조건을 생략하지 않도록 시작할 때 고정했다.
 - 현재 helper/검증기/benchmark/skill/protocol 및 checkout fingerprint를 새로 고정했다. 이전 세션과 skill/protocol 해시가 달라 새 세션을 사용했으며 이전 세션을 복구·수정하지 않았다.
 - 임시 전체 소스에서 대상 선언만 교체해 `lake env lean`으로 컴파일하고 `#print axioms`를 검사했다. 이후 별도 임시 소스에서 대상 선언만 `#count_heartbeats`로 측정했다. 기존 대상 정리 `.olean` import로 검증을 대신하지 않았다.
@@ -61,7 +61,7 @@ a003의 원장 `improved=false`는 **그때의 best인 B+A를 갱신하지 못�
 
 ## 5. 요청한 효과의 분리
 
-[세 비교의 계산 기록](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/contrasts.json)은 저장된 유효한 result JSON에서 계산했다. Lean을 추가 실행하지 않았고 helper의 부모 관계를 바꾸지 않았다.
+[세 비교의 계산 기록](../../metrics/agent/p11-20261017-ac-check4/contrasts.json)은 저장된 유효한 result JSON에서 계산했다. Lean을 추가 실행하지 않았고 helper의 부모 관계를 바꾸지 않았다.
 
 | 질문 | 비교 | Heartbeat 감소 | Heartbeat 감소율 | Tokens 감소 | Tokens 감소율 |
 | --- | --- | ---: | ---: | ---: | ---: |
@@ -100,10 +100,10 @@ a003의 원장 `improved=false`는 **그때의 best인 B+A를 갱신하지 못�
 ## 7. 종료 상태·실패·한계
 
 - 원본 1개 + 후보 4개 평가 완료. 후보 실패 **0**, timeout **0**, 권한 차단 **0**, 무결성/검증기 오류 **0**, 추가 수정 시도 **0**.
-- 모든 후보 review 및 [helper 회고](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/reflection.json) 저장 완료. 남은 예산 **0**. 새 후보를 만들지 않는다.
+- 모든 후보 review 및 [helper 회고](../../metrics/agent/p11-20261017-ac-check4/reflection.json) 저장 완료. 남은 예산 **0**. 새 후보를 만들지 않는다.
 - 회고의 정책 변경 제안은 **없음**. 활성 정책/skill/검증기 변경 없음.
-- [보존 대상 실행 전 해시](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/protected-before.json)에 등록한 이전 세션·skill·P11 원본/selected·기존 지표·발표 HTML 등 **48개 파일 모두 불변**이다.
-- [검증 기록](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/verification.json)의 부모·예산·동일성·차이 범위·원시 결과/원장 일치·저장 해시·공리 검사 **36개 모두 통과**했다. 이는 전체 dependency binary에 대한 완전한 attestation은 아니다.
+- [보존 대상 실행 전 해시](../../metrics/agent/p11-20261017-ac-check4/protected-before.json)에 등록한 이전 세션·skill·P11 원본/selected·기존 지표·발표 HTML 등 **48개 파일 모두 불변**이다.
+- [검증 기록](../../metrics/agent/p11-20261017-ac-check4/verification.json)의 부모·예산·동일성·차이 범위·원시 결과/원장 일치·저장 해시·공리 검사 **36개 모두 통과**했다. 이는 전체 dependency binary에 대한 완전한 attestation은 아니다.
 - 기존 세션 a003의 미완료 review는 그대로 보존했다. 이번 a004의 완료와 혼동하지 않는다.
 - 이번 작업은 도구 구현을 바꾸지 않았으므로 Python 회귀 테스트를 새로 실행하지 않았다. 실제 후보는 기존 검증기로 모두 컴파일/공리/heartbeat 검사했다.
 - 조건당 1회, 단일 정리/고정 커밋/v4.31.0에 한정된다. 다른 Lean 버전·정리·공식 서버 점수·반복 실행 분포는 확인하지 않았다.
@@ -111,15 +111,15 @@ a003의 원장 `improved=false`는 **그때의 best인 B+A를 갱신하지 못�
 
 ## 8. 원시 결과와 기록
 
-- [세션 원장: best·명시적 부모·비교율·review](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/session.json)
-- [동결 정책](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/policy-snapshot.json) · [회고](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/reflection.json) · [파생 비교](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/contrasts.json)
+- [세션 원장: best·명시적 부모·비교율·review](../../metrics/agent/p11-20261017-ac-check4/session.json)
+- [동결 정책](../../metrics/agent/p11-20261017-ac-check4/policy-snapshot.json) · [회고](../../metrics/agent/p11-20261017-ac-check4/reflection.json) · [파생 비교](../../metrics/agent/p11-20261017-ac-check4/contrasts.json)
 
 | 실행 | 원시 결과 | 전체 문맥 검증 로그 | 별도 heartbeat 로그 |
 | --- | --- | --- | --- |
-| reference | [JSON](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/baseline/result.json) | [check](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/baseline/check.log) | [heartbeat](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/baseline/heartbeat.log) |
-| a001 / B | [JSON](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a001/result.json) | [check](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a001/check.log) | [heartbeat](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a001/heartbeat.log) |
-| a002 / B+A | [JSON](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a002/result.json) | [check](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a002/check.log) | [heartbeat](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a002/heartbeat.log) |
-| a003 / B+C | [JSON](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a003/result.json) | [check](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a003/check.log) | [heartbeat](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a003/heartbeat.log) |
-| a004 / B+A+C | [JSON](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a004/result.json) | [check](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a004/check.log) | [heartbeat](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a004/heartbeat.log) |
+| reference | [JSON](../../metrics/agent/p11-20261017-ac-check4/baseline/result.json) | [check](../../metrics/agent/p11-20261017-ac-check4/baseline/check.log) | [heartbeat](../../metrics/agent/p11-20261017-ac-check4/baseline/heartbeat.log) |
+| a001 / B | [JSON](../../metrics/agent/p11-20261017-ac-check4/attempts/a001/result.json) | [check](../../metrics/agent/p11-20261017-ac-check4/attempts/a001/check.log) | [heartbeat](../../metrics/agent/p11-20261017-ac-check4/attempts/a001/heartbeat.log) |
+| a002 / B+A | [JSON](../../metrics/agent/p11-20261017-ac-check4/attempts/a002/result.json) | [check](../../metrics/agent/p11-20261017-ac-check4/attempts/a002/check.log) | [heartbeat](../../metrics/agent/p11-20261017-ac-check4/attempts/a002/heartbeat.log) |
+| a003 / B+C | [JSON](../../metrics/agent/p11-20261017-ac-check4/attempts/a003/result.json) | [check](../../metrics/agent/p11-20261017-ac-check4/attempts/a003/check.log) | [heartbeat](../../metrics/agent/p11-20261017-ac-check4/attempts/a003/heartbeat.log) |
+| a004 / B+A+C | [JSON](../../metrics/agent/p11-20261017-ac-check4/attempts/a004/result.json) | [check](../../metrics/agent/p11-20261017-ac-check4/attempts/a004/check.log) | [heartbeat](../../metrics/agent/p11-20261017-ac-check4/attempts/a004/heartbeat.log) |
 
-원시 측정/상태는 루트 metrics에만 두며 evidence에 복제하지 않았다. 이 보고서는 저장된 결과를 해석한 문서이고 최종 채택 선언이 아니다.
+원시 측정/상태는 개인 `evidence/metrics/`로 이동해 보존했다. JSON·로그·snapshot 내용과 내부의 과거 실행 경로·해시는 당시 기록 그대로이며 현재 환경과의 일치를 보장하지 않는다. 기존 세션을 자동 재개하지 않는다. 이 보고서는 저장된 결과를 해석한 문서이고 최종 채택 선언이 아니다.

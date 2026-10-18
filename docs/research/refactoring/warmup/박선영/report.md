@@ -11,7 +11,7 @@
 | 순서 | 자료 | 읽을 내용 |
 | --- | --- | --- |
 | 1 | [확인 실험 보고서](evidence/agent/p11-20261017-ac-check4/report.md) | 중간 `calc`의 두 `ring` 단계 통합(C)이 마지막 계수 계산 재구성(A) 없이도 효과가 있는지, 네 조건을 분리한 결과 |
-| 2 | [확인 실험 README](evidence/agent/p11-20261017-ac-check4/README.md) | 조건별 후보·가설·diff와 루트 metrics의 원시 결과·로그·회고를 찾는 목차 |
+| 2 | [확인 실험 README](evidence/agent/p11-20261017-ac-check4/README.md) | 조건별 후보·가설·diff와 evidence/metrics의 원시 결과·로그·회고를 찾는 목차 |
 | 3 | [이전 순차 탐색 보고서](evidence/agent/p11-20261017-adaptive3/report.md) | B→B+A→B+A+C로 다음 전략을 선택한 과정과 후속 확인 실험이 필요했던 이유 |
 
 ### 결과를 해석하는 기준
@@ -25,7 +25,9 @@
 - 이전 탐색은 마지막 평가 후 skill 파일 변경 감지로 a003의 review 저장이 중단됐습니다. 최신 확인 실험은 **네 후보 평가·review·회고까지 모두 완료**했습니다. 이전 기록은 수정하지 않고 보존했습니다.
 - 세션의 **best는 최종 채택이 아닙니다.** 최신 best는 a004(B+A+C)이지만 기존 `selected.lean`, 발표 HTML 및 Week 2 집계는 변경하지 않았습니다. 다른 정리·다른 버전·공식 서버 성능으로 일반화하지 않습니다.
 
-원시 수치는 보고서가 연결하는 루트 `metrics/warmup/박선영/agent/<session>/`의 `session.json`, `result.json`, `check.log`, `heartbeat.log`에서 확인합니다. 증명·가설·diff는 각 evidence 세션에 있고, 측정 파일을 이 대표 문서나 evidence에 복제하지 않습니다.
+원시 수치는 보고서가 연결하는 `evidence/metrics/agent/<session>/`의 `session.json`, `result.json`, `check.log`, `heartbeat.log`에서 확인합니다. 증명·가설·diff는 각 `evidence/agent/<session>/`에 있고, 측정 파일을 대표 문서나 증명 세션 폴더에 복제하지 않습니다.
+
+경로 정리로 원시 JSON·로그·snapshot의 내용은 바꾸지 않았습니다. 내부의 과거 출력 경로, 저장 해시 및 코드·환경 fingerprint는 원래 실행 당시의 기록이며 현재 트리 전체의 동일성을 보장하지 않습니다. 이 보고서의 기존 검증·불변성 주장은 해당 측정 시점의 사실입니다. 기존 세션을 자동 재개하거나 원장을 수정해 무결성 검사를 우회하지 않으며, 후속 실행은 별도 승인·현재 환경 확인 후 새 세션에서 수행합니다. 로컬 skill·helper는 이번 공유에서 제외하고 경로 정리에서도 변경하지 않습니다.
 
 ## Week 2 — 결론과 검증 범위
 
@@ -53,11 +55,11 @@
 
 측정 시각은 각 JSON의 UTC `measured_at`에 있습니다. 원본·후보·전체 소스 SHA-256, 실행 명령, 종료 코드, 경과 시간, 공리, heartbeat를 함께 저장합니다.
 
-- 8번: [결과 JSON](../../../../../metrics/warmup/박선영/P8/runs/20261015T053841280710Z-reference/result.json) · [Lean 검증 로그](../../../../../metrics/warmup/박선영/P8/runs/20261015T053841280710Z-reference/check.log) · [heartbeat 로그](../../../../../metrics/warmup/박선영/P8/runs/20261015T053841280710Z-reference/heartbeat.log).
-- 11번: [결과 JSON](../../../../../metrics/warmup/박선영/P11/runs/20261015T053854284087Z-reference/result.json) · [Lean 검증 로그](../../../../../metrics/warmup/박선영/P11/runs/20261015T053854284087Z-reference/check.log) · [heartbeat 로그](../../../../../metrics/warmup/박선영/P11/runs/20261015T053854284087Z-reference/heartbeat.log).
-- 8번 선택 후보: [결과 JSON](../../../../../metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck/result.json) · [Lean 검증 로그](../../../../../metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck/check.log) · [heartbeat 로그](../../../../../metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck/heartbeat.log).
-- 11번 선택 후보: [결과 JSON](../../../../../metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01/result.json) · [Lean 검증 로그](../../../../../metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01/check.log) · [heartbeat 로그](../../../../../metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01/heartbeat.log).
-- [전체 집계](../../../../../metrics/warmup/박선영/metrics.json) · [권한 차단 해소·검증기 수정 이력](../../../../../metrics/warmup/박선영/environment-status.json).
+- 8번: [결과 JSON](evidence/metrics/P8/runs/20261015T053841280710Z-reference/result.json) · [Lean 검증 로그](evidence/metrics/P8/runs/20261015T053841280710Z-reference/check.log) · [heartbeat 로그](evidence/metrics/P8/runs/20261015T053841280710Z-reference/heartbeat.log).
+- 11번: [결과 JSON](evidence/metrics/P11/runs/20261015T053854284087Z-reference/result.json) · [Lean 검증 로그](evidence/metrics/P11/runs/20261015T053854284087Z-reference/check.log) · [heartbeat 로그](evidence/metrics/P11/runs/20261015T053854284087Z-reference/heartbeat.log).
+- 8번 선택 후보: [결과 JSON](evidence/metrics/P8/runs/20261016T003747320609Z-attempt_01_recheck/result.json) · [Lean 검증 로그](evidence/metrics/P8/runs/20261016T003747320609Z-attempt_01_recheck/check.log) · [heartbeat 로그](evidence/metrics/P8/runs/20261016T003747320609Z-attempt_01_recheck/heartbeat.log).
+- 11번 선택 후보: [결과 JSON](evidence/metrics/P11/runs/20261016T003619698812Z-attempt_01/result.json) · [Lean 검증 로그](evidence/metrics/P11/runs/20261016T003619698812Z-attempt_01/check.log) · [heartbeat 로그](evidence/metrics/P11/runs/20261016T003619698812Z-attempt_01/heartbeat.log).
+- [전체 집계](evidence/metrics/metrics.json) · [권한 차단 해소·검증기 수정 이력](evidence/metrics/environment-status.json).
 
 원본 두 정리와 11번 후보의 공리는 `Classical.choice`, `Quot.sound`, `propext`입니다. **8번 후보는 공리 의존성이 없습니다**(`axioms: []`). 모든 통과 증명에 `sorryAx`가 없으며 원본 대비 새 공리도 없습니다. 이전 smoke test를 이번 실측으로 재사용한 것이 아닙니다.
 
@@ -112,7 +114,7 @@ set P₁ := oddRefinement ...
 5. `lake env lean <temporary>/Check.lean`으로 전체 문맥을 다시 elaborate하고 `#print axioms`를 확인합니다. 종료 코드·오류 출력과 공리가 허용 집합의 부분집합인지 검사합니다. 공리 없는 출력은 빈 목록으로 처리하고, 호환성 비교 시 원본 대비 새 공리가 없는지 확인합니다. 공리 제거를 실패로 취급하지 않습니다.
 6. 별도 임시 파일에 `Mathlib.Util.CountHeartbeats`와 `set_option Elab.async false in` / `#count_heartbeats in`을 넣어 대상 선언만 측정합니다. 앞의 doc comment 및 `omit ... in`을 고려합니다.
 7. timeout은 기본 180초입니다. 실패·timeout·파싱 실패는 수치를 `null`로 남깁니다. 비교율은 같은 버전의 원본과 선택 후보가 모두 통과한 경우에만 계산합니다.
-8. 실행별 JSON·원시 로그는 루트 `metrics/`에 저장합니다. `summarize --update-html`은 저장된 실행 결과를 집계하고 HTML marker 사이의 표만 갱신합니다. HTML은 런타임 JSON fetch 없이 파일로 열 수 있습니다.
+8. 실행별 JSON·원시 로그는 개인 `evidence/metrics/`에 저장합니다. `summarize --update-html`은 저장된 실행 결과를 집계하고 HTML marker 사이의 표만 갱신합니다. HTML은 런타임 JSON fetch 없이 파일로 열 수 있습니다.
 
 정적 금지 패턴 검사는 검토된 로컬 증명 후보용 보조 검사이며, 임의의 악성 Lean 코드를 안전하게 실행시키는 sandbox가 아닙니다. 외부 Lean/Lake 코드를 실제로 실행하는 데에는 별도 실행 권한이 필요합니다.
 
@@ -147,9 +149,11 @@ python3 -I "$EVIDENCE/run_experiments.py" verify --problem 11 --repo "$ARKLIB_RE
 
 실험에 사용한 `/lean-refactor` skill과 세션 helper는 이번 공유에서 제외하며, 추후 정리해 별도로 공개할 예정입니다.
 
-- Python 회귀 테스트 **25개 통과**: 원문 유일 교체, 명제 불변, 금지 패턴, 공리 없는 출력·축소된 공리 집합·중복 출력·`sorryAx`, 종료 코드, timeout bytes 처리, heartbeat 누락/중복/오류, null/감소율, 전체 버전 표시, HTML escaping·링크·marker 갱신, 저장된 해시·공리 및 후보 변경 범위.
+2026-10-18 경로 정리 후 Python 회귀 테스트 29개(기존 25개 + 경로 처리 4개), 문서 검사 124개, 브라우저 검사 209개를 통과했습니다. 새 검사 결과·화면 캡처는 Git에서 제외한 `evidence/metrics/local-checks/`에 생성합니다. 아래 링크의 과거 검사 JSON·로그와 이동한 측정 기록은 덮어쓰지 않았으며, 측정 JSON·로그 58개의 SHA-256이 이동 전과 같음을 확인했습니다. Lean은 추가 실행하지 않았습니다.
+
+- 초기 Python 회귀 테스트 **25개 통과**: 원문 유일 교체, 명제 불변, 금지 패턴, 공리 없는 출력·축소된 공리 집합·중복 출력·`sorryAx`, 종료 코드, timeout bytes 처리, heartbeat 누락/중복/오류, null/감소율, 전체 버전 표시, HTML escaping·링크·marker 갱신, 저장된 해시·공리 및 후보 변경 범위.
 - 처음 테스트 실행에서는 임시 발표 경로를 바꾼 테스트의 기대 링크 경로가 잘못되어 1개 실패했습니다. 같은 경로 문맥에서 기대 HTML을 만들도록 테스트를 수정한 뒤 24개 모두 통과했습니다. Lean 후보 실패 기록이 아닙니다.
-- 로컬 Chromium에서 이전/다음·방향키·Home/End·전체 보기·print media의 전체 슬라이드 표시, 1280px/400px의 light/dark 및 명시적 light override, 표의 7개 버전 행, 로컬 링크를 확인했습니다. 페이지 가로 넘침과 콘솔 오류는 없었습니다. [브라우저 기록](../../../../../metrics/warmup/박선영/document-checks.json). 화면 캡처는 로컬 생성물로 Git 공유에서 제외합니다. 실제 프린터 출력·다른 브라우저·공식 서버 렌더링은 확인하지 않았습니다.
-- 최종 상대 링크·앵커·해시·HTML/metrics 일치·Git 점검은 [저장소 검증 기록](../../../../../metrics/warmup/박선영/repository-checks.json), 회귀 테스트 출력은 [unit-tests.log](../../../../../metrics/warmup/박선영/unit-tests.log)에 보관합니다. `python3 -I docs/research/refactoring/warmup/박선영/evidence/tests/check_documents.py`로 이 점검을 재실행할 수 있습니다. 브라우저 점검은 이미 설치된 Playwright/Chromium이 있는 환경에서 `node docs/research/refactoring/warmup/박선영/evidence/tests/check_presentation.cjs`로 실행하며 자동 다운로드하지 않습니다.
-- [8번 최초 후보 실행](../../../../../metrics/warmup/박선영/P8/runs/20261016T002536550231Z-attempt_01/result.json)은 Lean 종료 코드 0인데 `status: failed`입니다. 당시 파서가 `does not depend on any axioms`를 인식하지 못하고 전체 허용 공리와의 동등성을 요구했기 때문입니다. 원시 기록을 고치지 않고, 검증기를 수정한 뒤 별도 recheck 실행으로 통과·heartbeat 측정을 확인했습니다.
+- 로컬 Chromium에서 이전/다음·방향키·Home/End·전체 보기·print media의 전체 슬라이드 표시, 1280px/400px의 light/dark 및 명시적 light override, 표의 7개 버전 행, 로컬 링크를 확인했습니다. 페이지 가로 넘침과 콘솔 오류는 없었습니다. [브라우저 기록](evidence/metrics/document-checks.json). 화면 캡처는 로컬 생성물로 Git 공유에서 제외합니다. 실제 프린터 출력·다른 브라우저·공식 서버 렌더링은 확인하지 않았습니다.
+- 이동 전 상대 링크·앵커·해시·HTML/metrics 일치·Git 점검은 [저장소 검증 기록](evidence/metrics/repository-checks.json), 회귀 테스트 출력은 [unit-tests.log](evidence/metrics/unit-tests.log)에 보관합니다. `python3 -I docs/research/refactoring/warmup/박선영/evidence/tests/check_documents.py`로 이 점검을 재실행할 수 있습니다. 브라우저 점검은 이미 설치된 Playwright/Chromium이 있는 환경에서 `node docs/research/refactoring/warmup/박선영/evidence/tests/check_presentation.cjs`로 실행하며 자동 다운로드하지 않습니다.
+- [8번 최초 후보 실행](evidence/metrics/P8/runs/20261016T002536550231Z-attempt_01/result.json)은 Lean 종료 코드 0인데 `status: failed`입니다. 당시 파서가 `does not depend on any axioms`를 인식하지 못하고 전체 허용 공리와의 동등성을 요구했기 때문입니다. 원시 기록을 고치지 않고, 검증기를 수정한 뒤 별도 recheck 실행으로 통과·heartbeat 측정을 확인했습니다.
 - 남은 핵심 작업: 나머지 지정 버전 검증과 8번 토큰 증가 완화 실험. 현재 로컬 결과를 공식 대회 점수나 전체 버전 호환성으로 확대해 주장하지 않습니다.

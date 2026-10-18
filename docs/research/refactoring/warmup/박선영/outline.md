@@ -15,7 +15,7 @@
 4. **A: 계수 계산 재구성** — 수동 conv·인덱스 재기술 대신 C의 준동형 법칙과 ring. h_j_lt 삭제를 포함한 블록 변경이며 세부 전술별 효과는 분리하지 않음.
 5. **C: 중간 등식 생략** — 같은 항의 연속 ring 단계에서 전개형 중간 등식 3행 제거. 줄어드는 단계와 커질 수 있는 단일 목표의 비용을 가설로 비교. 축약 코드는 설명용으로 명시.
 6. **네 조건 고정 설계** — A/C 유무의 2×2 비교. B가 공통 부모, 네 후보+별도 원본 기준선, 허용 diff·환경·예산 사전 고정. 현재 best에 따라 조건을 변경하지 않음.
-7. **검증과 기록** — skill의 판단, 세션 helper의 상태·해시 관리, 기존 evaluator의 명제·전체 문맥 컴파일·공리·별도 heartbeat 검사 역할 구분. evidence와 metrics 분리.
+7. **검증과 기록** — skill의 판단, 세션 helper의 상태·해시 관리, 기존 evaluator의 명제·전체 문맥 컴파일·공리·별도 heartbeat 검사 역할 구분. 개인 evidence 안에서 agent와 metrics/agent 분리.
 8. **결과** — B 41,636 / B+A 39,123 / B+C 40,850 / B+A+C 38,337 heartbeat. C는 A 유무 모두 786 감소, tokens 62 감소. 원본 대비·공통 B 대비·세션 best를 구분.
 9. **해석** — 관찰된 가산성(2,513+786=3,299)과 원인 추정 분리. tactic profiling 없음. B+C의 improved=false는 best 미갱신이지 부모 대비 무개선이 아님. 단일 정리·환경·조건당 1회의 한계.
 10. **조건부 전략 근거** — 구조→변경→적용 조건→반례→근거를 A/C 사례로 정리. 일반 규칙이나 이미 적용된 정책으로 표시하지 않음. 확인 실험의 회고는 정책 변경 제안 없음.
@@ -32,10 +32,10 @@
 ## 근거와 이력 구분
 - evidence/benchmark.jsonl 및 benchmark-provenance.json: 2026-10-10 획득 snapshot을 보존, 15개 토큰 기준 일치.
 - evidence/P8·P11/reference.lean, attempts/attempt_01.lean: 명제는 보존하고 증명 본문만 변경.
-- 루트 metrics/warmup/박선영/: 원본·후보 실행별 JSON·Lean/heartbeat 로그, 과거 차단 및 검증기 수정 이력, 집계.
+- evidence/metrics/: 원본·후보 실행별 JSON·Lean/heartbeat 로그, 과거 차단 및 검증기 수정 이력, 집계. 이동한 원시 기록의 내용·과거 출력 경로·해시는 당시 실행 근거로 보존하며 현재 트리의 동일성 보장이 아님. 보존 세션은 자동 재개하지 않고 후속 실험은 별도 승인·환경 확인 후 새 세션에서 진행. 로컬 skill은 공유 제외·이번 경로 정리에서 변경 없음.
 - evidence/P8·P11/selected.lean: 검증된 기존 비교 후보. 각 attempt_01과 동일하며 이번 발표 변경으로 채택 상태를 바꾸지 않음.
 - evidence/tests/test_experiments.py: 공리 없는 출력 회귀 테스트를 포함한 기존 25개 테스트.
 - 과거 발표의 20개 테스트·8번 원본-as-candidate smoke test·11번 기존 검증 기록은 이전 harness 이력. 새 원본 실측이나 최적화 후보 통과와 합산하지 않음.
 - 초기 실험의 상세 측정법·수치·한계·재현 명령은 report.md에서 관리.
-- 후속 확인 실험은 evidence/agent/p11-20261017-ac-check4/report.md와 대응하는 루트 metrics의 result.json·contrasts.json을 근거로 함. 네 후보 모두 passed/reviewed, reflection 완료. 앞선 adaptive3 세션은 마지막 review가 drift로 중단된 별도 기록.
+- 후속 확인 실험은 evidence/agent/p11-20261017-ac-check4/report.md와 대응하는 evidence/metrics/agent/p11-20261017-ac-check4/의 result.json·contrasts.json을 근거로 함. 네 후보 모두 passed/reviewed, reflection 완료. 앞선 adaptive3 세션은 마지막 review가 drift로 중단된 별도 기록.
 - 이번 발표 업데이트는 새 Lean 실행·정책 변경이 아님. 브라우저 검사에서 본문/부록 구성, 17장 탐색·테마·모바일·상대 링크, 표와 저장된 측정값 일치를 확인.

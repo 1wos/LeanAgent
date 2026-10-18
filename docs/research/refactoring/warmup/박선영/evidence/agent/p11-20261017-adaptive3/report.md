@@ -16,7 +16,7 @@
 - 준비된 기존 checkout: `/Users/parksunyoung/orca/workspaces/LeanAgent/sunyoung-week2/solution/.lake-env/ArkLib`.
 - Lean **v4.31.0**, ArkLib 커밋 `c1712f6c496d0aef04f09bae42aec13811b3273f`.
 - 원본 소스: `ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean`.
-- 정책: [동결 snapshot](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/policy-snapshot.json), v1. 유효성 → heartbeat 최소 → 동률일 때 tokens 최소.
+- 정책: [동결 snapshot](../../metrics/agent/p11-20261017-adaptive3/policy-snapshot.json), v1. 유효성 → heartbeat 최소 → 동률일 때 tokens 최소.
 - 후보 예산 3회, subprocess별 timeout 180초, 연속 무개선 한계 3회. 기준선은 별도 1회.
 - 원본 전체 파일 문맥에서 대상 선언만 교체하고 검증했다. 대상 정리의 기존 `.olean`을 import하여 검증을 대신하지 않았다.
 - 모든 실행은 `python3 -I .../experiment.py`의 baseline/evaluate 경로를 사용했다. 다운로드, checkout 변경, 권한 설정 변경, 외부 LLM API 호출 없음.
@@ -121,10 +121,10 @@ Skill/evaluator/benchmark drift; start a new session
 ## 원시 근거
 
 - [분석과 proof map](analysis.md)
-- [세션 원장: best·비교율·저장된 review](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/session.json)
-- [기준선 JSON](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/baseline/result.json) · [검증 로그](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/baseline/check.log) · [heartbeat 로그](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/baseline/heartbeat.log)
-- [a001 JSON](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/attempts/a001/result.json) · [검증 로그](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/attempts/a001/check.log) · [heartbeat 로그](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/attempts/a001/heartbeat.log)
-- [a002 JSON](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/attempts/a002/result.json) · [검증 로그](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/attempts/a002/check.log) · [heartbeat 로그](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/attempts/a002/heartbeat.log)
-- [a003 JSON](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/attempts/a003/result.json) · [검증 로그](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/attempts/a003/check.log) · [heartbeat 로그](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-adaptive3/attempts/a003/heartbeat.log)
+- [세션 원장: best·비교율·저장된 review](../../metrics/agent/p11-20261017-adaptive3/session.json)
+- [기준선 JSON](../../metrics/agent/p11-20261017-adaptive3/baseline/result.json) · [검증 로그](../../metrics/agent/p11-20261017-adaptive3/baseline/check.log) · [heartbeat 로그](../../metrics/agent/p11-20261017-adaptive3/baseline/heartbeat.log)
+- [a001 JSON](../../metrics/agent/p11-20261017-adaptive3/attempts/a001/result.json) · [검증 로그](../../metrics/agent/p11-20261017-adaptive3/attempts/a001/check.log) · [heartbeat 로그](../../metrics/agent/p11-20261017-adaptive3/attempts/a001/heartbeat.log)
+- [a002 JSON](../../metrics/agent/p11-20261017-adaptive3/attempts/a002/result.json) · [검증 로그](../../metrics/agent/p11-20261017-adaptive3/attempts/a002/check.log) · [heartbeat 로그](../../metrics/agent/p11-20261017-adaptive3/attempts/a002/heartbeat.log)
+- [a003 JSON](../../metrics/agent/p11-20261017-adaptive3/attempts/a003/result.json) · [검증 로그](../../metrics/agent/p11-20261017-adaptive3/attempts/a003/check.log) · [heartbeat 로그](../../metrics/agent/p11-20261017-adaptive3/attempts/a003/heartbeat.log)
 
 공식 서버 점수, 전체 버전 호환성, 일반화된 학습 성능, wall-clock 속도 향상은 주장하지 않는다. 완료된 로컬 측정 결과와 중단된 기록 절차를 분리해 보존한다.

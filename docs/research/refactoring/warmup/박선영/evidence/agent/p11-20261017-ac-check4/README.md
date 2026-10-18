@@ -28,12 +28,14 @@
 
 - 조건 간 추가 대조: [B+A→B+A+C](C-after-A.diff) · [B+C→B+A+C](A-after-C.diff).
 
-## 루트 metrics 근거
+## 개인 evidence/metrics 근거
 
-- [세션 원장](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/session.json) · [동결 정책](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/policy-snapshot.json) · [회고](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/reflection.json)
-- [원본 측정](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/baseline/result.json) · [B](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a001/result.json) · [B+A](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a002/result.json) · [B+C](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a003/result.json) · [B+A+C](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a004/result.json)
-- [세 대비의 계산 기록](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/contrasts.json) · [동일성·범위·해시 검증](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/verification.json) · [보존 대상 실행 전 해시](../../../../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/protected-before.json)
-- 각 실행의 원시 `check.log`/`heartbeat.log`는 보고서의 원시 근거 표에서 연결한다. 측정 파일은 이 evidence 폴더에 복제하지 않는다.
+측정·원장은 `evidence/metrics/agent/p11-20261017-ac-check4/`로 이동했다. 원시 JSON·로그·snapshot의 내부 경로와 해시는 원래 실행 당시의 기록으로 보존하며 현재 트리의 동일성 보장이 아니다. 기존 세션을 자동 재개하거나 원장을 수정해 이어 실행하지 않는다. 후속 실험은 별도 승인·환경 확인 후 새 세션에서 수행한다. 로컬 skill·helper는 공유 제외이며 이번 경로 정리에서도 변경하지 않았다.
+
+- [세션 원장](../../metrics/agent/p11-20261017-ac-check4/session.json) · [동결 정책](../../metrics/agent/p11-20261017-ac-check4/policy-snapshot.json) · [회고](../../metrics/agent/p11-20261017-ac-check4/reflection.json)
+- [원본 측정](../../metrics/agent/p11-20261017-ac-check4/baseline/result.json) · [B](../../metrics/agent/p11-20261017-ac-check4/attempts/a001/result.json) · [B+A](../../metrics/agent/p11-20261017-ac-check4/attempts/a002/result.json) · [B+C](../../metrics/agent/p11-20261017-ac-check4/attempts/a003/result.json) · [B+A+C](../../metrics/agent/p11-20261017-ac-check4/attempts/a004/result.json)
+- [세 대비의 계산 기록](../../metrics/agent/p11-20261017-ac-check4/contrasts.json) · [동일성·범위·해시 검증](../../metrics/agent/p11-20261017-ac-check4/verification.json) · [보존 대상 실행 전 해시](../../metrics/agent/p11-20261017-ac-check4/protected-before.json)
+- 각 실행의 원시 `check.log`/`heartbeat.log`는 보고서의 원시 근거 표에서 연결한다. 측정 파일은 이 증명 세션 폴더에 복제하지 않는다.
 
 ## 관련 자료
 

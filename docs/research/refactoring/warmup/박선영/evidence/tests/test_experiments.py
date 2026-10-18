@@ -144,6 +144,25 @@ class MeasurementTests(unittest.TestCase):
 
 
 class ReportTests(unittest.TestCase):
+    def test_output_is_author_local(self):
+        self.assertEqual(runner.OUTPUT, runner.HERE / "metrics")
+
+    def test_legacy_output_path_resolves_to_relocated_evidence(self):
+        self.assertEqual(runner.recorded_output_path("metrics/warmup/박선영/P11/runs/example"),
+                         runner.OUTPUT / "P11/runs/example")
+
+    def test_current_output_path_is_not_relocated_again(self):
+        path = runner.OUTPUT / "P8/runs/example"
+        self.assertEqual(runner.recorded_output_path(runner.relative(path)), path)
+
+    def test_rendering_preserves_historical_records(self):
+        data = json.loads((runner.OUTPUT / "metrics.json").read_text())
+        before = json.dumps(data, ensure_ascii=False, sort_keys=True)
+        table = runner.render_table(data)
+        self.assertIn('href="evidence/metrics/', table)
+        self.assertNotIn("../../../../../metrics/", table)
+        self.assertEqual(json.dumps(data, ensure_ascii=False, sort_keys=True), before)
+
     def test_all_versions_and_no_false_success(self):
         data = runner.aggregate()
         self.assertEqual([p["compatibility"]["required"] for p in data["problems"]], [4, 3])
@@ -190,9 +209,9 @@ class ReportTests(unittest.TestCase):
                 self.assertEqual(runner.digest(path.read_text().rstrip("\n")), run["candidate_sha256"])
                 if run["valid"]:
                     self.assertLessEqual(set(run["axioms"]), runner.ALLOWED_AXIOMS)
-                self.assertTrue((runner.ROOT / run["output"] / "check.log").exists())
+                self.assertTrue((runner.recorded_output_path(run["output"]) / "check.log").exists())
                 if "measurement" in run:
-                    self.assertTrue((runner.ROOT / run["output"] / "heartbeat.log").exists())
+                    self.assertTrue((runner.recorded_output_path(run["output"]) / "heartbeat.log").exists())
 
     def test_summary_updates_only_marker_section(self):
         data = runner.aggregate()

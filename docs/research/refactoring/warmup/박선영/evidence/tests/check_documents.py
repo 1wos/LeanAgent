@@ -10,7 +10,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[7]
 PERSONAL = ROOT / "docs/research/refactoring/warmup/박선영"
-OUTPUT = ROOT / "metrics/warmup/박선영"
+OUTPUT = PERSONAL / "evidence/metrics"
+CHECK_OUTPUT = OUTPUT / "local-checks"
 checks = []
 
 
@@ -23,16 +24,17 @@ def sha(text):
 
 
 def main():
-    # Record the live check so the report's self-reference resolves on the first run.
-    (OUTPUT / "repository-checks.json").write_text(json.dumps({"status": "running"}) + "\n")
+    # Keep fresh checks separate from preserved historical measurement records.
+    CHECK_OUTPUT.mkdir(parents=True, exist_ok=True)
+    (CHECK_OUTPUT / "repository-checks.json").write_text(json.dumps({"status": "running"}) + "\n")
     # These tests mock subprocess calls; no Lean checkout is executed.
     tests = subprocess.run([sys.executable, "-I", "-m", "unittest", "discover", "-s",
                             str(PERSONAL / "evidence/tests"), "-v"], cwd=ROOT,
                            capture_output=True, text=True)
-    (OUTPUT / "unit-tests.log").write_text(tests.stdout + tests.stderr)
+    (CHECK_OUTPUT / "unit-tests.log").write_text(tests.stdout + tests.stderr)
     check("Python regression suite", tests.returncode == 0)
     documents = [ROOT / "docs/STRUCTURE.md", ROOT / "docs/research/refactoring/warmup/README.md",
-                 ROOT / "metrics/README.md", PERSONAL / "README.md", PERSONAL / "report.md",
+                 OUTPUT / "README.md", PERSONAL / "README.md", PERSONAL / "report.md",
                  ROOT / "docs/meetings/2026-10-11-week2/README.md"]
     for document in documents:
         text = re.sub(r"```.*?```", "", document.read_text(), flags=re.DOTALL)
@@ -81,7 +83,7 @@ def main():
     check("git diff --check", diff.returncode == 0)
     # git diff ignores untracked files; check newly authored text files too.
     new_files = list((PERSONAL / "evidence").rglob("*.py")) + list((PERSONAL / "evidence").rglob("*.cjs"))
-    new_files += [PERSONAL / "report.md", ROOT / "metrics/README.md"]
+    new_files += [PERSONAL / "report.md", OUTPUT / "README.md"]
     for path in new_files:
         check(f"whitespace {path.relative_to(ROOT)}", all(line == line.rstrip() for line in path.read_text().splitlines()))
     count = re.search(r"Ran (\d+) tests", tests.stdout + tests.stderr)
@@ -89,7 +91,7 @@ def main():
               "status": "passed" if all(c["passed"] for c in checks) else "failed",
               "unit_tests": int(count[1]) if count else None,
               "lean_candidate_execution": "See saved runs in metrics.json; this check does not rerun Lean."}
-    (OUTPUT / "repository-checks.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    (CHECK_OUTPUT / "repository-checks.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps({"status": result["status"], "checks": len(checks),
                       "failures": [c["name"] for c in checks if not c["passed"]]}, ensure_ascii=False))
     return 0 if result["status"] == "passed" else 1

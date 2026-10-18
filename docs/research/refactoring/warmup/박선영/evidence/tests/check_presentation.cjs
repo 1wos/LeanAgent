@@ -5,8 +5,9 @@ const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 
 const personal = path.resolve(__dirname, '../..');
-const root = path.resolve(personal, '../../../../..');
-const output = path.join(root, 'metrics/warmup/박선영');
+const output = path.join(personal, 'evidence/metrics');
+const checkOutput = path.join(output, 'local-checks');
+fs.mkdirSync(checkOutput, { recursive: true });
 const presentation = path.join(personal, 'presentation.html');
 const checks = { checked_at: new Date().toISOString(), browser: 'not_started', checks: [], errors: [] };
 function expect(name, actual) {
@@ -82,7 +83,7 @@ function expect(name, actual) {
     }
     expect('C decrease without A is 786', results.a001.heartbeat - results.a003.heartbeat === 786);
     expect('C decrease after A is 786', results.a002.heartbeat - results.a004.heartbeat === 786);
-    await page.screenshot({ path: path.join(output, 'presentation-confirmation.png'), fullPage: true });
+    await page.screenshot({ path: path.join(checkOutput, 'presentation-confirmation.png'), fullPage: true });
     for (const width of [1280, 400]) {
       await page.setViewportSize({ width, height: 1100 });
       for (const colorScheme of ['light', 'dark']) {
@@ -101,7 +102,7 @@ function expect(name, actual) {
       }
     }
     await showId('confirmation-results');
-    await page.screenshot({ path: path.join(output, 'presentation-confirmation-mobile-dark.png'), fullPage: true });
+    await page.screenshot({ path: path.join(checkOutput, 'presentation-confirmation-mobile-dark.png'), fullPage: true });
     await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
     expect('explicit light overrides dark OS', await page.evaluate(() => getComputedStyle(document.body).color === 'rgb(24, 43, 64)'));
     const links = await page.locator('a[href]').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')));
@@ -117,8 +118,7 @@ function expect(name, actual) {
     process.exitCode = 1;
   } finally {
     if (browser) await browser.close();
-    fs.mkdirSync(output, { recursive: true });
-    fs.writeFileSync(path.join(output, 'document-checks.json'), JSON.stringify(checks, null, 2) + '\n');
+    fs.writeFileSync(path.join(checkOutput, 'document-checks.json'), JSON.stringify(checks, null, 2) + '\n');
     console.log(JSON.stringify(checks, null, 2));
   }
 })();

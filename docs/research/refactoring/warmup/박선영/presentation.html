@@ -68,7 +68,7 @@ ring</pre></div><p style="margin-top:1rem">C가 덧셈·곱셈을 보존하는 �
 <section class="slide" id="validation-method" aria-label="7. 실행·검증·기록의 역할">
 <p class="eyebrow">측정 신뢰성 / 유효성 먼저, 비용 비교는 그다음</p><h2>좋아 보이는 코드가 아니라,<br>같은 명제의 검증된 비용을 비교</h2>
 <div class="split"><div><h3>에이전트가 판단</h3><ol><li>증명 구조와 이전 결과 읽기</li><li>가설·부모·변경 범위 등록</li><li>후보 작성 및 diff 확인</li><li>측정 결과 해석·review·회고</li></ol></div><div class="surface"><h3>도구가 검사·보존</h3><ul><li>세션 helper: 해시·예산·상태·best 관리</li><li>기존 검증기: 명제·금지 패턴 검사</li><li>전체 파일 문맥에서 Lean 컴파일·공리 검사</li><li>별도 실행으로 대상 heartbeat 측정</li></ul></div></div>
-<p class="sequence">가설 → 후보 → 검증 → 측정 → 해석<br>증명·diff는 evidence / 수치·원시 로그는 루트 metrics</p>
+<p class="sequence">가설 → 후보 → 검증 → 측정 → 해석<br>증명·diff는 evidence / 수치·원시 로그는 evidence/metrics</p>
 <p class="note">기존 대상 정리의 .olean import로 검증을 대신하지 않았습니다. 네 후보 모두 원본과 같은 표준 공리만 사용하며 sorryAx·새 공리 추가는 없습니다. 주변 기존 선언의 sorry 경고와는 구분합니다. heartbeat ≠ proof tokens ≠ LLM 토큰 ≠ 실행 시간.<br><a href="evidence/run_experiments.py">기존 검증기</a> · skill·세션 helper는 추후 별도 공개 예정</p>
 </section>
 <section class="slide results" id="confirmation-results" aria-label="8. P11 A/C 효과 분리 결과">
@@ -81,7 +81,7 @@ ring</pre></div><p style="margin-top:1rem">C가 덧셈·곱셈을 보존하는 �
 </tbody></table></div>
 <div class="split"><div class="surface"><h3>A 없이 C 적용</h3><p>41,636 → 40,850<br><strong>786 감소 · 1.8878%</strong></p></div><div class="surface"><h3>A 이후 C 적용</h3><p>39,123 → 38,337<br><strong>786 감소 · 2.0090%</strong></p></div></div>
 <p>두 경우 모두 proof tokens는 62 감소했습니다.<br>감소율이 다른 이유는 비교 분모가 다르기 때문입니다.</p>
-<p class="source">새 원본 기준선: 45,537 heartbeat / 1,906 tokens. 세션 best B+A+C는 원본 대비 15.81% / 27.65% 감소했습니다. 네 후보 모두 passed/reviewed, 회고 완료.<br><a href="evidence/agent/p11-20261017-ac-check4/report.md">상세 보고서·원시 로그 링크</a> · <a href="../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/contrasts.json">효과 비교 JSON</a></p>
+<p class="source">새 원본 기준선: 45,537 heartbeat / 1,906 tokens. 세션 best B+A+C는 원본 대비 15.81% / 27.65% 감소했습니다. 네 후보 모두 passed/reviewed, 회고 완료.<br><a href="evidence/agent/p11-20261017-ac-check4/report.md">상세 보고서·원시 로그 링크</a> · <a href="evidence/metrics/agent/p11-20261017-ac-check4/contrasts.json">효과 비교 JSON</a></p>
 <p class="note">새로 발견한 최적해가 아니라 지정 네 조건 안의 best입니다. 기존 selected.lean으로 채택하거나 초기 집계를 교체한 것은 아닙니다. 단일 정리·고정 환경·조건당 1회라는 범위를 유지합니다.</p>
 </section>
 <section class="slide" id="interpretation" aria-label="9. 관찰과 원인 추정의 구분">
@@ -146,9 +146,9 @@ a₁ ⇒ b    a₂ ⇒ b</pre></div><p style="margin-top:1rem">결과가 처음�
 <div class="scroll"><table><caption>원본 → 선택 후보 · 로컬 측정 / 미검증 초안 토큰은 별도 표기</caption><thead><tr><th>문제 / 환경</th><th>증명 토큰</th><th>heartbeat</th><th>원본 / 후보 상태</th><th>후보 지정 버전 통과</th><th>근거</th></tr></thead><tbody>
 <tr><td>8번 · v4.33.0-rc2</td><td>미측정 → 미측정</td><td>미측정 → 미측정</td><td>미실행 / 미실행</td><td>1/4 (검사 1)</td><td>기록 없음</td></tr>
 <tr><td>8번 · v4.32.0</td><td>미측정 → 미측정</td><td>미측정 → 미측정</td><td>미실행 / 미실행</td><td>1/4 (검사 1)</td><td>기록 없음</td></tr>
-<tr><td>8번 · v4.31.0</td><td>407 → 412 (1.23% 증가)</td><td>1,382 → 1,320 (4.49% 감소)</td><td>통과 / 통과</td><td>1/4 (검사 1)</td><td><a href="../../../../../metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck/result.json">실행 기록</a></td></tr>
+<tr><td>8번 · v4.31.0</td><td>407 → 412 (1.23% 증가)</td><td>1,382 → 1,320 (4.49% 감소)</td><td>통과 / 통과</td><td>1/4 (검사 1)</td><td><a href="evidence/metrics/P8/runs/20261016T003747320609Z-attempt_01_recheck/result.json">실행 기록</a></td></tr>
 <tr><td>8번 · v4.30.0</td><td>미측정 → 미측정</td><td>미측정 → 미측정</td><td>미실행 / 미실행</td><td>1/4 (검사 1)</td><td>기록 없음</td></tr>
-<tr><td>11번 · v4.31.0</td><td>1,906 → 1,656 (13.12% 감소)</td><td>45,537 → 41,636 (8.57% 감소)</td><td>통과 / 통과</td><td>1/3 (검사 1)</td><td><a href="../../../../../metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01/result.json">실행 기록</a></td></tr>
+<tr><td>11번 · v4.31.0</td><td>1,906 → 1,656 (13.12% 감소)</td><td>45,537 → 41,636 (8.57% 감소)</td><td>통과 / 통과</td><td>1/3 (검사 1)</td><td><a href="evidence/metrics/P11/runs/20261016T003619698812Z-attempt_01/result.json">실행 기록</a></td></tr>
 <tr><td>11번 · v4.30.0</td><td>미측정 → 미측정</td><td>미측정 → 미측정</td><td>미실행 / 미실행</td><td>1/3 (검사 1)</td><td>기록 없음</td></tr>
 <tr><td>11번 · v4.29.0</td><td>미측정 → 미측정</td><td>미측정 → 미측정</td><td>미실행 / 미실행</td><td>1/3 (검사 1)</td><td>기록 없음</td></tr>
 </tbody></table></div>

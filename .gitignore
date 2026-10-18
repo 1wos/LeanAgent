@@ -5,12 +5,8 @@ __pycache__/
 
 .DS_Store
 
-# Keep personal settings, screenshots and runtime locks local.
-# Share only the documented warm-up JSON evidence and text logs.
-metrics/**
-!metrics/README.md
-!metrics/warmup/
-!metrics/warmup/박선영/
-!metrics/warmup/박선영/**/
-!metrics/warmup/박선영/**/*.json
-!metrics/warmup/박선영/**/*.log
+# Root metrics and personal Claude files stay local.
+/metrics/
+
+# Fresh document checks and screenshots are generated locally.
+/docs/research/refactoring/warmup/박선영/evidence/metrics/local-checks/

@@ -43,10 +43,6 @@ Warm-up의 세트 이름은 `warmup`입니다. 여러 주차에 걸쳐 같은 �
 | 별도 학습 기록 | 해당 발표자 폴더의 `studies/<주제 또는 날짜>/` |
 | 모임별 발표 목차 | `docs/meetings/YYYY-MM-DD-topic/README.md` |
 
-박선영 Warm-up 8·11 실험은 측정 산출물을 분리하는 예외를 적용합니다. 증명·원본·후보·재현 코드·테스트는 기존 발표자 `evidence/`에 두고, 측정 JSON·원시 실행 로그·문서 검증 결과는 저장소 루트 `metrics/warmup/박선영/`에 둡니다. 발표자 README에서 상대 링크로 연결하고, `docs/` 안에 같은 측정 파일을 복제하지 않습니다. 기존 다른 발표자의 측정 파일은 이동하지 않습니다.
-
-`/lean-refactor` skill의 분석·가설·후보는 위 개인 `evidence/agent/<session-id>/`, 상태·정책 snapshot·측정·회고는 루트 `metrics/warmup/박선영/agent/<session-id>/`로 같은 분리를 적용합니다. 재사용 가능한 skill·helper·단위 테스트와 실행 계약은 로컬 `.claude/skills/lean-refactor/`에 둡니다. 해당 구현은 이번 Git 공유에서 제외하며 추후 별도 공개할 예정입니다. 기존 선택 증명과 발표 집계는 자동 갱신하지 않습니다. 실험 종료(실패·차단·중단 포함) 및 회고 시에는 해당 `evidence/agent/<session-id>/`의 `README.md`에 범위·상태·근거 링크를, `report.md`에 시도별 결과·비교·판단·다음 실험을 작성·갱신합니다. 측정 JSON·원시 로그는 루트 metrics에 그대로 두고 상대 링크로 연결하며, 분석만 수행한 단계에 빈 보고서를 미리 만들지 않습니다.
-
 분야·세트 이름은 소문자 영문과 하이픈을 사용합니다. 날짜는 `YYYY-MM-DD` 형식으로 적습니다. 발표자 폴더명에 날짜·주차·문제 번호를 붙이지 않습니다.
 
 ## 파일명
