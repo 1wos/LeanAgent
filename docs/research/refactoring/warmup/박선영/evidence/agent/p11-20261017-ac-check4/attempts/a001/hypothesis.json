@@ -1,0 +1,11 @@
+{
+  "strategy": "remove-unused",
+  "target": "B: P₀_coeffs/P₁_coeffs 두 정의 및 소개 주석만 삭제",
+  "hypothesis": "기존 a001의 B를 byte-identical하게 재현하고 새 기준선에서 유효성과 비용을 확인한다",
+  "expected": "기존 관측 41636 HB/1656 tokens 재현 여부; 이 수치는 합격 기준이 아님",
+  "reason": "이전 분석/가설/후보/result/review 및 A/C diff를 읽었다. B는 확인 실험의 공통 비교 기반이다. 허용 diff는 두 미사용 정의 및 소개 주석 삭제뿐이며 다른 블록 변경 금지.",
+  "parent": "reference",
+  "kind": "reproduction",
+  "parent_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+  "registered_at": "2026-10-17T09:05:16.350447+00:00"
+}
