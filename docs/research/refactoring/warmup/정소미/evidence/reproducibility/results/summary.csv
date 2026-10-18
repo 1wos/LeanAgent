@@ -1,0 +1,9 @@
+environment,problem,candidate,runs,accepted,proof_tokens,heartbeat,stable,check_seconds_min,check_seconds_max
+p4-4.32,4,reference,3,3,851,11947,True,5.07,12.07
+p4-4.32,4,final,3,3,123,1411,True,3.9,7.13
+p9-4.31,9,reference,3,3,251,3859,True,4.18,11.02
+p9-4.31,9,final,3,3,79,516,True,3.98,4.02
+p9-4.32,9,reference,3,3,251,3856,True,4.26,10.08
+p9-4.32,9,final,3,3,79,516,True,3.94,5.15
+p9-4.33rc2,9,reference,3,3,251,3858,True,4.54,11.5
+p9-4.33rc2,9,final,3,3,79,510,True,4.07,4.27
