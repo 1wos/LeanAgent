@@ -1,0 +1,11 @@
+{
+  "strategy": "restructure-algebra",
+  "target": "B+A+C: 사전 지정 A와 C 두 블록만 변경하는 과거 a003 조합 재현",
+  "hypothesis": "B+A+C가 과거 a003을 재현하며 A 있는 C의 추가 효과를 B+C의 효과와 비교할 수 있다",
+  "expected": "B보다 HB/tokens 감소 예상; C 추가 효과는 B+A와 별도 대비",
+  "reason": "B/A/C 세 조건의 관측을 읽었다. B+C가 B보다 786 HB 감소했으므로 마지막 지정 조합을 재현해 A 조건부 효과와 비교한다. 부모는 B(a001) 명시. 허용 diff는 기존 A 마지막 계수 블록과 C 중간 calc 3행뿐; 과거 a003과 byte-identical, 자유 최적화 없음.",
+  "parent": "a001",
+  "kind": "reproduction",
+  "parent_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+  "registered_at": "2026-10-17T09:14:18.690177+00:00"
+}

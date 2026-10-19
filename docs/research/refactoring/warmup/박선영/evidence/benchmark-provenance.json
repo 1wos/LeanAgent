@@ -1,0 +1,7 @@
+{
+  "copied_at": "2026-10-15T05:37:28.836836+00:00",
+  "sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "rows": 15,
+  "source": "https://huggingface.co/spaces/delta-lab-ai/lean-refactor-arena/raw/main/benchmark_data_warmup.jsonl",
+  "note": "Existing local snapshot obtained 2026-10-10; not fetched anew. All 15 proof lengths reproduced."
+}

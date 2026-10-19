@@ -1,0 +1,50 @@
+
+=== P4-attempt_01 ===
+verifier return code: 0
+
+{
+ "tag": "P4-attempt_01",
+ "name": "fundamental_theorem_of_variational_calculus'",
+ "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+ "replaced_lines": [
+  99,
+  224
+ ],
+ "candidate_sha256": "9806a5d04e96705d70364cc347fc46d59242f169a50c25b199977412c4daa35d",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 838,
+ "declaration_lines": 82,
+ "check": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_01.check.lean",
+  "returncode": 0,
+  "seconds": 12.7,
+  "error_count": 0,
+  "first_errors": [],
+  "warning_count": 0,
+  "axioms": [
+   "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": false
+ },
+ "compiled": true,
+ "heartbeat": {
+  "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_01.hb.lean",
+  "returncode": 0,
+  "seconds": 10.57,
+  "heartbeats": 11867,
+  "error_count": 0,
+  "first_errors": []
+ }
+}
+
+
+
+--- check ---
+
+'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+
+--- hb ---
+
+Used 11867 heartbeats, which is less than the current maximum of 200000.

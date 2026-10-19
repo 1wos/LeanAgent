@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "record_type": "summary_of_previous_execution",
+  "summarized_on": "2026-10-18",
+  "timezone": "Asia/Seoul",
+  "raw_artifacts_retained": false,
+  "rerun_in_this_task": false,
+  "runtime": "leanprover-community/repl",
+  "repl_tag": "v4.19.0",
+  "repl_commit": "3b27c8543a48444ffab4077f47526d91849cca3d",
+  "lean_version": "Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)",
+  "system": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "model_called": false,
+  "mathlib_used": false,
+  "proof_statement": "theorem and_swap (P Q : Prop) (h : P ∧ Q) : Q ∧ P := by",
+  "repl_returncode": 0,
+  "protocol_records": 12,
+  "compiler": [
+    {
+      "label": "baseline",
+      "command": [
+        "/workspace/scratch/b13c49af177a/runtime_probe/lean-4.19.0-linux/bin/lean",
+        "/workspace/scratch/b13c49af177a/runtime_probe/baseline.lean"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.099091
+    },
+    {
+      "label": "broken",
+      "command": [
+        "/workspace/scratch/b13c49af177a/runtime_probe/lean-4.19.0-linux/bin/lean",
+        "/workspace/scratch/b13c49af177a/runtime_probe/broken.lean"
+      ],
+      "returncode": 1,
+      "stdout": "/workspace/scratch/b13c49af177a/runtime_probe/broken.lean:3:4: error: type mismatch\n  h.left\nhas type\n  P : Prop\nbut is expected to have type\n  Q : Prop\n",
+      "stderr": "",
+      "elapsed_seconds": 0.115419
+    },
+    {
+      "label": "repaired",
+      "command": [
+        "/workspace/scratch/b13c49af177a/runtime_probe/lean-4.19.0-linux/bin/lean",
+        "/workspace/scratch/b13c49af177a/runtime_probe/repaired.lean"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.11558
+    },
+    {
+      "label": "sorry",
+      "command": [
+        "/workspace/scratch/b13c49af177a/runtime_probe/lean-4.19.0-linux/bin/lean",
+        "/workspace/scratch/b13c49af177a/runtime_probe/sorry.lean"
+      ],
+      "returncode": 0,
+      "stdout": "/workspace/scratch/b13c49af177a/runtime_probe/sorry.lean:1:8: warning: declaration uses 'sorry'\n",
+      "stderr": "",
+      "elapsed_seconds": 0.102397
+    }
+  ],
+  "measurement_date": null,
+  "measurement_date_note": "원시 summary.json에 측정일이 없어 지정하지 않음.",
+  "repair": {
+    "before": "first branch: exact h.1",
+    "after": "first branch: exact h.2",
+    "expected_type": "Q",
+    "provided_type": "P"
+  },
+  "protocol_summary": [
+    {
+      "label": "base_environment",
+      "request_kind": "command",
+      "elapsed_seconds": 0.454046,
+      "goals_field_present": false,
+      "goals": null,
+      "proof_status": null,
+      "sorry_count": 0
+    },
+    {
+      "label": "full_baseline",
+      "request_kind": "command",
+      "elapsed_seconds": 0.034221,
+      "goals_field_present": false,
+      "goals": null,
+      "proof_status": null,
+      "sorry_count": 0,
+      "diagnostics": [
+        {
+          "severity": "info",
+          "data": "Goals accomplished!"
+        }
+      ]
+    },
+    {
+      "label": "full_broken",
+      "request_kind": "command",
+      "elapsed_seconds": 0.033488,
+      "goals_field_present": false,
+      "goals": null,
+      "proof_status": null,
+      "sorry_count": 0,
+      "diagnostics": [
+        {
+          "severity": "error",
+          "data": "type mismatch\n  h.left\nhas type\n  P : Prop\nbut is expected to have type\n  Q : Prop"
+        }
+      ]
+    },
+    {
+      "label": "full_repaired",
+      "request_kind": "command",
+      "elapsed_seconds": 0.034073,
+      "goals_field_present": false,
+      "goals": null,
+      "proof_status": null,
+      "sorry_count": 0,
+      "diagnostics": [
+        {
+          "severity": "info",
+          "data": "Goals accomplished!"
+        }
+      ]
+    },
+    {
+      "label": "full_sorry_false_success_probe",
+      "request_kind": "command",
+      "elapsed_seconds": 0.033389,
+      "goals_field_present": false,
+      "goals": null,
+      "proof_status": null,
+      "sorry_count": 1,
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "data": "declaration uses 'sorry'"
+        }
+      ]
+    },
+    {
+      "label": "tactic_constructor",
+      "request_kind": "tactic",
+      "elapsed_seconds": 0.000881,
+      "goals_field_present": true,
+      "goals": [
+        "case left\nP Q : Prop\nh : P ∧ Q\n⊢ Q",
+        "case right\nP Q : Prop\nh : P ∧ Q\n⊢ P"
+      ],
+      "proof_status": "Incomplete: open goals remain",
+      "sorry_count": 0,
+      "tactic": "constructor"
+    },
+    {
+      "label": "tactic_wrong_projection",
+      "request_kind": "tactic",
+      "elapsed_seconds": 0.000821,
+      "goals_field_present": false,
+      "goals": null,
+      "proof_status": null,
+      "sorry_count": 0,
+      "tactic": "exact h.1",
+      "error": "Lean error:\ntype mismatch\n  h.left\nhas type\n  P : Prop\nbut is expected to have type\n  Q : Prop"
+    },
+    {
+      "label": "tactic_repaired_projection",
+      "request_kind": "tactic",
+      "elapsed_seconds": 0.000623,
+      "goals_field_present": true,
+      "goals": [
+        "case right\nP Q : Prop\nh : P ∧ Q\n⊢ P"
+      ],
+      "proof_status": "Incomplete: open goals remain",
+      "sorry_count": 0,
+      "tactic": "exact h.2"
+    },
+    {
+      "label": "tactic_complete",
+      "request_kind": "tactic",
+      "elapsed_seconds": 0.000485,
+      "goals_field_present": true,
+      "goals": [],
+      "proof_status": "Completed",
+      "sorry_count": 0,
+      "tactic": "exact h.1"
+    },
+    {
+      "label": "tactic_sorry_false_success_probe",
+      "request_kind": "tactic",
+      "elapsed_seconds": 0.000756,
+      "goals_field_present": true,
+      "goals": [],
+      "proof_status": "Incomplete: contains sorry",
+      "sorry_count": 1,
+      "tactic": "sorry"
+    },
+    {
+      "label": "original_environment_after_tactic_completion",
+      "request_kind": "command",
+      "elapsed_seconds": 0.029236,
+      "goals_field_present": false,
+      "goals": null,
+      "proof_status": null,
+      "sorry_count": 0,
+      "diagnostics": [
+        {
+          "severity": "info",
+          "data": "'and_swap' depends on axioms: [sorryAx]"
+        }
+      ]
+    },
+    {
+      "label": "assembled_final_revalidation",
+      "request_kind": "command",
+      "elapsed_seconds": 0.035076,
+      "goals_field_present": false,
+      "goals": null,
+      "proof_status": null,
+      "sorry_count": 0,
+      "diagnostics": [
+        {
+          "severity": "info",
+          "data": "Goals accomplished!"
+        },
+        {
+          "severity": "info",
+          "data": "'and_swap' does not depend on any axioms"
+        }
+      ]
+    }
+  ],
+  "conclusions": [
+    "CLI exit 0또는 REPL process exit 0만으로 증명 완성을 판정하지 않음.",
+    "빈 goals에도 sorry가 남을 수 있음.",
+    "goals 필드 부재를 빈 목록으로 취급하지 않음.",
+    "proof state를 완성해도 원래 environment의 선언이 자동으로 바뀌지 않음.",
+    "전체 선언 재조립 뒤 공리 없는 and_swap을 확인함."
+  ],
+  "provenance": [
+    {
+      "original_relative_path": "repl/experiment/logs/summary.json",
+      "sha256": "a00ad743ba79ecacf845c92ce36bfefef59c8ddf7f9c9bf1a4f07f12d0fee6c6",
+      "retained": false
+    },
+    {
+      "original_relative_path": "repl/experiment/logs/trace.jsonl",
+      "sha256": "7c63f93cd3a1d39b8cce5acd6a337e927624b1a8c09b3ba724353ec3d77b2d6d",
+      "retained": false
+    }
+  ]
+}

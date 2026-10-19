@@ -1,0 +1,318 @@
+{
+  "frozen_utc": "2026-10-18T10:54:07.225657+00:00",
+  "repository_base": "6930994d0ea3cec0e9b3c06bc481ddd1dde9f7a7",
+  "design": "Retrospective fixed candidate pool, fresh Lean verification. No new LLM samples; not a replication of full paper algorithms.",
+  "pool_problems": [
+    4,
+    9
+  ],
+  "runs_per_input": 1,
+  "order_seed": 20261018,
+  "timeout_seconds": 300,
+  "expected_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "k_values": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "policies": [
+    "length_only",
+    "heartbeat_only",
+    "equal_normalized_length_heartbeat"
+  ],
+  "improvement_definition": "Signed relative improvement for valid attempts, zero for invalid attempts; candidate-level adaptation of ImProver, not theorem-level model accuracy.",
+  "min_at_k_definition": "Exact uniform-subset expectation within each frozen pool, invalid or worse candidates fall back to reference; no IID generator inference.",
+  "environments": {
+    "p4-4.32": {
+      "problem": 4,
+      "repository_url": "https://github.com/leanprover-community/physlib",
+      "commit": "c48433678e8fb6306ebcd48453300c8e16058a62",
+      "toolchain": "leanprover/lean4:v4.32.0",
+      "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+      "source_sha256": "ac7683ecbd03b7749d929b13eeb09b8021cef7b5b2125dc20d74007edb677a65",
+      "lake_manifest_sha256": "a9531c3978f21e50cb72cc89c2a7644b296bee59a7f2ff92ca2408aac4a67311",
+      "start": 99,
+      "end": 224,
+      "hb_line": 87,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "reference_proof_length": 851,
+      "statement": "P4/statement.lean",
+      "statement_sha256": "851df2b7bf3a5d24535c37b94bcd12339ae43438267de736e793664214c500b6",
+      "lean_args": [
+        "-Dwarn.sorry=false",
+        "-Dweak.says.verify=true"
+      ],
+      "extra_imports": []
+    },
+    "p9-4.32": {
+      "problem": 9,
+      "repository_url": "https://github.com/leanprover/cslib",
+      "commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+      "toolchain": "leanprover/lean4:v4.32.0",
+      "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+      "source_sha256": "d08a2996a8afa14dca972376a50530677214b54d870aa95d98ae23ac69b4fb61",
+      "lake_manifest_sha256": "ceba7d0fee50fcc84cb20db139450ffc9dbd9dfe343333409b2085f8d6776115",
+      "start": 311,
+      "end": 372,
+      "hb_line": 310,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "reference_proof_length": 251,
+      "statement": "P9/statement.lean",
+      "statement_sha256": "d22365e14ae095e15e8706b4c0e7a3f37de57a00d5eda6fa2a40580c8a60650b",
+      "lean_args": [],
+      "extra_imports": [
+        "Mathlib.Util.CountHeartbeats"
+      ]
+    }
+  },
+  "inputs": [
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "reference",
+      "path": "P4/reference.lean",
+      "sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd",
+      "role": "reference"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_01",
+      "path": "P4/attempts/attempt_01.lean",
+      "sha256": "dafa9af1d99b9a84674be5ca8d38ff0c5b719527d6cdb8fce8ebc2ced086eedb",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_02",
+      "path": "P4/attempts/attempt_02.lean",
+      "sha256": "f2ba3d6123e09ad11bdc203565900c580e8dbacdb987485a550a1d83f39bd7e7",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_03",
+      "path": "P4/attempts/attempt_03.lean",
+      "sha256": "0e79b7a866b0f183af12e20dbeb9ba21a8b12098ae9cbbe5ca6bc4bbd85a407d",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_04",
+      "path": "P4/attempts/attempt_04.lean",
+      "sha256": "4daf70829c6dd6ff889795de2f9dc5b9aeaa8f51d09a605cef54bb4c019758c1",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_05",
+      "path": "P4/attempts/attempt_05.lean",
+      "sha256": "710be5c8c3ec53115d262abadedcdbf609df7dce3d8b3577e74221d5dcaed620",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_06",
+      "path": "P4/attempts/attempt_06.lean",
+      "sha256": "54311f12b7c915d0419aa5e17f5a022f659ef177ded39501bf9ad75b67824254",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_07",
+      "path": "P4/attempts/attempt_07.lean",
+      "sha256": "0107e9d22cb8204ac6f94cec0f104dbb9d486041e48532b20380137246f6d9b0",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_08",
+      "path": "P4/attempts/attempt_08.lean",
+      "sha256": "e6a63348d73be4c25128ee19267e0de5b8ac33cf9646652fd696922c5f587e22",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_09",
+      "path": "P4/attempts/attempt_09.lean",
+      "sha256": "af18eaaf84a8298e21c7f188c9e27eda4717fec8f15a7bec520fede79bfd2a9c",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_10",
+      "path": "P4/attempts/attempt_10.lean",
+      "sha256": "e593df42a8daec1cdf4638811114b003ff2fb77bd56fae2fdaea81984ccdcb8a",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_11",
+      "path": "P4/attempts/attempt_11.lean",
+      "sha256": "d8fbe66036a320b7a10745efc9cc3c49b1051a66af8c3affd4e5b5a3523e9257",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "attempt_12",
+      "path": "P4/attempts/attempt_12.lean",
+      "sha256": "e387b48ed176fcd5aa5be8e13f8d6c1833b05d09c26510dfa384468533b3374a",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "research_01",
+      "path": "P4/attempts/research_01.lean",
+      "sha256": "1d3deaeaa95ab4fda45ea489d3382e10ce2f13f01d49a9cbefa309ef63e87c0c",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "research_02",
+      "path": "P4/attempts/research_02.lean",
+      "sha256": "bd65e887499066419755a31383ac47ac098a1124b0e7440a6e888d9864928e9c",
+      "role": "candidate"
+    },
+    {
+      "environment": "p4-4.32",
+      "problem": 4,
+      "id": "research_03",
+      "path": "P4/attempts/research_03.lean",
+      "sha256": "534b3f8929bc01e93d50fe36133ffc14ac729ff0eee74cacbc8cb03fe5ac0eb8",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "reference",
+      "path": "P9/reference.lean",
+      "sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+      "role": "reference"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_01",
+      "path": "P9/attempts/attempt_01.lean",
+      "sha256": "40223eaa4924b1142da9159e2675d5d9231ba8c8621ac04c2555359e49c7f321",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_02",
+      "path": "P9/attempts/attempt_02.lean",
+      "sha256": "c9ad9552d2c037447d02ed3701ea9c85b9f0ba7880c95b80efcfa13e5d6ce91e",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_03",
+      "path": "P9/attempts/attempt_03.lean",
+      "sha256": "e1bf4abe53b7132a03270eebae37ff030d3850510ffe61a4564632166bf093ff",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_04",
+      "path": "P9/attempts/attempt_04.lean",
+      "sha256": "68f7d6a0a2517a0f0c75a998a3faaebb57e39323833d16cf2ed99bfb14f59f9d",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_05",
+      "path": "P9/attempts/attempt_05.lean",
+      "sha256": "35feded50eae8a9ea7f0d9920fdfaa864afa949e60b85edd57e2e3d4f8d6fded",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_06",
+      "path": "P9/attempts/attempt_06.lean",
+      "sha256": "f6aeeeb7afdf062cda527ecce7fc6e6481669240c575dfdcd9a9197260a9f432",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_07",
+      "path": "P9/attempts/attempt_07.lean",
+      "sha256": "9972acd42207c97ce7e836d43ee8730bd94038fdb71ab33d7cef3d0904c3b6b0",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_08",
+      "path": "P9/attempts/attempt_08.lean",
+      "sha256": "e6ae618f4a5e0e5216fdc0f2d328372a8933a4531e9c7770a2fa9b7fe7766842",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_09",
+      "path": "P9/attempts/attempt_09.lean",
+      "sha256": "34e4d73a0fa54f8c6e3e6283ad910a9bd8aac55e36dbb31cb1acb340ddbbe536",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_10",
+      "path": "P9/attempts/attempt_10.lean",
+      "sha256": "d0dd99571822cb9f587ec308a1d9defc447f7cc370c23dad729f15ac20990e71",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_11",
+      "path": "P9/attempts/attempt_11.lean",
+      "sha256": "9058a92e628eb15aa3cc892a2c08d36f7184ac67b73d78f2b0cf18328b0c1b7b",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_12",
+      "path": "P9/attempts/attempt_12.lean",
+      "sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a",
+      "role": "candidate"
+    },
+    {
+      "environment": "p9-4.32",
+      "problem": 9,
+      "id": "attempt_13",
+      "path": "P9/attempts/attempt_13.lean",
+      "sha256": "9df818ded94bf3acf4a96f06c85c6862e28f6c3d0febb19221a7e643055e4bb3",
+      "role": "candidate"
+    }
+  ],
+  "scope": "Only own P4/P9 historical candidates. No other contributor comparison or reproduction.",
+  "preliminary_inputs_discarded": 14,
+  "measurement_protocol_finalized_utc": "2026-10-18T10:59:20.508646+00:00"
+}

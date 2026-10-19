@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "run_id": "d66599cc-285b-48ae-aa48-dcda1a4c1b25",
+  "problem": 9,
+  "objective": "length",
+  "attempts": 3,
+  "accepted": 1,
+  "selected": "candidate_03",
+  "selected_candidate": "candidates/candidate_03.lean",
+  "selected_cost": 131,
+  "reference_cost": 251,
+  "reduction": 0.47808764940239046,
+  "cost_usd": null,
+  "cost_status": "not_reported",
+  "finished_utc": "2026-10-18T12:27:14.963489+00:00",
+  "selected_sha256": "2aea0a41d1b5eddc19f8c461d20e6d90e7daab6d8d8f51ba6c3aca65a1e711bb"
+}

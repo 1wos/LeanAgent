@@ -1,0 +1,24 @@
+--- docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a001/candidate.lean	2026-10-17 17:10:54
++++ docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a002/draft.lean	2026-10-17 17:11:45
+@@ -155,19 +155,5 @@
+       -- We now prove that the terms inside the sums are equal for each index.
+       apply Finset.sum_congr rfl
+       intro j hj
+-      have h_j_lt : j.val < 2 ^ (ℓ - (↑i + 1)) := by
+-        rw [Nat.sub_add_eq]
+-        omega
+-      conv_lhs => enter [1]; rw [mul_comm (a := Polynomial.C (coeffs ⟨j.val * 2, by
+-        rw [←Nat.add_zero (j.val * 2)]
+-        apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))
+-          (i := 0) (by omega) (by omega)⟩)), ←mul_assoc,
+-        mul_comm (a := Polynomial.C (1 - r_chal))]; rw [mul_assoc]
+-      conv_lhs => enter [2]; rw [mul_comm (a := Polynomial.C (coeffs ⟨j.val * 2 + 1, by
+-        apply mul_two_add_bit_lt_two_pow (c := ℓ - i) (a := j) (b := ℓ - (↑i + 1))
+-          (i := 1) (by omega) (by omega)⟩)), ←mul_assoc,
+-        mul_comm (a := Polynomial.C r_chal)]; rw [mul_assoc]
+-      conv_rhs => rw [mul_comm]
+-      rw [←mul_add]
+-      congr
+-      simp only [←Polynomial.C_mul, ←Polynomial.C_add]
++      simp only [Polynomial.C_add, Polynomial.C_mul]
++      ring

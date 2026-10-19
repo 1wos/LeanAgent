@@ -1,0 +1,182 @@
+[
+  {
+    "problem": 4,
+    "metric": "length",
+    "pool_size": 15,
+    "k": 1,
+    "subsets": 15,
+    "expected_min_at_k": 376.8,
+    "expected_red_at_k": 0.5572267920094007
+  },
+  {
+    "problem": 4,
+    "metric": "length",
+    "pool_size": 15,
+    "k": 2,
+    "subsets": 105,
+    "expected_min_at_k": 214.38095238095238,
+    "expected_red_at_k": 0.7480834872139219
+  },
+  {
+    "problem": 4,
+    "metric": "length",
+    "pool_size": 15,
+    "k": 4,
+    "subsets": 1365,
+    "expected_min_at_k": 143.56263736263736,
+    "expected_red_at_k": 0.8313012486925531
+  },
+  {
+    "problem": 4,
+    "metric": "length",
+    "pool_size": 15,
+    "k": 8,
+    "subsets": 6435,
+    "expected_min_at_k": 131.06977466977466,
+    "expected_red_at_k": 0.8459814633727677
+  },
+  {
+    "problem": 4,
+    "metric": "length",
+    "pool_size": 15,
+    "k": 15,
+    "subsets": 1,
+    "expected_min_at_k": 123.0,
+    "expected_red_at_k": 0.8554641598119859
+  },
+  {
+    "problem": 4,
+    "metric": "heartbeat",
+    "pool_size": 15,
+    "k": 1,
+    "subsets": 15,
+    "expected_min_at_k": 4578.2,
+    "expected_red_at_k": 0.616790826148824
+  },
+  {
+    "problem": 4,
+    "metric": "heartbeat",
+    "pool_size": 15,
+    "k": 2,
+    "subsets": 105,
+    "expected_min_at_k": 2364.5142857142855,
+    "expected_red_at_k": 0.8020830094823566
+  },
+  {
+    "problem": 4,
+    "metric": "heartbeat",
+    "pool_size": 15,
+    "k": 4,
+    "subsets": 1365,
+    "expected_min_at_k": 1544.4483516483517,
+    "expected_red_at_k": 0.8707250061397546
+  },
+  {
+    "problem": 4,
+    "metric": "heartbeat",
+    "pool_size": 15,
+    "k": 8,
+    "subsets": 6435,
+    "expected_min_at_k": 1441.0226884226884,
+    "expected_red_at_k": 0.8793820466709058
+  },
+  {
+    "problem": 4,
+    "metric": "heartbeat",
+    "pool_size": 15,
+    "k": 15,
+    "subsets": 1,
+    "expected_min_at_k": 1411.0,
+    "expected_red_at_k": 0.8818950364108145
+  },
+  {
+    "problem": 9,
+    "metric": "length",
+    "pool_size": 13,
+    "k": 1,
+    "subsets": 13,
+    "expected_min_at_k": 139.84615384615384,
+    "expected_red_at_k": 0.44284400858106043
+  },
+  {
+    "problem": 9,
+    "metric": "length",
+    "pool_size": 13,
+    "k": 2,
+    "subsets": 78,
+    "expected_min_at_k": 105.47435897435898,
+    "expected_red_at_k": 0.5797834303810399
+  },
+  {
+    "problem": 9,
+    "metric": "length",
+    "pool_size": 13,
+    "k": 4,
+    "subsets": 715,
+    "expected_min_at_k": 88.02937062937063,
+    "expected_red_at_k": 0.649285375978603
+  },
+  {
+    "problem": 9,
+    "metric": "length",
+    "pool_size": 13,
+    "k": 8,
+    "subsets": 1287,
+    "expected_min_at_k": 81.22222222222223,
+    "expected_red_at_k": 0.6764054891544931
+  },
+  {
+    "problem": 9,
+    "metric": "length",
+    "pool_size": 13,
+    "k": 13,
+    "subsets": 1,
+    "expected_min_at_k": 79.0,
+    "expected_red_at_k": 0.6852589641434264
+  },
+  {
+    "problem": 9,
+    "metric": "heartbeat",
+    "pool_size": 13,
+    "k": 1,
+    "subsets": 13,
+    "expected_min_at_k": 766.8461538461538,
+    "expected_red_at_k": 0.8011291094797319
+  },
+  {
+    "problem": 9,
+    "metric": "heartbeat",
+    "pool_size": 13,
+    "k": 2,
+    "subsets": 78,
+    "expected_min_at_k": 425.0897435897436,
+    "expected_red_at_k": 0.8897588839238217
+  },
+  {
+    "problem": 9,
+    "metric": "heartbeat",
+    "pool_size": 13,
+    "k": 4,
+    "subsets": 715,
+    "expected_min_at_k": 377.9132867132867,
+    "expected_red_at_k": 0.9019934422424049
+  },
+  {
+    "problem": 9,
+    "metric": "heartbeat",
+    "pool_size": 13,
+    "k": 8,
+    "subsets": 1287,
+    "expected_min_at_k": 356.85392385392385,
+    "expected_red_at_k": 0.9074548952660986
+  },
+  {
+    "problem": 9,
+    "metric": "heartbeat",
+    "pool_size": 13,
+    "k": 13,
+    "subsets": 1,
+    "expected_min_at_k": 353.0,
+    "expected_red_at_k": 0.908454356846473
+  }
+]

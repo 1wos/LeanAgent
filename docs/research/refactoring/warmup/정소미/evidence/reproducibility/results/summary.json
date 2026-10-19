@@ -1,0 +1,98 @@
+[
+  {
+    "environment": "p4-4.32",
+    "problem": 4,
+    "candidate": "reference",
+    "runs": 3,
+    "accepted": 3,
+    "proof_tokens": 851,
+    "heartbeat": 11947,
+    "stable": true,
+    "check_seconds_min": 5.07,
+    "check_seconds_max": 12.07
+  },
+  {
+    "environment": "p4-4.32",
+    "problem": 4,
+    "candidate": "final",
+    "runs": 3,
+    "accepted": 3,
+    "proof_tokens": 123,
+    "heartbeat": 1411,
+    "stable": true,
+    "check_seconds_min": 3.9,
+    "check_seconds_max": 7.13
+  },
+  {
+    "environment": "p9-4.31",
+    "problem": 9,
+    "candidate": "reference",
+    "runs": 3,
+    "accepted": 3,
+    "proof_tokens": 251,
+    "heartbeat": 3859,
+    "stable": true,
+    "check_seconds_min": 4.18,
+    "check_seconds_max": 11.02
+  },
+  {
+    "environment": "p9-4.31",
+    "problem": 9,
+    "candidate": "final",
+    "runs": 3,
+    "accepted": 3,
+    "proof_tokens": 79,
+    "heartbeat": 516,
+    "stable": true,
+    "check_seconds_min": 3.98,
+    "check_seconds_max": 4.02
+  },
+  {
+    "environment": "p9-4.32",
+    "problem": 9,
+    "candidate": "reference",
+    "runs": 3,
+    "accepted": 3,
+    "proof_tokens": 251,
+    "heartbeat": 3856,
+    "stable": true,
+    "check_seconds_min": 4.26,
+    "check_seconds_max": 10.08
+  },
+  {
+    "environment": "p9-4.32",
+    "problem": 9,
+    "candidate": "final",
+    "runs": 3,
+    "accepted": 3,
+    "proof_tokens": 79,
+    "heartbeat": 516,
+    "stable": true,
+    "check_seconds_min": 3.94,
+    "check_seconds_max": 5.15
+  },
+  {
+    "environment": "p9-4.33rc2",
+    "problem": 9,
+    "candidate": "reference",
+    "runs": 3,
+    "accepted": 3,
+    "proof_tokens": 251,
+    "heartbeat": 3858,
+    "stable": true,
+    "check_seconds_min": 4.54,
+    "check_seconds_max": 11.5
+  },
+  {
+    "environment": "p9-4.33rc2",
+    "problem": 9,
+    "candidate": "final",
+    "runs": 3,
+    "accepted": 3,
+    "proof_tokens": 79,
+    "heartbeat": 510,
+    "stable": true,
+    "check_seconds_min": 4.07,
+    "check_seconds_max": 4.27
+  }
+]

@@ -1,0 +1,61 @@
+[
+  {
+    "tag": "changed-statement",
+    "accepted": false,
+    "status": "statement_mismatch",
+    "lean_invoked": false,
+    "expected_status": "statement_mismatch",
+    "matched_expectation": true
+  },
+  {
+    "tag": "forbidden-proof",
+    "accepted": false,
+    "status": "forbidden_pattern",
+    "lean_invoked": false,
+    "expected_status": "forbidden_pattern",
+    "matched_expectation": true
+  },
+  {
+    "tag": "compiler-error",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "2ef72b344fcec928cc6531a37f91c9ae083dce20c21554b8ff4ea77fee10333e",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 3,
+    "declaration_lines": 2,
+    "check": {
+      "command": "lake env lean compiler-error.check.lean",
+      "returncode": 1,
+      "seconds": 9.73,
+      "error_count": 1,
+      "first_errors": [
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-vxdgsd66/compiler-error.check.lean:312:94: error(lean.unknownIdentifier): Unknown identifier `noSuchLemmaForReplayControl`"
+      ],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [sorryAx]"
+      ],
+      "sorryAx": true
+    },
+    "compiled": false,
+    "axioms_match": false,
+    "accepted": false,
+    "lean_invoked": true,
+    "verifier_returncode": 1,
+    "status": "verification_failed",
+    "expected_status": "verification_failed",
+    "matched_expectation": true
+  },
+  {
+    "tag": "wrong-environment",
+    "lean_invoked": false,
+    "accepted": false,
+    "observed_error": "project commit mismatch",
+    "matched_expectation": true
+  }
+]

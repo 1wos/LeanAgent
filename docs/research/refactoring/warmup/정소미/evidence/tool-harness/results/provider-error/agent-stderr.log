@@ -1,0 +1,14 @@
+2026-10-18T12:24:36.946748Z  WARN codex_models_manager::model_info: Unknown model gpt-6-sol is used. This will use fallback model metadata.
+2026-10-18T12:24:37.071222Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:37.086913Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:37.099211Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:37.114337Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:37.128097Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:37.141012Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:37.151871Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:37.164270Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:37.175863Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:37.187082Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-18T12:24:38.033270Z  WARN codex_models_manager::model_info: Unknown model gpt-6-sol is used. This will use fallback model metadata.
+2026-10-18T12:24:38.149542Z  WARN codex_models_manager::model_info: Unknown model gpt-6-sol is used. This will use fallback model metadata.
+2026-10-18T12:24:40.999264Z  WARN codex_core::session_startup_prewarm: startup websocket prewarm setup failed: {"type":"error","status":400,"error":{"type":"invalid_request_error","message":"The 'gpt-6-sol' model is not supported when using Codex with a ChatGPT account."}}

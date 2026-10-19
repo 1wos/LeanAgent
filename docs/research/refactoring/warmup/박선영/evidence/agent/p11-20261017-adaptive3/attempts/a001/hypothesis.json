@@ -1,0 +1,11 @@
+{
+  "strategy": "remove-unused",
+  "target": "P₀_coeffs/P₁_coeffs",
+  "hypothesis": "기존 selected의 미사용 지역 계수 정의 제거 효과를 새 세션에서 재현한다",
+  "expected": "기준선 대비 heartbeat와 proof tokens 감소; 기존 41636/1656 재현 여부 관측",
+  "reason": "기존 report/result와 원본/selected를 대조했다. 두 정의에 후속 사용이 없고 실제 refinement는 독립적이다. 과거 성공을 새 발견으로 세지 않고 검증된 부모를 확보한다.",
+  "parent": "reference",
+  "kind": "reproduction",
+  "parent_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+  "registered_at": "2026-10-17T08:01:20.724043+00:00"
+}

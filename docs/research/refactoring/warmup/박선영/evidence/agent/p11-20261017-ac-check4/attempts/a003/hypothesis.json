@@ -1,0 +1,11 @@
+{
+  "strategy": "restructure-algebra",
+  "target": "B+C: main calc의 전개형 중간 등식 3행 삭제만 허용",
+  "hypothesis": "A 없이 B에서 C만 적용해도 heartbeat가 감소한다",
+  "expected": "B보다 HB 감소 예상; 감소량이 A 존재 시와 같은지는 새 측정 후 비교",
+  "reason": "B/A 재현 결과는 확인했으나 과거에 없던 B+C가 주 질문에 필요하다. 부모는 B(a001) 고정. 허용 diff는 과거 a002→a003에서 삭제한 main calc 3행뿐. 마지막 intro j hj 이후 계수 계산과 모든 나머지 부분은 B 그대로 보존한다.",
+  "parent": "a001",
+  "kind": "experiment",
+  "parent_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+  "registered_at": "2026-10-17T09:12:47.780481+00:00"
+}

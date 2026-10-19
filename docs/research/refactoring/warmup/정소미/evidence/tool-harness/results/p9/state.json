@@ -1,0 +1,211 @@
+{
+  "status": "completed",
+  "attempts": [
+    {
+      "id": "candidate_01",
+      "status": "verification_failed",
+      "accepted": false,
+      "started_utc": "2026-10-18T12:26:18.251770+00:00",
+      "candidate": "candidates/candidate_01.lean",
+      "candidate_sha256": "66869817d750b628555fc89c1fc82293a9f439ba4d54d221931b20d39b37bd57",
+      "tag": "candidate_01",
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+      "replaced_lines": [
+        311,
+        372
+      ],
+      "statement_unchanged": true,
+      "forbidden_patterns": [],
+      "proof_tokens": 26,
+      "declaration_lines": 6,
+      "check": {
+        "command": "lake env lean candidate_01.check.lean",
+        "returncode": 1,
+        "seconds": 8.77,
+        "timed_out": false,
+        "error_count": 1,
+        "first_errors": [
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-76frl0e_/candidate_01.check.lean:316:15: error: `grind` failed"
+        ],
+        "warning_count": 0,
+        "axioms": [
+          "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+        ],
+        "sorryAx": true
+      },
+      "compiled": false,
+      "heartbeat": {
+        "command": "lake env lean candidate_01.hb.lean",
+        "returncode": 1,
+        "seconds": 4.33,
+        "timed_out": false,
+        "heartbeats": null,
+        "measurement_ambiguous": false,
+        "error_count": 1,
+        "first_errors": [
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-76frl0e_/candidate_01.hb.lean:319:15: error: `grind` failed"
+        ]
+      },
+      "axioms_match": false,
+      "lean_invoked": true,
+      "verifier_returncode": 1,
+      "log": "logs/candidate_01.log",
+      "log_sha256": "4f9fa88a5f57b182f64833f9fb4b53215df04fa31fac8401171fc2c4a56ba3cb",
+      "finished_utc": "2026-10-18T12:26:31.468373+00:00",
+      "seconds": 13.215
+    },
+    {
+      "id": "candidate_02",
+      "status": "verification_failed",
+      "accepted": false,
+      "started_utc": "2026-10-18T12:26:39.451080+00:00",
+      "candidate": "candidates/candidate_02.lean",
+      "candidate_sha256": "1a423159b857befe038f927dc4fa7d8af3197e590968eeb79cc508348beac73e",
+      "tag": "candidate_02",
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+      "replaced_lines": [
+        311,
+        372
+      ],
+      "statement_unchanged": true,
+      "forbidden_patterns": [],
+      "proof_tokens": 127,
+      "declaration_lines": 21,
+      "check": {
+        "command": "lake env lean candidate_02.check.lean",
+        "returncode": 1,
+        "seconds": 5.99,
+        "timed_out": false,
+        "error_count": 2,
+        "first_errors": [
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.check.lean:324:56: error: Application type mismatch: The argument",
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.check.lean:330:56: error: Application type mismatch: The argument"
+        ],
+        "warning_count": 0,
+        "axioms": [
+          "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+        ],
+        "sorryAx": true
+      },
+      "compiled": false,
+      "heartbeat": {
+        "command": "lake env lean candidate_02.hb.lean",
+        "returncode": 1,
+        "seconds": 6.83,
+        "timed_out": false,
+        "heartbeats": null,
+        "measurement_ambiguous": false,
+        "error_count": 2,
+        "first_errors": [
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.hb.lean:327:56: error: Application type mismatch: The argument",
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.hb.lean:333:56: error: Application type mismatch: The argument"
+        ]
+      },
+      "axioms_match": false,
+      "lean_invoked": true,
+      "verifier_returncode": 1,
+      "log": "logs/candidate_02.log",
+      "log_sha256": "29e782055aaa4654d73a0654113b5a06cac07e1406f18e10316a9efa79577a5c",
+      "finished_utc": "2026-10-18T12:26:52.396041+00:00",
+      "seconds": 12.944
+    },
+    {
+      "id": "candidate_03",
+      "status": "accepted",
+      "accepted": true,
+      "started_utc": "2026-10-18T12:27:00.834772+00:00",
+      "candidate": "candidates/candidate_03.lean",
+      "candidate_sha256": "db6de1ce1fa42fabcc6b64229a4e549b94b9aa687bd0ad8e9cff382a40037115",
+      "tag": "candidate_03",
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+      "replaced_lines": [
+        311,
+        372
+      ],
+      "statement_unchanged": true,
+      "forbidden_patterns": [],
+      "proof_tokens": 131,
+      "declaration_lines": 25,
+      "check": {
+        "command": "lake env lean candidate_03.check.lean",
+        "returncode": 0,
+        "seconds": 5.89,
+        "timed_out": false,
+        "error_count": 0,
+        "first_errors": [],
+        "warning_count": 0,
+        "axioms": [
+          "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ],
+        "sorryAx": false
+      },
+      "compiled": true,
+      "heartbeat": {
+        "command": "lake env lean candidate_03.hb.lean",
+        "returncode": 0,
+        "seconds": 4.68,
+        "timed_out": false,
+        "heartbeats": 1283,
+        "measurement_ambiguous": false,
+        "error_count": 0,
+        "first_errors": []
+      },
+      "axioms_match": true,
+      "lean_invoked": true,
+      "verifier_returncode": 0,
+      "log": "logs/candidate_03.log",
+      "log_sha256": "c64559230c9a142045cb035da1eacbab7a2d13e6c3f638cab95a0cd3a6acee9f",
+      "finished_utc": "2026-10-18T12:27:11.519113+00:00",
+      "seconds": 10.682
+    }
+  ],
+  "selected": "candidate_03",
+  "reference": {
+    "tag": "reference",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean reference.check.lean",
+      "returncode": 0,
+      "seconds": 7.78,
+      "timed_out": false,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean reference.hb.lean",
+      "returncode": 0,
+      "seconds": 7.6,
+      "timed_out": false,
+      "heartbeats": 3856,
+      "measurement_ambiguous": false,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "log": "logs/reference.log",
+    "log_sha256": "0103c7fd40c2c21bc37302bff552a004cab2fa222fe1c193f8b669a22e894d14"
+  }
+}
