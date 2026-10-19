@@ -1,0 +1,107 @@
+{
+  "shared_at": "2026-10-18",
+  "work_period": [
+    "2026-10-12",
+    "2026-10-17"
+  ],
+  "kind": "local_mock_not_official",
+  "source": "evidence/warmup-2026-10-15/results.json",
+  "tokenizer": "tiktoken 0.14.0 / o200k_base",
+  "heartbeat": "IO.getNumHeartbeats delta / 1000; synchronous target declaration",
+  "primary_version": "first listed per benchmark problem",
+  "problems": 15,
+  "prompt_slots": 45,
+  "changed_bodies": 40,
+  "problem_version_checks": 36,
+  "selected_improvements": 14,
+  "user_preserved": [
+    8
+  ],
+  "raw_outcomes": {
+    "improved": 30,
+    "worse": 3,
+    "invalid": 7,
+    "unchanged": 5
+  },
+  "escalation_prompts": 12,
+  "escalation_calls": 0,
+  "baseline_score": 33.333333333333336,
+  "selected_mean_score": 35.26826405861254,
+  "selected": [
+    {
+      "problem_id": 1,
+      "selection": "P1/raw",
+      "score": 35.41163708977876
+    },
+    {
+      "problem_id": 2,
+      "selection": "P3/raw",
+      "score": 33.72427133559937
+    },
+    {
+      "problem_id": 3,
+      "selection": "P1/raw",
+      "score": 37.3276433146058
+    },
+    {
+      "problem_id": 4,
+      "selection": "P3/raw",
+      "score": 33.71750326075627
+    },
+    {
+      "problem_id": 5,
+      "selection": "P1/raw",
+      "score": 33.39810028375162
+    },
+    {
+      "problem_id": 6,
+      "selection": "P3/raw",
+      "score": 33.67797382282984
+    },
+    {
+      "problem_id": 7,
+      "selection": "P3/raw",
+      "score": 33.37691361992241
+    },
+    {
+      "problem_id": 8,
+      "selection": "original",
+      "score": 33.333333333333336
+    },
+    {
+      "problem_id": 9,
+      "selection": "P2/raw",
+      "score": 43.54863116327289
+    },
+    {
+      "problem_id": 10,
+      "selection": "P2/raw",
+      "score": 33.402644710679404
+    },
+    {
+      "problem_id": 11,
+      "selection": "P2/raw",
+      "score": 34.902538963339964
+    },
+    {
+      "problem_id": 12,
+      "selection": "P1/raw",
+      "score": 33.45125495432767
+    },
+    {
+      "problem_id": 13,
+      "selection": "P2/extraction",
+      "score": 41.23696359137998
+    },
+    {
+      "problem_id": 14,
+      "selection": "P3/raw",
+      "score": 34.21849631734677
+    },
+    {
+      "problem_id": 15,
+      "selection": "P2/raw",
+      "score": 34.29605511826402
+    }
+  ]
+}
