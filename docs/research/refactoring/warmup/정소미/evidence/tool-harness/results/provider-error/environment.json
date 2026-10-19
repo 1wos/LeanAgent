@@ -1,0 +1,69 @@
+{
+  "environment": {
+    "commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+    "toolchain": "leanprover/lean4:v4.32.0",
+    "lean_version_output": "Lean (version 4.32.0, arm64-apple-darwin24.6.0, commit 8c9756b28d64dab099da31a4c09229a9e6a2ef35, Release)",
+    "source_sha256": "d08a2996a8afa14dca972376a50530677214b54d870aa95d98ae23ac69b4fb61",
+    "lake_manifest_sha256": "ceba7d0fee50fcc84cb20db139450ffc9dbd9dfe343333409b2085f8d6776115",
+    "tracked_changes": false,
+    "dependencies": [
+      {
+        "name": "mathlib",
+        "commit": "81a5d257c8e410db227a6665ed08f64fea08e997",
+        "tracked_changes": false
+      },
+      {
+        "name": "plausible",
+        "commit": "e12c1910fe855cbfc38803cd4e55543906d5fa62",
+        "tracked_changes": false
+      },
+      {
+        "name": "LeanSearchClient",
+        "commit": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+        "tracked_changes": false
+      },
+      {
+        "name": "importGraph",
+        "commit": "7e9612bf0b9ee66db3cb5b9988a35afc706f5a12",
+        "tracked_changes": false
+      },
+      {
+        "name": "proofwidgets",
+        "commit": "6e311e2a844da9b2cc3971187df2fe0066947b93",
+        "tracked_changes": false
+      },
+      {
+        "name": "aesop",
+        "commit": "a7dbf0c63b694e47f425f3dcddbc0e178bb432d3",
+        "tracked_changes": false
+      },
+      {
+        "name": "Qq",
+        "commit": "38d591e778f100aec9762bb582f9c7f55f50e9dc",
+        "tracked_changes": false
+      },
+      {
+        "name": "batteries",
+        "commit": "023ce7d62a0531e22a5331e20b587817a80d49ff",
+        "tracked_changes": false
+      },
+      {
+        "name": "Cli",
+        "commit": "88679d088c9720c27ebdf2ba4dafe17341747f94",
+        "tracked_changes": false
+      }
+    ]
+  },
+  "python": "3.14.8",
+  "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+  "protocol_sha256": "a2c4cc3f3d00e03dfb186afafa32dbf0ad1a11712b6c6b49b997caf070348f3c",
+  "scripts_sha256": {
+    "tool-harness/harness.py": "b86ceae66ab67e9e678c61c3630ec56faa78c5f404cf790541e7128f370b7ec8",
+    "tool-harness/tool_server.py": "9f90c1d1569b72b030231cda2e55448c07ff1407e275b61efbf642152c67dc50",
+    "tool-harness/run_agent.py": "47517d46bbcdfbc90d668389466f8164eefbe9fd78c765070769181ddb827012",
+    "reproducibility/run_replay.py": "93cb141e6230edd5b49317ccc97b5ba99ada0046072f7bd6644a133b77c174c6",
+    "verify_candidate.py": "5dfa979ac22adc02c95d34059a2d228fabe85a5e1f730c9151c7a24b2198130a",
+    "proof_tokens.py": "746f0c5b6d21015062f686b9bde4ea3623c17c2421d12f1436d741860c5404ed"
+  },
+  "scope": "Existing local build cache; not an independent clean-install reproduction."
+}

@@ -1,0 +1,11 @@
+{
+  "strategy": "restructure-algebra",
+  "target": "main calc의 연속 두 ring 등식",
+  "hypothesis": "중간 전개형 등식을 생략하고 바로 x₁-x₀로 묶는 등식을 ring 한 번으로 증명해 중복 정규화를 줄인다",
+  "expected": "부모 a002보다 tokens 감소, heartbeat 감소 여부 실측; 큰 단일 ring 목표는 더 비쌀 수도 있음",
+  "reason": "a002는 마지막 계수 블록의 재구성으로 2513 HB를 줄였다. 이를 모든 ring에 일반화하지 않고, 독립된 main calc에서 동일 항들의 연속 정규화 두 번만 한 번으로 바꿔 시험한다. fiber 증명과 마지막 계수 블록은 그대로 둔다.",
+  "parent": "a002",
+  "kind": "experiment",
+  "parent_sha256": "4488b9800e5bf644cd3065aed7ae219257858d87d92dce97da1b41afa07a205d",
+  "registered_at": "2026-10-17T08:04:51.283307+00:00"
+}

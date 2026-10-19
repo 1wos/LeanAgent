@@ -1,0 +1,39 @@
+{
+  "recorded_at_utc": "2026-10-15T06:00:13.383030+00:00",
+  "launch_message": "Execute the complete shared experimental task in /Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/common/task.txt. Read that task file and the sibling experiment-root schedule.json first, then follow them for the full one-hour active window. Derive your output arm from your canonical task name as specified there. All arms receive this identical launch message. Do not read or modify the other arms. Report blockers promptly and actual results at the end.",
+  "launch_message_sha256": "0f20a90d19efc560333f26100713108b482ed88b12308978fe4265d056035d1c",
+  "task_file_sha256": "500c06bced1d457d4853a1bc54aa43e1638260f56db7625326665774f551a044",
+  "arms": [
+    {
+      "task_name": "/root/effort_xhigh",
+      "fork_turns": "none",
+      "reasoning_effort": "xhigh",
+      "model_override": null,
+      "spawn_success": true
+    },
+    {
+      "task_name": "/root/effort_high",
+      "fork_turns": "none",
+      "reasoning_effort": "high",
+      "model_override": null,
+      "spawn_success": true
+    },
+    {
+      "task_name": "/root/effort_ultra",
+      "fork_turns": "none",
+      "reasoning_effort": "ultra",
+      "model_override": null,
+      "spawn_success": true
+    }
+  ],
+  "shared_followup": {
+    "recorded_at_utc": "2026-10-15T06:51:58.844590+00:00",
+    "message": "Common deadline reminder sent identically to all three arms: stop launching new candidate experiments at 2026-10-15T06:59:23.653029+00:00. Use the remaining window for substantive analysis, required final repeats, results.json and Korean report.md; do not add filler repetitions. Preserve all failed attempts. Report actual timing, selected proof hashes, repeat ranges and unavailable telemetry. No other arm's results are being shared. Send your final report promptly at the deadline after flushing artifacts.",
+    "message_sha256": "2ffecc250ebf01ad23aa086e51808f8f9c49679977495ce9e4ad1393e4795a95",
+    "recipients": [
+      "effort_high",
+      "effort_xhigh",
+      "effort_ultra"
+    ]
+  }
+}

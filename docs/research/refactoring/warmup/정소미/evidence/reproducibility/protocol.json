@@ -1,0 +1,133 @@
+{
+  "purpose": "Repeat existing P4/P9 proofs under pinned environments; no candidate search or model calls.",
+  "repetitions": 3,
+  "timeout_seconds": 300,
+  "expected_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "environments": {
+    "p4-4.32": {
+      "problem": 4,
+      "repository_url": "https://github.com/leanprover-community/physlib",
+      "commit": "c48433678e8fb6306ebcd48453300c8e16058a62",
+      "toolchain": "leanprover/lean4:v4.32.0",
+      "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+      "source_sha256": "ac7683ecbd03b7749d929b13eeb09b8021cef7b5b2125dc20d74007edb677a65",
+      "lake_manifest_sha256": "a9531c3978f21e50cb72cc89c2a7644b296bee59a7f2ff92ca2408aac4a67311",
+      "start": 99,
+      "end": 224,
+      "hb_line": 87,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "reference_proof_length": 851,
+      "statement": "P4/statement.lean",
+      "statement_sha256": "851df2b7bf3a5d24535c37b94bcd12339ae43438267de736e793664214c500b6",
+      "candidates": {
+        "reference": {
+          "path": "P4/reference.lean",
+          "sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd"
+        },
+        "final": {
+          "path": "P4/final.lean",
+          "sha256": "534b3f8929bc01e93d50fe36133ffc14ac729ff0eee74cacbc8cb03fe5ac0eb8"
+        }
+      },
+      "lean_args": [
+        "-Dwarn.sorry=false",
+        "-Dweak.says.verify=true"
+      ],
+      "extra_imports": []
+    },
+    "p9-4.31": {
+      "problem": 9,
+      "repository_url": "https://github.com/leanprover/cslib",
+      "commit": "8ea71c8df91acd63285515a04da952b23b78d266",
+      "toolchain": "leanprover/lean4:v4.31.0",
+      "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+      "source_sha256": "d08a2996a8afa14dca972376a50530677214b54d870aa95d98ae23ac69b4fb61",
+      "lake_manifest_sha256": "c192257881ee32336e32f1e5ebc660f8890bbefaba391f1b360f961a033fba32",
+      "start": 311,
+      "end": 372,
+      "hb_line": 310,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "reference_proof_length": 251,
+      "statement": "P9/statement.lean",
+      "statement_sha256": "d22365e14ae095e15e8706b4c0e7a3f37de57a00d5eda6fa2a40580c8a60650b",
+      "candidates": {
+        "reference": {
+          "path": "P9/reference.lean",
+          "sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+        },
+        "final": {
+          "path": "P9/final.lean",
+          "sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+        }
+      },
+      "lean_args": [],
+      "extra_imports": [
+        "Mathlib.Util.CountHeartbeats"
+      ]
+    },
+    "p9-4.32": {
+      "problem": 9,
+      "repository_url": "https://github.com/leanprover/cslib",
+      "commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+      "toolchain": "leanprover/lean4:v4.32.0",
+      "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+      "source_sha256": "d08a2996a8afa14dca972376a50530677214b54d870aa95d98ae23ac69b4fb61",
+      "lake_manifest_sha256": "ceba7d0fee50fcc84cb20db139450ffc9dbd9dfe343333409b2085f8d6776115",
+      "start": 311,
+      "end": 372,
+      "hb_line": 310,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "reference_proof_length": 251,
+      "statement": "P9/statement.lean",
+      "statement_sha256": "d22365e14ae095e15e8706b4c0e7a3f37de57a00d5eda6fa2a40580c8a60650b",
+      "candidates": {
+        "reference": {
+          "path": "P9/reference.lean",
+          "sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+        },
+        "final": {
+          "path": "P9/final.lean",
+          "sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+        }
+      },
+      "lean_args": [],
+      "extra_imports": [
+        "Mathlib.Util.CountHeartbeats"
+      ]
+    },
+    "p9-4.33rc2": {
+      "problem": 9,
+      "repository_url": "https://github.com/leanprover/cslib",
+      "commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+      "toolchain": "leanprover/lean4:v4.33.0-rc2",
+      "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+      "source_sha256": "ab051b1bb5547a874efe3491ed0c9acc785de2234344046c0d95d4dee178f73e",
+      "lake_manifest_sha256": "c5acf9a59cf6956eb89589ff09b6a35adbc79fb220886f61442fe02d8b21aae0",
+      "start": 311,
+      "end": 372,
+      "hb_line": 310,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "reference_proof_length": 251,
+      "statement": "P9/statement.lean",
+      "statement_sha256": "d22365e14ae095e15e8706b4c0e7a3f37de57a00d5eda6fa2a40580c8a60650b",
+      "candidates": {
+        "reference": {
+          "path": "P9/reference.lean",
+          "sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+        },
+        "final": {
+          "path": "P9/final.lean",
+          "sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+        }
+      },
+      "lean_args": [],
+      "extra_imports": [
+        "Mathlib.Util.CountHeartbeats"
+      ]
+    }
+  }
+}

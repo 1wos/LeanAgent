@@ -1,0 +1,1395 @@
+[
+  {
+    "tag": "P9-attempt_10",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "d772b864641b5cdf938146f85346b4c23778be206e7547b19b963a6f2c800ef4",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 87,
+    "declaration_lines": 10,
+    "check": {
+      "command": "lake env lean P9-attempt_10.check.lean",
+      "returncode": 0,
+      "seconds": 5.77,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_10.hb.lean",
+      "returncode": 0,
+      "seconds": 3.82,
+      "heartbeats": 502,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_10",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_10.lean",
+    "input_sha256": "d0dd99571822cb9f587ec308a1d9defc447f7cc370c23dad729f15ac20990e71"
+  },
+  {
+    "tag": "P9-attempt_07",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "8008875351ca41967b769a652a4776eded3c50cb9f1682abf1fbadc5cc8ce3c8",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 120,
+    "declaration_lines": 12,
+    "check": {
+      "command": "lake env lean P9-attempt_07.check.lean",
+      "returncode": 0,
+      "seconds": 3.9,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_07.hb.lean",
+      "returncode": 0,
+      "seconds": 4.02,
+      "heartbeats": 353,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_07",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_07.lean",
+    "input_sha256": "9972acd42207c97ce7e836d43ee8730bd94038fdb71ab33d7cef3d0904c3b6b0"
+  },
+  {
+    "tag": "P4-attempt_09",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "033d4276c53276333972501f9476998d7eea4d20fcdca29e7a92fe0e164a0142",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 161,
+    "declaration_lines": 21,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_09.check.lean",
+      "returncode": 0,
+      "seconds": 9.11,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_09.hb.lean",
+      "returncode": 0,
+      "seconds": 3.76,
+      "heartbeats": 1488,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_09",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_09.lean",
+    "input_sha256": "af18eaaf84a8298e21c7f188c9e27eda4717fec8f15a7bec520fede79bfd2a9c"
+  },
+  {
+    "tag": "P4-research_03",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "d6cfeba8fdd26342165ca19a44a8e917ac4eaa0ab93a9a058f729c8bc07799c1",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 123,
+    "declaration_lines": 18,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-research_03.check.lean",
+      "returncode": 0,
+      "seconds": 3.88,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-research_03.hb.lean",
+      "returncode": 0,
+      "seconds": 3.99,
+      "heartbeats": 1411,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "research_03",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/research_03.lean",
+    "input_sha256": "534b3f8929bc01e93d50fe36133ffc14ac729ff0eee74cacbc8cb03fe5ac0eb8"
+  },
+  {
+    "tag": "P9-attempt_13",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "012b5171af592ca76a71fd40f24ba6e3cec0ef62e409305785b6ac640c6f1377",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 103,
+    "declaration_lines": 11,
+    "check": {
+      "command": "lake env lean P9-attempt_13.check.lean",
+      "returncode": 0,
+      "seconds": 5.26,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_13.hb.lean",
+      "returncode": 0,
+      "seconds": 3.97,
+      "heartbeats": 1242,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_13",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_13.lean",
+    "input_sha256": "9df818ded94bf3acf4a96f06c85c6862e28f6c3d0febb19221a7e643055e4bb3"
+  },
+  {
+    "tag": "P9-attempt_03",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "cb0ed295a140af662a52038919749f53ad341893c46912ede318d52681fc4561",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 165,
+    "declaration_lines": 21,
+    "check": {
+      "command": "lake env lean P9-attempt_03.check.lean",
+      "returncode": 1,
+      "seconds": 3.98,
+      "error_count": 4,
+      "first_errors": [
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-5ar2g6dz/P9-attempt_03.check.lean:318:42: error(lean.unknownIdentifier): Unknown identifier `t`",
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-5ar2g6dz/P9-attempt_03.check.lean:320:29: error(lean.unknownIdentifier): Unknown identifier `t`",
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-5ar2g6dz/P9-attempt_03.check.lean:322:42: error(lean.unknownIdentifier): Unknown identifier `t`",
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-5ar2g6dz/P9-attempt_03.check.lean:324:29: error(lean.unknownIdentifier): Unknown identifier `t`"
+      ],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": true
+    },
+    "compiled": false,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_03.hb.lean",
+      "returncode": 1,
+      "seconds": 5.93,
+      "heartbeats": null,
+      "error_count": 4,
+      "first_errors": [
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-5ar2g6dz/P9-attempt_03.hb.lean:321:42: error(lean.unknownIdentifier): Unknown identifier `t`",
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-5ar2g6dz/P9-attempt_03.hb.lean:323:29: error(lean.unknownIdentifier): Unknown identifier `t`",
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-5ar2g6dz/P9-attempt_03.hb.lean:325:42: error(lean.unknownIdentifier): Unknown identifier `t`"
+      ]
+    },
+    "axioms_match": false,
+    "accepted": false,
+    "lean_invoked": true,
+    "verifier_returncode": 1,
+    "status": "verification_failed",
+    "problem": 9,
+    "candidate_id": "attempt_03",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_03.lean",
+    "input_sha256": "e1bf4abe53b7132a03270eebae37ff030d3850510ffe61a4564632166bf093ff"
+  },
+  {
+    "tag": "P4-attempt_04",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "0701a94560d0b36e7951258b9e37964dca80541571494e9d0eebb70758dd2e9a",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 543,
+    "declaration_lines": 57,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_04.check.lean",
+      "returncode": 0,
+      "seconds": 27.68,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_04.hb.lean",
+      "returncode": 0,
+      "seconds": 22.13,
+      "heartbeats": 5306,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_04",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_04.lean",
+    "input_sha256": "4daf70829c6dd6ff889795de2f9dc5b9aeaa8f51d09a605cef54bb4c019758c1"
+  },
+  {
+    "tag": "P4-attempt_12",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "863e15787726ba25aa214ca83e650d400d67244a2b803ffd537ea0d8cc5b948a",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 141,
+    "declaration_lines": 20,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_12.check.lean",
+      "returncode": 0,
+      "seconds": 11.18,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_12.hb.lean",
+      "returncode": 0,
+      "seconds": 5.24,
+      "heartbeats": 1485,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_12",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_12.lean",
+    "input_sha256": "e387b48ed176fcd5aa5be8e13f8d6c1833b05d09c26510dfa384468533b3374a"
+  },
+  {
+    "tag": "P9-attempt_02",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "71ff78620c4238a8dad8e02b4a67c9289d069fa8151ac98abff55e79608c1358",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 198,
+    "declaration_lines": 34,
+    "check": {
+      "command": "lake env lean P9-attempt_02.check.lean",
+      "returncode": 0,
+      "seconds": 6.04,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_02.hb.lean",
+      "returncode": 0,
+      "seconds": 7.84,
+      "heartbeats": 441,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_02",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_02.lean",
+    "input_sha256": "c9ad9552d2c037447d02ed3701ea9c85b9f0ba7880c95b80efcfa13e5d6ce91e"
+  },
+  {
+    "tag": "P9-attempt_12",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean P9-attempt_12.check.lean",
+      "returncode": 0,
+      "seconds": 8.56,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_12.hb.lean",
+      "returncode": 0,
+      "seconds": 4.57,
+      "heartbeats": 516,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_12",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_12.lean",
+    "input_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  },
+  {
+    "tag": "P9-attempt_04",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "4c7376777c872a04c7e755a6d1890be8b1d144f8a8ce606bc41b3e98bd223f4f",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 169,
+    "declaration_lines": 25,
+    "check": {
+      "command": "lake env lean P9-attempt_04.check.lean",
+      "returncode": 0,
+      "seconds": 4.42,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_04.hb.lean",
+      "returncode": 0,
+      "seconds": 4.58,
+      "heartbeats": 380,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_04",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_04.lean",
+    "input_sha256": "68f7d6a0a2517a0f0c75a998a3faaebb57e39323833d16cf2ed99bfb14f59f9d"
+  },
+  {
+    "tag": "P4-reference",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 851,
+    "declaration_lines": 126,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-reference.check.lean",
+      "returncode": 0,
+      "seconds": 10.95,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-reference.hb.lean",
+      "returncode": 0,
+      "seconds": 6.16,
+      "heartbeats": 11947,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "reference",
+    "role": "reference",
+    "environment": "p4-4.32",
+    "input_path": "P4/reference.lean",
+    "input_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd"
+  },
+  {
+    "tag": "P4-research_01",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "f35e299e9c53fb2ddd4249d63a7e77422b0cd7a47b6e5c752d709aa07033c5da",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 176,
+    "declaration_lines": 19,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-research_01.check.lean",
+      "returncode": 0,
+      "seconds": 14.51,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-research_01.hb.lean",
+      "returncode": 0,
+      "seconds": 11.25,
+      "heartbeats": 2004,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "research_01",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/research_01.lean",
+    "input_sha256": "1d3deaeaa95ab4fda45ea489d3382e10ce2f13f01d49a9cbefa309ef63e87c0c"
+  },
+  {
+    "tag": "P9-attempt_06",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "af790bd34d94be1d66efef2942f27287bd406feecc082515c93752c04dc337d8",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 124,
+    "declaration_lines": 12,
+    "check": {
+      "command": "lake env lean P9-attempt_06.check.lean",
+      "returncode": 0,
+      "seconds": 11.61,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_06.hb.lean",
+      "returncode": 0,
+      "seconds": 4.85,
+      "heartbeats": 353,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_06",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_06.lean",
+    "input_sha256": "f6aeeeb7afdf062cda527ecce7fc6e6481669240c575dfdcd9a9197260a9f432"
+  },
+  {
+    "tag": "P4-attempt_11",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "6efb240a4811e8cbaa8ea74a112ba7a89cbee620e0829cf4f066893ce8dcda05",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 141,
+    "declaration_lines": 20,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_11.check.lean",
+      "returncode": 0,
+      "seconds": 14.87,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_11.hb.lean",
+      "returncode": 0,
+      "seconds": 7.78,
+      "heartbeats": 1483,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_11",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_11.lean",
+    "input_sha256": "d8fbe66036a320b7a10745efc9cc3c49b1051a66af8c3affd4e5b5a3523e9257"
+  },
+  {
+    "tag": "P4-attempt_05",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "941332fad04e3d6b11d3e20ffe17184d3d840e38df426ed1bc90c4b88dcbb637",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 418,
+    "declaration_lines": 47,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_05.check.lean",
+      "returncode": 1,
+      "seconds": 4.97,
+      "error_count": 1,
+      "first_errors": [
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-d6x833et/P4-attempt_05.check.lean:140:29: error: Application type mismatch: The argument"
+      ],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": true
+    },
+    "compiled": false,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_05.hb.lean",
+      "returncode": 1,
+      "seconds": 15.26,
+      "heartbeats": null,
+      "error_count": 1,
+      "first_errors": [
+        "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-d6x833et/P4-attempt_05.hb.lean:142:29: error: Application type mismatch: The argument"
+      ]
+    },
+    "axioms_match": false,
+    "accepted": false,
+    "lean_invoked": true,
+    "verifier_returncode": 1,
+    "status": "verification_failed",
+    "problem": 4,
+    "candidate_id": "attempt_05",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_05.lean",
+    "input_sha256": "710be5c8c3ec53115d262abadedcdbf609df7dce3d8b3577e74221d5dcaed620"
+  },
+  {
+    "tag": "P9-attempt_05",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "e96afbfce530447c24054eee8c338fa7c7d8a3fc6dcb7bdbd52ed6f4c90c4b2d",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 157,
+    "declaration_lines": 17,
+    "check": {
+      "command": "lake env lean P9-attempt_05.check.lean",
+      "returncode": 0,
+      "seconds": 7.85,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_05.hb.lean",
+      "returncode": 0,
+      "seconds": 4.35,
+      "heartbeats": 383,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_05",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_05.lean",
+    "input_sha256": "35feded50eae8a9ea7f0d9920fdfaa864afa949e60b85edd57e2e3d4f8d6fded"
+  },
+  {
+    "tag": "P4-attempt_08",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "1961f2367dec87eadad84349dc257680e8d20ad4f0308a0083bb750a1dcdedb3",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 165,
+    "declaration_lines": 22,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_08.check.lean",
+      "returncode": 0,
+      "seconds": 11.54,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_08.hb.lean",
+      "returncode": 0,
+      "seconds": 10.34,
+      "heartbeats": 1686,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_08",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_08.lean",
+    "input_sha256": "e6a63348d73be4c25128ee19267e0de5b8ac33cf9646652fd696922c5f587e22"
+  },
+  {
+    "tag": "P4-attempt_07",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "1bdd8c402eed2a95fa839a51438a6e8de50c3fdf8f01e822aaaebf470e9b5741",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 185,
+    "declaration_lines": 24,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_07.check.lean",
+      "returncode": 0,
+      "seconds": 11.54,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_07.hb.lean",
+      "returncode": 0,
+      "seconds": 10.34,
+      "heartbeats": 1765,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_07",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_07.lean",
+    "input_sha256": "0107e9d22cb8204ac6f94cec0f104dbb9d486041e48532b20380137246f6d9b0"
+  },
+  {
+    "tag": "P4-attempt_01",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "9806a5d04e96705d70364cc347fc46d59242f169a50c25b199977412c4daa35d",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 838,
+    "declaration_lines": 82,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_01.check.lean",
+      "returncode": 0,
+      "seconds": 12.7,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_01.hb.lean",
+      "returncode": 0,
+      "seconds": 10.57,
+      "heartbeats": 11867,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_01",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_01.lean",
+    "input_sha256": "dafa9af1d99b9a84674be5ca8d38ff0c5b719527d6cdb8fce8ebc2ced086eedb"
+  },
+  {
+    "tag": "P9-attempt_01",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a861045bcb00dc6a79acf452743cfba696a248999796670a044a76d0bc353deb",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 262,
+    "declaration_lines": 38,
+    "check": {
+      "command": "lake env lean P9-attempt_01.check.lean",
+      "returncode": 0,
+      "seconds": 11.89,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_01.hb.lean",
+      "returncode": 0,
+      "seconds": 17.94,
+      "heartbeats": 497,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_01",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_01.lean",
+    "input_sha256": "40223eaa4924b1142da9159e2675d5d9231ba8c8621ac04c2555359e49c7f321"
+  },
+  {
+    "tag": "P9-reference",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean P9-reference.check.lean",
+      "returncode": 0,
+      "seconds": 11.0,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-reference.hb.lean",
+      "returncode": 0,
+      "seconds": 18.1,
+      "heartbeats": 3856,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "reference",
+    "role": "reference",
+    "environment": "p9-4.32",
+    "input_path": "P9/reference.lean",
+    "input_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "P4-attempt_03",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "a42cfdd52444a3cfe46287394566ba632ee82e5aef15a8123f15797f8f4bb2ce",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 806,
+    "declaration_lines": 75,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_03.check.lean",
+      "returncode": 0,
+      "seconds": 13.06,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_03.hb.lean",
+      "returncode": 0,
+      "seconds": 23.56,
+      "heartbeats": 8512,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_03",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_03.lean",
+    "input_sha256": "0e79b7a866b0f183af12e20dbeb9ba21a8b12098ae9cbbe5ca6bc4bbd85a407d"
+  },
+  {
+    "tag": "P4-research_02",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "0bc77e10cd34a4888e336981d41cb0b9a0a6acc6d3f59aa9523cfd6558e945b4",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 139,
+    "declaration_lines": 18,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-research_02.check.lean",
+      "returncode": 0,
+      "seconds": 17.4,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-research_02.hb.lean",
+      "returncode": 0,
+      "seconds": 12.94,
+      "heartbeats": 1959,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "research_02",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/research_02.lean",
+    "input_sha256": "bd65e887499066419755a31383ac47ac098a1124b0e7440a6e888d9864928e9c"
+  },
+  {
+    "tag": "P4-attempt_02",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "8a1b6e8cf3ca03cccd67fab75a49175db4e220400de49ef110589a7f82ce43a0",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 812,
+    "declaration_lines": 76,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_02.check.lean",
+      "returncode": 0,
+      "seconds": 19.24,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_02.hb.lean",
+      "returncode": 0,
+      "seconds": 13.53,
+      "heartbeats": 11551,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_02",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_02.lean",
+    "input_sha256": "f2ba3d6123e09ad11bdc203565900c580e8dbacdb987485a550a1d83f39bd7e7"
+  },
+  {
+    "tag": "P9-attempt_08",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "ee33f7582c3516993c0ac73abb9da0d0b6fdd75ea783c66a9853c0f20b66a0c9",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 107,
+    "declaration_lines": 11,
+    "check": {
+      "command": "lake env lean P9-attempt_08.check.lean",
+      "returncode": 0,
+      "seconds": 13.27,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_08.hb.lean",
+      "returncode": 0,
+      "seconds": 13.3,
+      "heartbeats": 422,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_08",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_08.lean",
+    "input_sha256": "e6ae618f4a5e0e5216fdc0f2d328372a8933a4531e9c7770a2fa9b7fe7766842"
+  },
+  {
+    "tag": "P9-attempt_09",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "dc3067e613dacb5627a29f5f367ccdc6ae6baae6d3f312b4b9c7f2e559c0f02d",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 89,
+    "declaration_lines": 10,
+    "check": {
+      "command": "lake env lean P9-attempt_09.check.lean",
+      "returncode": 0,
+      "seconds": 10.49,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_09.hb.lean",
+      "returncode": 0,
+      "seconds": 13.0,
+      "heartbeats": 500,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_09",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_09.lean",
+    "input_sha256": "34e4d73a0fa54f8c6e3e6283ad910a9bd8aac55e36dbb31cb1acb340ddbbe536"
+  },
+  {
+    "tag": "P4-attempt_10",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "cd030a5e24fdfd2962b6f12f62ec8a0f341603cbe219fc68522c99449ef36beb",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 144,
+    "declaration_lines": 20,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_10.check.lean",
+      "returncode": 0,
+      "seconds": 15.39,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_10.hb.lean",
+      "returncode": 0,
+      "seconds": 12.52,
+      "heartbeats": 1463,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_10",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_10.lean",
+    "input_sha256": "e593df42a8daec1cdf4638811114b003ff2fb77bd56fae2fdaea81984ccdcb8a"
+  },
+  {
+    "tag": "P4-attempt_06",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "9c2cd6fba0c6d2dda0edf96f2c112bfce8e404cb21396b7655be3b4919084ec3",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 427,
+    "declaration_lines": 47,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_06.check.lean",
+      "returncode": 0,
+      "seconds": 13.49,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true P4-attempt_06.hb.lean",
+      "returncode": 0,
+      "seconds": 12.48,
+      "heartbeats": 4746,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 4,
+    "candidate_id": "attempt_06",
+    "role": "candidate",
+    "environment": "p4-4.32",
+    "input_path": "P4/attempts/attempt_06.lean",
+    "input_sha256": "54311f12b7c915d0419aa5e17f5a022f659ef177ded39501bf9ad75b67824254"
+  },
+  {
+    "tag": "P9-attempt_11",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "765a3df650bfdf09cef21cdcdbca56c4ee5cbb07d3a3585d736afaacd77ccc89",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 83,
+    "declaration_lines": 10,
+    "check": {
+      "command": "lake env lean P9-attempt_11.check.lean",
+      "returncode": 0,
+      "seconds": 7.96,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean P9-attempt_11.hb.lean",
+      "returncode": 0,
+      "seconds": 4.69,
+      "heartbeats": 524,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "problem": 9,
+    "candidate_id": "attempt_11",
+    "role": "candidate",
+    "environment": "p9-4.32",
+    "input_path": "P9/attempts/attempt_11.lean",
+    "input_sha256": "9058a92e628eb15aa3cc892a2c08d36f7184ac67b73d78f2b0cf18328b0c1b7b"
+  }
+]

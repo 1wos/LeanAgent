@@ -1,0 +1,108 @@
+{
+  "at": "2026-10-17T09:15:13.251232+00:00",
+  "session": "p11-20261017-ac-check4",
+  "policy_sha256": "8bf7231915d1409d1761b3e451db80853d8cc163e1fabff6904ebb79fc686d17",
+  "observations": [
+    {
+      "id": "a001",
+      "strategy": "remove-unused",
+      "kind": "reproduction",
+      "status": "passed",
+      "duplicate_of": null,
+      "improved": true,
+      "comparisons": {
+        "reference": {
+          "heartbeat_reduction_pct": 8.5667,
+          "proof_tokens_reduction_pct": 13.1165
+        },
+        "parent": {
+          "heartbeat_reduction_pct": 8.5667,
+          "proof_tokens_reduction_pct": 13.1165
+        }
+      },
+      "review": {
+        "observation": "B 통과: HB 41636/tokens 1656. 원본 45537/1906 대비 8.5667%/13.1165% 감소. 기존 a001과 byte-identical이고 부모 diff는 두 미사용 계수 정의/소개 주석 삭제뿐. 공리 동일, 명제 보존.",
+        "interpretation": "과거 B 결과를 재현하여 공통 비교 기반이 확보되었다. C의 독립 효과는 아직 평가되지 않았다.",
+        "next": "고정 설계의 B+A를 a001 부모로 평가한다. 결과에 따라 조건을 바꾸지 않는다.",
+        "at": "2026-10-17T09:11:45.645629+00:00"
+      }
+    },
+    {
+      "id": "a002",
+      "strategy": "restructure-algebra",
+      "kind": "reproduction",
+      "status": "passed",
+      "duplicate_of": null,
+      "improved": true,
+      "comparisons": {
+        "reference": {
+          "heartbeat_reduction_pct": 14.0852,
+          "proof_tokens_reduction_pct": 24.3966
+        },
+        "parent": {
+          "heartbeat_reduction_pct": 6.0356,
+          "proof_tokens_reduction_pct": 12.9831
+        }
+      },
+      "review": {
+        "observation": "B+A passed: 39123 HB/1441 tokens. B 대비 2513 HB(6.0356%)/215 tokens(12.9831%) 감소; 원본 대비 14.0852%/24.3966% 감소. 과거 a002와 byte-identical, A 외 diff 없음, 공리 동일.",
+        "interpretation": "B에서 A의 효과가 재현되었다. 이 결과만으로 C가 A 없이 효과가 있는지는 알 수 없다.",
+        "next": "사전 지정 B+C를 B(a001) 부모에서 작성한다. 현재 best a002를 부모로 사용하지 않는다.",
+        "at": "2026-10-17T09:12:47.561975+00:00"
+      }
+    },
+    {
+      "id": "a003",
+      "strategy": "restructure-algebra",
+      "kind": "experiment",
+      "status": "passed",
+      "duplicate_of": null,
+      "improved": false,
+      "comparisons": {
+        "reference": {
+          "heartbeat_reduction_pct": 10.2927,
+          "proof_tokens_reduction_pct": 16.3694
+        },
+        "parent": {
+          "heartbeat_reduction_pct": 1.8878,
+          "proof_tokens_reduction_pct": 3.744
+        }
+      },
+      "review": {
+        "observation": "B+C passed: 40850 HB/1594 tokens. B 대비 786 HB(1.8878%)/62 tokens(3.7440%) 감소; 원본 대비 10.2927%/16.3694% 감소. C diff는 과거와 동일하고 마지막 계수 계산 B 그대로. 공리 동일. improved=false는 현재 best B+A(39123) 미갱신을 뜻하며 부모 대비 개선 실패가 아니다.",
+        "interpretation": "이 P11/고정 환경에서 C는 A 없이도 HB를 줄였다. 중복 정규화와 중간 등식 elaboration 제거라는 설명과 일치하지만 세부 tactic 비용 profiling은 하지 않았다.",
+        "next": "마지막 고정 조건 B+A+C를 B(a001) 부모로 재현한다. A 유무별 C 효과의 직접 비교는 새 네 번째 결과 후 계산한다.",
+        "at": "2026-10-17T09:14:18.476075+00:00"
+      }
+    },
+    {
+      "id": "a004",
+      "strategy": "restructure-algebra",
+      "kind": "reproduction",
+      "status": "passed",
+      "duplicate_of": null,
+      "improved": true,
+      "comparisons": {
+        "reference": {
+          "heartbeat_reduction_pct": 15.8113,
+          "proof_tokens_reduction_pct": 27.6495
+        },
+        "parent": {
+          "heartbeat_reduction_pct": 7.9234,
+          "proof_tokens_reduction_pct": 16.7271
+        }
+      },
+      "review": {
+        "observation": "B+A+C passed: 38337 HB/1379 tokens. 부모 B 대비 3299 HB(7.9234%)/277 tokens(16.7271%) 감소, 원본 대비 15.8113%/27.6495% 감소. 과거 a003 byte-identical. B+A 대비 C 추가 효과 786 HB(2.0090%)/62 tokens(4.3026%); B 대비 C 효과도 786 HB/62 tokens. 명제/공리 유지.",
+        "interpretation": "주 질문 답은 이 환경에서 예다. C는 A 없이도 감소했고 A 유무별 절대 감소량이 동일했다. 측정값의 가산성과 일치하지만 보편적 독립성/타 정리 성능을 증명하지 않는다. 재현 3개와 C-only 확인 1개를 새 최적화 4개로 세지 않는다.",
+        "next": "고정 4조건/예산 4개 완료. 추가 Lean 실행 없이 근거 보존 검사, 조건별 비교 기록, 회고와 README/report 작성 후 종료한다.",
+        "at": "2026-10-17T09:15:13.028894+00:00"
+      }
+    }
+  ],
+  "interpretation": "P11 v4.31.0 고정 조건에서 B=41636, BA=39123, BC=40850, BAC=38337 HB. A 없는 C와 A 있는 C가 각각 786 HB를 줄였고 상호작용 대비는 0이다. tokens도 각각 62 감소. 현재 best는 BAC지만 BC도 부모 B보다 개선되었다. 재현을 새 최적화 성공으로 세지 않는다.",
+  "proposal": "없음. 요청은 사전 지정 구조 변경의 확인 실험이며 자유 탐색이나 활성 정책/skill/도구 변경은 하지 않는다.",
+  "counterexample": "한 정리/한 버전/조건당 1회이므로 다른 문맥에서는 결합 효과가 다르거나 단일 ring 목표가 커져 비용이 증가할 수 있다. 세부 tactic profiling과 다른 버전/정리 검증은 수행하지 않았다. 일반화에는 별도 요청과 새 실험이 필요하다.",
+  "policy_changed": false,
+  "generalization_demonstrated": false
+}

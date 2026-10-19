@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "experiment": "reasoning-effort-warmup",
+  "model": "inherited parent model; explicit reasoning efforts high/xhigh/ultra",
+  "source_root": "/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent-LeanRefactorArena/sources/strata",
+  "source_revision": "451e5f047bafa010d178856db76c00029bfa4d7f",
+  "toolchain": "leanprover/lean4:v4.26.0",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "limits": {
+    "wall_seconds_per_verification": 120,
+    "lean_memory_mib": 1536,
+    "lean_threads": 1,
+    "maxHeartbeats": 200000,
+    "maxRecDepth": 1000,
+    "concurrent_verifications_per_agent": 1
+  },
+  "problems": [
+    {
+      "number": 1,
+      "name": "CallElimCorrect.substOldPostSubset",
+      "file_path": "Strata/Transform/CallElimCorrect.lean",
+      "source_sha256": "1c5e76014548db4a380b5c225f561c726a0db1184dcddfefb7191052e67dd79a",
+      "proof_sha256": "db0d2df58a5a0844d7f644ac86d3b8c7b2257378b031c6b787d65dc5d58e65ec",
+      "official_reference_heartbeat": 5175,
+      "official_proof_length": 313
+    },
+    {
+      "number": 2,
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "file_path": "Strata/Transform/CallElimCorrect.lean",
+      "source_sha256": "1c5e76014548db4a380b5c225f561c726a0db1184dcddfefb7191052e67dd79a",
+      "proof_sha256": "8dc06d3b64efe3194b2b71ba3d27d72484013bbff621069f533fc146978b9b06",
+      "official_reference_heartbeat": 2696,
+      "official_proof_length": 222
+    },
+    {
+      "number": 3,
+      "name": "Core.InitsUpdatesComm",
+      "file_path": "Strata/Languages/Core/StatementSemanticsProps.lean",
+      "source_sha256": "bb67b50c5a2c9021ba7b2b5c705e2ace30dea100fda687397fa09d7774a69602",
+      "proof_sha256": "769f0df6278c6e92e798158def838dd4a51976b9431527560fba49630bd1b8c9",
+      "official_reference_heartbeat": 4251,
+      "official_proof_length": 224
+    }
+  ],
+  "lean_path": "/Users/jwkweon/00_work/00_project/cache/05_pseudolab/LeanAgent-LeanRefactorArena/sources/strata/lake/packages/plausible/.lake/build/lib/lean:/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent-LeanRefactorArena/sources/strata/.lake/build/lib/lean:/Users/jwkweon/.elan/toolchains/leanprover--lean4---v4.26.0/lib/lean",
+  "lean_binary": "/Users/jwkweon/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+  "files_sha256": {
+    "lean-toolchain": "e8173aad377a6d70041e5f7a5d8895ed587628f5cab243c53a18c40a1b7b6bf8",
+    "lake-manifest.json": "5aab41f14cc55b5049ae81535506b6998bfadd9d983af6130fa92f4a39bd244c",
+    "lakefile.toml": "5c0abe83aaa82d837d50cf987102ff3138a15aec988912f06166a39e5ee578ae",
+    "proof_tokens.py": "746f0c5b6d21015062f686b9bde4ea3623c17c2421d12f1436d741860c5404ed",
+    "P02/reference.lean": "8dc06d3b64efe3194b2b71ba3d27d72484013bbff621069f533fc146978b9b06",
+    "P02/statement.lean": "25d86f06653c4884d42640b2feebc2c949edf8932635abf62f60cce055ac110b",
+    "P02/metadata.json": "200848ba024cd819d173dfb0fbd588c7a9f48fead8ac1fe9b4c9d1a114651e2f",
+    "P02/source.lean": "1c5e76014548db4a380b5c225f561c726a0db1184dcddfefb7191052e67dd79a",
+    "P03/reference.lean": "769f0df6278c6e92e798158def838dd4a51976b9431527560fba49630bd1b8c9",
+    "P03/statement.lean": "b9be138d7d55c7ef5310cffd7ceda4e443e99a4d65d2d57d38113331e405398a",
+    "P03/metadata.json": "3fc847026cf5c55a800215be47c05850420a61a293bfadc88932f5ce5d48600b",
+    "P03/source.lean": "bb67b50c5a2c9021ba7b2b5c705e2ace30dea100fda687397fa09d7774a69602",
+    "P01/reference.lean": "db0d2df58a5a0844d7f644ac86d3b8c7b2257378b031c6b787d65dc5d58e65ec",
+    "P01/statement.lean": "c82af4f7a0f8046ae6f49328b476cf836483f67f0020c8834eb87de39d8274e1",
+    "P01/metadata.json": "c52524b34384e22ca5537332043cf93a8e915cb9267b2e7bff8aa59c7fd92fd4",
+    "P01/source.lean": "1c5e76014548db4a380b5c225f561c726a0db1184dcddfefb7191052e67dd79a",
+    "verify.py": "535260e2f8b738693754f76975981622264be8965a9b009cef2962e3be41ec20",
+    "task.txt": "500c06bced1d457d4853a1bc54aa43e1638260f56db7625326665774f551a044"
+  },
+  "lean_binary_sha256": "2974847fff2e2621502841f4c2dbac4035b4847d6060a4f2087cbc0d04005e37",
+  "harness_version": "1.0",
+  "sandbox_scope": "Lean verification child only: deny network and all file writes; coding agents have shared host access controlled by instructions"
+}

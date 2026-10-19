@@ -1,0 +1,261 @@
+{
+  "started_utc": "2026-10-18T10:25:08.158200+00:00",
+  "system": "Darwin",
+  "system_release": "25.4.0",
+  "machine": "arm64",
+  "python": "3.14.8",
+  "protocol_sha256": "d09a07095b5f0f194e722f21d1f1c6cdc92acdaa026457e7c0595481771ec0c5",
+  "scripts_sha256": {
+    "run_replay.py": "93cb141e6230edd5b49317ccc97b5ba99ada0046072f7bd6644a133b77c174c6",
+    "verify_candidate.py": "ba1096a8d4e227477086392ff599a1cd00f264d7872c4a546d9d212cab05e24c",
+    "proof_tokens.py": "746f0c5b6d21015062f686b9bde4ea3623c17c2421d12f1436d741860c5404ed"
+  },
+  "environments": {
+    "p4-4.32": {
+      "commit": "c48433678e8fb6306ebcd48453300c8e16058a62",
+      "toolchain": "leanprover/lean4:v4.32.0",
+      "lean_version_output": "Lean (version 4.32.0, arm64-apple-darwin24.6.0, commit 8c9756b28d64dab099da31a4c09229a9e6a2ef35, Release)",
+      "source_sha256": "ac7683ecbd03b7749d929b13eeb09b8021cef7b5b2125dc20d74007edb677a65",
+      "lake_manifest_sha256": "a9531c3978f21e50cb72cc89c2a7644b296bee59a7f2ff92ca2408aac4a67311",
+      "tracked_changes": false,
+      "dependencies": [
+        {
+          "name": "mathlib",
+          "commit": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "tracked_changes": false
+        },
+        {
+          "name": "«doc-gen4»",
+          "commit": "092d6318789e7bb9160ade1e85bdbcc0abfd7f6e",
+          "tracked_changes": false
+        },
+        {
+          "name": "plausible",
+          "commit": "e12c1910fe855cbfc38803cd4e55543906d5fa62",
+          "tracked_changes": false
+        },
+        {
+          "name": "LeanSearchClient",
+          "commit": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+          "tracked_changes": false
+        },
+        {
+          "name": "importGraph",
+          "commit": "7e9612bf0b9ee66db3cb5b9988a35afc706f5a12",
+          "tracked_changes": false
+        },
+        {
+          "name": "proofwidgets",
+          "commit": "6e311e2a844da9b2cc3971187df2fe0066947b93",
+          "tracked_changes": false
+        },
+        {
+          "name": "aesop",
+          "commit": "a7dbf0c63b694e47f425f3dcddbc0e178bb432d3",
+          "tracked_changes": false
+        },
+        {
+          "name": "Qq",
+          "commit": "38d591e778f100aec9762bb582f9c7f55f50e9dc",
+          "tracked_changes": false
+        },
+        {
+          "name": "batteries",
+          "commit": "023ce7d62a0531e22a5331e20b587817a80d49ff",
+          "tracked_changes": false
+        },
+        {
+          "name": "leansqlite",
+          "commit": "b2e8105c3507d81adaa531fda5990d14b631528f",
+          "tracked_changes": false
+        },
+        {
+          "name": "Cli",
+          "commit": "88679d088c9720c27ebdf2ba4dafe17341747f94",
+          "tracked_changes": false
+        },
+        {
+          "name": "UnicodeBasic",
+          "commit": "947120c17904da8fc89abe3616d57e1c3e13aa9c",
+          "tracked_changes": false
+        },
+        {
+          "name": "BibtexQuery",
+          "commit": "b648facb6be09a29be636bbc02d28ddee77565c7",
+          "tracked_changes": false
+        },
+        {
+          "name": "MD4Lean",
+          "commit": "31907cc18f48a95384f99cee5582c00fb39e0f67",
+          "tracked_changes": false
+        }
+      ]
+    },
+    "p9-4.31": {
+      "commit": "8ea71c8df91acd63285515a04da952b23b78d266",
+      "toolchain": "leanprover/lean4:v4.31.0",
+      "lean_version_output": "Lean (version 4.31.0, arm64-apple-darwin24.6.0, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+      "source_sha256": "d08a2996a8afa14dca972376a50530677214b54d870aa95d98ae23ac69b4fb61",
+      "lake_manifest_sha256": "c192257881ee32336e32f1e5ebc660f8890bbefaba391f1b360f961a033fba32",
+      "tracked_changes": false,
+      "dependencies": [
+        {
+          "name": "mathlib",
+          "commit": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "tracked_changes": false
+        },
+        {
+          "name": "plausible",
+          "commit": "63045536fe95024e6c18fc7b48e03f506701c5bc",
+          "tracked_changes": false
+        },
+        {
+          "name": "LeanSearchClient",
+          "commit": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+          "tracked_changes": false
+        },
+        {
+          "name": "importGraph",
+          "commit": "5c7542ed018c78194f1e2b903eaf6a792b74c03d",
+          "tracked_changes": false
+        },
+        {
+          "name": "proofwidgets",
+          "commit": "24b0d9dc081c5423f8eec7e866c441e5184f29d9",
+          "tracked_changes": false
+        },
+        {
+          "name": "aesop",
+          "commit": "e3cb2f741431ce31bf73549fb52316a57368b06f",
+          "tracked_changes": false
+        },
+        {
+          "name": "Qq",
+          "commit": "f46324995fca5f0483b742e4eb4daec7f4ee50d2",
+          "tracked_changes": false
+        },
+        {
+          "name": "batteries",
+          "commit": "fa08db58b30eb033edcdab331bba000827f9f785",
+          "tracked_changes": false
+        },
+        {
+          "name": "Cli",
+          "commit": "92564e5770e4d09f2d86dfbf8ada1e9c715b384c",
+          "tracked_changes": false
+        }
+      ]
+    },
+    "p9-4.32": {
+      "commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+      "toolchain": "leanprover/lean4:v4.32.0",
+      "lean_version_output": "Lean (version 4.32.0, arm64-apple-darwin24.6.0, commit 8c9756b28d64dab099da31a4c09229a9e6a2ef35, Release)",
+      "source_sha256": "d08a2996a8afa14dca972376a50530677214b54d870aa95d98ae23ac69b4fb61",
+      "lake_manifest_sha256": "ceba7d0fee50fcc84cb20db139450ffc9dbd9dfe343333409b2085f8d6776115",
+      "tracked_changes": false,
+      "dependencies": [
+        {
+          "name": "mathlib",
+          "commit": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "tracked_changes": false
+        },
+        {
+          "name": "plausible",
+          "commit": "e12c1910fe855cbfc38803cd4e55543906d5fa62",
+          "tracked_changes": false
+        },
+        {
+          "name": "LeanSearchClient",
+          "commit": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+          "tracked_changes": false
+        },
+        {
+          "name": "importGraph",
+          "commit": "7e9612bf0b9ee66db3cb5b9988a35afc706f5a12",
+          "tracked_changes": false
+        },
+        {
+          "name": "proofwidgets",
+          "commit": "6e311e2a844da9b2cc3971187df2fe0066947b93",
+          "tracked_changes": false
+        },
+        {
+          "name": "aesop",
+          "commit": "a7dbf0c63b694e47f425f3dcddbc0e178bb432d3",
+          "tracked_changes": false
+        },
+        {
+          "name": "Qq",
+          "commit": "38d591e778f100aec9762bb582f9c7f55f50e9dc",
+          "tracked_changes": false
+        },
+        {
+          "name": "batteries",
+          "commit": "023ce7d62a0531e22a5331e20b587817a80d49ff",
+          "tracked_changes": false
+        },
+        {
+          "name": "Cli",
+          "commit": "88679d088c9720c27ebdf2ba4dafe17341747f94",
+          "tracked_changes": false
+        }
+      ]
+    },
+    "p9-4.33rc2": {
+      "commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+      "toolchain": "leanprover/lean4:v4.33.0-rc2",
+      "lean_version_output": "Lean (version 4.33.0-rc2, arm64-apple-darwin24.6.0, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+      "source_sha256": "ab051b1bb5547a874efe3491ed0c9acc785de2234344046c0d95d4dee178f73e",
+      "lake_manifest_sha256": "c5acf9a59cf6956eb89589ff09b6a35adbc79fb220886f61442fe02d8b21aae0",
+      "tracked_changes": false,
+      "dependencies": [
+        {
+          "name": "mathlib",
+          "commit": "51e6992efd06126df61a496bebf8f49482a4e129",
+          "tracked_changes": false
+        },
+        {
+          "name": "plausible",
+          "commit": "123d15766ba49356c02ebad2a4462dfe12d79899",
+          "tracked_changes": false
+        },
+        {
+          "name": "LeanSearchClient",
+          "commit": "f5c090429dff3cf66cb65562526c9ea6e8edfbcb",
+          "tracked_changes": false
+        },
+        {
+          "name": "importGraph",
+          "commit": "bb3469a87774349fe01898d8bf2fc6a1ce6411ca",
+          "tracked_changes": false
+        },
+        {
+          "name": "proofwidgets",
+          "commit": "222c58dad7706a6e7cae46c0edd65ea881d3ee27",
+          "tracked_changes": false
+        },
+        {
+          "name": "aesop",
+          "commit": "7db8190085343afde2f5d2cdcc9bac719b6ec02c",
+          "tracked_changes": false
+        },
+        {
+          "name": "Qq",
+          "commit": "ef42f8944eaf5b6cbfbe75d1917d824c7dd6cf33",
+          "tracked_changes": false
+        },
+        {
+          "name": "batteries",
+          "commit": "76e1c118b0700b4ceafe99532e887d6431625e1a",
+          "tracked_changes": false
+        },
+        {
+          "name": "Cli",
+          "commit": "1319485273bf87833fa472afbcefdedecb16b45f",
+          "tracked_changes": false
+        }
+      ]
+    }
+  },
+  "finished_utc": "2026-10-18T10:29:46.520739+00:00"
+}

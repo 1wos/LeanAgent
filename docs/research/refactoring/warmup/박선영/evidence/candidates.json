@@ -1,0 +1,14 @@
+[
+  {
+    "problem": 8,
+    "label": "attempt_01",
+    "path": "P8/attempts/attempt_01.lean",
+    "hypothesis": "par/red_S 분기의 grind 탐색을 명시적 .par 생성자 조립으로 대체한다."
+  },
+  {
+    "problem": 11,
+    "label": "attempt_01",
+    "path": "P11/attempts/attempt_01.lean",
+    "hypothesis": "이후 참조되지 않는 P₀_coeffs·P₁_coeffs 지역 정의만 제거한다."
+  }
+]

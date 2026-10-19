@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "record_type": "summary_of_previous_execution",
+  "summarized_on": "2026-10-18",
+  "timezone": "Asia/Seoul",
+  "raw_artifacts_retained": false,
+  "rerun_in_this_task": false,
+  "created_at_utc": "2026-10-17T22:54:29.546180+00:00",
+  "experiment": "controlled_known_repair",
+  "automatic_model_repair": false,
+  "final_verdict": "passed_with_documented_refinement",
+  "primary_run_verdict": "review_required",
+  "run_id": "20261018T074757+0900-retry1-replay",
+  "cases": {
+    "P7": {
+      "commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+      "version": "v4.33.0-rc2",
+      "module": "Cslib.Languages.LambdaCalculus.LocallyNameless.Fsub.Typing",
+      "target": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "flags": [
+        "-DwarningAsError=true"
+      ],
+      "benchmark_statement_preserved": true,
+      "benchmark_statement": "lemma Typing.progress (der : Typing [] t τ) : t.Value ∨ ∃ t', t ⭢βᵛ t'",
+      "actual_lean_version": "Lean (version 4.33.0-rc2, arm64-apple-darwin24.6.0, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+      "actual_lake_version": "Lake version 5.0.0-src+d8b1897 (Lean version 4.33.0-rc2)",
+      "source_unchanged": true,
+      "configuration_unchanged": true,
+      "project_status_unchanged": true,
+      "axiom_comparison": {
+        "baseline": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "repaired": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "equal": true,
+        "added": []
+      },
+      "final_verdict": "controlled_repair_verified",
+      "final_verdict_basis": "Exact full baseline and repaired files verify; target check and transitive axiom output observed; no errors, warnings, sorryAx or added axioms; original source/settings and all repository statuses preserved. Intended application-typing mismatch reproduced.",
+      "library": "Cslib",
+      "runs": {
+        "00_baseline": {
+          "executed": true,
+          "started_at_utc": "2026-10-17T22:54:34.835292+00:00",
+          "returncode": 0,
+          "elapsed_seconds": 6.422,
+          "timed_out": false,
+          "process_error": null,
+          "observed": "verified",
+          "expected": "verified",
+          "theorem_check_seen": true,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "axiom_output_observed": true,
+          "diagnostic_category": "none",
+          "expectation_met": true,
+          "source_sha256": "ba192c3ce4232496f5435a07ba48b0f7fd850a61689dbc0b22174dce11e97473"
+        },
+        "01_broken": {
+          "executed": true,
+          "started_at_utc": "2026-10-17T22:54:41.260309+00:00",
+          "returncode": 1,
+          "elapsed_seconds": 3.328,
+          "timed_out": false,
+          "process_error": null,
+          "observed": "proof_error",
+          "expected": "proof_error",
+          "theorem_check_seen": true,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext",
+            "sorryAx"
+          ],
+          "axiom_output_observed": true,
+          "diagnostic_category": "typing_evidence_mismatch",
+          "expectation_met": true,
+          "source_sha256": "ddbd4db1fdc876dc6f9c2c864d44a4bfacc1793892bd70d04baa24f451b411c1"
+        },
+        "02_repaired": {
+          "executed": true,
+          "started_at_utc": "2026-10-17T22:54:44.590498+00:00",
+          "returncode": 0,
+          "elapsed_seconds": 3.231,
+          "timed_out": false,
+          "process_error": null,
+          "observed": "verified",
+          "expected": "verified",
+          "theorem_check_seen": true,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "axiom_output_observed": true,
+          "diagnostic_category": "none",
+          "expectation_met": true,
+          "source_sha256": "ba192c3ce4232496f5435a07ba48b0f7fd850a61689dbc0b22174dce11e97473"
+        }
+      },
+      "known_repair_equals_baseline_bytes": true,
+      "diagnosis": {
+        "category": "typing_evidence_mismatch",
+        "expected_actual_types": {
+          "actual": "Typing [] (t₁.app t₂) τ✝",
+          "expected": "Typing [] t₁ (σ✝.arrow τ✝)",
+          "source": "literal excerpts from actual Lean diagnostic"
+        },
+        "repair": "ihLeft rfl wholeTyped → ihLeft rfl leftTyped"
+      }
+    },
+    "P12": {
+      "commit": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+      "version": "v4.31.0",
+      "module": "ArkLib.Data.CodingTheory.ProximityGap.DG25.Basic",
+      "target": "interleaved_affine_gaps_imply_tensor_gaps",
+      "flags": [
+        "-DwarningAsError=true",
+        "-DautoImplicit=false"
+      ],
+      "benchmark_statement_preserved": true,
+      "benchmark_statement": "theorem interleaved_affine_gaps_imply_tensor_gaps\n    (hC_proximityGapAffineLines : e_ε_correlatedAgreementAffineLinesNat\n      (F := F) (A := A) (ι := ι) (C := MC) (e := e) (ε := ε))\n    (h_interleaved_gaps : ∀ m : ℕ, m ≥ 1 →\n      e_ε_correlatedAgreementAffineLinesNat (F := F)\n        (A := InterleavedSymbol A (Fin m)) (ι := ι) (C := MC ^⋈ (Fin m)) e ε) :\n    ∀ (ϑ : ℕ), (hϑ_gt_0 : ϑ > 0) → δ_ε_multilinearCorrelatedAgreement_Nat (F := F) (A := A)\n      (ι := ι) (C := MC) (ϑ := ϑ) (e := e) (ε := ε)",
+      "actual_lean_version": "Lean (version 4.31.0, arm64-apple-darwin24.6.0, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+      "actual_lake_version": "Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)",
+      "source_unchanged": true,
+      "configuration_unchanged": true,
+      "project_status_unchanged": true,
+      "axiom_comparison": {
+        "baseline": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "repaired": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "equal": true,
+        "added": []
+      },
+      "final_verdict": "controlled_repair_verified_with_refined_failure",
+      "final_verdict_basis": "Exact full baseline and repaired files verify; target check and transitive axiom output observed; no errors, warnings, sorryAx or added axioms; original source/settings and all repository statuses preserved. Requested underscore attempt fails earlier at implicit inference; explicit-parameter attempt reproduces intended event-expression mismatch.",
+      "library": "ArkLib",
+      "runs": {
+        "00_baseline": {
+          "executed": true,
+          "started_at_utc": "2026-10-17T22:54:54.054121+00:00",
+          "returncode": 0,
+          "elapsed_seconds": 20.907,
+          "timed_out": false,
+          "process_error": null,
+          "observed": "verified",
+          "expected": "verified",
+          "theorem_check_seen": true,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "axiom_output_observed": true,
+          "diagnostic_category": "none",
+          "expectation_met": true,
+          "source_sha256": "1c34dde0d08885ce200353268a74f809742ef194a756f252143b3b0dbe390d80"
+        },
+        "01_broken": {
+          "executed": true,
+          "started_at_utc": "2026-10-17T22:55:14.966020+00:00",
+          "returncode": 1,
+          "elapsed_seconds": 10.6,
+          "timed_out": false,
+          "process_error": null,
+          "observed": "proof_error",
+          "expected": "proof_error",
+          "theorem_check_seen": true,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext",
+            "sorryAx"
+          ],
+          "axiom_output_observed": true,
+          "diagnostic_category": "implicit_argument_inference",
+          "expectation_met": false,
+          "source_sha256": "ccfeaf50d453a09f66cf00391e657ba20ae024d423a0faff93aba66a76b88cbe"
+        },
+        "02_repaired": {
+          "executed": true,
+          "started_at_utc": "2026-10-17T22:55:25.570786+00:00",
+          "returncode": 0,
+          "elapsed_seconds": 10.377,
+          "timed_out": false,
+          "process_error": null,
+          "observed": "verified",
+          "expected": "verified",
+          "theorem_check_seen": true,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "axiom_output_observed": true,
+          "diagnostic_category": "none",
+          "expectation_met": true,
+          "source_sha256": "1c34dde0d08885ce200353268a74f809742ef194a756f252143b3b0dbe390d80"
+        }
+      },
+      "known_repair_equals_baseline_bytes": true,
+      "refined_failure": {
+        "executed": true,
+        "started_at_utc": "2026-10-17T22:55:59.476999+00:00",
+        "returncode": 1,
+        "elapsed_seconds": 10.521,
+        "timed_out": false,
+        "process_error": null,
+        "observed": "proof_error",
+        "expected": "proof_error",
+        "theorem_check_seen": true,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext",
+          "sorryAx"
+        ],
+        "axiom_output_observed": true,
+        "diagnostic_category": "event_expression_mismatch",
+        "expectation_met": true,
+        "source_sha256": "b9bf925eefe73d9e8d8ac083b73ca4da898fefdc61da1b8f527b79bc74be3a3f"
+      },
+      "diagnosis": {
+        "initial": "implicit argument/typeclass inference failed",
+        "after_explicit_arguments": "event expression mismatch",
+        "repair": "restore pointwise fold equality, simp_rw [fold], then the sampling split theorem",
+        "edited_declaration": "tensor_success_split",
+        "verification_target": "interleaved_affine_gaps_imply_tensor_gaps",
+        "dependency_build_sorry_warnings_observed": true
+      }
+    }
+  },
+  "limitations": [
+    "Known repair experiment; model did not discover the repair.",
+    "Single-run times are not comparable P7/P12 speed benchmarks.",
+    "No sorryAx in final target dependencies does not mean every dependency file is free of sorry."
+  ],
+  "provenance": [
+    {
+      "original_relative_path": "controlled/20261018T074757+0900-retry1-replay/results.json",
+      "sha256": "8c7880555372f71fcd9819ff023c15cdf12e7d336f0d0ddd2883faa13e0c146e",
+      "retained": false
+    }
+  ]
+}

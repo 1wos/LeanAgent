@@ -1,0 +1,1 @@
+{"attempt":5,"remaining":3,"valid":false,"proof_tokens":96,"raw_heartbeats":245965,"local_score":null,"axioms":["propext","sorryAx","Quot.sound"],"diagnostics":"Unknown constant `List.Subset.append`\nUnknown constant `List.Subset.append`\nUnknown constant `List.Subset.append`","error_count":4}

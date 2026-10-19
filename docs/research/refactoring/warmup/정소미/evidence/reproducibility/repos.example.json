@@ -1,0 +1,6 @@
+{
+  "p4-4.32": "/absolute/path/to/physlib-4.32",
+  "p9-4.31": "/absolute/path/to/cslib-4.31",
+  "p9-4.32": "/absolute/path/to/cslib-4.32",
+  "p9-4.33rc2": "/absolute/path/to/cslib-4.33rc2"
+}

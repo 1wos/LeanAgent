@@ -1,0 +1,32 @@
+--- run01
++++ run02
+@@ -1,11 +1,21 @@
+ by
+   intro h
+   induction h <;>
+-    simp_all [Imperative.HasVarsPure.getVars, extractOldExprVars,
+-      Lambda.LExpr.LExpr.getVars, List.subset_def]
+-  split <;> simp_all [Lambda.LExpr.LExpr.getVars]
+-  · rename_i hOld
+-    have hf := hOld IsOldPred.oldPred
+-    cases hf
+-    simp_all
+-  · aesop
++    simp only [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.getVars,
++      extractOldExprVars] at *
++  all_goals try assumption
++  all_goals try exact List.nil_subset _
++  all_goals try solve | apply List.append_subset_append <;> assumption
++  case ite =>
++    apply List.append_subset_append
++    · apply List.append_subset_append <;> assumption
++    · assumption
++  case app =>
++    rename_i hn ihfn ihe
++    split
++    · simp [Lambda.LExpr.LExpr.getVars]
++    · next hf =>
++        have hv := hn (by constructor)
++        cases hv
++        exact False.elim (hf rfl)
++    · exact List.append_subset_append ihfn ihe

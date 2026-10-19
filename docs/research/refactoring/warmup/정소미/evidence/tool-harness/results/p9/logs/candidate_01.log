@@ -1,0 +1,359 @@
+
+=== candidate_01 ===
+verifier return code: 1
+
+{
+ "tag": "candidate_01",
+ "name": "Cslib.CCS.bisimilarity_congr_choice",
+ "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+ "replaced_lines": [
+  311,
+  372
+ ],
+ "candidate_sha256": "66869817d750b628555fc89c1fc82293a9f439ba4d54d221931b20d39b37bd57",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 26,
+ "declaration_lines": 6,
+ "check": {
+  "command": "lake env lean candidate_01.check.lean",
+  "returncode": 1,
+  "seconds": 8.77,
+  "timed_out": false,
+  "error_count": 1,
+  "first_errors": [
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-76frl0e_/candidate_01.check.lean:316:15: error: `grind` failed"
+  ],
+  "warning_count": 0,
+  "axioms": [
+   "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": true
+ },
+ "compiled": false,
+ "heartbeat": {
+  "command": "lake env lean candidate_01.hb.lean",
+  "returncode": 1,
+  "seconds": 4.33,
+  "timed_out": false,
+  "heartbeats": null,
+  "measurement_ambiguous": false,
+  "error_count": 1,
+  "first_errors": [
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-76frl0e_/candidate_01.hb.lean:319:15: error: `grind` failed"
+  ]
+ }
+}
+
+
+
+--- check ---
+
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-76frl0e_/candidate_01.check.lean:316:15: error: `grind` failed
+case grind.1
+Name : Type u
+Constant : Type v
+defs : Constant → Process Name Constant → Prop
+p q r : Process Name Constant
+h : p ~[lts] q
+μ : Act Name
+p_1 q_1 r_1 : Process Name Constant
+h_1 : p_1 ~[lts] q_1
+h_3 :
+  ¬∀ (s₁' : Process Name Constant),
+      lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂'
+w : Process Name Constant
+h_5 : ¬(lts.Tr (p_1.choice r_1) μ w → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim w s₂')
+w_1 : Process Name Constant → Process Name Constant → Prop
+left : w_1 p_1 q_1
+right : lts.IsBisimulation lts w_1
+w_2 : Process Name Constant → Process Name Constant → Prop
+left_1 : w_2 p q
+right_1 : lts.IsBisimulation lts w_2
+⊢ False
+[grind] Goal diagnostics
+  [facts] Asserted facts
+    [prop] p ~[lts,lts] q
+    [prop] p_1 ~[lts,lts] q_1
+    [prop] (¬∀ (s₁' : Process Name Constant),
+              lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂') ∨
+          ¬∀ (s₂' : Process Name Constant),
+              lts.Tr (q_1.choice r_1) μ s₂' → ∃ s₁', lts.Tr (p_1.choice r_1) μ s₁' ∧ ChoiceBisim s₁' s₂'
+    [prop] p_1 ~[lts,lts] q_1 = ∃ r, r p_1 q_1 ∧ lts.IsBisimulation lts r
+    [prop] p ~[lts,lts] q = ∃ r, r p q ∧ lts.IsBisimulation lts r
+    [prop] ¬∀ (s₁' : Process Name Constant),
+            lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂'
+    [prop] ¬(lts.Tr (p_1.choice r_1) μ w → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim w s₂')
+    [prop] ∀ (x : Process Name Constant), lts.Tr (q_1.choice r_1) μ x → ¬ChoiceBisim w x
+    [prop] w_1 p_1 q_1
+    [prop] lts.IsBisimulation lts w_1
+    [prop] lts.IsBisimulation lts w_1 =
+          ((∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_1 s₁ s₂ →
+                ∀ (μ : Act Name) (s₁' : Process Name Constant),
+                  lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_1 s₁' s₂') ∧
+            ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_1 s₁ s₂ →
+                ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_1 s₁' s₂')
+    [prop] w_2 p q
+    [prop] lts.IsBisimulation lts w_2
+    [prop] lts.IsBisimulation lts w_2 =
+          ((∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_2 s₁ s₂ →
+                ∀ (μ : Act Name) (s₁' : Process Name Constant),
+                  lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_2 s₁' s₂') ∧
+            ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_2 s₁ s₂ →
+                ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_2 s₁' s₂')
+  [eqc] True propositions
+    [prop] ¬∀ (s₁' : Process Name Constant),
+            lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂'
+    [prop] (¬∀ (s₁' : Process Name Constant),
+              lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂') ∨
+          ¬∀ (s₂' : Process Name Constant),
+              lts.Tr (q_1.choice r_1) μ s₂' → ∃ s₁', lts.Tr (p_1.choice r_1) μ s₁' ∧ ChoiceBisim s₁' s₂'
+    [prop] lts.Tr (p_1.choice r_1) μ w
+    [prop] p ~[lts,lts] q
+    [prop] p_1 ~[lts,lts] q_1
+    [prop] ∀ (x : Process Name Constant), lts.Tr (q_1.choice r_1) μ x → ¬ChoiceBisim w x
+    [prop] w_1 p_1 q_1
+    [prop] w_2 p q
+    [prop] ∃ r, r p q ∧ lts.IsBisimulation lts r
+    [prop] ∃ r, r p_1 q_1 ∧ lts.IsBisimulation lts r
+    [prop] p ~[lts,lts] q = ∃ r, r p q ∧ lts.IsBisimulation lts r
+    [prop] p_1 ~[lts,lts] q_1 = ∃ r, r p_1 q_1 ∧ lts.IsBisimulation lts r
+    [prop] lts.IsBisimulation lts w_1
+    [prop] lts.IsBisimulation lts w_2
+    [prop] (∀ ⦃s₁ s₂ : Process Name Constant⦄,
+            w_1 s₁ s₂ →
+              ∀ (μ : Act Name) (s₁' : Process Name Constant), lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_1 s₁' s₂') ∧
+          ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+            w_1 s₁ s₂ →
+              ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_1 s₁' s₂'
+    [prop] (∀ ⦃s₁ s₂ : Process Name Constant⦄,
+            w_2 s₁ s₂ →
+              ∀ (μ : Act Name) (s₁' : Process Name Constant), lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_2 s₁' s₂') ∧
+          ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+            w_2 s₁ s₂ →
+              ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_2 s₁' s₂'
+    [prop] lts.IsBisimulation lts w_1 =
+          ((∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_1 s₁ s₂ →
+                ∀ (μ : Act Name) (s₁' : Process Name Constant),
+                  lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_1 s₁' s₂') ∧
+            ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_1 s₁ s₂ →
+                ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_1 s₁' s₂')
+    [prop] lts.IsBisimulation lts w_2 =
+          ((∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_2 s₁ s₂ →
+                ∀ (μ : Act Name) (s₁' : Process Name Constant),
+                  lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_2 s₁' s₂') ∧
+            ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_2 s₁ s₂ →
+                ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_2 s₁' s₂')
+    [prop] ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+          w_1 s₁ s₂ →
+            ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_1 s₁' s₂'
+    [prop] ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+          w_1 s₁ s₂ →
+            ∀ (μ : Act Name) (s₁' : Process Name Constant), lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_1 s₁' s₂'
+    [prop] ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+          w_2 s₁ s₂ →
+            ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_2 s₁' s₂'
+    [prop] ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+          w_2 s₁ s₂ →
+            ∀ (μ : Act Name) (s₁' : Process Name Constant), lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_2 s₁' s₂'
+  [eqc] False propositions
+    [prop] ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim w s₂'
+    [prop] ∀ (s₁' : Process Name Constant),
+          lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂'
+    [prop] lts.Tr (p_1.choice r_1) μ w → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim w s₂'
+  [cases] Case analyses
+    [cases] [1/2]: (¬∀ (s₁' : Process Name Constant),
+              lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂') ∨
+          ¬∀ (s₂' : Process Name Constant),
+              lts.Tr (q_1.choice r_1) μ s₂' → ∃ s₁', lts.Tr (p_1.choice r_1) μ s₁' ∧ ChoiceBisim s₁' s₂'
+      [cases] source: Initial goal
+    [cases] [1/1]: ∃ r, r p_1 q_1 ∧ lts.IsBisimulation lts r
+      [cases] source: E-matching `Bisimilarity.eq_1`
+    [cases] [1/1]: ∃ r, r p q ∧ lts.IsBisimulation lts r
+      [cases] source: E-matching `Bisimilarity.eq_1`
+  [ematch] E-matching patterns
+    [thm] Bisimilarity.eq_1: [@Bisimilarity #6 #5 #4 #3 #2 #1 #0]
+    [thm] IsBisimulation.eq_1: [@IsBisimulation #5 #4 #3 #2 #1 #0]
+    [thm] ChoiceBisim.choice: [@ChoiceBisim #6 #5 #4 (@choice _ _ #3 #1) (@choice _ _ #2 #1)]
+    [thm] ChoiceBisim.bisim: [@ChoiceBisim #5 #4 #3 #2 #1]
+    [thm] deterministic_tr_image_singleton: [@LTS.Tr #6 #5 #4 #3 #2 #1]
+    [thm] deterministic_not_lto: [@LTS.Tr #9 #8 #7 #5 #4 #2, @LTS.Tr _ _ #7 #5 #4 #3]
+    [thm] local_0: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] `[q_1.choice r_1] `[μ] #1]
+    [thm] local_0: [@ChoiceBisim `[Name] `[Constant] `[defs] `[w] #1]
+    [thm] local_1: [w_1 #5 #4, @LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #4 #2 #1]
+    [thm] local_1: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #4 #2 #1, w_1 #5 #4]
+    [thm] local_2: [w_1 #5 #4, @LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #5 #2 #1]
+    [thm] local_2: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #5 #2 #1, w_1 #5 #4]
+    [thm] local_3: [w_2 #5 #4, @LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #4 #2 #1]
+    [thm] local_3: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #4 #2 #1, w_2 #5 #4]
+    [thm] local_4: [w_2 #5 #4, @LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #5 #2 #1]
+    [thm] local_4: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #5 #2 #1, w_2 #5 #4]
+[grind] Diagnostics
+  [thm] E-Matching instances
+    [thm] Bisimilarity.eq_1 ↦ 2
+    [thm] IsBisimulation.eq_1 ↦ 2
+'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+
+
+--- hb ---
+
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-76frl0e_/candidate_01.hb.lean:319:15: error: `grind` failed
+case grind.1
+Name : Type u
+Constant : Type v
+defs : Constant → Process Name Constant → Prop
+p q r : Process Name Constant
+h : p ~[lts] q
+μ : Act Name
+p_1 q_1 r_1 : Process Name Constant
+h_1 : p_1 ~[lts] q_1
+h_3 :
+  ¬∀ (s₁' : Process Name Constant),
+      lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂'
+w : Process Name Constant
+h_5 : ¬(lts.Tr (p_1.choice r_1) μ w → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim w s₂')
+w_1 : Process Name Constant → Process Name Constant → Prop
+left : w_1 p_1 q_1
+right : lts.IsBisimulation lts w_1
+w_2 : Process Name Constant → Process Name Constant → Prop
+left_1 : w_2 p q
+right_1 : lts.IsBisimulation lts w_2
+⊢ False
+[grind] Goal diagnostics
+  [facts] Asserted facts
+    [prop] p ~[lts,lts] q
+    [prop] p_1 ~[lts,lts] q_1
+    [prop] (¬∀ (s₁' : Process Name Constant),
+              lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂') ∨
+          ¬∀ (s₂' : Process Name Constant),
+              lts.Tr (q_1.choice r_1) μ s₂' → ∃ s₁', lts.Tr (p_1.choice r_1) μ s₁' ∧ ChoiceBisim s₁' s₂'
+    [prop] p_1 ~[lts,lts] q_1 = ∃ r, r p_1 q_1 ∧ lts.IsBisimulation lts r
+    [prop] p ~[lts,lts] q = ∃ r, r p q ∧ lts.IsBisimulation lts r
+    [prop] ¬∀ (s₁' : Process Name Constant),
+            lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂'
+    [prop] ¬(lts.Tr (p_1.choice r_1) μ w → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim w s₂')
+    [prop] ∀ (x : Process Name Constant), lts.Tr (q_1.choice r_1) μ x → ¬ChoiceBisim w x
+    [prop] w_1 p_1 q_1
+    [prop] lts.IsBisimulation lts w_1
+    [prop] lts.IsBisimulation lts w_1 =
+          ((∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_1 s₁ s₂ →
+                ∀ (μ : Act Name) (s₁' : Process Name Constant),
+                  lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_1 s₁' s₂') ∧
+            ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_1 s₁ s₂ →
+                ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_1 s₁' s₂')
+    [prop] w_2 p q
+    [prop] lts.IsBisimulation lts w_2
+    [prop] lts.IsBisimulation lts w_2 =
+          ((∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_2 s₁ s₂ →
+                ∀ (μ : Act Name) (s₁' : Process Name Constant),
+                  lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_2 s₁' s₂') ∧
+            ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_2 s₁ s₂ →
+                ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_2 s₁' s₂')
+  [eqc] True propositions
+    [prop] ¬∀ (s₁' : Process Name Constant),
+            lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂'
+    [prop] (¬∀ (s₁' : Process Name Constant),
+              lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂') ∨
+          ¬∀ (s₂' : Process Name Constant),
+              lts.Tr (q_1.choice r_1) μ s₂' → ∃ s₁', lts.Tr (p_1.choice r_1) μ s₁' ∧ ChoiceBisim s₁' s₂'
+    [prop] lts.Tr (p_1.choice r_1) μ w
+    [prop] p ~[lts,lts] q
+    [prop] p_1 ~[lts,lts] q_1
+    [prop] ∀ (x : Process Name Constant), lts.Tr (q_1.choice r_1) μ x → ¬ChoiceBisim w x
+    [prop] w_1 p_1 q_1
+    [prop] w_2 p q
+    [prop] ∃ r, r p q ∧ lts.IsBisimulation lts r
+    [prop] ∃ r, r p_1 q_1 ∧ lts.IsBisimulation lts r
+    [prop] p ~[lts,lts] q = ∃ r, r p q ∧ lts.IsBisimulation lts r
+    [prop] p_1 ~[lts,lts] q_1 = ∃ r, r p_1 q_1 ∧ lts.IsBisimulation lts r
+    [prop] lts.IsBisimulation lts w_1
+    [prop] lts.IsBisimulation lts w_2
+    [prop] (∀ ⦃s₁ s₂ : Process Name Constant⦄,
+            w_1 s₁ s₂ →
+              ∀ (μ : Act Name) (s₁' : Process Name Constant), lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_1 s₁' s₂') ∧
+          ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+            w_1 s₁ s₂ →
+              ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_1 s₁' s₂'
+    [prop] (∀ ⦃s₁ s₂ : Process Name Constant⦄,
+            w_2 s₁ s₂ →
+              ∀ (μ : Act Name) (s₁' : Process Name Constant), lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_2 s₁' s₂') ∧
+          ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+            w_2 s₁ s₂ →
+              ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_2 s₁' s₂'
+    [prop] lts.IsBisimulation lts w_1 =
+          ((∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_1 s₁ s₂ →
+                ∀ (μ : Act Name) (s₁' : Process Name Constant),
+                  lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_1 s₁' s₂') ∧
+            ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_1 s₁ s₂ →
+                ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_1 s₁' s₂')
+    [prop] lts.IsBisimulation lts w_2 =
+          ((∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_2 s₁ s₂ →
+                ∀ (μ : Act Name) (s₁' : Process Name Constant),
+                  lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_2 s₁' s₂') ∧
+            ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+              w_2 s₁ s₂ →
+                ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_2 s₁' s₂')
+    [prop] ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+          w_1 s₁ s₂ →
+            ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_1 s₁' s₂'
+    [prop] ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+          w_1 s₁ s₂ →
+            ∀ (μ : Act Name) (s₁' : Process Name Constant), lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_1 s₁' s₂'
+    [prop] ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+          w_2 s₁ s₂ →
+            ∀ (μ : Act Name) (s₂' : Process Name Constant), lts.Tr s₂ μ s₂' → ∃ s₁', lts.Tr s₁ μ s₁' ∧ w_2 s₁' s₂'
+    [prop] ∀ ⦃s₁ s₂ : Process Name Constant⦄,
+          w_2 s₁ s₂ →
+            ∀ (μ : Act Name) (s₁' : Process Name Constant), lts.Tr s₁ μ s₁' → ∃ s₂', lts.Tr s₂ μ s₂' ∧ w_2 s₁' s₂'
+  [eqc] False propositions
+    [prop] ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim w s₂'
+    [prop] ∀ (s₁' : Process Name Constant),
+          lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂'
+    [prop] lts.Tr (p_1.choice r_1) μ w → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim w s₂'
+  [cases] Case analyses
+    [cases] [1/2]: (¬∀ (s₁' : Process Name Constant),
+              lts.Tr (p_1.choice r_1) μ s₁' → ∃ s₂', lts.Tr (q_1.choice r_1) μ s₂' ∧ ChoiceBisim s₁' s₂') ∨
+          ¬∀ (s₂' : Process Name Constant),
+              lts.Tr (q_1.choice r_1) μ s₂' → ∃ s₁', lts.Tr (p_1.choice r_1) μ s₁' ∧ ChoiceBisim s₁' s₂'
+      [cases] source: Initial goal
+    [cases] [1/1]: ∃ r, r p_1 q_1 ∧ lts.IsBisimulation lts r
+      [cases] source: E-matching `Bisimilarity.eq_1`
+    [cases] [1/1]: ∃ r, r p q ∧ lts.IsBisimulation lts r
+      [cases] source: E-matching `Bisimilarity.eq_1`
+  [ematch] E-matching patterns
+    [thm] Bisimilarity.eq_1: [@Bisimilarity #6 #5 #4 #3 #2 #1 #0]
+    [thm] IsBisimulation.eq_1: [@IsBisimulation #5 #4 #3 #2 #1 #0]
+    [thm] ChoiceBisim.choice: [@ChoiceBisim #6 #5 #4 (@choice _ _ #3 #1) (@choice _ _ #2 #1)]
+    [thm] ChoiceBisim.bisim: [@ChoiceBisim #5 #4 #3 #2 #1]
+    [thm] deterministic_tr_image_singleton: [@LTS.Tr #6 #5 #4 #3 #2 #1]
+    [thm] deterministic_not_lto: [@LTS.Tr #9 #8 #7 #5 #4 #2, @LTS.Tr _ _ #7 #5 #4 #3]
+    [thm] local_0: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] `[q_1.choice r_1] `[μ] #1]
+    [thm] local_0: [@ChoiceBisim `[Name] `[Constant] `[defs] `[w] #1]
+    [thm] local_1: [w_1 #5 #4, @LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #4 #2 #1]
+    [thm] local_1: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #4 #2 #1, w_1 #5 #4]
+    [thm] local_2: [w_1 #5 #4, @LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #5 #2 #1]
+    [thm] local_2: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #5 #2 #1, w_1 #5 #4]
+    [thm] local_3: [w_2 #5 #4, @LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #4 #2 #1]
+    [thm] local_3: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #4 #2 #1, w_2 #5 #4]
+    [thm] local_4: [w_2 #5 #4, @LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #5 #2 #1]
+    [thm] local_4: [@LTS.Tr `[Process Name Constant] `[Act Name] `[lts] #5 #2 #1, w_2 #5 #4]
+[grind] Diagnostics
+  [thm] E-Matching instances
+    [thm] Bisimilarity.eq_1 ↦ 2
+    [thm] IsBisimulation.eq_1 ↦ 2
+Used 1420 heartbeats, which is less than the current maximum of 200000.

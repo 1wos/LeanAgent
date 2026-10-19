@@ -1,0 +1,17 @@
+{
+  "recorded_at_utc": "2026-10-15T06:17:15.978493+00:00",
+  "python_executable": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+  "python_version": "3.9.6 (default, Mar  6 2026, 16:22:43) \n[Clang 21.0.0 (clang-2100.0.123.102)]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "architecture": "arm64",
+  "cpu_count": 10,
+  "memory_bytes": 17179869184,
+  "project_git_revision": "0c7f0b5d27b71da3c985c1d8f0df19f7dec3658b",
+  "source_git_revision": "451e5f047bafa010d178856db76c00029bfa4d7f",
+  "lean_binary": "/Users/jwkweon/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+  "lean_version": "Lean (version 4.26.0, arm64-apple-darwin24.6.0, commit d8204c9fd894f91bbb2cdfec5912ec8196fd8562, Release)",
+  "cache_root": "/Users/jwkweon/00_work/00_project/cache/05_pseudolab/LeanAgent",
+  "runtime_environment_created": false,
+  "python_dependencies": "standard library and frozen local proof_tokens.py only",
+  "verification_process_peak_rss": "not measured; Lean allocator limit -M1536 configured"
+}

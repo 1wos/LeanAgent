@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "run_id": "d66599cc-285b-48ae-aa48-dcda1a4c1b25",
+  "created_utc": "2026-10-18T12:25:27.973658+00:00",
+  "problem": 9,
+  "repo": "/Users/somi/Documents/lean-refactor-warmup/cslib",
+  "spec": {
+    "problem": 9,
+    "repository_url": "https://github.com/leanprover/cslib",
+    "commit": "197a7be621263b84c67ca4f803f69205b36d06df",
+    "toolchain": "leanprover/lean4:v4.32.0",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "source_sha256": "d08a2996a8afa14dca972376a50530677214b54d870aa95d98ae23ac69b4fb61",
+    "lake_manifest_sha256": "ceba7d0fee50fcc84cb20db139450ffc9dbd9dfe343333409b2085f8d6776115",
+    "start": 311,
+    "end": 372,
+    "hb_line": 310,
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "reference_proof_length": 251,
+    "statement": "P9/statement.lean",
+    "statement_sha256": "d22365e14ae095e15e8706b4c0e7a3f37de57a00d5eda6fa2a40580c8a60650b",
+    "lean_args": [],
+    "extra_imports": [
+      "Mathlib.Util.CountHeartbeats"
+    ]
+  },
+  "objective": "length",
+  "max_evaluations": 3,
+  "timeout_seconds": 30,
+  "expected_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "input_sha256": {
+    "reference.lean": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement.lean": "d22365e14ae095e15e8706b4c0e7a3f37de57a00d5eda6fa2a40580c8a60650b",
+    "context.lean": "fe14b361802a22fc113163d6d76217f69f38bd927ff3e41307bc101ac3832b5e"
+  }
+}

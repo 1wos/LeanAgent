@@ -1,0 +1,49 @@
+{
+  "source_result": "xhigh/runs/P01/final_01/result.json",
+  "context_sha256": "c6dfb9db577e650cc0dfc9e8ed42099018e947a67e45fcb13b908dc55c9edbb6",
+  "command": [
+    "/usr/bin/sandbox-exec",
+    "-p",
+    "(version 1) (allow default) (deny network*) (deny file-write*)",
+    "/Users/jwkweon/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+    "-j1",
+    "-M1536",
+    "-T200000",
+    "--json",
+    "/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/xhigh/runs/P01/final_01/context.lean"
+  ],
+  "fixed_context_path": "/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/xhigh/runs/P01/final_01/context.lean",
+  "control": "Same stored context bytes, same absolute input path, same cwd and command; fresh process each repeat, after agent window.",
+  "records": [
+    {
+      "repeat": 1,
+      "started_at": "2026-10-15T07:00:10.968102+00:00",
+      "wall_seconds": 19.103191459,
+      "exit_code": 0,
+      "raw_heartbeats": 1892095,
+      "errors": []
+    },
+    {
+      "repeat": 2,
+      "started_at": "2026-10-15T07:00:30.071170+00:00",
+      "wall_seconds": 12.133784375000001,
+      "exit_code": 0,
+      "raw_heartbeats": 1892048,
+      "errors": []
+    },
+    {
+      "repeat": 3,
+      "started_at": "2026-10-15T07:00:42.204835+00:00",
+      "wall_seconds": 11.768766624999998,
+      "exit_code": 0,
+      "raw_heartbeats": 1892013,
+      "errors": []
+    }
+  ],
+  "all_compiled": true,
+  "raw_heartbeat_range": [
+    1892013,
+    1892095
+  ],
+  "raw_heartbeat_median": 1892048
+}

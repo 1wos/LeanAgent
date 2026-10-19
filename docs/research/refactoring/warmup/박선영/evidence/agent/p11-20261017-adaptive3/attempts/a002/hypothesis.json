@@ -1,0 +1,11 @@
+{
+  "strategy": "restructure-algebra",
+  "target": "마지막 Finset.sum_congr의 계수별 등식 블록",
+  "hypothesis": "C_add/C_mul을 정방향으로 전개하고 ring으로 계수별 다항식 등식을 닫아 반복 conv와 인덱스 elaboration을 줄인다",
+  "expected": "부모 a001보다 heartbeat와 tokens 감소; 타입 정합성이나 ring 정규화 비용은 실제 검사 필요",
+  "reason": "a001 재현 성공과 review를 읽었다. 새 계수는 두 스칼라 곱의 합이므로 C의 환 준동형 법칙으로 같은 가환환 식이 된다. 부모의 마지막 블록만 바꾸며 qMap/fiber/calc는 유지한다.",
+  "parent": "a001",
+  "kind": "experiment",
+  "parent_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+  "registered_at": "2026-10-17T08:03:40.725434+00:00"
+}

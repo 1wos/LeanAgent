@@ -1,0 +1,163 @@
+{
+  "status": "completed",
+  "attempts": [
+    {
+      "id": "candidate_01",
+      "status": "verification_failed",
+      "accepted": false,
+      "started_utc": "2026-10-18T12:26:38.471696+00:00",
+      "candidate": "candidates/candidate_01.lean",
+      "candidate_sha256": "4d0dea237a6479b6651b1ff12b502376d93774c137f40a6270250a7dd9b19b60",
+      "tag": "candidate_01",
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+      "replaced_lines": [
+        99,
+        224
+      ],
+      "statement_unchanged": true,
+      "forbidden_patterns": [],
+      "proof_tokens": 846,
+      "declaration_lines": 98,
+      "check": {
+        "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true candidate_01.check.lean",
+        "returncode": 1,
+        "seconds": 12.26,
+        "timed_out": false,
+        "error_count": 2,
+        "first_errors": [
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-i52p52o6/candidate_01.check.lean:103:13: error: unsolved goals",
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-i52p52o6/candidate_01.check.lean:105:4: error: unexpected identifier; expected command"
+        ],
+        "warning_count": 0,
+        "axioms": [
+          "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+        ],
+        "sorryAx": true
+      },
+      "compiled": false,
+      "heartbeat": {
+        "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true candidate_01.hb.lean",
+        "returncode": 1,
+        "seconds": 7.09,
+        "timed_out": false,
+        "heartbeats": null,
+        "measurement_ambiguous": false,
+        "error_count": 2,
+        "first_errors": [
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-i52p52o6/candidate_01.hb.lean:105:13: error: unsolved goals",
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-i52p52o6/candidate_01.hb.lean:107:4: error: unexpected identifier; expected command"
+        ]
+      },
+      "axioms_match": false,
+      "lean_invoked": true,
+      "verifier_returncode": 1,
+      "log": "logs/candidate_01.log",
+      "log_sha256": "66ca2aaf65e16ec1f8456da4ea572684386e302715b8b2a694590214c09d87b8",
+      "finished_utc": "2026-10-18T12:26:57.951285+00:00",
+      "seconds": 19.477
+    },
+    {
+      "id": "candidate_02",
+      "status": "verification_failed",
+      "accepted": false,
+      "started_utc": "2026-10-18T12:27:20.751434+00:00",
+      "candidate": "candidates/candidate_02.lean",
+      "candidate_sha256": "68a62c4aeec8ae576c258a6fbf90eef8cc382dcb02500252c72cf0dee3afac49",
+      "tag": "candidate_02",
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+      "replaced_lines": [
+        99,
+        224
+      ],
+      "statement_unchanged": true,
+      "forbidden_patterns": [],
+      "proof_tokens": 848,
+      "declaration_lines": 100,
+      "check": {
+        "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true candidate_02.check.lean",
+        "returncode": 1,
+        "seconds": 9.84,
+        "timed_out": false,
+        "error_count": 2,
+        "first_errors": [
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.check.lean:103:13: error: unsolved goals",
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.check.lean:105:4: error: unexpected identifier; expected command"
+        ],
+        "warning_count": 0,
+        "axioms": [
+          "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+        ],
+        "sorryAx": true
+      },
+      "compiled": false,
+      "heartbeat": {
+        "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true candidate_02.hb.lean",
+        "returncode": 1,
+        "seconds": 4.01,
+        "timed_out": false,
+        "heartbeats": null,
+        "measurement_ambiguous": false,
+        "error_count": 2,
+        "first_errors": [
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.hb.lean:105:13: error: unsolved goals",
+          "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-qc0owcl7/candidate_02.hb.lean:107:4: error: unexpected identifier; expected command"
+        ]
+      },
+      "axioms_match": false,
+      "lean_invoked": true,
+      "verifier_returncode": 1,
+      "log": "logs/candidate_02.log",
+      "log_sha256": "3a0956aef75d62c09525574d75f058bdae309d834d0b78c82174c34819a8731c",
+      "finished_utc": "2026-10-18T12:27:34.726883+00:00",
+      "seconds": 13.974
+    }
+  ],
+  "selected": "reference",
+  "reference": {
+    "tag": "reference",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 851,
+    "declaration_lines": 126,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true reference.check.lean",
+      "returncode": 0,
+      "seconds": 13.94,
+      "timed_out": false,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true reference.hb.lean",
+      "returncode": 0,
+      "seconds": 10.24,
+      "timed_out": false,
+      "heartbeats": 11947,
+      "measurement_ambiguous": false,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "log": "logs/reference.log",
+    "log_sha256": "036442c0d62afe07ac64a7e2eff615606314ac1fb8ef73f3074c633cf97593fb"
+  }
+}

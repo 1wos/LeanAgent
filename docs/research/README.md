@@ -12,11 +12,13 @@
 | `Autoformalization` | 박선영 · 남성우 | [autoformalization](autoformalization/README.md) |
 | `Automated Theorem Proving` (ATP) | 권주원 · 손지연 | [automated-theorem-proving](automated-theorem-proving/README.md) |
 | `Verifier-guided Agent` | 정소미 · 박성호 | [verifier-guided-agent](verifier-guided-agent/README.md) |
+| 검증·수리 설계 | 손지연 | [verification-repair](verification-repair/README.md) |
 
 ## 문제 연구
 
 - [Refactoring](refactoring/README.md): 세트별 자료 안내와 Warm-up·논문 조사 혼합 여부.
 - [Warm-up](refactoring/warmup/README.md): 15문제의 담당자별 발표·보고서·검증 기록.
+- [수집 코퍼스](refactoring/corpus/README.md): 6개 출처의 수집 범위·증명 통계와 표본 설계.
 
 ## 공통 경로와 파일명
 

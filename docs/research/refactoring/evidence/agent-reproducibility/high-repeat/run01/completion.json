@@ -1,0 +1,7 @@
+{
+  "status": "completed",
+  "reasoning_effort": "high",
+  "submissions": 8,
+  "protocol_deviations": [],
+  "strategy_summary": "Inducted over normalization evidence, composed append subsets with one local helper, and replaced simplifier calls with direct membership proofs. Candidates 06, 07, and 08 were valid; candidate 08 had the lowest observed local score, 0.4786977073984702."
+}

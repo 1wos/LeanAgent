@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "scope": "Publication integrity, score recomputation from saved measurements, and fresh recorded-state replay; no new Lean or model runs.",
+  "files_hashed": 195,
+  "measurement_records": {
+    "effort-comparison": 321,
+    "high-repeat": 42,
+    "controlled-harness": 24
+  },
+  "effort": {
+    "main_runs": 315,
+    "candidate_attempts": 243,
+    "valid_candidates": 176,
+    "final_passes": 45,
+    "lowest_score_by_problem": {
+      "1": "xhigh",
+      "2": "high",
+      "3": "ultra"
+    }
+  },
+  "high_repeat": {
+    "trials": 3,
+    "distinct_first_proofs": 3,
+    "distinct_final_proofs": 3,
+    "final_passes": 15
+  },
+  "controlled_harness": {
+    "fresh_record_replay_matches": 9,
+    "historical_live_validity_matches": 9,
+    "historical_live_heartbeat_matches": 7,
+    "historical_same_selection": 3,
+    "historical_same_request": 8
+  },
+  "new_model_calls": 0,
+  "new_lean_processes": 0
+}

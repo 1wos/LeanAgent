@@ -1,0 +1,95 @@
+Run one arm of the user's one-hour, three-agent parallel Warm-up experiment.
+The other arms receive THIS EXACT SAME MESSAGE AND TASK FILE. Your reasoning
+effort is set by the spawn call. The only arm-specific facts are your task name,
+reasoning effort, and output directory. Use the inherited parent model.
+
+Experiment root:
+/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort
+
+Derive VARIANT from your canonical task name's final component: effort_high
+means high, effort_xhigh means xhigh, effort_ultra means ultra. Read common/
+manifest.json and schedule.json. The schedule defines the common 3600-second
+active window. Do not finish early after a few successful candidates. Work
+through the window on substantive proof experiments and reproducibility
+analysis. Stop launching candidate experiments at the deadline; finish the
+report immediately afterward. Check the real UTC clock regularly. If an
+unfixable blocker occurs, report it promptly instead of claiming success.
+
+Mandatory workspace rules:
+- Read /Users/jwkweon/00_work/00_project/AGENTS.md and run the account check in
+  the LeanAgent repository. The configured account is personal. Never change
+  global Git authentication; do not commit, push, or create repositories.
+- Source /Users/jwkweon/00_work/00_project/env/use.sh 05_pseudolab/LeanAgent
+  in EVERY shell session. Runtime/cache paths must remain centralized.
+- Write ONLY within ROOT/VARIANT. Common inputs, verifier, original source,
+  imported libraries, and other arms' files must not be modified.
+- Do not read other arms, prior optimized Warm-up proofs, reports, or results.
+  You may read common/ and the pinned Strata source tree and installed Lean
+  source for definitions and theorem signatures. No web research or external
+  model/API calls. No extra subagents. Do not share proofs with other arms.
+- One Lean process at a time per arm. ALL candidate verification and metric
+  collection must use common/verify.py. Do not run lake build/update, install
+  dependencies, alter environment versions, or bypass failed checks.
+
+Tasks: Warm-up 1, 2, 3 in the frozen Strata commit, Lean v4.26.0. Keep each
+original statement and context. Optimize the proof term only, preserving
+validity and allowed transitive axioms. The target theorem must not be used
+to prove itself. No sorry/admit, new axioms, unsafe/evaluator-based shortcuts,
+option changes, or modifications to the verifier. The Lean child is OS
+sandboxed against network and file writes, but the coding agent itself is
+NOT OS sandboxed; accurately report this boundary.
+
+Procedure, common to all arms:
+1. Create your output folder and progress.json. Record your effective effort,
+   inherited model status, start time, task-file SHA256 and manifest SHA256.
+   Do not invent an exact model ID or unavailable token/API-cost telemetry.
+2. Run each original proof three times through the verifier in fresh Lean
+   processes. Keep every result, including failures. Original full-context
+   files contain unrelated sorry warnings; inspect TARGET transitive axioms.
+3. Explore refactorings in the SAME problem order P01, P02, P03. Suggested
+   time allocation: approximately first 20 minutes P01, next 18 P02, next 17
+   P03, final 5 minutes repeated final verification and reporting. Baseline
+   setup counts toward the first allocation. Observe the common deadline.
+4. For each attempted candidate save a standalone proof term under your arm,
+   plus a short hypothesis, parent candidate, and why you accept/reject it.
+   Use unique labels; never overwrite attempts. Failed candidates are data.
+   Log before testing. Do not merely loop redundant validations to fill time;
+   use remaining time for distinct simplification, structure, or lemma-use
+   strategies and analysis of failures.
+5. Compare candidates with local objective
+   0.5 * (candidate_proof_tokens / baseline_proof_tokens
+          + candidate_raw_heartbeats / baseline_raw_heartbeats), lower better.
+   Use median baseline raw heartbeat across your three original runs. This
+   local metric is NOT an official Arena score. Preserve tradeoffs/Pareto
+   candidates. Wall time is secondary because all arms share this host.
+6. Revalidate each selected final proof FIVE times using separate verifier
+   processes, as time permits. Record identical code hash, validity, axiom
+   set, heartbeat spread, and wall-time spread. Retain the baseline if no
+   valid improvement is found. Keep unsupported claims out of the report.
+7. Write results.json with one entry per problem: baseline metrics, selected
+   candidate path and hash, valid/invalid attempt counts, score, repeat
+   distributions, all material limitations. Write report.md in Korean with
+   concrete findings and a replay command. Write decision_history.jsonl for
+   your experimental decisions; no hidden chain-of-thought is requested.
+   Update progress.json about every five minutes and send the parent concise
+   progress messages around 15/30/45 minutes and on blockers. No messaging
+   external chats or people.
+
+Verification invocation (absolute paths strongly preferred):
+python3 ROOT/common/verify.py --variant VARIANT --problem 1 \
+  --candidate ROOT/VARIANT/candidates/P01/example.lean --label example \
+  --parent reference --strategy "brief experimental hypothesis"
+
+Original proof paths are ROOT/common/P01/reference.lean, P02/reference.lean,
+and P03/reference.lean. The verifier reconstructs the original FULL module,
+replaces exactly the target declaration, checks the target's axiom set,
+and writes stdout/stderr/code/result.json plus your events.jsonl. Local
+heartbeat measures command elaboration, with a fixed wrapper; it is NOT
+asserted to match published Arena values. All wall times include full-module
+checking and local process overhead, not model generation latency.
+
+This is one agent trajectory per effort, NOT independent repeated LLM calls.
+Repeated Lean verification demonstrates verifier repeatability; it does not
+demonstrate deterministic model generation or statistically rank efforts.
+Your final answer to the parent should cite actual artifact paths and report
+the active duration, candidate counts, best metrics, repeatability and limits.

@@ -1,0 +1,91 @@
+
+=== candidate_02 ===
+verifier return code: 1
+
+{
+ "tag": "candidate_02",
+ "name": "Cslib.CCS.bisimilarity_congr_choice",
+ "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+ "replaced_lines": [
+  311,
+  372
+ ],
+ "candidate_sha256": "1a423159b857befe038f927dc4fa7d8af3197e590968eeb79cc508348beac73e",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 127,
+ "declaration_lines": 21,
+ "check": {
+  "command": "lake env lean candidate_02.check.lean",
+  "returncode": 1,
+  "seconds": 5.99,
+  "timed_out": false,
+  "error_count": 2,
+  "first_errors": [
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.check.lean:324:56: error: Application type mismatch: The argument",
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.check.lean:330:56: error: Application type mismatch: The argument"
+  ],
+  "warning_count": 0,
+  "axioms": [
+   "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": true
+ },
+ "compiled": false,
+ "heartbeat": {
+  "command": "lake env lean candidate_02.hb.lean",
+  "returncode": 1,
+  "seconds": 6.83,
+  "timed_out": false,
+  "heartbeats": null,
+  "measurement_ambiguous": false,
+  "error_count": 2,
+  "first_errors": [
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.hb.lean:327:56: error: Application type mismatch: The argument",
+   "/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.hb.lean:333:56: error: Application type mismatch: The argument"
+  ]
+ }
+}
+
+
+
+--- check ---
+
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.check.lean:324:56: error: Application type mismatch: The argument
+  HomBisimilarity.refl
+has type
+  ∀ (s : ?m.372), s ~[?m.374] s
+but is expected to have type
+  s' ~[lts] s'
+in the application
+  ChoiceBisim.bisim HomBisimilarity.refl
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.check.lean:330:56: error: Application type mismatch: The argument
+  HomBisimilarity.refl
+has type
+  ∀ (s : ?m.619), s ~[?m.621] s
+but is expected to have type
+  s' ~[lts] s'
+in the application
+  ChoiceBisim.bisim HomBisimilarity.refl
+'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+
+
+--- hb ---
+
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.hb.lean:327:56: error: Application type mismatch: The argument
+  HomBisimilarity.refl
+has type
+  ∀ (s : ?m.372), s ~[?m.374] s
+but is expected to have type
+  s' ~[lts] s'
+in the application
+  ChoiceBisim.bisim HomBisimilarity.refl
+/private/var/folders/_s/wgddvvjd5z194zgkpq2yqj1m0000gn/T/leanagent-replay-325zbo37/candidate_02.hb.lean:333:56: error: Application type mismatch: The argument
+  HomBisimilarity.refl
+has type
+  ∀ (s : ?m.619), s ~[?m.621] s
+but is expected to have type
+  s' ~[lts] s'
+in the application
+  ChoiceBisim.bisim HomBisimilarity.refl
+Used 1347 heartbeats, which is less than the current maximum of 200000.

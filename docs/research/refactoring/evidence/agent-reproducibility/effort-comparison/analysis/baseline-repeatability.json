@@ -1,0 +1,66 @@
+{
+  "1": {
+    "n": 9,
+    "all_valid": true,
+    "proof_sha256": "db0d2df58a5a0844d7f644ac86d3b8c7b2257378b031c6b787d65dc5d58e65ec",
+    "context_hash_count": 1,
+    "manifest_hash_count": 1,
+    "axiom_sets": [
+      [
+        "propext",
+        "Quot.sound"
+      ]
+    ],
+    "raw_heartbeats_min": 5180168,
+    "raw_heartbeats_max": 5180177,
+    "range_parts_per_million": 1.7373950540995862,
+    "integer_thousand_heartbeat_values": [
+      5180
+    ],
+    "wall_seconds_min": 15.2837155,
+    "wall_seconds_max": 23.63229
+  },
+  "2": {
+    "n": 9,
+    "all_valid": true,
+    "proof_sha256": "8dc06d3b64efe3194b2b71ba3d27d72484013bbff621069f533fc146978b9b06",
+    "context_hash_count": 1,
+    "manifest_hash_count": 1,
+    "axiom_sets": [
+      [
+        "propext",
+        "Quot.sound"
+      ]
+    ],
+    "raw_heartbeats_min": 2585163,
+    "raw_heartbeats_max": 2585164,
+    "range_parts_per_million": 0.38682280382320183,
+    "integer_thousand_heartbeat_values": [
+      2585
+    ],
+    "wall_seconds_min": 15.743225708,
+    "wall_seconds_max": 18.048155292
+  },
+  "3": {
+    "n": 9,
+    "all_valid": true,
+    "proof_sha256": "769f0df6278c6e92e798158def838dd4a51976b9431527560fba49630bd1b8c9",
+    "context_hash_count": 1,
+    "manifest_hash_count": 1,
+    "axiom_sets": [
+      [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    ],
+    "raw_heartbeats_min": 4668407,
+    "raw_heartbeats_max": 4668409,
+    "range_parts_per_million": 0.42841166162247635,
+    "integer_thousand_heartbeat_values": [
+      4668
+    ],
+    "wall_seconds_min": 4.32017475,
+    "wall_seconds_max": 6.693515291000001
+  }
+}

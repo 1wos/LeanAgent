@@ -1,0 +1,47 @@
+{
+  "enforced_by_lean_child": [
+    "OS sandbox denies network operations",
+    "OS sandbox denies all filesystem writes",
+    "Lean -j1",
+    "Lean -M1536 memory setting",
+    "120-second subprocess wall timeout with process-group kill",
+    "Target maxHeartbeats 200000 and maxRecDepth 1000"
+  ],
+  "enforced_by_verifier": [
+    "Frozen common file SHA256 checks before every verification",
+    "Exact original declaration replaced once in full source context",
+    "Original statement retained verbatim",
+    "Candidate lexical rejection for sorry, admit, axioms, resource overrides and specified evaluator escapes",
+    "Target transitive axioms must be a subset of propext, Classical.choice, Quot.sound",
+    "Lean exit success and absence of errors required",
+    "One verification lock per variant",
+    "Immutable unique run labels; attempts are never overwritten"
+  ],
+  "instruction_only_for_coding_agents": [
+    "Write only the assigned arm directory",
+    "Do not inspect other arms or earlier optimized solutions",
+    "No package installation, builds, web access or external model calls",
+    "Use only the common verifier",
+    "Same task ordering and common deadline"
+  ],
+  "not_enforced_or_observable": [
+    "Coding agent filesystem/network access is not OS sandboxed",
+    "Exact inherited model identifier is not exposed by spawn result",
+    "Model token use, backend sampling and billed cost are unavailable",
+    "No process CPU affinity or host-wide load isolation",
+    "No repeated independent model generations under identical effort",
+    "No independent second-machine reproduction",
+    "Prompt and decision history are saved but internal model request/response traces are not exposed",
+    "Operating-system filesystem page cache is not reset between runs",
+    "Equal wall budget does not imply equal model token or inference compute budget",
+    "Occasional parent control probes overlap the early parallel runs; wall time is descriptive only"
+  ],
+  "negative_controls": {
+    "sandbox": "analysis/sandbox-probes.json",
+    "forbidden_sorry": "control/runs/P03/negative_sorry/result.json",
+    "resource_override": "control/runs/P03/negative_option_override/result.json",
+    "wrong_type": "control/runs/P03/negative_wrong_type/result.json"
+  },
+  "source_scope": "Warm-up 1,2,3 only; Strata 451e5f047bafa010d178856db76c00029bfa4d7f / Lean v4.26.0; no compatibility claim for other versions",
+  "measurement_scope": "Fixed custom command counts raw heartbeat allocations around target declaration elaboration; unrelated original sorry declarations retained but target axioms checked; published Arena heartbeat and score are not reproduced claims"
+}

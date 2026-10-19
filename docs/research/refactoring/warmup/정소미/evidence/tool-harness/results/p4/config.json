@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "run_id": "0c3858c5-8532-4c11-b8d1-db87caafd507",
+  "created_utc": "2026-10-18T12:25:28.945408+00:00",
+  "problem": 4,
+  "repo": "/Users/somi/Documents/lean-refactor-warmup/physlib",
+  "spec": {
+    "problem": 4,
+    "repository_url": "https://github.com/leanprover-community/physlib",
+    "commit": "c48433678e8fb6306ebcd48453300c8e16058a62",
+    "toolchain": "leanprover/lean4:v4.32.0",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "source_sha256": "ac7683ecbd03b7749d929b13eeb09b8021cef7b5b2125dc20d74007edb677a65",
+    "lake_manifest_sha256": "a9531c3978f21e50cb72cc89c2a7644b296bee59a7f2ff92ca2408aac4a67311",
+    "start": 99,
+    "end": 224,
+    "hb_line": 87,
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "reference_proof_length": 851,
+    "statement": "P4/statement.lean",
+    "statement_sha256": "851df2b7bf3a5d24535c37b94bcd12339ae43438267de736e793664214c500b6",
+    "lean_args": [
+      "-Dwarn.sorry=false",
+      "-Dweak.says.verify=true"
+    ],
+    "extra_imports": []
+  },
+  "objective": "length",
+  "max_evaluations": 2,
+  "timeout_seconds": 60,
+  "expected_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "input_sha256": {
+    "reference.lean": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd",
+    "statement.lean": "851df2b7bf3a5d24535c37b94bcd12339ae43438267de736e793664214c500b6",
+    "context.lean": "9c713f9c734629f070811d6bfd815a77c3883fa0fdbab219e372b074a13c9750"
+  }
+}

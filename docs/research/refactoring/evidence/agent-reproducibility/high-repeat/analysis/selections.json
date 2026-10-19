@@ -1,0 +1,26 @@
+[
+  {
+    "label": "attempt_08",
+    "score": 0.4786977073984702,
+    "proof_tokens": 171,
+    "attempt": 8,
+    "proof_path": "run01/runs/P02/attempt_08/proof.lean",
+    "trial": "run01"
+  },
+  {
+    "label": "attempt_08",
+    "score": 0.34783611480361354,
+    "proof_tokens": 106,
+    "attempt": 8,
+    "proof_path": "run02/runs/P02/attempt_08/proof.lean",
+    "trial": "run02"
+  },
+  {
+    "label": "attempt_07",
+    "score": 0.4995441998947194,
+    "proof_tokens": 145,
+    "attempt": 7,
+    "proof_path": "run03/runs/P02/attempt_07/proof.lean",
+    "trial": "run03"
+  }
+]
