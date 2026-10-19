@@ -1,0 +1,150 @@
+
+=== p9-4.33rc2-reference-1 ===
+verifier return code: 0
+
+{
+ "tag": "p9-4.33rc2-reference-1",
+ "name": "Cslib.CCS.bisimilarity_congr_choice",
+ "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+ "replaced_lines": [
+  311,
+  372
+ ],
+ "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 251,
+ "declaration_lines": 62,
+ "check": {
+  "command": "lake env lean p9-4.33rc2-reference-1.check.lean",
+  "returncode": 0,
+  "seconds": 11.5,
+  "error_count": 0,
+  "first_errors": [],
+  "warning_count": 0,
+  "axioms": [
+   "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": false
+ },
+ "compiled": true,
+ "heartbeat": {
+  "command": "lake env lean p9-4.33rc2-reference-1.hb.lean",
+  "returncode": 0,
+  "seconds": 6.0,
+  "heartbeats": 3858,
+  "error_count": 0,
+  "first_errors": []
+ }
+}
+
+
+
+--- check ---
+
+'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+
+--- hb ---
+
+Used 3858 heartbeats, which is less than the current maximum of 200000.
+
+=== p9-4.33rc2-reference-2 ===
+verifier return code: 0
+
+{
+ "tag": "p9-4.33rc2-reference-2",
+ "name": "Cslib.CCS.bisimilarity_congr_choice",
+ "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+ "replaced_lines": [
+  311,
+  372
+ ],
+ "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 251,
+ "declaration_lines": 62,
+ "check": {
+  "command": "lake env lean p9-4.33rc2-reference-2.check.lean",
+  "returncode": 0,
+  "seconds": 6.89,
+  "error_count": 0,
+  "first_errors": [],
+  "warning_count": 0,
+  "axioms": [
+   "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": false
+ },
+ "compiled": true,
+ "heartbeat": {
+  "command": "lake env lean p9-4.33rc2-reference-2.hb.lean",
+  "returncode": 0,
+  "seconds": 4.27,
+  "heartbeats": 3858,
+  "error_count": 0,
+  "first_errors": []
+ }
+}
+
+
+
+--- check ---
+
+'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+
+--- hb ---
+
+Used 3858 heartbeats, which is less than the current maximum of 200000.
+
+=== p9-4.33rc2-reference-3 ===
+verifier return code: 0
+
+{
+ "tag": "p9-4.33rc2-reference-3",
+ "name": "Cslib.CCS.bisimilarity_congr_choice",
+ "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+ "replaced_lines": [
+  311,
+  372
+ ],
+ "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+ "statement_unchanged": true,
+ "forbidden_patterns": [],
+ "proof_tokens": 251,
+ "declaration_lines": 62,
+ "check": {
+  "command": "lake env lean p9-4.33rc2-reference-3.check.lean",
+  "returncode": 0,
+  "seconds": 4.54,
+  "error_count": 0,
+  "first_errors": [],
+  "warning_count": 0,
+  "axioms": [
+   "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+  ],
+  "sorryAx": false
+ },
+ "compiled": true,
+ "heartbeat": {
+  "command": "lake env lean p9-4.33rc2-reference-3.hb.lean",
+  "returncode": 0,
+  "seconds": 4.3,
+  "heartbeats": 3858,
+  "error_count": 0,
+  "first_errors": []
+ }
+}
+
+
+
+--- check ---
+
+'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+
+--- hb ---
+
+Used 3858 heartbeats, which is less than the current maximum of 200000.

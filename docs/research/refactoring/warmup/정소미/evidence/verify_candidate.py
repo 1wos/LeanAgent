@@ -22,7 +22,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
+import signal
 import subprocess
 import sys
 import time
@@ -55,15 +57,47 @@ IMPORT_RE = re.compile(r"^\s*((public|private|meta)\s+)*import\s")
 
 def run_lean(repo: Path, lean_args: list[str], path: Path, timeout: int) -> dict:
     cmd = ["lake", "env", "lean", *lean_args, str(path)]
-    t0 = time.time()
-    try:
-        p = subprocess.run(cmd, cwd=repo, capture_output=True, text=True, timeout=timeout)
-        out, code = p.stdout + p.stderr, p.returncode
-    except subprocess.TimeoutExpired as e:
-        out = (e.stdout or "") + (e.stderr or "") + f"\nTIMEOUT after {timeout}s\n"
-        code = -1
+    t0 = time.monotonic()
+    timed_out = False
+    with subprocess.Popen(cmd, cwd=repo, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                          text=True, errors="replace", start_new_session=os.name == "posix") as p:
+        def kill_children():
+            try:
+                if os.name == "posix":
+                    os.killpg(p.pid, signal.SIGKILL)
+                else:
+                    p.kill()
+            except ProcessLookupError:
+                pass
+
+        def terminate(signum, frame):
+            kill_children()
+            raise SystemExit(128 + signum)
+
+        previous = signal.signal(signal.SIGTERM, terminate)
+        try:
+            try:
+                stdout, stderr = p.communicate(timeout=timeout)
+            except subprocess.TimeoutExpired:
+                timed_out = True
+                kill_children()
+                stdout, stderr = p.communicate()
+        finally:
+            signal.signal(signal.SIGTERM, previous)
+        code = -1 if timed_out else p.returncode
+    out = stdout + stderr + (f"\nTIMEOUT after {timeout}s\n" if timed_out else "")
     return {"command": " ".join(cmd[:-1] + [path.name]), "returncode": code,
-            "seconds": round(time.time() - t0, 2), "output": out}
+            "seconds": round(time.monotonic() - t0, 2), "output": out,
+            "timed_out": timed_out}
+
+
+def parse_heartbeat(output: str, returncode: int) -> dict:
+    found = HB_RE.findall(output)
+    errors = [line for line in output.splitlines() if ": error" in line]
+    usable = len(found) == 1 and returncode == 0 and not errors
+    return {"heartbeats": int(found[0]) if usable else None,
+            "measurement_ambiguous": len(found) > 1,
+            "error_count": len(errors), "first_errors": errors[:3]}
 
 
 def main() -> int:
@@ -145,12 +179,7 @@ def main() -> int:
         hb = run_lean(args.repo, args.lean_arg, hb_path, args.timeout)
         hb_out = hb.pop("output")
         (args.workdir / f"{args.tag}.hb.log").write_text(hb_out, encoding="utf-8")
-        found = HB_RE.findall(hb_out)
-        hb_errors = [l for l in hb_out.splitlines() if ": error" in l]
-        # like the authors' heartbeat tool: a count from a failed run is discarded
-        usable = bool(found) and hb["returncode"] == 0 and not hb_errors
-        result["heartbeat"] = {**hb, "heartbeats": int(found[0]) if usable else None,
-                               "error_count": len(hb_errors), "first_errors": hb_errors[:3]}
+        result["heartbeat"] = {**hb, **parse_heartbeat(hb_out, hb["returncode"])}
 
     (args.workdir / f"{args.tag}.result.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

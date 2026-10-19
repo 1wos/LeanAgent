@@ -1,0 +1,50 @@
+[
+  {
+    "problem": 4,
+    "metric": "length",
+    "attempts": 15,
+    "valid": 14,
+    "failed": 1,
+    "valid_fraction": 0.9333333333333333,
+    "improved_fraction_all_attempts": 0.9333333333333333,
+    "valid_only_mean_improvement": 0.597028705724358,
+    "failure_inclusive_mean_improvement": 0.5572267920094007,
+    "denominator_gap_percentage_points": 3.9801913714957227
+  },
+  {
+    "problem": 4,
+    "metric": "heartbeat",
+    "attempts": 15,
+    "valid": 14,
+    "failed": 1,
+    "valid_fraction": 0.9333333333333333,
+    "improved_fraction_all_attempts": 0.9333333333333333,
+    "valid_only_mean_improvement": 0.6608473137308828,
+    "failure_inclusive_mean_improvement": 0.616790826148824,
+    "denominator_gap_percentage_points": 4.405648758205882
+  },
+  {
+    "problem": 9,
+    "metric": "length",
+    "attempts": 13,
+    "valid": 12,
+    "failed": 1,
+    "valid_fraction": 0.9230769230769231,
+    "improved_fraction_all_attempts": 0.8461538461538461,
+    "valid_only_mean_improvement": 0.4760956175298805,
+    "failure_inclusive_mean_improvement": 0.4394728777198897,
+    "denominator_gap_percentage_points": 3.662273980999081
+  },
+  {
+    "problem": 9,
+    "metric": "heartbeat",
+    "attempts": 13,
+    "valid": 12,
+    "failed": 1,
+    "valid_fraction": 0.9230769230769231,
+    "improved_fraction_all_attempts": 0.9230769230769231,
+    "valid_only_mean_improvement": 0.8678898686030428,
+    "failure_inclusive_mean_improvement": 0.8011291094797319,
+    "denominator_gap_percentage_points": 6.6760759123310915
+  }
+]

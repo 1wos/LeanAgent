@@ -1,0 +1,35 @@
+{
+  "url": "https://huggingface.co/spaces/delta-lab-ai/lean-refactor-arena/resolve/main/benchmark_data_warmup.jsonl",
+  "revision": "8fdaaaa25b993ae8d894e9bb756c3ae222b58507",
+  "retrieved_utc": "2026-10-18T10:18:38.084332+00:00",
+  "sha256": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+  "rows_checked": [
+    {
+      "problem": 4,
+      "name": "fundamental_theorem_of_variational_calculus'",
+      "proof_length": 851,
+      "version_info": [
+        {
+          "v4.32.0": "c48433678e8fb6306ebcd48453300c8e16058a62"
+        }
+      ]
+    },
+    {
+      "problem": 9,
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "proof_length": 251,
+      "version_info": [
+        {
+          "v4.33.0-rc2": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc"
+        },
+        {
+          "v4.32.0": "197a7be621263b84c67ca4f803f69205b36d06df"
+        },
+        {
+          "v4.31.0": "8ea71c8df91acd63285515a04da952b23b78d266"
+        }
+      ]
+    }
+  ],
+  "immutable_url": "https://huggingface.co/spaces/delta-lab-ai/lean-refactor-arena/resolve/8fdaaaa25b993ae8d894e9bb756c3ae222b58507/benchmark_data_warmup.jsonl"
+}

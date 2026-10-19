@@ -1,0 +1,1058 @@
+[
+  {
+    "tag": "p4-4.32-reference-1",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 851,
+    "declaration_lines": 126,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-reference-1.check.lean",
+      "returncode": 0,
+      "seconds": 12.07,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-reference-1.hb.lean",
+      "returncode": 0,
+      "seconds": 6.05,
+      "heartbeats": 11947,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p4-4.32",
+    "candidate": "reference",
+    "repeat": 1,
+    "candidate_file_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd"
+  },
+  {
+    "tag": "p4-4.32-final-1",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "d6cfeba8fdd26342165ca19a44a8e917ac4eaa0ab93a9a058f729c8bc07799c1",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 123,
+    "declaration_lines": 18,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-final-1.check.lean",
+      "returncode": 0,
+      "seconds": 3.9,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-final-1.hb.lean",
+      "returncode": 0,
+      "seconds": 3.96,
+      "heartbeats": 1411,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p4-4.32",
+    "candidate": "final",
+    "repeat": 1,
+    "candidate_file_sha256": "534b3f8929bc01e93d50fe36133ffc14ac729ff0eee74cacbc8cb03fe5ac0eb8"
+  },
+  {
+    "tag": "p4-4.32-reference-2",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 851,
+    "declaration_lines": 126,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-reference-2.check.lean",
+      "returncode": 0,
+      "seconds": 5.07,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-reference-2.hb.lean",
+      "returncode": 0,
+      "seconds": 4.92,
+      "heartbeats": 11947,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p4-4.32",
+    "candidate": "reference",
+    "repeat": 2,
+    "candidate_file_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd"
+  },
+  {
+    "tag": "p4-4.32-final-2",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "d6cfeba8fdd26342165ca19a44a8e917ac4eaa0ab93a9a058f729c8bc07799c1",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 123,
+    "declaration_lines": 18,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-final-2.check.lean",
+      "returncode": 0,
+      "seconds": 4.42,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-final-2.hb.lean",
+      "returncode": 0,
+      "seconds": 4.08,
+      "heartbeats": 1411,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p4-4.32",
+    "candidate": "final",
+    "repeat": 2,
+    "candidate_file_sha256": "534b3f8929bc01e93d50fe36133ffc14ac729ff0eee74cacbc8cb03fe5ac0eb8"
+  },
+  {
+    "tag": "p4-4.32-reference-3",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 851,
+    "declaration_lines": 126,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-reference-3.check.lean",
+      "returncode": 0,
+      "seconds": 5.65,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-reference-3.hb.lean",
+      "returncode": 0,
+      "seconds": 5.85,
+      "heartbeats": 11947,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p4-4.32",
+    "candidate": "reference",
+    "repeat": 3,
+    "candidate_file_sha256": "ae3a05ebcb1ec68d71b29734366ba8e73e3d3068bcc3a53e5b71ec3990bc84dd"
+  },
+  {
+    "tag": "p4-4.32-final-3",
+    "name": "fundamental_theorem_of_variational_calculus'",
+    "source_file": "Physlib/Mathematics/VariationalCalculus/Basic.lean",
+    "replaced_lines": [
+      99,
+      224
+    ],
+    "candidate_sha256": "d6cfeba8fdd26342165ca19a44a8e917ac4eaa0ab93a9a058f729c8bc07799c1",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 123,
+    "declaration_lines": 18,
+    "check": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-final-3.check.lean",
+      "returncode": 0,
+      "seconds": 7.13,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'fundamental_theorem_of_variational_calculus'' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean -Dwarn.sorry=false -Dweak.says.verify=true p4-4.32-final-3.hb.lean",
+      "returncode": 0,
+      "seconds": 4.03,
+      "heartbeats": 1411,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p4-4.32",
+    "candidate": "final",
+    "repeat": 3,
+    "candidate_file_sha256": "534b3f8929bc01e93d50fe36133ffc14ac729ff0eee74cacbc8cb03fe5ac0eb8"
+  },
+  {
+    "tag": "p9-4.31-reference-1",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean p9-4.31-reference-1.check.lean",
+      "returncode": 0,
+      "seconds": 11.02,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.31-reference-1.hb.lean",
+      "returncode": 0,
+      "seconds": 4.2,
+      "heartbeats": 3859,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.31",
+    "candidate": "reference",
+    "repeat": 1,
+    "candidate_file_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "p9-4.31-final-1",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean p9-4.31-final-1.check.lean",
+      "returncode": 0,
+      "seconds": 3.98,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.31-final-1.hb.lean",
+      "returncode": 0,
+      "seconds": 3.98,
+      "heartbeats": 516,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.31",
+    "candidate": "final",
+    "repeat": 1,
+    "candidate_file_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  },
+  {
+    "tag": "p9-4.31-reference-2",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean p9-4.31-reference-2.check.lean",
+      "returncode": 0,
+      "seconds": 4.45,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.31-reference-2.hb.lean",
+      "returncode": 0,
+      "seconds": 4.21,
+      "heartbeats": 3859,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.31",
+    "candidate": "reference",
+    "repeat": 2,
+    "candidate_file_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "p9-4.31-final-2",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean p9-4.31-final-2.check.lean",
+      "returncode": 0,
+      "seconds": 4.01,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.31-final-2.hb.lean",
+      "returncode": 0,
+      "seconds": 4.34,
+      "heartbeats": 516,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.31",
+    "candidate": "final",
+    "repeat": 2,
+    "candidate_file_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  },
+  {
+    "tag": "p9-4.31-reference-3",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean p9-4.31-reference-3.check.lean",
+      "returncode": 0,
+      "seconds": 4.18,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.31-reference-3.hb.lean",
+      "returncode": 0,
+      "seconds": 4.22,
+      "heartbeats": 3859,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.31",
+    "candidate": "reference",
+    "repeat": 3,
+    "candidate_file_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "p9-4.31-final-3",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean p9-4.31-final-3.check.lean",
+      "returncode": 0,
+      "seconds": 4.02,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.31-final-3.hb.lean",
+      "returncode": 0,
+      "seconds": 4.05,
+      "heartbeats": 516,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.31",
+    "candidate": "final",
+    "repeat": 3,
+    "candidate_file_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  },
+  {
+    "tag": "p9-4.32-reference-1",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean p9-4.32-reference-1.check.lean",
+      "returncode": 0,
+      "seconds": 10.08,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.32-reference-1.hb.lean",
+      "returncode": 0,
+      "seconds": 4.41,
+      "heartbeats": 3856,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.32",
+    "candidate": "reference",
+    "repeat": 1,
+    "candidate_file_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "p9-4.32-final-1",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean p9-4.32-final-1.check.lean",
+      "returncode": 0,
+      "seconds": 3.94,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.32-final-1.hb.lean",
+      "returncode": 0,
+      "seconds": 3.89,
+      "heartbeats": 516,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.32",
+    "candidate": "final",
+    "repeat": 1,
+    "candidate_file_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  },
+  {
+    "tag": "p9-4.32-reference-2",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean p9-4.32-reference-2.check.lean",
+      "returncode": 0,
+      "seconds": 4.63,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.32-reference-2.hb.lean",
+      "returncode": 0,
+      "seconds": 5.29,
+      "heartbeats": 3856,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.32",
+    "candidate": "reference",
+    "repeat": 2,
+    "candidate_file_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "p9-4.32-final-2",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean p9-4.32-final-2.check.lean",
+      "returncode": 0,
+      "seconds": 5.15,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.32-final-2.hb.lean",
+      "returncode": 0,
+      "seconds": 4.37,
+      "heartbeats": 516,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.32",
+    "candidate": "final",
+    "repeat": 2,
+    "candidate_file_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  },
+  {
+    "tag": "p9-4.32-reference-3",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean p9-4.32-reference-3.check.lean",
+      "returncode": 0,
+      "seconds": 4.26,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.32-reference-3.hb.lean",
+      "returncode": 0,
+      "seconds": 7.39,
+      "heartbeats": 3856,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.32",
+    "candidate": "reference",
+    "repeat": 3,
+    "candidate_file_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "p9-4.32-final-3",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean p9-4.32-final-3.check.lean",
+      "returncode": 0,
+      "seconds": 4.19,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.32-final-3.hb.lean",
+      "returncode": 0,
+      "seconds": 4.14,
+      "heartbeats": 516,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.32",
+    "candidate": "final",
+    "repeat": 3,
+    "candidate_file_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  },
+  {
+    "tag": "p9-4.33rc2-reference-1",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean p9-4.33rc2-reference-1.check.lean",
+      "returncode": 0,
+      "seconds": 11.5,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.33rc2-reference-1.hb.lean",
+      "returncode": 0,
+      "seconds": 6.0,
+      "heartbeats": 3858,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.33rc2",
+    "candidate": "reference",
+    "repeat": 1,
+    "candidate_file_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "p9-4.33rc2-final-1",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean p9-4.33rc2-final-1.check.lean",
+      "returncode": 0,
+      "seconds": 4.27,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.33rc2-final-1.hb.lean",
+      "returncode": 0,
+      "seconds": 4.13,
+      "heartbeats": 510,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.33rc2",
+    "candidate": "final",
+    "repeat": 1,
+    "candidate_file_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  },
+  {
+    "tag": "p9-4.33rc2-reference-2",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean p9-4.33rc2-reference-2.check.lean",
+      "returncode": 0,
+      "seconds": 6.89,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.33rc2-reference-2.hb.lean",
+      "returncode": 0,
+      "seconds": 4.27,
+      "heartbeats": 3858,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.33rc2",
+    "candidate": "reference",
+    "repeat": 2,
+    "candidate_file_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "p9-4.33rc2-final-2",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean p9-4.33rc2-final-2.check.lean",
+      "returncode": 0,
+      "seconds": 4.11,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.33rc2-final-2.hb.lean",
+      "returncode": 0,
+      "seconds": 4.03,
+      "heartbeats": 510,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.33rc2",
+    "candidate": "final",
+    "repeat": 2,
+    "candidate_file_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  },
+  {
+    "tag": "p9-4.33rc2-reference-3",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 251,
+    "declaration_lines": 62,
+    "check": {
+      "command": "lake env lean p9-4.33rc2-reference-3.check.lean",
+      "returncode": 0,
+      "seconds": 4.54,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.33rc2-reference-3.hb.lean",
+      "returncode": 0,
+      "seconds": 4.3,
+      "heartbeats": 3858,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.33rc2",
+    "candidate": "reference",
+    "repeat": 3,
+    "candidate_file_sha256": "90ec3fb53d6c4e9485868b3d1f1bceac5de6abc8b429d456281744fd1b0fa828"
+  },
+  {
+    "tag": "p9-4.33rc2-final-3",
+    "name": "Cslib.CCS.bisimilarity_congr_choice",
+    "source_file": "Cslib/Languages/CCS/BehaviouralTheory.lean",
+    "replaced_lines": [
+      311,
+      372
+    ],
+    "candidate_sha256": "a10b4088a2440c2e21f4daa17a82061bfa215e84ef013b33509b911969ca7078",
+    "statement_unchanged": true,
+    "forbidden_patterns": [],
+    "proof_tokens": 79,
+    "declaration_lines": 9,
+    "check": {
+      "command": "lake env lean p9-4.33rc2-final-3.check.lean",
+      "returncode": 0,
+      "seconds": 4.07,
+      "error_count": 0,
+      "first_errors": [],
+      "warning_count": 0,
+      "axioms": [
+        "'Cslib.CCS.bisimilarity_congr_choice' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ],
+      "sorryAx": false
+    },
+    "compiled": true,
+    "heartbeat": {
+      "command": "lake env lean p9-4.33rc2-final-3.hb.lean",
+      "returncode": 0,
+      "seconds": 4.02,
+      "heartbeats": 510,
+      "error_count": 0,
+      "first_errors": []
+    },
+    "axioms_match": true,
+    "accepted": true,
+    "lean_invoked": true,
+    "verifier_returncode": 0,
+    "status": "accepted",
+    "environment": "p9-4.33rc2",
+    "candidate": "final",
+    "repeat": 3,
+    "candidate_file_sha256": "12c49a5118cd4a455ecbc9c793284fe24bb4123803196cf73139ba254aad7f7a"
+  }
+]
