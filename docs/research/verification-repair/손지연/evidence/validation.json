@@ -1,0 +1,245 @@
+{
+  "schema_version": 2,
+  "summarized_on": "2026-10-18",
+  "timezone": "Asia/Seoul",
+  "scope": "evidence/ only; original execution files replaced with Markdown and JSON summaries",
+  "raw_artifacts_retained": false,
+  "full_reproduction_possible_from_this_bundle": false,
+  "original_file_count": 381,
+  "final_file_count": 11,
+  "removed_original_paths": 374,
+  "rewritten_existing_paths": [
+    "README.md",
+    "controlled/README.md",
+    "metrics.json",
+    "model-repair/README.md",
+    "repl/README.md",
+    "tests/README.md",
+    "validation.json"
+  ],
+  "added_summary_paths": [
+    "controlled/results.json",
+    "model-repair/results.json",
+    "repl/results.json",
+    "tests/results.json"
+  ],
+  "original_total_bytes": 1397696,
+  "original_inventory_sha256": "2bce25f877e4e3db7fb22e1f6f009131247c7175c076b030c66ab6fdd091ea2e",
+  "summary_source_comparison": [
+    {
+      "check": "REPL: 12 summarized requests equal recorded protocol count",
+      "passed": true
+    },
+    {
+      "check": "REPL: all compiler return codes and elapsed times copied",
+      "passed": true
+    },
+    {
+      "check": "P7: known repair equals baseline bytes",
+      "passed": true
+    },
+    {
+      "check": "P7 00_baseline: status/time/axioms equal measured record",
+      "passed": true
+    },
+    {
+      "check": "P7 00_baseline: metrics agree with raw results",
+      "passed": true
+    },
+    {
+      "check": "P7 01_broken: status/time/axioms equal measured record",
+      "passed": true
+    },
+    {
+      "check": "P7 01_broken: metrics agree with raw results",
+      "passed": true
+    },
+    {
+      "check": "P7 02_repaired: status/time/axioms equal measured record",
+      "passed": true
+    },
+    {
+      "check": "P7 02_repaired: metrics agree with raw results",
+      "passed": true
+    },
+    {
+      "check": "P12: known repair equals baseline bytes",
+      "passed": true
+    },
+    {
+      "check": "P12 00_baseline: status/time/axioms equal measured record",
+      "passed": true
+    },
+    {
+      "check": "P12 00_baseline: metrics agree with raw results",
+      "passed": true
+    },
+    {
+      "check": "P12 01_broken: status/time/axioms equal measured record",
+      "passed": true
+    },
+    {
+      "check": "P12 01_broken: metrics agree with raw results",
+      "passed": true
+    },
+    {
+      "check": "P12 02_repaired: status/time/axioms equal measured record",
+      "passed": true
+    },
+    {
+      "check": "P12 02_repaired: metrics agree with raw results",
+      "passed": true
+    },
+    {
+      "check": "P7 model: original raw response proof body equals body artifact",
+      "passed": true
+    },
+    {
+      "check": "P7 model: attempts/attempt_01/candidate.lean SHA256 matches final checked candidate",
+      "passed": true
+    },
+    {
+      "check": "P7 model: attempts/attempt_01_final/candidate.lean SHA256 matches final checked candidate",
+      "passed": true
+    },
+    {
+      "check": "P7 model: successful.lean SHA256 matches final checked candidate",
+      "passed": true
+    },
+    {
+      "check": "P7 model: metrics counts equal original result",
+      "passed": true
+    },
+    {
+      "check": "P7 model: final status and target axioms agree",
+      "passed": true
+    },
+    {
+      "check": "Tests: 22 named regression outcomes match recorded module totals",
+      "passed": true
+    },
+    {
+      "check": "Tests: controller subset count matches archived record",
+      "passed": true
+    },
+    {
+      "check": "Tests: 15 parser cases preserve every expected/actual verdict",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → ../report.html",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → metrics.json",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → repl/README.md",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → repl/results.json",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → controlled/README.md",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → controlled/results.json",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → model-repair/README.md",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → model-repair/results.json",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → tests/README.md",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → tests/results.json",
+      "passed": true
+    },
+    {
+      "check": "Link README.md → ../../../../../STRUCTURE.md",
+      "passed": true
+    },
+    {
+      "check": "Link repl/README.md → results.json",
+      "passed": true
+    },
+    {
+      "check": "Link controlled/README.md → results.json",
+      "passed": true
+    },
+    {
+      "check": "Link model-repair/README.md → results.json",
+      "passed": true
+    },
+    {
+      "check": "Link tests/README.md → results.json",
+      "passed": true
+    },
+    {
+      "check": "Metrics path ../report.html",
+      "passed": true
+    },
+    {
+      "check": "Metrics path repl/results.json",
+      "passed": true
+    },
+    {
+      "check": "Metrics path controlled/results.json",
+      "passed": true
+    },
+    {
+      "check": "Metrics path model-repair/results.json",
+      "passed": true
+    },
+    {
+      "check": "Metrics path tests/results.json",
+      "passed": true
+    },
+    {
+      "check": "Metrics path tests/results.json",
+      "passed": true
+    },
+    {
+      "check": "Metrics path tests/results.json",
+      "passed": true
+    },
+    {
+      "check": "Exactly 11 summary documents/JSON files staged",
+      "passed": true
+    },
+    {
+      "check": "Outside evidence docs unchanged",
+      "passed": true
+    },
+    {
+      "check": "Source files unchanged since extraction",
+      "passed": true
+    },
+    {
+      "check": "Existing broken proof body compatibility verdict copied from original record",
+      "passed": true
+    }
+  ],
+  "local_documentation_links_checked": 16,
+  "metrics_paths_checked": 7,
+  "outside_scope_docs_files_unchanged": 160,
+  "lean_rerun": false,
+  "model_called": false,
+  "tests_rerun": false,
+  "limitations": [
+    "Summaries retain selected measurements, diagnoses, environment identifiers and hashes, not the original proof bodies, implementations or raw logs.",
+    "A stored hash identifies a removed original but cannot reconstruct it or permit a fresh audit without that original.",
+    "All proof acceptance and test results describe previous executions, not a rerun during summarization."
+  ]
+}

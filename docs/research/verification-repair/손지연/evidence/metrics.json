@@ -1,0 +1,240 @@
+{
+  "schema_version": 2,
+  "record_type": "derived_index_of_summarized_measurements",
+  "timezone": "Asia/Seoul",
+  "representative_report": "../report.html",
+  "scope": "기존 실행 결과의 문서·JSON 요약. 원시 증명·코드·로그·환경 사본은 삭제했으며 새 Lean 검증·모델 호출은 수행하지 않음.",
+  "repl": {
+    "source": "repl/results.json",
+    "environment": {
+      "runtime": "leanprover-community/repl",
+      "repl_tag": "v4.19.0",
+      "repl_commit": "3b27c8543a48444ffab4077f47526d91849cca3d",
+      "lean_version": "Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)",
+      "system": "Linux-6.18.55-x86_64-with-glibc2.39"
+    },
+    "model_called": false,
+    "mathlib_used": false,
+    "protocol_records": 12,
+    "compiler": [
+      {
+        "label": "baseline",
+        "returncode": 0,
+        "elapsed_seconds": 0.099091
+      },
+      {
+        "label": "broken",
+        "returncode": 1,
+        "elapsed_seconds": 0.115419
+      },
+      {
+        "label": "repaired",
+        "returncode": 0,
+        "elapsed_seconds": 0.11558
+      },
+      {
+        "label": "sorry",
+        "returncode": 0,
+        "elapsed_seconds": 0.102397
+      }
+    ],
+    "measurement_date": null,
+    "measurement_date_note": "원시 summary.json에 측정일 필드가 없어 지정하지 않음."
+  },
+  "controlled": {
+    "source": "controlled/results.json",
+    "record_created_at_utc": "2026-10-17T22:54:29.546180+00:00",
+    "experiment": "controlled_known_repair",
+    "automatic_model_repair": false,
+    "final_verdict": "passed_with_documented_refinement",
+    "cases": {
+      "P7": {
+        "library": "Cslib",
+        "commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+        "lean_version": "v4.33.0-rc2",
+        "target": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "runs": {
+          "00_baseline": {
+            "observed": "verified",
+            "returncode": 0,
+            "elapsed_seconds": 6.422,
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "diagnostic_category": "none"
+          },
+          "01_broken": {
+            "observed": "proof_error",
+            "returncode": 1,
+            "elapsed_seconds": 3.328,
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext",
+              "sorryAx"
+            ],
+            "diagnostic_category": "typing_evidence_mismatch"
+          },
+          "02_repaired": {
+            "observed": "verified",
+            "returncode": 0,
+            "elapsed_seconds": 3.231,
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "diagnostic_category": "none"
+          }
+        },
+        "axiom_comparison": {
+          "baseline": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "repaired": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "equal": true,
+          "added": []
+        }
+      },
+      "P12": {
+        "library": "ArkLib",
+        "commit": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+        "lean_version": "v4.31.0",
+        "target": "interleaved_affine_gaps_imply_tensor_gaps",
+        "runs": {
+          "00_baseline": {
+            "observed": "verified",
+            "returncode": 0,
+            "elapsed_seconds": 20.907,
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "diagnostic_category": "none"
+          },
+          "01_broken": {
+            "observed": "proof_error",
+            "returncode": 1,
+            "elapsed_seconds": 10.6,
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext",
+              "sorryAx"
+            ],
+            "diagnostic_category": "implicit_argument_inference"
+          },
+          "02_repaired": {
+            "observed": "verified",
+            "returncode": 0,
+            "elapsed_seconds": 10.377,
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "diagnostic_category": "none"
+          }
+        },
+        "axiom_comparison": {
+          "baseline": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "repaired": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "equal": true,
+          "added": []
+        }
+      }
+    },
+    "measurement_date": "2026-10-18"
+  },
+  "model_repair": {
+    "source": "model-repair/results.json",
+    "record_created_at_Asia_Seoul": "2026-10-18T09:40:07.162999+09:00",
+    "environment": {
+      "library": "Cslib",
+      "commit": "3aa9d4416c185e0b9faeb72bbd65abe85b95dbcc",
+      "lean_toolchain": "leanprover/lean4:v4.33.0-rc2",
+      "manifest_sha256": "c5acf9a59cf6956eb89589ff09b6a35adbc79fb220886f61442fe02d8b21aae0"
+    },
+    "status": "verified",
+    "requested_model": "gpt-5.6-sol",
+    "requested_reasoning_effort": "high",
+    "observed_model_id": null,
+    "candidate_request_cli_invocations": 1,
+    "completed_model_turns": 1,
+    "actual_model_retry_observed": false,
+    "lean_call_counts": {
+      "whole_file_verification": 4,
+      "proof_state_diagnostic": 1,
+      "proof_body_parser": 2
+    },
+    "model_cli_elapsed_seconds": 8.826,
+    "experiment_elapsed_seconds_excluding_preparation": 36.713,
+    "final_checked_sha256": "81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf",
+    "successful_file_sha256": "81a54ed93208f9e079f069e800b4e0481f9980f39ac8677df5ff5af2677049cf",
+    "exact_model_body_preserved": true,
+    "manual_candidate_edits": false,
+    "final_target_axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "isolation_verified": false,
+    "independent_success_counted": false,
+    "cost": null,
+    "measurement_date": "2026-10-18"
+  },
+  "archived_tests": {
+    "event_and_controller": {
+      "source": "tests/results.json",
+      "count": 22,
+      "modules": {
+        "test_event_audit": 9,
+        "test_controller": 13
+      },
+      "returncode": 0,
+      "model_call_count": 0,
+      "lean_call_count": 0
+    },
+    "controller_v2": {
+      "source": "tests/results.json",
+      "count": 13,
+      "included_in_event_and_controller": true
+    },
+    "parser_guard": {
+      "source": "tests/results.json",
+      "count": 15,
+      "all_passed": true,
+      "candidate_elaborated": false
+    }
+  },
+  "interpretation_limits": [
+    "단일 실행 시간이며 P7/P12 성능 비교가 아님.",
+    "P7 첫 후보 수락을 관측했고 실패 후 실제 모델 재시도와 P12 모델 수리는 실행하지 않았음.",
+    "22개 회귀 시험은 13개 controller 시험을 포함함.",
+    "CLI 종료 코드와 빈 goals만으로 최종 성공을 판정하지 않음.",
+    "수정된 전체 파일과 최종 대상 정리의 전이적 공리 검사를 함께 확인함."
+  ],
+  "shared_date": "2026-10-18",
+  "source_index_created_at": "2026-10-18T11:06:25.291014+09:00",
+  "summarized_on": "2026-10-18",
+  "path_base": "evidence/",
+  "raw_artifacts_retained": false,
+  "full_reproduction_possible_from_this_bundle": false
+}
