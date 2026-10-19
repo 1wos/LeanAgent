@@ -12,7 +12,7 @@
 
 | 담당 영역 | 담당자 | 살펴볼 내용 |
 | --- | --- | --- |
-| 구조/전략(tactic) 설계 | 박채원, 박선영, 박성호 | 기존 증명 분석과 리팩터링 후보를 만드는 전략 |
+| 구조/전략(tactic) 설계 | 박채원, 박선영 | 기존 증명 분석과 리팩터링 후보를 만드는 전략 |
 | 검증/수리 설계 | 남성우, 손지연 | 후보 증명 검증과 실패 원인을 바탕으로 한 수정 방법 |
 | 실행관리/평가/재현 | 정소미, 권주원 | 실험 실행, 결과 비교와 재현 방법 |
 
@@ -26,8 +26,8 @@
 
 | 담당 영역 | 담당자 | 대표 공유 자료 |
 | --- | --- | --- |
-| 구조/전략(tactic) 설계 | 박채원, 박선영, 박성호 | 자료 없음 |
+| 구조/전략(tactic) 설계 | 박채원, 박선영 | 박채원: [Warm-up 14·15 구조 분석과 블록 조합 실험](../../research/refactoring/warmup/박채원/presentation.html), 박선영: [P11 구조 변경 효과 분리 실험](../../research/refactoring/warmup/박선영/presentation.html) |
 | 검증/수리 설계 | 남성우, 손지연 | 남성우: [검증을 통과한 뒤에도, 선택은 남아 있다](../../research/verifier-guided-agent/남성우/presentation.html), 손지연: [검증·수리 설계와 실행 (HTML)](../../research/verification-repair/손지연/report.html) |
-| 실행관리/평가/재현 | 정소미, 권주원 | 정소미: [후보 선택·실패 집계에 따른 평가 차이 (HTML)](../../research/refactoring/warmup/정소미/evaluation.html), 권주원: [수집 코퍼스와 통계 분석](../../research/refactoring/corpus/권주원/report.html) |
+| 실행관리/평가/재현 | 정소미, 권주원 | 정소미: [후보 선택·실패 집계에 따른 평가 차이 (HTML)](../../research/refactoring/warmup/정소미/evaluation.html), 권주원: [Arena 개발·실험·운영 통합 가이드](../../research/refactoring/arena-guide.html) |
 
 발표자료와 상세 보고서·실험 기록은 [문서 지침](../../STRUCTURE.md)에 따라 기존 분야·문제 세트의 담당자 폴더에 작성하고, 이 표에 대표 자료를 연결합니다.
