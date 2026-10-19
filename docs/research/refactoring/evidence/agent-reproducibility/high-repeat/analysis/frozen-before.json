@@ -1,0 +1,18 @@
+{
+  "initial-message.txt": "6af61840e46e32608f56124583d1463a182c2424b66ab710df04c4995fe7a8df",
+  "launch.txt": "3c834678d928657bae76c588b5f7c535a2749a87d5b6f75287ae7cd5f188cb0b",
+  "protocol.json": "0eb55c71bf1fb98e61532fbf884b8712bd60312dda580f540156ed6ad90ae119",
+  "gate.py": "9400db5f55d9f176c7117bcd2b71afd69cffe27b61e7c43934669b218f49b421",
+  "baseline.json": "8a5165be7bb5450b5656ad14979da16e2e6248175ac8f646f234a203da586ba7",
+  "common/manifest.json": "f91d1fa0cfcfe37eee27f599abf0b36223f6d908cc8982e3e2fadcb882703671",
+  "common/P02/metadata.json": "200848ba024cd819d173dfb0fbd588c7a9f48fead8ac1fe9b4c9d1a114651e2f",
+  "common/P02/reference.lean": "8dc06d3b64efe3194b2b71ba3d27d72484013bbff621069f533fc146978b9b06",
+  "common/P02/source.lean": "1c5e76014548db4a380b5c225f561c726a0db1184dcddfefb7191052e67dd79a",
+  "common/P02/statement.lean": "25d86f06653c4884d42640b2feebc2c949edf8932635abf62f60cce055ac110b",
+  "common/lake-manifest.json": "5aab41f14cc55b5049ae81535506b6998bfadd9d983af6130fa92f4a39bd244c",
+  "common/lakefile.toml": "5c0abe83aaa82d837d50cf987102ff3138a15aec988912f06166a39e5ee578ae",
+  "common/lean-toolchain": "e8173aad377a6d70041e5f7a5d8895ed587628f5cab243c53a18c40a1b7b6bf8",
+  "common/packet.txt": "a6d061e96690018568bc3bec1b809c54d61307ed4b292e29f4476231e45f964b",
+  "common/proof_tokens.py": "746f0c5b6d21015062f686b9bde4ea3623c17c2421d12f1436d741860c5404ed",
+  "common/verify.py": "98bc492f41d4f4db3b5b5040381cb45b5613585d9269310fc0dbd7458836f938"
+}

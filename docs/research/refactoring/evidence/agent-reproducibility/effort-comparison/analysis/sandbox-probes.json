@@ -1,0 +1,43 @@
+{
+  "file_write": {
+    "command": [
+      "/usr/bin/sandbox-exec",
+      "-p",
+      "(version 1) (allow default) (deny network*) (deny file-write*)",
+      "/bin/sh",
+      "-c",
+      "touch \"$1\"",
+      "sandbox-probe",
+      "/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/analysis/SHOULD_NOT_EXIST"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "touch: /Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/analysis/SHOULD_NOT_EXIST: Operation not permitted\n"
+  },
+  "network_bind": {
+    "command": [
+      "/usr/bin/sandbox-exec",
+      "-p",
+      "(version 1) (allow default) (deny network*) (deny file-write*)",
+      "/usr/bin/python3",
+      "-c",
+      "import socket; s=socket.socket(); s.bind((\"127.0.0.1\", 0))"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nPermissionError: [Errno 1] Operation not permitted\n"
+  },
+  "file_read": {
+    "command": [
+      "/usr/bin/sandbox-exec",
+      "-p",
+      "(version 1) (allow default) (deny network*) (deny file-write*)",
+      "/bin/cat",
+      "/Users/jwkweon/00_work/00_project/05_pseudolab/LeanAgent/docs/research/refactoring/warmup/권주원/evidence/2026-10-15-reasoning-effort/common/lean-toolchain"
+    ],
+    "exit_code": 0,
+    "stdout": "leanprover/lean4:v4.26.0\n",
+    "stderr": ""
+  },
+  "file_created": false
+}

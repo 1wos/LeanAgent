@@ -1,0 +1,18 @@
+--- run01
++++ run03
+@@ -2,10 +2,9 @@
+   intro h
+   induction h <;>
+     simp_all [Imperative.HasVarsPure.getVars, extractOldExprVars,
+-      Lambda.LExpr.LExpr.getVars, List.subset_def]
++      Lambda.LExpr.LExpr.getVars, List.Subset, List.mem_append]
+   split <;> simp_all [Lambda.LExpr.LExpr.getVars]
+-  · rename_i hOld
+-    have hf := hOld IsOldPred.oldPred
+-    cases hf
+-    simp_all
+-  · aesop
++  rename_i hn _ _ _
++  have hf := hn (by constructor)
++  cases hf
++  contradiction

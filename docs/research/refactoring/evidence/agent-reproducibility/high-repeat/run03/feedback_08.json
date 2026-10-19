@@ -1,0 +1,1 @@
+{"attempt":8,"remaining":0,"valid":false,"proof_tokens":125,"raw_heartbeats":918109,"local_score":null,"axioms":["propext","sorryAx","Quot.sound"],"diagnostics":"Application type mismatch: The argument\n  ha\nhas type\n  a.Subset c\nbut is expected to have type\n  ?m.26 → x✝ ∈ c\nin the application\n  Or.imp ha","error_count":1}

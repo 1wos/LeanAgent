@@ -1,0 +1,68 @@
+{
+  "launch_sha256": "ff73e3e81c067558af25a8e4192700c55295ca8ada936c741701a373f056920c",
+  "first_launches": [
+    "/root/run01_s1",
+    "/root/run02_s1",
+    "/root/run03_s1"
+  ],
+  "fork_turns": "none",
+  "reasoning_effort": "high",
+  "transport": "filesystem mailbox",
+  "note": "All nine spawn messages use launch.txt byte-identical text; task identity differs.",
+  "workers": [
+    {
+      "worker": "run01_s1",
+      "request_characters": 10412,
+      "fresh": true,
+      "effort": "high"
+    },
+    {
+      "worker": "run01_s2",
+      "request_characters": 13032,
+      "fresh": true,
+      "effort": "high"
+    },
+    {
+      "worker": "run01_s3",
+      "request_characters": 12709,
+      "fresh": true,
+      "effort": "high"
+    },
+    {
+      "worker": "run02_s1",
+      "request_characters": 10412,
+      "fresh": true,
+      "effort": "high"
+    },
+    {
+      "worker": "run02_s2",
+      "request_characters": 12508,
+      "fresh": true,
+      "effort": "high"
+    },
+    {
+      "worker": "run02_s3",
+      "request_characters": 12007,
+      "fresh": true,
+      "effort": "high"
+    },
+    {
+      "worker": "run03_s1",
+      "request_characters": 10412,
+      "fresh": true,
+      "effort": "high"
+    },
+    {
+      "worker": "run03_s2",
+      "request_characters": 12212,
+      "fresh": true,
+      "effort": "high"
+    },
+    {
+      "worker": "run03_s3",
+      "request_characters": 11928,
+      "fresh": true,
+      "effort": "high"
+    }
+  ]
+}

@@ -1,0 +1,612 @@
+{
+  "generated_at_utc": "2026-10-15T08:40:18.572527+00:00",
+  "protocol": {
+    "created_at_utc": "2026-10-15T08:26:10.709692+00:00",
+    "problem": 2,
+    "reasoning_effort": "high",
+    "independent_trials": 3,
+    "fork_turns": "none",
+    "model_override": null,
+    "model": "inherited parent; exact model ID unavailable",
+    "task_packet_max_characters": 12000,
+    "task_packet_actual_characters": 6652,
+    "feedback_max_characters_per_submission": 1500,
+    "candidate_submissions_per_trial": 8,
+    "candidate_max_characters": 4000,
+    "final_verification_repeats": 5,
+    "baseline_repeats": 3,
+    "selection": "minimum valid discovery score including original; ties: fewer proof tokens then earlier attempt",
+    "primary_comparisons": [
+      "first candidate exact hash",
+      "final selected proof exact hash",
+      "lexical token sequence after stripping comments/whitespace (not semantic equality)",
+      "validity",
+      "final median local score"
+    ],
+    "serial_lean_validation": true,
+    "no_time_race": true,
+    "launch_sha256": "3c834678d928657bae76c588b5f7c535a2749a87d5b6f75287ae7cd5f188cb0b",
+    "governance_characters": 3831,
+    "limitations": [
+      "exact model/token/cost/sampling telemetry unavailable",
+      "same launch and domain packet, different task identities and output paths",
+      "no hard token cap on app system context or evolving own output",
+      "agent read isolation by instructions, not OS sandbox",
+      "three trials describe observations, not a stable probability estimate",
+      "new restricted context and 8 attempts are not directly comparable to previous one-hour unrestricted-source search"
+    ],
+    "initial_message_sha256": "6af61840e46e32608f56124583d1463a182c2424b66ab710df04c4995fe7a8df"
+  },
+  "baseline": {
+    "proof_tokens": 222,
+    "median_raw_heartbeats": 2585163,
+    "raw_heartbeats": [
+      2585163,
+      2585163,
+      2585163
+    ],
+    "all_valid": true
+  },
+  "trials": [
+    {
+      "trial": "run01",
+      "started_at": "2026-10-15T08:27:28.211407+00:00",
+      "finished_at": "2026-10-15T08:35:49.120441+00:00",
+      "candidate_attempts": 8,
+      "valid_candidates": 3,
+      "invalid_candidates": 5,
+      "packet_sha256": "a6d061e96690018568bc3bec1b809c54d61307ed4b292e29f4476231e45f964b",
+      "packet_characters": 6652,
+      "feedback_characters": [
+        192,
+        689,
+        1202,
+        1486,
+        687,
+        184,
+        185,
+        184
+      ],
+      "total_feedback_characters": 4809,
+      "delivered_domain_characters": 11461,
+      "first_candidate": {
+        "exact_sha256": "c51c2d6d91273babdb089de404d5e7aeaefe126743668111d4cf7ec7324e313b",
+        "lexical_sha256": "0e8ea68f02b99009f8b49e06b92bb6be1a73141d12b6858387c9611ef3fd079a",
+        "valid": false,
+        "path": "run01/runs/P02/attempt_01/proof.lean"
+      },
+      "selection": {
+        "label": "attempt_08",
+        "score": 0.4786977073984702,
+        "proof_tokens": 171,
+        "attempt": 8,
+        "proof_path": "run01/runs/P02/attempt_08/proof.lean",
+        "trial": "run01"
+      },
+      "final": {
+        "exact_sha256": "76774433bc2127ce1a97849fce922e5159c6973201d073199ffc00afb28be726",
+        "lexical_sha256": "369d302e1a7896a3a084598d283aa98a7022405ed8d3a7c0d83c35acfbc0a71a",
+        "proof_tokens": 171,
+        "raw_heartbeats": {
+          "values": [
+            483749,
+            483749,
+            483749,
+            483749,
+            483749
+          ],
+          "min": 483749,
+          "median": 483749,
+          "max": 483749,
+          "spread": 0
+        },
+        "local_score": 0.4786977073984702,
+        "valid_repeats": 5,
+        "axioms": [
+          "propext",
+          "Quot.sound"
+        ],
+        "path": "run01/selected/proof.lean",
+        "wall_seconds": {
+          "values": [
+            15.572099457999999,
+            11.808389,
+            12.052233791,
+            12.145386166,
+            11.797821875
+          ],
+          "min": 11.797821875,
+          "median": 12.052233791,
+          "max": 15.572099457999999,
+          "spread": 3.774277582999998
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 35,
+          "raw_heartbeats": null,
+          "proof_sha256": "c51c2d6d91273babdb089de404d5e7aeaefe126743668111d4cf7ec7324e313b",
+          "hypothesis": "Induct over normalization evidence and discharge list membership goals by simplification, leaving only application matching.",
+          "result_path": "run01/runs/P02/attempt_01/result.json",
+          "candidate_path": "run01/candidates/01.lean"
+        },
+        {
+          "attempt": 2,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 57,
+          "raw_heartbeats": 864830,
+          "proof_sha256": "2598481b6913c61af6bb660a6cf2ca78a2ff447fa3361c47b529410a2bc75623",
+          "hypothesis": "Replace unavailable automation with explicit disjunction elimination and core proof search.",
+          "result_path": "run01/runs/P02/attempt_02/result.json",
+          "candidate_path": "run01/candidates/02.lean"
+        },
+        {
+          "attempt": 3,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 157,
+          "raw_heartbeats": 873626,
+          "proof_sha256": "fa08645fe124dedf0dd04291517b9cecb9415812e12295667fa674645448714c",
+          "hypothesis": "Use normalization induction with a direct append-subset helper to close structural constructors without global membership simplification.",
+          "result_path": "run01/runs/P02/attempt_03/result.json",
+          "candidate_path": "run01/candidates/03.lean"
+        },
+        {
+          "attempt": 4,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 155,
+          "raw_heartbeats": 3494906,
+          "proof_sha256": "592c84f5d4b6e2e78915b29b0d9a27e018ad1e0d23dac46402988fa1a4acc5ce",
+          "hypothesis": "Normalize hypotheses and goals consistently and explicitly unfold the application extractor before splitting.",
+          "result_path": "run01/runs/P02/attempt_04/result.json",
+          "candidate_path": "run01/candidates/04.lean"
+        },
+        {
+          "attempt": 5,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 191,
+          "raw_heartbeats": 518554,
+          "proof_sha256": "41129bac0041f59abda1e1c53cf59fd4058302a082692a54099b99e465e13833",
+          "hypothesis": "Avoid simplifier changes to the append helper; use definitional reduction for each normalization constructor and infer false-match parameters.",
+          "result_path": "run01/runs/P02/attempt_05/result.json",
+          "candidate_path": "run01/candidates/05.lean"
+        },
+        {
+          "attempt": 6,
+          "valid": true,
+          "score": 0.5429518684435299,
+          "proof_tokens": 196,
+          "raw_heartbeats": 524842,
+          "proof_sha256": "3c7384eea29fb1fbfc1d4339fbe32e6d9802cc34a5f4b0973000c7c2d3e80dc0",
+          "hypothesis": "Finish the old-variable branch with explicit identity membership after simplification; keep direct structural induction.",
+          "result_path": "run01/runs/P02/attempt_06/result.json",
+          "candidate_path": "run01/candidates/06.lean"
+        },
+        {
+          "attempt": 7,
+          "valid": true,
+          "score": 0.49719562615064755,
+          "proof_tokens": 177,
+          "raw_heartbeats": 509520,
+          "proof_sha256": "fcc15ac9f8b40bfaf8a1a97cfaa3e4827ba87fe5fb4fc2b0bf073b2760d53624",
+          "hypothesis": "Replace base-case simplification by empty-membership elimination and prove the old-variable branch by definitional identity.",
+          "result_path": "run01/runs/P02/attempt_07/result.json",
+          "candidate_path": "run01/candidates/07.lean"
+        },
+        {
+          "attempt": 8,
+          "valid": true,
+          "score": 0.4786977073984702,
+          "proof_tokens": 171,
+          "raw_heartbeats": 483749,
+          "proof_sha256": "76774433bc2127ce1a97849fce922e5159c6973201d073199ffc00afb28be726",
+          "hypothesis": "Replace the append helper simplification proof with direct use of the supplied subset-union theorem and append membership constructors.",
+          "result_path": "run01/runs/P02/attempt_08/result.json",
+          "candidate_path": "run01/candidates/08.lean"
+        }
+      ],
+      "completion": {
+        "status": "completed",
+        "reasoning_effort": "high",
+        "submissions": 8,
+        "protocol_deviations": [],
+        "strategy_summary": "Inducted over normalization evidence, composed append subsets with one local helper, and replaced simplifier calls with direct membership proofs. Candidates 06, 07, and 08 were valid; candidate 08 had the lowest observed local score, 0.4786977073984702."
+      }
+    },
+    {
+      "trial": "run02",
+      "started_at": "2026-10-15T08:27:37.904210+00:00",
+      "finished_at": "2026-10-15T08:36:01.018714+00:00",
+      "candidate_attempts": 8,
+      "valid_candidates": 5,
+      "invalid_candidates": 3,
+      "packet_sha256": "a6d061e96690018568bc3bec1b809c54d61307ed4b292e29f4476231e45f964b",
+      "packet_characters": 6652,
+      "feedback_characters": [
+        759,
+        970,
+        184,
+        185,
+        295,
+        184,
+        185,
+        185
+      ],
+      "total_feedback_characters": 2947,
+      "delivered_domain_characters": 9599,
+      "first_candidate": {
+        "exact_sha256": "e32bc022979ccf16b3f834ea7668fecfc4fe3b24fefb615340ba9c08c2caaf5f",
+        "lexical_sha256": "dbfe14683fe9c266b04356744c3001dc8f3054edd74e8a6867c9f7f0428f7185",
+        "valid": false,
+        "path": "run02/runs/P02/attempt_01/proof.lean"
+      },
+      "selection": {
+        "label": "attempt_08",
+        "score": 0.34783611480361354,
+        "proof_tokens": 106,
+        "attempt": 8,
+        "proof_path": "run02/runs/P02/attempt_08/proof.lean",
+        "trial": "run02"
+      },
+      "final": {
+        "exact_sha256": "b3245ce523bf7d4f7fc0a8143c5cb911293c7e68d63fae38ea354ff3376eb9fd",
+        "lexical_sha256": "f9a8c371875306f5f4ee07cfc4ab72a60ab53779a26bc4311aeee0ceab4fc682",
+        "proof_tokens": 106,
+        "raw_heartbeats": {
+          "values": [
+            564069,
+            564069,
+            564069,
+            564069,
+            564069
+          ],
+          "min": 564069,
+          "median": 564069,
+          "max": 564069,
+          "spread": 0
+        },
+        "local_score": 0.34783611480361354,
+        "valid_repeats": 5,
+        "axioms": [
+          "propext",
+          "Quot.sound"
+        ],
+        "path": "run02/selected/proof.lean",
+        "wall_seconds": {
+          "values": [
+            11.874762291,
+            11.897500292,
+            12.727321667,
+            11.785459,
+            11.786825292
+          ],
+          "min": 11.785459,
+          "median": 11.874762291,
+          "max": 12.727321667,
+          "spread": 0.9418626670000005
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 83,
+          "raw_heartbeats": 619169,
+          "proof_sha256": "e32bc022979ccf16b3f834ea7668fecfc4fe3b24fefb615340ba9c08c2caaf5f",
+          "hypothesis": "Induct on normalization evidence and use append monotonicity directly to remove repeated subset embeddings.",
+          "result_path": "run02/runs/P02/attempt_01/result.json",
+          "candidate_path": "run02/candidates/01.lean"
+        },
+        {
+          "attempt": 2,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 157,
+          "raw_heartbeats": 1209891,
+          "proof_sha256": "1b8acba74efce5cb6905f2a933400a7b8c0b1342998762b67e4a883d0e9c48cb",
+          "hypothesis": "Replace unavailable append theorem with a direct local lemma and explicitly unfold the app extraction match.",
+          "result_path": "run02/runs/P02/attempt_02/result.json",
+          "candidate_path": "run02/candidates/02.lean"
+        },
+        {
+          "attempt": 3,
+          "valid": true,
+          "score": 0.4564211702015005,
+          "proof_tokens": 146,
+          "raw_heartbeats": 659694,
+          "proof_sha256": "a46b5c2c62c4877b4f6ea27b62f4146dfb3ce2a7ab49924ee3b85aaa20de1a4f",
+          "hypothesis": "Use definitional reduction instead of global simplification; repair reflexive singleton inclusion and match contradiction.",
+          "result_path": "run02/runs/P02/attempt_03/result.json",
+          "candidate_path": "run02/candidates/03.lean"
+        },
+        {
+          "attempt": 4,
+          "valid": true,
+          "score": 0.44341607514925796,
+          "proof_tokens": 159,
+          "raw_heartbeats": 441070,
+          "proof_sha256": "dd8019efb6fee85a415467d3552f8b9ea477899378440de5b53c5c8ab222d677",
+          "hypothesis": "Use direct constructor cases and append membership constructors, eliminating tactic search and singleton simplification.",
+          "result_path": "run02/runs/P02/attempt_04/result.json",
+          "candidate_path": "run02/candidates/04.lean"
+        },
+        {
+          "attempt": 5,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 96,
+          "raw_heartbeats": 245965,
+          "proof_sha256": "bbef1a56375a593dfcad05ba07926a874fe5e35d7bafd4c8f8de27f952a94e6c",
+          "hypothesis": "Test the namespaced append subset theorem to remove the local monotonicity lemma entirely.",
+          "result_path": "run02/runs/P02/attempt_05/result.json",
+          "candidate_path": "run02/candidates/05.lean"
+        },
+        {
+          "attempt": 6,
+          "valid": true,
+          "score": 0.4073745765479517,
+          "proof_tokens": 145,
+          "raw_heartbeats": 417752,
+          "proof_sha256": "49cd1fb9b973a536558d9f25929613e223da8cdd26b785ca7adfe2573ca866d9",
+          "hypothesis": "Infer the local append lemma result from explicit membership embeddings, retaining fast constructor-directed induction.",
+          "result_path": "run02/runs/P02/attempt_06/result.json",
+          "candidate_path": "run02/candidates/06.lean"
+        },
+        {
+          "attempt": 7,
+          "valid": true,
+          "score": 0.35077064668544977,
+          "proof_tokens": 102,
+          "raw_heartbeats": 625821,
+          "proof_sha256": "60677ac6705e4a6959b53521092055d334f054c6467c511921be1c565f9e3575",
+          "hypothesis": "Compress all ordinary constructors into a bounded structural tactic using assumptions, empty inclusion, and append monotonicity.",
+          "result_path": "run02/runs/P02/attempt_07/result.json",
+          "candidate_path": "run02/candidates/07.lean"
+        },
+        {
+          "attempt": 8,
+          "valid": true,
+          "score": 0.34783611480361354,
+          "proof_tokens": 106,
+          "raw_heartbeats": 564069,
+          "proof_sha256": "b3245ce523bf7d4f7fc0a8143c5cb911293c7e68d63fae38ea354ff3376eb9fd",
+          "hypothesis": "Handle application explicitly before the generic constructor tactic, avoiding unsuccessful tactic search on its nested match.",
+          "result_path": "run02/runs/P02/attempt_08/result.json",
+          "candidate_path": "run02/candidates/08.lean"
+        }
+      ],
+      "completion": {
+        "status": "completed",
+        "reasoning_effort": "high",
+        "submissions": 8,
+        "protocol_deviations": [],
+        "strategy_summary": "Induct on NormalizedOldExpr evidence; prove append monotonicity locally using membership embeddings; handle application matching explicitly; discharge ordinary constructors with a compact structural tactic. Removed broad simplification and avoided generic tactic search in the application case.",
+        "best_candidate": "candidates/08.lean",
+        "best_local_score": 0.34783611480361354,
+        "best_proof_tokens": 106,
+        "best_raw_heartbeats": 564069
+      }
+    },
+    {
+      "trial": "run03",
+      "started_at": "2026-10-15T08:27:47.847117+00:00",
+      "finished_at": "2026-10-15T08:34:56.800402+00:00",
+      "candidate_attempts": 8,
+      "valid_candidates": 3,
+      "invalid_candidates": 5,
+      "packet_sha256": "a6d061e96690018568bc3bec1b809c54d61307ed4b292e29f4476231e45f964b",
+      "packet_characters": 6652,
+      "feedback_characters": [
+        690,
+        692,
+        972,
+        185,
+        184,
+        218,
+        184,
+        331
+      ],
+      "total_feedback_characters": 3456,
+      "delivered_domain_characters": 10108,
+      "first_candidate": {
+        "exact_sha256": "43bccc8674d59b8a3f4583b0ca4c044d12059654d8b8542ea34cb903838a9242",
+        "lexical_sha256": "2f190f8b4dd3ab477305cb99a8bd2aa7349e5f3e98b449662ba97eae11a2c2dd",
+        "valid": false,
+        "path": "run03/runs/P02/attempt_01/proof.lean"
+      },
+      "selection": {
+        "label": "attempt_07",
+        "score": 0.4995441998947194,
+        "proof_tokens": 145,
+        "attempt": 7,
+        "proof_path": "run03/runs/P02/attempt_07/proof.lean",
+        "trial": "run03"
+      },
+      "final": {
+        "exact_sha256": "dcdce30f7b4d82252b2c97a20b9f2180e058d1354d3c2ce73a59dac56807ab70",
+        "lexical_sha256": "9d1a2e5f6c1ccd0c866f8273dd9c881f0977c20d872a5dce91c727162ce25ba8",
+        "proof_tokens": 145,
+        "raw_heartbeats": {
+          "values": [
+            894299,
+            894299,
+            894299,
+            894299,
+            894299
+          ],
+          "min": 894299,
+          "median": 894299,
+          "max": 894299,
+          "spread": 0
+        },
+        "local_score": 0.4995441998947194,
+        "valid_repeats": 5,
+        "axioms": [
+          "propext",
+          "Quot.sound"
+        ],
+        "path": "run03/selected/proof.lean",
+        "wall_seconds": {
+          "values": [
+            11.790695375,
+            11.805511542,
+            11.784153458,
+            11.775830833,
+            11.717023625
+          ],
+          "min": 11.717023625,
+          "median": 11.784153458,
+          "max": 11.805511542,
+          "spread": 0.08848791700000014
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 40,
+          "raw_heartbeats": 3245169,
+          "proof_sha256": "43bccc8674d59b8a3f4583b0ca4c044d12059654d8b8542ea34cb903838a9242",
+          "hypothesis": "Induct on normalization and discharge structural subset goals by simp; split only the old application matcher.",
+          "result_path": "run03/runs/P02/attempt_01/result.json",
+          "candidate_path": "run03/candidates/01.lean"
+        },
+        {
+          "attempt": 2,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 154,
+          "raw_heartbeats": 968476,
+          "proof_sha256": "c0b9f490c59c27c0878b71b243d418f0f2a69b2a90055690452e38f75dcdf3e2",
+          "hypothesis": "Use an explicit append monotonicity helper to discharge normalization induction branches without broad subset simplification.",
+          "result_path": "run03/runs/P02/attempt_02/result.json",
+          "candidate_path": "run03/candidates/02.lean"
+        },
+        {
+          "attempt": 3,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 156,
+          "raw_heartbeats": 1256621,
+          "proof_sha256": "9740ebbd2feaa2c49e2405cf08465a5ee164b132d5bc6c060e5848f8c3d4f073",
+          "hypothesis": "Explicitly unfold the remaining application extractor to expose the matcher before split.",
+          "result_path": "run03/runs/P02/attempt_03/result.json",
+          "candidate_path": "run03/candidates/03.lean"
+        },
+        {
+          "attempt": 4,
+          "valid": true,
+          "score": 0.5922449884518234,
+          "proof_tokens": 159,
+          "raw_heartbeats": 1210564,
+          "proof_sha256": "6fe5eb09691beb04b9720c6a4850e4a75260835a52ebc342ca621afcd564bd04",
+          "hypothesis": "Close the singleton subset by identity and let apply infer the impossible-fvar matcher arguments.",
+          "result_path": "run03/runs/P02/attempt_04/result.json",
+          "candidate_path": "run03/candidates/04.lean"
+        },
+        {
+          "attempt": 5,
+          "valid": true,
+          "score": 0.5375226431171453,
+          "proof_tokens": 162,
+          "raw_heartbeats": 892697,
+          "proof_sha256": "af119cdc10255398eeb016846b102171e522a808d4c1709fe545f5d395e83d60",
+          "hypothesis": "Replace simplification across every induction context with definitional reduction and direct append proof terms.",
+          "result_path": "run03/runs/P02/attempt_05/result.json",
+          "candidate_path": "run03/candidates/05.lean"
+        },
+        {
+          "attempt": 6,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 124,
+          "raw_heartbeats": 844121,
+          "proof_sha256": "f6ceb714d21e0181b9f9b84662e542c8ee6737fe3fb626751c045cc72b547d63",
+          "hypothesis": "Try the core append subset theorem and close normalized old applications by definitional identity.",
+          "result_path": "run03/runs/P02/attempt_06/result.json",
+          "candidate_path": "run03/candidates/06.lean"
+        },
+        {
+          "attempt": 7,
+          "valid": true,
+          "score": 0.4995441998947194,
+          "proof_tokens": 145,
+          "raw_heartbeats": 894299,
+          "proof_sha256": "dcdce30f7b4d82252b2c97a20b9f2180e058d1354d3c2ce73a59dac56807ab70",
+          "hypothesis": "Restore the explicit append proof, remove the getVars change, and retain direct identity and contradiction terms.",
+          "result_path": "run03/runs/P02/attempt_07/result.json",
+          "candidate_path": "run03/candidates/07.lean"
+        },
+        {
+          "attempt": 8,
+          "valid": false,
+          "score": null,
+          "proof_tokens": 125,
+          "raw_heartbeats": 918109,
+          "proof_sha256": "06b6ba1be4ab29a5c5a3b7c1bffa65408b96a9d458bd62af1e4b6bd2697b1b5d",
+          "hypothesis": "Replace simp in append monotonicity with a compact direct Or.imp membership proof to reduce elaboration work.",
+          "result_path": "run03/runs/P02/attempt_08/result.json",
+          "candidate_path": "run03/candidates/08.lean"
+        }
+      ],
+      "completion": {
+        "status": "completed",
+        "reasoning_effort": "high",
+        "submissions": 8,
+        "protocol_deviations": [],
+        "strategy_summary": "NormalizedOldExpr induction with explicit append monotonicity, definitional reduction for structural cases, and a split of the old-application matcher. Candidates 04, 05, and 07 validated; candidate 07 achieved the lowest observed valid local score.",
+        "best_valid_candidate": "candidates/07.lean",
+        "best_valid_local_score": 0.4995441998947194
+      }
+    }
+  ],
+  "pairwise": [
+    {
+      "a": "run01",
+      "b": "run02",
+      "first_exact_match": false,
+      "first_lexical_match": false,
+      "final_exact_match": false,
+      "final_lexical_match": false
+    },
+    {
+      "a": "run01",
+      "b": "run03",
+      "first_exact_match": false,
+      "first_lexical_match": false,
+      "final_exact_match": false,
+      "final_lexical_match": false
+    },
+    {
+      "a": "run02",
+      "b": "run03",
+      "first_exact_match": false,
+      "first_lexical_match": false,
+      "final_exact_match": false,
+      "final_lexical_match": false
+    }
+  ],
+  "first_exact_distinct": 3,
+  "final_exact_distinct": 3,
+  "final_lexical_distinct": 3,
+  "final_score_distribution": {
+    "values": [
+      0.4786977073984702,
+      0.34783611480361354,
+      0.4995441998947194
+    ],
+    "min": 0.34783611480361354,
+    "median": 0.4786977073984702,
+    "max": 0.4995441998947194,
+    "spread": 0.15170808509110584
+  },
+  "interpretation": "Lexical comparison ignores comments/whitespace; it is not a semantic equivalence proof."
+}

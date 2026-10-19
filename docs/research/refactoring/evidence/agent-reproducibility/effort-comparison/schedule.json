@@ -1,0 +1,12 @@
+{
+  "start_utc": "2026-10-15T05:59:23.653029+00:00",
+  "deadline_utc": "2026-10-15T06:59:23.653029+00:00",
+  "duration_seconds": 3600,
+  "reasoning_efforts": [
+    "high",
+    "xhigh",
+    "ultra"
+  ],
+  "model": "inherited parent model, unchanged across arms",
+  "design": "one independent coding agent per effort, identical initial prompt; repeated Lean verification within each arm"
+}

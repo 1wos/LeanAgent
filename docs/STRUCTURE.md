@@ -21,6 +21,9 @@ docs/
     │   └── <발표자>/                      논문 조사·학습 자료
     └── refactoring/
         ├── README.md                      문제 연구 안내
+        ├── arena-guide.html               개발·환경·대시보드·데이터 출처·에이전트 실험 통합 안내
+        ├── evidence/corpus-deep-dive/      공통 출처 분석 결과·재현 코드·검증 기록
+        ├── evidence/agent-reproducibility/ effort 비교·반복 실험·하네스 검증 근거
         └── <세트>/
             ├── README.md                  세트별 담당자·자료 안내
             └── <발표자>/                  문제 발표·보고서·검증 기록
@@ -36,14 +39,18 @@ Warm-up의 세트 이름은 `warmup`입니다. 여러 주차에 걸쳐 같은 �
 
 | 자료 유형 | 저장 위치 |
 | --- | --- |
+| 대회용 에이전트 공통 설계·개요 | `docs/research/refactoring/<주제>.html` 또는 `<주제>.md`; Refactoring 목차에서 연결 |
 | 논문 조사·분야별 발표 | `docs/research/<분야>/<발표자>/` |
 | Warm-up 발표·문제 풀이 | `docs/research/refactoring/warmup/<발표자>/` |
 | 다른 문제 세트의 연구 | `docs/research/refactoring/<세트>/<발표자>/` |
+| 대회 공통 도구 사용·운영 안내 | `docs/research/refactoring/<도구>.md` 또는 `<도구>.html` |
 | 증명·실험·검증 근거 | 해당 발표자 폴더의 `evidence/` |
 | 별도 학습 기록 | 해당 발표자 폴더의 `studies/<주제 또는 날짜>/` |
 | 모임별 발표 목차 | `docs/meetings/YYYY-MM-DD-topic/README.md` |
 
 분야·세트 이름은 소문자 영문과 하이픈을 사용합니다. 날짜는 `YYYY-MM-DD` 형식으로 적습니다. 발표자 폴더명에 날짜·주차·문제 번호를 붙이지 않습니다.
+
+Arena 에이전트 개발 개요, 문제별 환경 고정 가안, 대시보드 운영 안내, 데이터 출처·후보군 분석과 서브에이전트 effort·재현성 실험은 [통합 가이드](research/refactoring/arena-guide.html)에서 관리합니다. 공유 문서는 통합 HTML 하나로 유지하고, 통합 전 개별 문서와 원본 ZIP은 게시하지 않습니다. 공통 출처 분석의 결과 JSON·재현 코드·기존 검증 기록은 `research/refactoring/evidence/corpus-deep-dive/`에 보관하고, 복사 출처와 파일 해시는 같은 폴더의 `provenance.json`에 기록합니다. 에이전트 실험의 조건·측정 원문·최종 증명·기록 재생 코드는 `research/refactoring/evidence/agent-reproducibility/`에 두고, 해당 폴더의 `provenance.json`에 포함·생략 범위와 원본 해시를 기록합니다.
 
 ## 파일명
 

@@ -1,0 +1,37 @@
+{
+  "created_at_utc": "2026-10-15T08:26:10.709692+00:00",
+  "problem": 2,
+  "reasoning_effort": "high",
+  "independent_trials": 3,
+  "fork_turns": "none",
+  "model_override": null,
+  "model": "inherited parent; exact model ID unavailable",
+  "task_packet_max_characters": 12000,
+  "task_packet_actual_characters": 6652,
+  "feedback_max_characters_per_submission": 1500,
+  "candidate_submissions_per_trial": 8,
+  "candidate_max_characters": 4000,
+  "final_verification_repeats": 5,
+  "baseline_repeats": 3,
+  "selection": "minimum valid discovery score including original; ties: fewer proof tokens then earlier attempt",
+  "primary_comparisons": [
+    "first candidate exact hash",
+    "final selected proof exact hash",
+    "lexical token sequence after stripping comments/whitespace (not semantic equality)",
+    "validity",
+    "final median local score"
+  ],
+  "serial_lean_validation": true,
+  "no_time_race": true,
+  "launch_sha256": "3c834678d928657bae76c588b5f7c535a2749a87d5b6f75287ae7cd5f188cb0b",
+  "governance_characters": 3831,
+  "limitations": [
+    "exact model/token/cost/sampling telemetry unavailable",
+    "same launch and domain packet, different task identities and output paths",
+    "no hard token cap on app system context or evolving own output",
+    "agent read isolation by instructions, not OS sandbox",
+    "three trials describe observations, not a stable probability estimate",
+    "new restricted context and 8 attempts are not directly comparable to previous one-hour unrestricted-source search"
+  ],
+  "initial_message_sha256": "6af61840e46e32608f56124583d1463a182c2424b66ab710df04c4995fe7a8df"
+}

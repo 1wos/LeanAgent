@@ -10,6 +10,10 @@
 - [주제별 자료 공유](research/README.md): 주제별 1–2명의 조사·발표자료와 예제를 모으는 폴더.
 - [Refactoring · Warm-up 문제 연구](research/refactoring/README.md): 세트별·발표자별 문제 분석, 발표자료와 검증 기록.
 
+## 팀 도구
+
+- [Arena 개발·실험·운영 가이드(HTML)](research/refactoring/arena-guide.html): 에이전트 개발 개요, 문제별 환경 고정 가안·파일럿 검증, 대시보드 사용·데이터 갱신·배포, 6개 데이터 출처·후보군 분석, 서브에이전트 effort 비교·재현성 실험.
+
 ## 모임 자료
 
 - [2026-10-04 · 13기 1차 미팅 / OT](meetings/2026-10-04-ot/README.md)

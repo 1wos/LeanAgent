@@ -1,0 +1,28 @@
+{
+  "recorded_at_utc": "2026-10-15T08:28:16.720215+00:00",
+  "message_sha256": "6af61840e46e32608f56124583d1463a182c2424b66ab710df04c4995fe7a8df",
+  "agents": [
+    {
+      "task_name": "/root/high_r01",
+      "reasoning_effort": "high",
+      "fork_turns": "none",
+      "model_override": null,
+      "spawn_success": true
+    },
+    {
+      "task_name": "/root/high_r02",
+      "reasoning_effort": "high",
+      "fork_turns": "none",
+      "model_override": null,
+      "spawn_success": true
+    },
+    {
+      "task_name": "/root/high_r03",
+      "reasoning_effort": "high",
+      "fork_turns": "none",
+      "model_override": null,
+      "spawn_success": true
+    }
+  ],
+  "followups": []
+}

@@ -1,0 +1,201 @@
+Task
+Optimize only the proof of Warm-up 2. The complete original module is reconstructed by the verifier. Namespace is CallElimCorrect; the declaration opens OldExpressions. Original statement must remain unchanged. No previous optimized proof or run result is provided.
+
+Statement
+open OldExpressions in
+theorem extractedOldExprInVars :
+  NormalizedOldExpr post →
+  (extractOldExprVars post).Subset
+  (Imperative.HasVarsPure.getVars post)
+
+
+Original proof
+by
+  intros Hnorm
+  induction post <;>
+    simp [Imperative.HasVarsPure.getVars, extractOldExprVars,
+          Lambda.LExpr.LExpr.getVars] at * <;>
+    try simp_all
+  case app fn e fn_ih e_ih =>
+    unfold extractOldExprVars
+    split
+    . simp [Lambda.LExpr.LExpr.getVars]
+      intros x Hin
+      exact Hin
+    . next Hfalse =>
+      cases Hnorm with
+      | app H1 H2 Hn =>
+      exfalso
+      specialize Hn ?_
+      constructor
+      cases Hn
+      apply Hfalse
+      rfl
+    . cases Hnorm with
+      | app H1 H2 Hn =>
+      apply List.Subset.app
+      . apply List.Subset.trans
+        apply fn_ih
+        exact H1
+        intros x Hin
+        simp_all
+      . apply List.Subset.trans
+        apply e_ih
+        exact H2
+        intros x Hin
+        simp_all
+  case abs ih =>
+    cases Hnorm
+    apply ih <;> assumption
+  case quant trih eih =>
+    cases Hnorm
+    rename_i e_normalized
+    rename_i tr_normalized
+    rename_i tr e ty k
+    apply List.Subset.app
+    . apply List.Subset.trans
+      apply trih <;> assumption
+      intros x Hin
+      simp_all
+    . apply List.Subset.trans
+      apply eih <;> assumption
+      intros x Hin
+      simp_all
+  case ite cih tih eih =>
+    cases Hnorm
+    apply List.Subset.app
+    . apply List.Subset.trans
+      apply cih <;> assumption
+      intros x Hin
+      simp_all
+    apply List.Subset.app
+    . apply List.Subset.trans
+      apply tih <;> assumption
+      intros x Hin
+      simp_all
+    . apply List.Subset.trans
+      apply eih <;> assumption
+      intros x Hin
+      simp_all
+  case eq ih1 ih2 =>
+    cases Hnorm
+    apply List.Subset.app
+    . apply List.Subset.trans
+      apply ih1 <;> assumption
+      intros x Hin
+      simp_all
+    . apply List.Subset.trans
+      apply ih2 <;> assumption
+      intros x Hin
+      simp_all
+
+
+Expression constructors
+inductive LExpr (T : LExprParamsT) : Type where
+  /-- A constant (in the sense of literals). -/
+  | const   (m: T.base.Metadata) (c: LConst)
+  /-- A built-in operation, referred to by name. -/
+  | op      (m: T.base.Metadata) (o : Identifier T.base.IDMeta) (ty : Option T.TypeType)
+  /-- A bound variable, in de Bruijn form. -/
+  | bvar    (m: T.base.Metadata) (deBruijnIndex : Nat)
+  /-- A free variable, with an optional type annotation. -/
+  | fvar    (m: T.base.Metadata) (name : Identifier T.base.IDMeta) (ty : Option T.TypeType)
+  /-- An abstraction, where `ty` the is (optional) type of bound variable. -/
+  | abs     (m: T.base.Metadata) (ty : Option T.TypeType) (e : LExpr T)
+  /-- A quantified expression, where `k` indicates whether it is universally or
+  existentially quantified, `ty` is the type of bound variable, and `trigger` is
+  a trigger pattern (primarily for use with SMT). -/
+  | quant   (m: T.base.Metadata) (k : QuantifierKind) (ty : Option T.TypeType) (trigger: LExpr T) (e : LExpr T)
+  /-- A function application. -/
+  | app     (m: T.base.Metadata) (fn e : LExpr T)
+  /-- A conditional expression. This is a constructor rather than a built-in
+  operation because it occurs so frequently. -/
+  | ite     (m: T.base.Metadata) (c t e : LExpr T)
+  /-- An equality expression. This is a constructor rather than a built-in
+  operation because it occurs so frequently. -/
+  | eq      (m: T.base.Metadata) (e1 e2 : LExpr T)
+
+instance [Repr T.base.Metadata] [Repr T.TypeType] [Repr T.base.IDMeta] : Repr (LExpr T) where
+
+
+getVars
+def LExpr.getVars (e : LExpr T) : List (Identifier T.base.IDMeta) := match e with
+  | .const _ _ => [] | .bvar _ _ => [] | .op _ _ _ => []
+  | .fvar _ y _ => [y]
+  | .abs _ _ e' => LExpr.getVars e'
+  | .quant _ _ _ tr' e' => LExpr.getVars tr' ++ LExpr.getVars e'
+  | .app _ e1 e2 => LExpr.getVars e1 ++ LExpr.getVars e2
+  | .ite _ c t e => LExpr.getVars c ++ LExpr.getVars t ++ LExpr.getVars e
+  | .eq _ e1 e2 => LExpr.getVars e1 ++ LExpr.getVars e2
+
+
+HasVarsPure instance
+instance : Imperative.HasVarsPure Expression Expression.Expr where
+  getVars := Lambda.LExpr.LExpr.getVars
+
+
+OldExpressions.IsOldPred
+inductive IsOldPred : Expression.Expr → Prop where
+  | oldPred : IsOldPred (.op m (CoreIdent.unres "old") ty)
+
+
+OldExpressions.IsFvar
+inductive IsFvar : Expression.Expr → Prop where
+  | fvar : IsFvar (.fvar () v ty)
+
+
+OldExpressions.extractOldExprVars
+def extractOldExprVars (expr : Expression.Expr)
+  : List Expression.Ident := match expr with
+  | .const _ _ | .bvar _ _ | .fvar _ _ _ | .op _ _ _ => []
+  | .abs _ _ e => extractOldExprVars e
+  | .quant _ _ _ tr e => extractOldExprVars tr ++ extractOldExprVars e
+  | .app _ e1 e2 => match e1, e2 with
+    | .op _ (CoreIdent.unres "old") _, .fvar _ v _ => [v]
+    | .op _ (CoreIdent.unres "old") _, _ => panic! s!"Old expression {expr} not normalized"
+    | e1', e2' => extractOldExprVars e1' ++ extractOldExprVars e2'
+  | .ite _ c t e => extractOldExprVars c ++ extractOldExprVars t ++ extractOldExprVars e
+  | .eq _ e1 e2 => extractOldExprVars e1 ++ extractOldExprVars e2
+
+
+
+OldExpressions.NormalizedOldExpr
+inductive NormalizedOldExpr : Expression.Expr → Prop where
+  -- | oldVar : NormalizedOldExpr (@oldVar tyOld v ty)
+  | const :  NormalizedOldExpr (.const _ _)
+  | op :     NormalizedOldExpr (.op _ _ _)
+  | bvar :   NormalizedOldExpr (.bvar _ _)
+  | fvar :   NormalizedOldExpr (.fvar _ _ _)
+  | abs :    NormalizedOldExpr e →
+             NormalizedOldExpr (.abs m ty e)
+  | quant :  NormalizedOldExpr tr →
+             NormalizedOldExpr e →
+             NormalizedOldExpr (.quant m k ty tr e)
+  | app :    NormalizedOldExpr fn →
+             NormalizedOldExpr e →
+             (IsOldPred fn → IsFvar e) →
+             NormalizedOldExpr (.app m fn e)
+  | ite :    NormalizedOldExpr c →
+             NormalizedOldExpr t →
+             NormalizedOldExpr e →
+             NormalizedOldExpr (.ite m c t e)
+  | eq  :    NormalizedOldExpr e1 →
+             NormalizedOldExpr e2 →
+             NormalizedOldExpr (.eq m e1 e2)
+
+
+Local helper declarations
+theorem List.Subset.trans :
+  List.Subset a b → b.Subset c → a.Subset c := fun H1 H2 _ Hin => H2 (H1 Hin)
+
+theorem List.Subset.app :
+  List.Subset a c → b.Subset c → (a ++ b).Subset c := by
+  intros H1 H2
+  intros x Hin
+  simp at Hin
+  cases Hin with
+  | inl Hin =>
+    exact H1 Hin
+  | inr Hin =>
+    exact H2 Hin
+

@@ -1,0 +1,1 @@
+[{"rejected_cases":8,"valid_schema_accepted":true},{"forbidden_action_not_executed":true,"rejection_consumes_step":true},{"duplicate_step_rejected":true},{"tampered_request_rejected":true},{"budget_overflow_rejected":true,"executor_calls_for_all_invalid_cases":0}]
