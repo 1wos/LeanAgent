@@ -1,0 +1,5 @@
+# Preserve historical Lean source and build logs byte-for-byte.
+# Their whitespace is experiment input/evidence, not a new formatting change.
+warmup-2026-10-15/**/*.lean -whitespace
+warmup-2026-10-15/**/*.log -whitespace
+warmup-2026-10-15/*.csv whitespace=cr-at-eol

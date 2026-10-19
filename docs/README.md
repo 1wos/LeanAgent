@@ -16,6 +16,8 @@
 
 ## 모임 자료
 
+- [2026-10-18 · Week 3 / 검증·수리 파이프라인 주간 공유](meetings/2026-10-18-week3/README.md)
+
 - [2026-10-04 · 13기 1차 미팅 / OT](meetings/2026-10-04-ot/README.md)
 - [2026-10-11 · Week 2 / 웜업 문제 연구와 논문 조사](meetings/2026-10-11-week2/README.md)
 - [2026-10-18 · Week 3 / 역할 분담과 에이전트 설계 초안](meetings/2026-10-18-week3/README.md)
