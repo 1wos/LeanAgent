@@ -1,0 +1,52 @@
+{
+  "measured_at": "2026-10-17T09:12:09.188621+00:00",
+  "problem": 11,
+  "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+  "label": "a002",
+  "hypothesis": "B에서 A만 적용하면 기존 a002의 비용 절감이 재현된다",
+  "candidate": "docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a002/candidate.lean",
+  "candidate_sha256": "4488b9800e5bf644cd3065aed7ae219257858d87d92dce97da1b41afa07a205d",
+  "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+  "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+  "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+  "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+  "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+  "version": "v4.31.0",
+  "statement_unchanged": true,
+  "forbidden_patterns": [],
+  "proof_tokens": 1441,
+  "official_reference_tokens": 1906,
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "valid": true,
+  "heartbeat": 39123,
+  "official_worker": false,
+  "api_cost_usd": null,
+  "output": "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a002",
+  "check": {
+    "exit_code": 0,
+    "status": "finished",
+    "seconds": 8.378,
+    "command": [
+      "lake",
+      "env",
+      "lean",
+      "<temporary>/Check.lean"
+    ]
+  },
+  "measurement": {
+    "exit_code": 0,
+    "status": "finished",
+    "seconds": 9.903,
+    "command": [
+      "lake",
+      "env",
+      "lean",
+      "<temporary>/Heartbeat.lean"
+    ]
+  },
+  "status": "passed"
+}

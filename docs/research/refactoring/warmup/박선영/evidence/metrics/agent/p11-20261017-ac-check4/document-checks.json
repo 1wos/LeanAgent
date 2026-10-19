@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-10-17T09:18:36.021789+00:00",
+  "local_link_count": 71,
+  "missing_links": [],
+  "protected_file_count": 48,
+  "changed_protected_files": [],
+  "checkout_tracked_changes": "",
+  "checkout_revision_matches": true,
+  "git_diff_check_exit_code": 0,
+  "new_document_trailing_whitespace": [],
+  "note": "Read-only verification apart from this new check record; no Lean rerun."
+}

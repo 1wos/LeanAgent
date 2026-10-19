@@ -1,0 +1,11 @@
+{
+  "strategy": "restructure-algebra",
+  "target": "B+A: 마지막 intro j hj 이후 계수 계산 블록만 변경",
+  "hypothesis": "B에서 A만 적용하면 기존 a002의 비용 절감이 재현된다",
+  "expected": "B보다 HB 감소 예상; 기존 39123/1441은 비교 관측일 뿐 판정 기준 아님",
+  "reason": "B의 유효성과 기존 결과 재현을 확인했다. 허용 diff는 마지막 h_j_lt/conv 블록을 C_add/C_mul과 ring으로 교체하는 A뿐. main calc의 두 ring 단계 포함 나머지는 B 그대로. 과거 a002와 byte-identical 검사.",
+  "parent": "a001",
+  "kind": "reproduction",
+  "parent_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+  "registered_at": "2026-10-17T09:11:45.861979+00:00"
+}

@@ -1,0 +1,580 @@
+{
+  "generated_at": "2026-10-16T00:44:11.894894+00:00",
+  "official_worker": false,
+  "api_cost_usd": null,
+  "note": "Local measurements, not official scores. Proof tokens are computed statically; candidate validity is tracked separately. Missing versions are not passes. Heartbeats compare only within the same version.",
+  "environment_status": {
+    "recorded_on": "2026-10-16",
+    "available_version": "v4.31.0",
+    "reference_runs": "P8 and P11 completed successfully in existing pinned environments on 2026-10-15.",
+    "candidate_execution": "completed_v4.31.0",
+    "scope": "Both selected candidates passed full-context Lean validation and separate heartbeat measurement in their existing pinned v4.31.0 environments. No downloads or source-checkout modifications.",
+    "prior_blocker": {
+      "recorded_on": "2026-10-15",
+      "blocked_command": "verify --problem 8 --label attempt_01",
+      "message": "Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Code from External] The verify command executes code from https://github.com/leanprover/cslib; explicit user approval to run that external source would clear this block.",
+      "resolution": "User authorized Lean compilation on 2026-10-16; CSLib execution proceeded. ArkLib was initially blocked again, then proceeded after a repository-specific approval. No alternate execution route was used."
+    },
+    "runner_correction": {
+      "affected_run": "P8/runs/20261016T002536550231Z-attempt_01",
+      "description": "Lean exited 0 and printed that the candidate does not depend on any axioms. The runner only parsed nonempty axiom-list output and required the full allowed set, so it incorrectly recorded failed. The raw result is preserved unchanged. The runner now parses axiom-free output as [] and permits subsets of the allowed axioms; compatibility requires no new axioms relative to the reference.",
+      "successful_recheck": "P8/runs/20261016T003747320609Z-attempt_01_recheck"
+    },
+    "other_versions": "Not prepared or tested. Additional toolchain/dependency downloads were outside the explicitly approved execution scope.",
+    "selection": "Both attempt_01 candidates are preserved as selected.lean after successful Lean validation. P8 trades a small proof-token increase for fewer heartbeats; P11 reduces both metrics."
+  },
+  "problems": [
+    {
+      "problem": 8,
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "selected": "docs/research/refactoring/warmup/박선영/evidence/P8/selected.lean",
+      "selected_sha256": "4376ff993d83e796b1f60e20b6aaa8ead1a4c0f04cd6f487b02e185d4579137d",
+      "draft_candidates": [
+        {
+          "problem": 8,
+          "label": "attempt_01",
+          "path": "docs/research/refactoring/warmup/박선영/evidence/P8/attempts/attempt_01.lean",
+          "hypothesis": "par/red_S 분기의 grind 탐색을 명시적 .par 생성자 조립으로 대체한다.",
+          "sha256": "4376ff993d83e796b1f60e20b6aaa8ead1a4c0f04cd6f487b02e185d4579137d",
+          "proof_tokens": 412,
+          "statement_unchanged": true,
+          "forbidden_patterns": [],
+          "static_checks_only": false,
+          "validated_versions": [
+            "v4.31.0"
+          ]
+        }
+      ],
+      "versions": [
+        {
+          "version": "v4.33.0-rc2",
+          "reference": null,
+          "candidate": null,
+          "token_reduction_pct": null,
+          "heartbeat_reduction_pct": null
+        },
+        {
+          "version": "v4.32.0",
+          "reference": null,
+          "candidate": null,
+          "token_reduction_pct": null,
+          "heartbeat_reduction_pct": null
+        },
+        {
+          "version": "v4.31.0",
+          "reference": {
+            "measured_at": "2026-10-15T05:38:41.281393+00:00",
+            "problem": 8,
+            "name": "Cslib.SKI.parallelReduction_diamond",
+            "label": "reference",
+            "hypothesis": "pinned v4.31.0 원본 기준선 재측정",
+            "candidate": "docs/research/refactoring/warmup/박선영/evidence/P8/reference.lean",
+            "candidate_sha256": "35f528e8e77dceff098e735cfb0ee98ea989fecca8258a7d59632f211cc5ffdc",
+            "reference_sha256": "35f528e8e77dceff098e735cfb0ee98ea989fecca8258a7d59632f211cc5ffdc",
+            "source_sha256": "b9e0b9f7b499f0aeec14008c08d373aa8766aca665debb3e2b1cb20481f91d19",
+            "source_file": "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+            "repo_url": "https://github.com/leanprover/cslib",
+            "revision": "8ea71c8df91acd63285515a04da952b23b78d266",
+            "version": "v4.31.0",
+            "statement_unchanged": true,
+            "forbidden_patterns": [],
+            "proof_tokens": 407,
+            "official_reference_tokens": 407,
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "valid": true,
+            "heartbeat": 1382,
+            "official_worker": false,
+            "api_cost_usd": null,
+            "output": "metrics/warmup/박선영/P8/runs/20261015T053841280710Z-reference",
+            "check": {
+              "exit_code": 0,
+              "status": "finished",
+              "seconds": 5.995,
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "<temporary>/Check.lean"
+              ]
+            },
+            "measurement": {
+              "exit_code": 0,
+              "status": "finished",
+              "seconds": 1.2,
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "<temporary>/Heartbeat.lean"
+              ]
+            },
+            "status": "passed"
+          },
+          "candidate": {
+            "measured_at": "2026-10-16T00:37:47.320998+00:00",
+            "problem": 8,
+            "name": "Cslib.SKI.parallelReduction_diamond",
+            "label": "attempt_01_recheck",
+            "hypothesis": "공리 없는 증명 출력 파서 수정 후 명시적 par 후보 재검증·heartbeat 측정",
+            "candidate": "docs/research/refactoring/warmup/박선영/evidence/P8/attempts/attempt_01.lean",
+            "candidate_sha256": "4376ff993d83e796b1f60e20b6aaa8ead1a4c0f04cd6f487b02e185d4579137d",
+            "reference_sha256": "35f528e8e77dceff098e735cfb0ee98ea989fecca8258a7d59632f211cc5ffdc",
+            "source_sha256": "b9e0b9f7b499f0aeec14008c08d373aa8766aca665debb3e2b1cb20481f91d19",
+            "source_file": "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+            "repo_url": "https://github.com/leanprover/cslib",
+            "revision": "8ea71c8df91acd63285515a04da952b23b78d266",
+            "version": "v4.31.0",
+            "statement_unchanged": true,
+            "forbidden_patterns": [],
+            "proof_tokens": 412,
+            "official_reference_tokens": 407,
+            "axioms": [],
+            "valid": true,
+            "heartbeat": 1320,
+            "official_worker": false,
+            "api_cost_usd": null,
+            "output": "metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck",
+            "check": {
+              "exit_code": 0,
+              "status": "finished",
+              "seconds": 2.84,
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "<temporary>/Check.lean"
+              ]
+            },
+            "measurement": {
+              "exit_code": 0,
+              "status": "finished",
+              "seconds": 1.827,
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "<temporary>/Heartbeat.lean"
+              ]
+            },
+            "status": "passed"
+          },
+          "token_reduction_pct": -1.2285,
+          "heartbeat_reduction_pct": 4.4863
+        },
+        {
+          "version": "v4.30.0",
+          "reference": null,
+          "candidate": null,
+          "token_reduction_pct": null,
+          "heartbeat_reduction_pct": null
+        }
+      ],
+      "compatibility": {
+        "passed": 1,
+        "required": 4,
+        "tested": 1
+      },
+      "attempts": [
+        {
+          "measured_at": "2026-10-15T05:38:41.281393+00:00",
+          "problem": 8,
+          "name": "Cslib.SKI.parallelReduction_diamond",
+          "label": "reference",
+          "hypothesis": "pinned v4.31.0 원본 기준선 재측정",
+          "candidate": "docs/research/refactoring/warmup/박선영/evidence/P8/reference.lean",
+          "candidate_sha256": "35f528e8e77dceff098e735cfb0ee98ea989fecca8258a7d59632f211cc5ffdc",
+          "reference_sha256": "35f528e8e77dceff098e735cfb0ee98ea989fecca8258a7d59632f211cc5ffdc",
+          "source_sha256": "b9e0b9f7b499f0aeec14008c08d373aa8766aca665debb3e2b1cb20481f91d19",
+          "source_file": "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+          "repo_url": "https://github.com/leanprover/cslib",
+          "revision": "8ea71c8df91acd63285515a04da952b23b78d266",
+          "version": "v4.31.0",
+          "statement_unchanged": true,
+          "forbidden_patterns": [],
+          "proof_tokens": 407,
+          "official_reference_tokens": 407,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "valid": true,
+          "heartbeat": 1382,
+          "official_worker": false,
+          "api_cost_usd": null,
+          "output": "metrics/warmup/박선영/P8/runs/20261015T053841280710Z-reference",
+          "check": {
+            "exit_code": 0,
+            "status": "finished",
+            "seconds": 5.995,
+            "command": [
+              "lake",
+              "env",
+              "lean",
+              "<temporary>/Check.lean"
+            ]
+          },
+          "measurement": {
+            "exit_code": 0,
+            "status": "finished",
+            "seconds": 1.2,
+            "command": [
+              "lake",
+              "env",
+              "lean",
+              "<temporary>/Heartbeat.lean"
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "measured_at": "2026-10-16T00:25:36.550581+00:00",
+          "problem": 8,
+          "name": "Cslib.SKI.parallelReduction_diamond",
+          "label": "attempt_01",
+          "hypothesis": "par/red_S 분기의 grind를 명시적 생성자 증명으로 교체",
+          "candidate": "docs/research/refactoring/warmup/박선영/evidence/P8/attempts/attempt_01.lean",
+          "candidate_sha256": "4376ff993d83e796b1f60e20b6aaa8ead1a4c0f04cd6f487b02e185d4579137d",
+          "reference_sha256": "35f528e8e77dceff098e735cfb0ee98ea989fecca8258a7d59632f211cc5ffdc",
+          "source_sha256": "b9e0b9f7b499f0aeec14008c08d373aa8766aca665debb3e2b1cb20481f91d19",
+          "source_file": "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+          "repo_url": "https://github.com/leanprover/cslib",
+          "revision": "8ea71c8df91acd63285515a04da952b23b78d266",
+          "version": "v4.31.0",
+          "statement_unchanged": true,
+          "forbidden_patterns": [],
+          "proof_tokens": 412,
+          "official_reference_tokens": 407,
+          "axioms": null,
+          "valid": false,
+          "heartbeat": null,
+          "official_worker": false,
+          "api_cost_usd": null,
+          "output": "metrics/warmup/박선영/P8/runs/20261016T002536550231Z-attempt_01",
+          "check": {
+            "exit_code": 0,
+            "status": "finished",
+            "seconds": 6.835,
+            "command": [
+              "lake",
+              "env",
+              "lean",
+              "<temporary>/Check.lean"
+            ]
+          },
+          "status": "failed"
+        },
+        {
+          "measured_at": "2026-10-16T00:37:47.320998+00:00",
+          "problem": 8,
+          "name": "Cslib.SKI.parallelReduction_diamond",
+          "label": "attempt_01_recheck",
+          "hypothesis": "공리 없는 증명 출력 파서 수정 후 명시적 par 후보 재검증·heartbeat 측정",
+          "candidate": "docs/research/refactoring/warmup/박선영/evidence/P8/attempts/attempt_01.lean",
+          "candidate_sha256": "4376ff993d83e796b1f60e20b6aaa8ead1a4c0f04cd6f487b02e185d4579137d",
+          "reference_sha256": "35f528e8e77dceff098e735cfb0ee98ea989fecca8258a7d59632f211cc5ffdc",
+          "source_sha256": "b9e0b9f7b499f0aeec14008c08d373aa8766aca665debb3e2b1cb20481f91d19",
+          "source_file": "Cslib/Languages/CombinatoryLogic/Confluence.lean",
+          "repo_url": "https://github.com/leanprover/cslib",
+          "revision": "8ea71c8df91acd63285515a04da952b23b78d266",
+          "version": "v4.31.0",
+          "statement_unchanged": true,
+          "forbidden_patterns": [],
+          "proof_tokens": 412,
+          "official_reference_tokens": 407,
+          "axioms": [],
+          "valid": true,
+          "heartbeat": 1320,
+          "official_worker": false,
+          "api_cost_usd": null,
+          "output": "metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck",
+          "check": {
+            "exit_code": 0,
+            "status": "finished",
+            "seconds": 2.84,
+            "command": [
+              "lake",
+              "env",
+              "lean",
+              "<temporary>/Check.lean"
+            ]
+          },
+          "measurement": {
+            "exit_code": 0,
+            "status": "finished",
+            "seconds": 1.827,
+            "command": [
+              "lake",
+              "env",
+              "lean",
+              "<temporary>/Heartbeat.lean"
+            ]
+          },
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "problem": 11,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "selected": "docs/research/refactoring/warmup/박선영/evidence/P11/selected.lean",
+      "selected_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+      "draft_candidates": [
+        {
+          "problem": 11,
+          "label": "attempt_01",
+          "path": "docs/research/refactoring/warmup/박선영/evidence/P11/attempts/attempt_01.lean",
+          "hypothesis": "이후 참조되지 않는 P₀_coeffs·P₁_coeffs 지역 정의만 제거한다.",
+          "sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+          "proof_tokens": 1656,
+          "statement_unchanged": true,
+          "forbidden_patterns": [],
+          "static_checks_only": false,
+          "validated_versions": [
+            "v4.31.0"
+          ]
+        }
+      ],
+      "versions": [
+        {
+          "version": "v4.31.0",
+          "reference": {
+            "measured_at": "2026-10-15T05:38:54.284502+00:00",
+            "problem": 11,
+            "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+            "label": "reference",
+            "hypothesis": "pinned v4.31.0 원본 기준선 재측정",
+            "candidate": "docs/research/refactoring/warmup/박선영/evidence/P11/reference.lean",
+            "candidate_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+            "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+            "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+            "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+            "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+            "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+            "version": "v4.31.0",
+            "statement_unchanged": true,
+            "forbidden_patterns": [],
+            "proof_tokens": 1906,
+            "official_reference_tokens": 1906,
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "valid": true,
+            "heartbeat": 45537,
+            "official_worker": false,
+            "api_cost_usd": null,
+            "output": "metrics/warmup/박선영/P11/runs/20261015T053854284087Z-reference",
+            "check": {
+              "exit_code": 0,
+              "status": "finished",
+              "seconds": 18.553,
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "<temporary>/Check.lean"
+              ]
+            },
+            "measurement": {
+              "exit_code": 0,
+              "status": "finished",
+              "seconds": 6.986,
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "<temporary>/Heartbeat.lean"
+              ]
+            },
+            "status": "passed"
+          },
+          "candidate": {
+            "measured_at": "2026-10-16T00:36:19.699171+00:00",
+            "problem": 11,
+            "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+            "label": "attempt_01",
+            "hypothesis": "미사용 P₀_coeffs·P₁_coeffs 지역 정의 제거",
+            "candidate": "docs/research/refactoring/warmup/박선영/evidence/P11/attempts/attempt_01.lean",
+            "candidate_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+            "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+            "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+            "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+            "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+            "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+            "version": "v4.31.0",
+            "statement_unchanged": true,
+            "forbidden_patterns": [],
+            "proof_tokens": 1656,
+            "official_reference_tokens": 1906,
+            "axioms": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "valid": true,
+            "heartbeat": 41636,
+            "official_worker": false,
+            "api_cost_usd": null,
+            "output": "metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01",
+            "check": {
+              "exit_code": 0,
+              "status": "finished",
+              "seconds": 22.95,
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "<temporary>/Check.lean"
+              ]
+            },
+            "measurement": {
+              "exit_code": 0,
+              "status": "finished",
+              "seconds": 10.561,
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "<temporary>/Heartbeat.lean"
+              ]
+            },
+            "status": "passed"
+          },
+          "token_reduction_pct": 13.1165,
+          "heartbeat_reduction_pct": 8.5667
+        },
+        {
+          "version": "v4.30.0",
+          "reference": null,
+          "candidate": null,
+          "token_reduction_pct": null,
+          "heartbeat_reduction_pct": null
+        },
+        {
+          "version": "v4.29.0",
+          "reference": null,
+          "candidate": null,
+          "token_reduction_pct": null,
+          "heartbeat_reduction_pct": null
+        }
+      ],
+      "compatibility": {
+        "passed": 1,
+        "required": 3,
+        "tested": 1
+      },
+      "attempts": [
+        {
+          "measured_at": "2026-10-15T05:38:54.284502+00:00",
+          "problem": 11,
+          "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+          "label": "reference",
+          "hypothesis": "pinned v4.31.0 원본 기준선 재측정",
+          "candidate": "docs/research/refactoring/warmup/박선영/evidence/P11/reference.lean",
+          "candidate_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+          "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+          "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+          "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+          "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+          "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+          "version": "v4.31.0",
+          "statement_unchanged": true,
+          "forbidden_patterns": [],
+          "proof_tokens": 1906,
+          "official_reference_tokens": 1906,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "valid": true,
+          "heartbeat": 45537,
+          "official_worker": false,
+          "api_cost_usd": null,
+          "output": "metrics/warmup/박선영/P11/runs/20261015T053854284087Z-reference",
+          "check": {
+            "exit_code": 0,
+            "status": "finished",
+            "seconds": 18.553,
+            "command": [
+              "lake",
+              "env",
+              "lean",
+              "<temporary>/Check.lean"
+            ]
+          },
+          "measurement": {
+            "exit_code": 0,
+            "status": "finished",
+            "seconds": 6.986,
+            "command": [
+              "lake",
+              "env",
+              "lean",
+              "<temporary>/Heartbeat.lean"
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "measured_at": "2026-10-16T00:36:19.699171+00:00",
+          "problem": 11,
+          "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+          "label": "attempt_01",
+          "hypothesis": "미사용 P₀_coeffs·P₁_coeffs 지역 정의 제거",
+          "candidate": "docs/research/refactoring/warmup/박선영/evidence/P11/attempts/attempt_01.lean",
+          "candidate_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+          "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+          "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+          "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+          "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+          "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+          "version": "v4.31.0",
+          "statement_unchanged": true,
+          "forbidden_patterns": [],
+          "proof_tokens": 1656,
+          "official_reference_tokens": 1906,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "valid": true,
+          "heartbeat": 41636,
+          "official_worker": false,
+          "api_cost_usd": null,
+          "output": "metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01",
+          "check": {
+            "exit_code": 0,
+            "status": "finished",
+            "seconds": 22.95,
+            "command": [
+              "lake",
+              "env",
+              "lean",
+              "<temporary>/Check.lean"
+            ]
+          },
+          "measurement": {
+            "exit_code": 0,
+            "status": "finished",
+            "seconds": 10.561,
+            "command": [
+              "lake",
+              "env",
+              "lean",
+              "<temporary>/Heartbeat.lean"
+            ]
+          },
+          "status": "passed"
+        }
+      ]
+    }
+  ]
+}

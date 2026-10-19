@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "smoke-p8-v1",
+  "problem": 8,
+  "created_at": "2026-10-17T07:41:38.804930+00:00",
+  "environment": {
+    "repo": "/Users/parksunyoung/orca/workspaces/LeanAgent/sunyoung-week2/solution/.lake-env/cslib",
+    "version": "v4.31.0",
+    "revision": "8ea71c8df91acd63285515a04da952b23b78d266",
+    "url": "https://github.com/leanprover/cslib",
+    "files": {
+      "Cslib/Languages/CombinatoryLogic/Confluence.lean": "b9e0b9f7b499f0aeec14008c08d373aa8766aca665debb3e2b1cb20481f91d19",
+      "lean-toolchain": "efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee",
+      "lake-manifest.json": "c192257881ee32336e32f1e5ebc660f8890bbefaba391f1b360f961a033fba32",
+      "lakefile.lean": null,
+      "lakefile.toml": "0d236bf0f173fa7ef490605a32f9d5cc3cf1b214a34a02f7919af37ad4d20c54"
+    }
+  },
+  "code": {
+    "/Users/parksunyoung/Desktop/study/LeanAgent/.claude/skills/lean-refactor/scripts/experiment.py": "06ffb5b5ef1c74fb8fc7d822ee4201233b3984dfe00769de6866c106cb3f629a",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/run_experiments.py": "05f8d21d883d783d0de5b2c8d8c690102353fb2b6d90af4d75dcfe65f92d1d83",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/benchmark.jsonl": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/정소미/evidence/proof_tokens.py": "746f0c5b6d21015062f686b9bde4ea3623c17c2421d12f1436d741860c5404ed",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/정소미/evidence/verify_candidate.py": "ba1096a8d4e227477086392ff599a1cd00f264d7872c4a546d9d212cab05e24c",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/.claude/skills/lean-refactor/SKILL.md": "898f0aea55c3b1d36d68b33645166e7fe8849971fd77dc30d9e27fffb34cfe0d",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/.claude/skills/lean-refactor/references/protocol.md": "44c60310b9025971e3a057acbb0fd79605091ac836b6dafd7658aa9806a6dca4",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/.claude/skills/lean-refactor/references/strategies.md": "caad3df1984ece1e3e02a64933d7f36c43bfd7f79054b60b56f9caa82e0bd209"
+  },
+  "budget": {
+    "max_attempts": 1,
+    "timeout": 180,
+    "patience": 3
+  },
+  "policy_sha256": "8bf7231915d1409d1761b3e451db80853d8cc163e1fabff6904ebb79fc686d17",
+  "reference_sha256": "a25126bc021822f74815506c65a84146c7c18fbda179f7abe7d344abcbfdb165",
+  "statement_sha256": "9cb4dc36d6c498241273c239a94dea74e5458b82269929233367800b0725b588",
+  "baseline": {
+    "candidate": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/smoke-p8-v1/reference.lean",
+    "candidate_file_sha256": "a25126bc021822f74815506c65a84146c7c18fbda179f7abe7d344abcbfdb165",
+    "phase": "evaluated",
+    "status": "blocked",
+    "error": "Claude Code auto mode classifier denied the baseline tool call before Python/Lean execution: external https://github.com/leanprover/cslib source requires explicit execution approval. No retry or alternate execution was attempted.",
+    "execution": "not_started",
+    "finished_at": "2026-10-17T07:42:53.881376+00:00"
+  },
+  "best": null,
+  "attempts": {},
+  "no_improvement": 0,
+  "official_worker": false,
+  "api_cost_usd": null
+}

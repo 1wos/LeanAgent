@@ -1,0 +1,12 @@
+.gjc
+.claude/
+__pycache__/
+*.pyc
+
+.DS_Store
+
+# Root metrics and personal Claude files stay local.
+/metrics/
+
+# Fresh document checks and screenshots are generated locally.
+/docs/research/refactoring/warmup/박선영/evidence/metrics/local-checks/

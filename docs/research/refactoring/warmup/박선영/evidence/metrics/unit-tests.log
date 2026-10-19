@@ -1,0 +1,31 @@
+metrics/metrics.json
+test_all_official_token_counts (test_experiments.CandidateTests) ... ok
+test_changed_statement (test_experiments.CandidateTests) ... ok
+test_comments_not_executable (test_experiments.CandidateTests) ... ok
+test_forbidden_patterns (test_experiments.CandidateTests) ... ok
+test_real_drafts_only_intended_change (test_experiments.CandidateTests) ... ok
+test_splice_missing_duplicate_empty (test_experiments.CandidateTests) ... ok
+test_splice_once (test_experiments.CandidateTests) ... ok
+test_term_proof_rejected (test_experiments.CandidateTests) ... ok
+test_top_level_command_rejected (test_experiments.CandidateTests) ... ok
+test_unchanged_statement (test_experiments.CandidateTests) ... ok
+test_axiom_free_proof (test_experiments.MeasurementTests) ... ok
+test_axiom_missing_duplicate_wrong_name (test_experiments.MeasurementTests) ... ok
+test_axiom_parse (test_experiments.MeasurementTests) ... ok
+test_heartbeat_parse (test_experiments.MeasurementTests) ... ok
+test_heartbeat_rejects_missing_multiple_failure (test_experiments.MeasurementTests) ... ok
+test_instrument_before_doc_comment (test_experiments.MeasurementTests) ... ok
+test_instrument_before_omit (test_experiments.MeasurementTests) ... ok
+test_no_import_fails (test_experiments.MeasurementTests) ... ok
+test_reduction (test_experiments.MeasurementTests) ... ok
+test_timeout_normalizes_bytes (test_experiments.MeasurementTests) ... ok
+test_valid_check_rejects_error_exit_and_axioms (test_experiments.MeasurementTests) ... ok
+test_aggregate_hashes_and_axioms_match_saved_files (test_experiments.ReportTests) ... ok
+test_all_versions_and_no_false_success (test_experiments.ReportTests) ... ok
+test_html_escape_and_existing_evidence_link (test_experiments.ReportTests) ... ok
+test_summary_updates_only_marker_section (test_experiments.ReportTests) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.055s
+
+OK

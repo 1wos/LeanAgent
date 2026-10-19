@@ -1,0 +1,72 @@
+{
+  "version": "1",
+  "objective": [
+    "validity",
+    "minimum_heartbeat",
+    "minimum_tokens_on_tie"
+  ],
+  "selection": "Use proof structure and prior reviews, not a fixed universal ranking. Register the reason before editing.",
+  "update": "Reflection proposes changes; user review and a new version/session are required.",
+  "strategies": [
+    {
+      "id": "remove-unused",
+      "condition": "A local definition has no downstream use",
+      "counterexample": "Deletion may remove useful elaboration constraints"
+    },
+    {
+      "id": "explicit-evidence",
+      "condition": "A known constructor/lemma directly builds a goal currently solved by search",
+      "counterexample": "Explicit evidence can increase tokens or elaboration work"
+    },
+    {
+      "id": "reuse-lemma",
+      "condition": "An existing boundary lemma matches the required intermediate fact",
+      "counterexample": "Coercions and side conditions can exceed saved work"
+    },
+    {
+      "id": "share-facts",
+      "condition": "The same intermediate fact is derived repeatedly",
+      "counterexample": "A general helper can cost more than specialized local derivations"
+    },
+    {
+      "id": "delay-unfold",
+      "condition": "A large definition is expanded before its structure is needed",
+      "counterexample": "The subsequent tactic may need the expanded normal form"
+    },
+    {
+      "id": "restructure-algebra",
+      "condition": "Equivalent calculation/case structures offer different search spaces",
+      "counterexample": "Fewer proof lines do not imply fewer heartbeats"
+    }
+  ],
+  "historical_observations": [
+    {
+      "problem": 8,
+      "strategy": "explicit-evidence",
+      "version": "v4.31.0",
+      "heartbeat": [
+        1382,
+        1320
+      ],
+      "tokens": [
+        407,
+        412
+      ],
+      "new_skill_success": false
+    },
+    {
+      "problem": 11,
+      "strategy": "remove-unused",
+      "version": "v4.31.0",
+      "heartbeat": [
+        45537,
+        41636
+      ],
+      "tokens": [
+        1906,
+        1656
+      ],
+      "new_skill_success": false
+    }
+  ]
+}
