@@ -1,0 +1,478 @@
+{
+  "schema_version": 1,
+  "id": "p11-20261017-ac-check4",
+  "problem": 11,
+  "created_at": "2026-10-17T09:02:58.316628+00:00",
+  "environment": {
+    "repo": "/Users/parksunyoung/orca/workspaces/LeanAgent/sunyoung-week2/solution/.lake-env/ArkLib",
+    "version": "v4.31.0",
+    "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+    "url": "https://github.com/Verified-zkEVM/ArkLib",
+    "files": {
+      "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+      "lean-toolchain": "efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee",
+      "lake-manifest.json": "25e545bb447c1f4e0bc1d55ffb17813ae58f9abd0c7cb48273186e0e5fd367a5",
+      "lakefile.lean": null,
+      "lakefile.toml": "f1de06f1b58a7f069cf6cf505981db3d400bd4daee22d838f6649f2856672520"
+    }
+  },
+  "code": {
+    "/Users/parksunyoung/Desktop/study/LeanAgent/.claude/skills/lean-refactor/scripts/experiment.py": "1933529fd7225892de172f1bc2495dfea3e9266cf35e89fae1eae03f828b5a48",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/run_experiments.py": "05f8d21d883d783d0de5b2c8d8c690102353fb2b6d90af4d75dcfe65f92d1d83",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/benchmark.jsonl": "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/정소미/evidence/proof_tokens.py": "746f0c5b6d21015062f686b9bde4ea3623c17c2421d12f1436d741860c5404ed",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/정소미/evidence/verify_candidate.py": "ba1096a8d4e227477086392ff599a1cd00f264d7872c4a546d9d212cab05e24c",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/.claude/skills/lean-refactor/SKILL.md": "d9fb7b8f2c57e095304dfebb57254c9708072855d8ae9430cd619a31f7f6e2e5",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/.claude/skills/lean-refactor/references/protocol.md": "4039d46682a6b69ebc0f9dcd5d80f8b4f37d050d90b1f114f7f8d91a58f0c8ac",
+    "/Users/parksunyoung/Desktop/study/LeanAgent/.claude/skills/lean-refactor/references/strategies.md": "caad3df1984ece1e3e02a64933d7f36c43bfd7f79054b60b56f9caa82e0bd209"
+  },
+  "budget": {
+    "max_attempts": 4,
+    "timeout": 180,
+    "patience": 4
+  },
+  "policy_sha256": "8bf7231915d1409d1761b3e451db80853d8cc163e1fabff6904ebb79fc686d17",
+  "reference_sha256": "9a756a9e6e607dc3b7ca672b7b2913f1b374d6403d54e0416e898cd069bf9662",
+  "statement_sha256": "6dda39aa2f444a80a0cb7e89ddef7e06938f863b7e9eff67b80b4cedf033fe57",
+  "baseline": {
+    "candidate": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/reference.lean",
+    "candidate_file_sha256": "9a756a9e6e607dc3b7ca672b7b2913f1b374d6403d54e0416e898cd069bf9662",
+    "phase": "evaluated",
+    "started_at": "2026-10-17T09:03:53.551193+00:00",
+    "execution": "requested",
+    "result": {
+      "measured_at": "2026-10-17T09:03:53.583575+00:00",
+      "problem": 11,
+      "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+      "label": "reference",
+      "hypothesis": "Fresh session baseline",
+      "candidate": "docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/reference.lean",
+      "candidate_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+      "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+      "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+      "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+      "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+      "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+      "version": "v4.31.0",
+      "statement_unchanged": true,
+      "forbidden_patterns": [],
+      "proof_tokens": 1906,
+      "official_reference_tokens": 1906,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "valid": true,
+      "heartbeat": 45537,
+      "official_worker": false,
+      "api_cost_usd": null,
+      "output": "metrics/warmup/박선영/agent/p11-20261017-ac-check4/baseline",
+      "check": {
+        "exit_code": 0,
+        "status": "finished",
+        "seconds": 24.877,
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "<temporary>/Check.lean"
+        ]
+      },
+      "measurement": {
+        "exit_code": 0,
+        "status": "finished",
+        "seconds": 10.404,
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "<temporary>/Heartbeat.lean"
+        ]
+      },
+      "status": "passed"
+    },
+    "result_path": "/Users/parksunyoung/Desktop/study/LeanAgent/metrics/warmup/박선영/agent/p11-20261017-ac-check4/baseline/result.json",
+    "result_sha256": "1bba6e343bcb8e6f88d08e40cbde057505b3ea9f6c72cac665ed13825439494d",
+    "status": "passed",
+    "finished_at": "2026-10-17T09:04:28.911372+00:00"
+  },
+  "best": "a004",
+  "attempts": {
+    "a001": {
+      "strategy": "remove-unused",
+      "target": "B: P₀_coeffs/P₁_coeffs 두 정의 및 소개 주석만 삭제",
+      "hypothesis": "기존 a001의 B를 byte-identical하게 재현하고 새 기준선에서 유효성과 비용을 확인한다",
+      "expected": "기존 관측 41636 HB/1656 tokens 재현 여부; 이 수치는 합격 기준이 아님",
+      "reason": "이전 분석/가설/후보/result/review 및 A/C diff를 읽었다. B는 확인 실험의 공통 비교 기반이다. 허용 diff는 두 미사용 정의 및 소개 주석 삭제뿐이며 다른 블록 변경 금지.",
+      "parent": "reference",
+      "kind": "reproduction",
+      "parent_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+      "registered_at": "2026-10-17T09:05:16.350447+00:00",
+      "id": "a001",
+      "phase": "reviewed",
+      "hypothesis_path": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a001/hypothesis.json",
+      "hypothesis_sha256": "7ffbf1bed35cbccb5fd1c56960defa94ffe5ec115067dc2fbff5b2bbb2712a00",
+      "candidate": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a001/candidate.lean",
+      "candidate_file_sha256": "06afddcc6cdeaaba9efc456f5ef500b2f37c9e2eb180cc665056d85e4d342d4f",
+      "candidate_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+      "started_at": "2026-10-17T09:10:55.099549+00:00",
+      "execution": "requested",
+      "result": {
+        "measured_at": "2026-10-17T09:10:55.130049+00:00",
+        "problem": 11,
+        "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "label": "a001",
+        "hypothesis": "기존 a001의 B를 byte-identical하게 재현하고 새 기준선에서 유효성과 비용을 확인한다",
+        "candidate": "docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a001/candidate.lean",
+        "candidate_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+        "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+        "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+        "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+        "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+        "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+        "version": "v4.31.0",
+        "statement_unchanged": true,
+        "forbidden_patterns": [],
+        "proof_tokens": 1656,
+        "official_reference_tokens": 1906,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "valid": true,
+        "heartbeat": 41636,
+        "official_worker": false,
+        "api_cost_usd": null,
+        "output": "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a001",
+        "check": {
+          "exit_code": 0,
+          "status": "finished",
+          "seconds": 13.254,
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "<temporary>/Check.lean"
+          ]
+        },
+        "measurement": {
+          "exit_code": 0,
+          "status": "finished",
+          "seconds": 10.039,
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "<temporary>/Heartbeat.lean"
+          ]
+        },
+        "status": "passed"
+      },
+      "result_path": "/Users/parksunyoung/Desktop/study/LeanAgent/metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a001/result.json",
+      "result_sha256": "fbb280446bb18a5490172f900ac2a177cbc568467a93c9fb3de6e74006d2c534",
+      "status": "passed",
+      "finished_at": "2026-10-17T09:11:18.466028+00:00",
+      "improved": true,
+      "comparisons": {
+        "reference": {
+          "heartbeat_reduction_pct": 8.5667,
+          "proof_tokens_reduction_pct": 13.1165
+        },
+        "parent": {
+          "heartbeat_reduction_pct": 8.5667,
+          "proof_tokens_reduction_pct": 13.1165
+        }
+      },
+      "review": {
+        "observation": "B 통과: HB 41636/tokens 1656. 원본 45537/1906 대비 8.5667%/13.1165% 감소. 기존 a001과 byte-identical이고 부모 diff는 두 미사용 계수 정의/소개 주석 삭제뿐. 공리 동일, 명제 보존.",
+        "interpretation": "과거 B 결과를 재현하여 공통 비교 기반이 확보되었다. C의 독립 효과는 아직 평가되지 않았다.",
+        "next": "고정 설계의 B+A를 a001 부모로 평가한다. 결과에 따라 조건을 바꾸지 않는다.",
+        "at": "2026-10-17T09:11:45.645629+00:00"
+      }
+    },
+    "a002": {
+      "strategy": "restructure-algebra",
+      "target": "B+A: 마지막 intro j hj 이후 계수 계산 블록만 변경",
+      "hypothesis": "B에서 A만 적용하면 기존 a002의 비용 절감이 재현된다",
+      "expected": "B보다 HB 감소 예상; 기존 39123/1441은 비교 관측일 뿐 판정 기준 아님",
+      "reason": "B의 유효성과 기존 결과 재현을 확인했다. 허용 diff는 마지막 h_j_lt/conv 블록을 C_add/C_mul과 ring으로 교체하는 A뿐. main calc의 두 ring 단계 포함 나머지는 B 그대로. 과거 a002와 byte-identical 검사.",
+      "parent": "a001",
+      "kind": "reproduction",
+      "parent_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+      "registered_at": "2026-10-17T09:11:45.861979+00:00",
+      "id": "a002",
+      "phase": "reviewed",
+      "hypothesis_path": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a002/hypothesis.json",
+      "hypothesis_sha256": "fa75b9d5292963026293fe6f42d40a4e624fc13542e15b082823054a4a552e37",
+      "candidate": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a002/candidate.lean",
+      "candidate_file_sha256": "5fa41505989a8772c6f58ecdbe1d1f9fdeddd7b652a21ee6ce9e7965e3ef286c",
+      "candidate_sha256": "4488b9800e5bf644cd3065aed7ae219257858d87d92dce97da1b41afa07a205d",
+      "started_at": "2026-10-17T09:12:09.156056+00:00",
+      "execution": "requested",
+      "result": {
+        "measured_at": "2026-10-17T09:12:09.188621+00:00",
+        "problem": 11,
+        "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "label": "a002",
+        "hypothesis": "B에서 A만 적용하면 기존 a002의 비용 절감이 재현된다",
+        "candidate": "docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a002/candidate.lean",
+        "candidate_sha256": "4488b9800e5bf644cd3065aed7ae219257858d87d92dce97da1b41afa07a205d",
+        "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+        "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+        "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+        "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+        "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+        "version": "v4.31.0",
+        "statement_unchanged": true,
+        "forbidden_patterns": [],
+        "proof_tokens": 1441,
+        "official_reference_tokens": 1906,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "valid": true,
+        "heartbeat": 39123,
+        "official_worker": false,
+        "api_cost_usd": null,
+        "output": "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a002",
+        "check": {
+          "exit_code": 0,
+          "status": "finished",
+          "seconds": 8.378,
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "<temporary>/Check.lean"
+          ]
+        },
+        "measurement": {
+          "exit_code": 0,
+          "status": "finished",
+          "seconds": 9.903,
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "<temporary>/Heartbeat.lean"
+          ]
+        },
+        "status": "passed"
+      },
+      "result_path": "/Users/parksunyoung/Desktop/study/LeanAgent/metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a002/result.json",
+      "result_sha256": "5e72cbcf9287839b0b8ed1957d1e1555c477b9cda555d8647dc2f63e6fb0f279",
+      "status": "passed",
+      "finished_at": "2026-10-17T09:12:27.505888+00:00",
+      "improved": true,
+      "comparisons": {
+        "reference": {
+          "heartbeat_reduction_pct": 14.0852,
+          "proof_tokens_reduction_pct": 24.3966
+        },
+        "parent": {
+          "heartbeat_reduction_pct": 6.0356,
+          "proof_tokens_reduction_pct": 12.9831
+        }
+      },
+      "review": {
+        "observation": "B+A passed: 39123 HB/1441 tokens. B 대비 2513 HB(6.0356%)/215 tokens(12.9831%) 감소; 원본 대비 14.0852%/24.3966% 감소. 과거 a002와 byte-identical, A 외 diff 없음, 공리 동일.",
+        "interpretation": "B에서 A의 효과가 재현되었다. 이 결과만으로 C가 A 없이 효과가 있는지는 알 수 없다.",
+        "next": "사전 지정 B+C를 B(a001) 부모에서 작성한다. 현재 best a002를 부모로 사용하지 않는다.",
+        "at": "2026-10-17T09:12:47.561975+00:00"
+      }
+    },
+    "a003": {
+      "strategy": "restructure-algebra",
+      "target": "B+C: main calc의 전개형 중간 등식 3행 삭제만 허용",
+      "hypothesis": "A 없이 B에서 C만 적용해도 heartbeat가 감소한다",
+      "expected": "B보다 HB 감소 예상; 감소량이 A 존재 시와 같은지는 새 측정 후 비교",
+      "reason": "B/A 재현 결과는 확인했으나 과거에 없던 B+C가 주 질문에 필요하다. 부모는 B(a001) 고정. 허용 diff는 과거 a002→a003에서 삭제한 main calc 3행뿐. 마지막 intro j hj 이후 계수 계산과 모든 나머지 부분은 B 그대로 보존한다.",
+      "parent": "a001",
+      "kind": "experiment",
+      "parent_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+      "registered_at": "2026-10-17T09:12:47.780481+00:00",
+      "id": "a003",
+      "phase": "reviewed",
+      "hypothesis_path": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a003/hypothesis.json",
+      "hypothesis_sha256": "356fc4c644ba2e178f72c083ce932539c04c913b42059160f1314f2af973185d",
+      "candidate": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a003/candidate.lean",
+      "candidate_file_sha256": "c45f9812e9b0ca4c90058a8ad10cff52a22721e3bab92680378fc11cd3b2c6c3",
+      "candidate_sha256": "f2edbb0578ecb50701b7db2ec39c97e3e851a290c53c43017f019b5f4f063a8d",
+      "started_at": "2026-10-17T09:13:35.188199+00:00",
+      "execution": "requested",
+      "result": {
+        "measured_at": "2026-10-17T09:13:35.220641+00:00",
+        "problem": 11,
+        "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "label": "a003",
+        "hypothesis": "A 없이 B에서 C만 적용해도 heartbeat가 감소한다",
+        "candidate": "docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a003/candidate.lean",
+        "candidate_sha256": "f2edbb0578ecb50701b7db2ec39c97e3e851a290c53c43017f019b5f4f063a8d",
+        "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+        "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+        "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+        "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+        "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+        "version": "v4.31.0",
+        "statement_unchanged": true,
+        "forbidden_patterns": [],
+        "proof_tokens": 1594,
+        "official_reference_tokens": 1906,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "valid": true,
+        "heartbeat": 40850,
+        "official_worker": false,
+        "api_cost_usd": null,
+        "output": "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a003",
+        "check": {
+          "exit_code": 0,
+          "status": "finished",
+          "seconds": 8.635,
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "<temporary>/Check.lean"
+          ]
+        },
+        "measurement": {
+          "exit_code": 0,
+          "status": "finished",
+          "seconds": 9.955,
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "<temporary>/Heartbeat.lean"
+          ]
+        },
+        "status": "passed"
+      },
+      "result_path": "/Users/parksunyoung/Desktop/study/LeanAgent/metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a003/result.json",
+      "result_sha256": "7a805b2eb9da97ee2bb46c2eaaa1a8ad458b2d19d6938630aadda18cacc8d36b",
+      "status": "passed",
+      "finished_at": "2026-10-17T09:13:53.851159+00:00",
+      "improved": false,
+      "comparisons": {
+        "reference": {
+          "heartbeat_reduction_pct": 10.2927,
+          "proof_tokens_reduction_pct": 16.3694
+        },
+        "parent": {
+          "heartbeat_reduction_pct": 1.8878,
+          "proof_tokens_reduction_pct": 3.744
+        }
+      },
+      "review": {
+        "observation": "B+C passed: 40850 HB/1594 tokens. B 대비 786 HB(1.8878%)/62 tokens(3.7440%) 감소; 원본 대비 10.2927%/16.3694% 감소. C diff는 과거와 동일하고 마지막 계수 계산 B 그대로. 공리 동일. improved=false는 현재 best B+A(39123) 미갱신을 뜻하며 부모 대비 개선 실패가 아니다.",
+        "interpretation": "이 P11/고정 환경에서 C는 A 없이도 HB를 줄였다. 중복 정규화와 중간 등식 elaboration 제거라는 설명과 일치하지만 세부 tactic 비용 profiling은 하지 않았다.",
+        "next": "마지막 고정 조건 B+A+C를 B(a001) 부모로 재현한다. A 유무별 C 효과의 직접 비교는 새 네 번째 결과 후 계산한다.",
+        "at": "2026-10-17T09:14:18.476075+00:00"
+      }
+    },
+    "a004": {
+      "strategy": "restructure-algebra",
+      "target": "B+A+C: 사전 지정 A와 C 두 블록만 변경하는 과거 a003 조합 재현",
+      "hypothesis": "B+A+C가 과거 a003을 재현하며 A 있는 C의 추가 효과를 B+C의 효과와 비교할 수 있다",
+      "expected": "B보다 HB/tokens 감소 예상; C 추가 효과는 B+A와 별도 대비",
+      "reason": "B/A/C 세 조건의 관측을 읽었다. B+C가 B보다 786 HB 감소했으므로 마지막 지정 조합을 재현해 A 조건부 효과와 비교한다. 부모는 B(a001) 명시. 허용 diff는 기존 A 마지막 계수 블록과 C 중간 calc 3행뿐; 과거 a003과 byte-identical, 자유 최적화 없음.",
+      "parent": "a001",
+      "kind": "reproduction",
+      "parent_sha256": "00e451398043107a3408e21335ed146d95b7b3ab2c7df7b5817886c8c6593dd3",
+      "registered_at": "2026-10-17T09:14:18.690177+00:00",
+      "id": "a004",
+      "phase": "reviewed",
+      "hypothesis_path": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a004/hypothesis.json",
+      "hypothesis_sha256": "f551c398acbe1ea04fb72f151f96f0e6223f4784bc8877a1e651877d77b8b5f7",
+      "candidate": "/Users/parksunyoung/Desktop/study/LeanAgent/docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a004/candidate.lean",
+      "candidate_file_sha256": "f243d2bfe00218893fc495b6ecfe880c37104072c568c256b49c263046710c50",
+      "candidate_sha256": "8ac188807310437609649239994b521d9a03711aac08682d03e47858ea09b232",
+      "started_at": "2026-10-17T09:14:32.029550+00:00",
+      "execution": "requested",
+      "result": {
+        "measured_at": "2026-10-17T09:14:32.059637+00:00",
+        "problem": 11,
+        "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+        "label": "a004",
+        "hypothesis": "B+A+C가 과거 a003을 재현하며 A 있는 C의 추가 효과를 B+C의 효과와 비교할 수 있다",
+        "candidate": "docs/research/refactoring/warmup/박선영/evidence/agent/p11-20261017-ac-check4/attempts/a004/candidate.lean",
+        "candidate_sha256": "8ac188807310437609649239994b521d9a03711aac08682d03e47858ea09b232",
+        "reference_sha256": "67401740132ca27612c5a143c6dd3a90205f5d84a7c0850182c9391592a0752f",
+        "source_sha256": "7b6cd84808024e67fa8aadde67e7953e67ed5f5e4ecd69ac0c061143f69cffac",
+        "source_file": "ArkLib/ProofSystem/Binius/BinaryBasefold/Prelude.lean",
+        "repo_url": "https://github.com/Verified-zkEVM/ArkLib",
+        "revision": "c1712f6c496d0aef04f09bae42aec13811b3273f",
+        "version": "v4.31.0",
+        "statement_unchanged": true,
+        "forbidden_patterns": [],
+        "proof_tokens": 1379,
+        "official_reference_tokens": 1906,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "valid": true,
+        "heartbeat": 38337,
+        "official_worker": false,
+        "api_cost_usd": null,
+        "output": "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a004",
+        "check": {
+          "exit_code": 0,
+          "status": "finished",
+          "seconds": 8.279,
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "<temporary>/Check.lean"
+          ]
+        },
+        "measurement": {
+          "exit_code": 0,
+          "status": "finished",
+          "seconds": 9.604,
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "<temporary>/Heartbeat.lean"
+          ]
+        },
+        "status": "passed"
+      },
+      "result_path": "/Users/parksunyoung/Desktop/study/LeanAgent/metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a004/result.json",
+      "result_sha256": "3903c5332b2e1674523acbd8daf493791613ff0f5d8ef7a3aeec59df7172363f",
+      "status": "passed",
+      "finished_at": "2026-10-17T09:14:49.979624+00:00",
+      "improved": true,
+      "comparisons": {
+        "reference": {
+          "heartbeat_reduction_pct": 15.8113,
+          "proof_tokens_reduction_pct": 27.6495
+        },
+        "parent": {
+          "heartbeat_reduction_pct": 7.9234,
+          "proof_tokens_reduction_pct": 16.7271
+        }
+      },
+      "review": {
+        "observation": "B+A+C passed: 38337 HB/1379 tokens. 부모 B 대비 3299 HB(7.9234%)/277 tokens(16.7271%) 감소, 원본 대비 15.8113%/27.6495% 감소. 과거 a003 byte-identical. B+A 대비 C 추가 효과 786 HB(2.0090%)/62 tokens(4.3026%); B 대비 C 효과도 786 HB/62 tokens. 명제/공리 유지.",
+        "interpretation": "주 질문 답은 이 환경에서 예다. C는 A 없이도 감소했고 A 유무별 절대 감소량이 동일했다. 측정값의 가산성과 일치하지만 보편적 독립성/타 정리 성능을 증명하지 않는다. 재현 3개와 C-only 확인 1개를 새 최적화 4개로 세지 않는다.",
+        "next": "고정 4조건/예산 4개 완료. 추가 Lean 실행 없이 근거 보존 검사, 조건별 비교 기록, 회고와 README/report 작성 후 종료한다.",
+        "at": "2026-10-17T09:15:13.028894+00:00"
+      }
+    }
+  },
+  "no_improvement": 0,
+  "official_worker": false,
+  "api_cost_usd": null
+}

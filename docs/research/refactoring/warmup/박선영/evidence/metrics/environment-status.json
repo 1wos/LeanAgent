@@ -1,0 +1,20 @@
+{
+  "recorded_on": "2026-10-16",
+  "available_version": "v4.31.0",
+  "reference_runs": "P8 and P11 completed successfully in existing pinned environments on 2026-10-15.",
+  "candidate_execution": "completed_v4.31.0",
+  "scope": "Both selected candidates passed full-context Lean validation and separate heartbeat measurement in their existing pinned v4.31.0 environments. No downloads or source-checkout modifications.",
+  "prior_blocker": {
+    "recorded_on": "2026-10-15",
+    "blocked_command": "verify --problem 8 --label attempt_01",
+    "message": "Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Code from External] The verify command executes code from https://github.com/leanprover/cslib; explicit user approval to run that external source would clear this block.",
+    "resolution": "User authorized Lean compilation on 2026-10-16; CSLib execution proceeded. ArkLib was initially blocked again, then proceeded after a repository-specific approval. No alternate execution route was used."
+  },
+  "runner_correction": {
+    "affected_run": "P8/runs/20261016T002536550231Z-attempt_01",
+    "description": "Lean exited 0 and printed that the candidate does not depend on any axioms. The runner only parsed nonempty axiom-list output and required the full allowed set, so it incorrectly recorded failed. The raw result is preserved unchanged. The runner now parses axiom-free output as [] and permits subsets of the allowed axioms; compatibility requires no new axioms relative to the reference.",
+    "successful_recheck": "P8/runs/20261016T003747320609Z-attempt_01_recheck"
+  },
+  "other_versions": "Not prepared or tested. Additional toolchain/dependency downloads were outside the explicitly approved execution scope.",
+  "selection": "Both attempt_01 candidates are preserved as selected.lean after successful Lean validation. P8 trades a small proof-token increase for fewer heartbeats; P11 reduces both metrics."
+}

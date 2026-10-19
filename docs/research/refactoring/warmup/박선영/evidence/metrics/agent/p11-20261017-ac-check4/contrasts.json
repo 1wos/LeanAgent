@@ -1,0 +1,74 @@
+{
+  "session": "p11-20261017-ac-check4",
+  "computed_at": "2026-10-17T09:15:49.109539+00:00",
+  "note": "Derived from saved valid results; no Lean execution. Positive reduction means lower cost.",
+  "contrasts": [
+    {
+      "contrast": "A_without_C",
+      "before": "a001",
+      "after": "a002",
+      "source_results": [
+        "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a001/result.json",
+        "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a002/result.json"
+      ],
+      "heartbeat": {
+        "before": 41636,
+        "after": 39123,
+        "reduction": 2513,
+        "reduction_pct": 6.0356
+      },
+      "proof_tokens": {
+        "before": 1656,
+        "after": 1441,
+        "reduction": 215,
+        "reduction_pct": 12.9831
+      }
+    },
+    {
+      "contrast": "C_without_A",
+      "before": "a001",
+      "after": "a003",
+      "source_results": [
+        "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a001/result.json",
+        "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a003/result.json"
+      ],
+      "heartbeat": {
+        "before": 41636,
+        "after": 40850,
+        "reduction": 786,
+        "reduction_pct": 1.8878
+      },
+      "proof_tokens": {
+        "before": 1656,
+        "after": 1594,
+        "reduction": 62,
+        "reduction_pct": 3.744
+      }
+    },
+    {
+      "contrast": "C_with_A",
+      "before": "a002",
+      "after": "a004",
+      "source_results": [
+        "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a002/result.json",
+        "metrics/warmup/박선영/agent/p11-20261017-ac-check4/attempts/a004/result.json"
+      ],
+      "heartbeat": {
+        "before": 39123,
+        "after": 38337,
+        "reduction": 786,
+        "reduction_pct": 2.009
+      },
+      "proof_tokens": {
+        "before": 1441,
+        "after": 1379,
+        "reduction": 62,
+        "reduction_pct": 4.3026
+      }
+    }
+  ],
+  "interaction_difference_of_differences": {
+    "heartbeat": 0,
+    "proof_tokens": 0
+  }
+}

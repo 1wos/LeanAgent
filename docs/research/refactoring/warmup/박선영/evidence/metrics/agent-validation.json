@@ -1,0 +1,40 @@
+{
+  "recorded_on": "2026-10-17",
+  "scope": "lean-refactor skill MVP",
+  "status": "local_tests_passed_external_smoke_blocked",
+  "tests": [
+    {
+      "command": "python3 -I -m unittest discover -s .claude/skills/lean-refactor/tests -v",
+      "count": 30,
+      "status": "passed",
+      "external_lean_execution": false
+    },
+    {
+      "command": "python3 -I -m unittest discover -s docs/research/refactoring/warmup/박선영/evidence/tests -v",
+      "count": 25,
+      "status": "passed",
+      "external_lean_execution": false
+    }
+  ],
+  "relative_markdown_links_checked": 27,
+  "skill_whitespace": "passed",
+  "git_diff_check": "passed",
+  "legacy_aggregate_problems": "unchanged",
+  "legacy_html_table": "unchanged",
+  "external_tracked_checkouts": {"cslib": "clean", "ArkLib": "clean"},
+  "cli_argument_parsing": "help command passed",
+  "native_skill_discovery": "not verified in a fresh Claude Code session",
+  "external_smoke": {
+    "session": "smoke-p8-v1",
+    "initialization": "passed",
+    "baseline": "blocked before Python evaluator or Lean execution",
+    "reason": "Claude Code auto mode classifier requires explicit approval for executing external https://github.com/leanprover/cslib source",
+    "retries_or_bypasses": false,
+    "new_measurements": false,
+    "p11": "not attempted after external execution denial",
+    "resume": "Preserve blocked session. After explicit execution approval, initialize a new session with current code fingerprints."
+  },
+  "official_worker": false,
+  "api_cost_usd": null,
+  "note": "The 30 new tests include fixture-only successful, failed, interrupted and reflected lifecycles. They do not establish successful real Lean execution through this adapter. Prior v4.31.0 proof measurements remain historical evidence."
+}

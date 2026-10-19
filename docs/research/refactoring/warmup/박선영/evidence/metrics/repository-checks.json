@@ -1,0 +1,500 @@
+{
+  "checked_at": "2026-10-18T04:12:13.128993+00:00",
+  "checks": [
+    {
+      "name": "Python regression suite",
+      "passed": true
+    },
+    {
+      "name": "link docs/STRUCTURE.md -> research/refactoring/README.md#공유-파일의-warm-up논문-조사-혼합-여부",
+      "passed": true
+    },
+    {
+      "name": "anchor research/refactoring/README.md#공유-파일의-warm-up논문-조사-혼합-여부",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 남성우/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 남성우/report.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 남성우/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 권주원/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 권주원/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 정소미/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 정소미/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 정소미/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 박성호/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 박성호/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 손지연/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 손지연/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 손지연/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 박선영/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 박선영/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 박선영/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 박채원/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> 박채원/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> ../../../STRUCTURE.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> ../README.md#공유-파일의-warm-up논문-조사-혼합-여부",
+      "passed": true
+    },
+    {
+      "name": "anchor ../README.md#공유-파일의-warm-up논문-조사-혼합-여부",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/README.md -> ../../../meetings/2026-10-11-week2/README.md",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> ../docs/STRUCTURE.md",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> ../docs/research/refactoring/warmup/박선영/README.md",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> ../docs/research/refactoring/warmup/박선영/report.md",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> warmup/박선영/metrics.json",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> warmup/박선영/environment-status.json",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> warmup/박선영/document-checks.json",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> warmup/박선영/repository-checks.json",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> warmup/박선영/unit-tests.log",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> ../docs/research/refactoring/warmup/박선영/evidence/",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> ../docs/research/refactoring/warmup/박선영/evidence/run_experiments.py",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> warmup/박선영/agent-validation.json",
+      "passed": true
+    },
+    {
+      "name": "link metrics/README.md -> ../docs/research/refactoring/warmup/박선영/report.md#재현-명령",
+      "passed": true
+    },
+    {
+      "name": "anchor ../docs/research/refactoring/warmup/박선영/report.md#재현-명령",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/README.md -> presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/README.md -> evidence/agent/p11-20261017-ac-check4/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/README.md -> evidence/agent/p11-20261017-adaptive3/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/README.md -> report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/README.md -> ../../../../../metrics/warmup/박선영/metrics.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/README.md -> ../../../../../metrics/warmup/박선영/environment-status.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/README.md -> evidence/",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/README.md -> ../../../../../metrics/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/README.md -> ../../../autoformalization/박선영/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/agent/p11-20261017-ac-check4/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/agent/p11-20261017-ac-check4/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/agent/p11-20261017-ac-check4/README.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/agent/p11-20261017-adaptive3/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P8/runs/20261015T053841280710Z-reference/result.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P8/runs/20261015T053841280710Z-reference/check.log",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P8/runs/20261015T053841280710Z-reference/heartbeat.log",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P11/runs/20261015T053854284087Z-reference/result.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P11/runs/20261015T053854284087Z-reference/check.log",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P11/runs/20261015T053854284087Z-reference/heartbeat.log",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck/result.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck/check.log",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck/heartbeat.log",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01/result.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01/check.log",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01/heartbeat.log",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/metrics.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/environment-status.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/benchmark.jsonl",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/P8/reference.lean",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/P8/attempts/attempt_01.lean",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/P8/selected.lean",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/P11/reference.lean",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/P11/attempts/attempt_01.lean",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/P11/selected.lean",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/candidates.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> evidence/benchmark-provenance.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/document-checks.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/repository-checks.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/unit-tests.log",
+      "passed": true
+    },
+    {
+      "name": "link docs/research/refactoring/warmup/박선영/report.md -> ../../../../../metrics/warmup/박선영/P8/runs/20261016T002536550231Z-attempt_01/result.json",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/refactoring/warmup/박채원/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/lean-mathlib/박채원/report.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/lean-mathlib/박채원/leandojo.md",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/refactoring/warmup/남성우/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/autoformalization/남성우/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/refactoring/warmup/박선영/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/autoformalization/박선영/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/refactoring/warmup/권주원/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/automated-theorem-proving/권주원/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/refactoring/warmup/손지연/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/automated-theorem-proving/손지연/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/refactoring/warmup/정소미/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/refactoring/warmup/정소미/presentation.html",
+      "passed": true
+    },
+    {
+      "name": "link docs/meetings/2026-10-11-week2/README.md -> ../../research/refactoring/warmup/박성호/report.md",
+      "passed": true
+    },
+    {
+      "name": "P8 run hash",
+      "passed": true
+    },
+    {
+      "name": "P8 report token count",
+      "passed": true
+    },
+    {
+      "name": "P8 report heartbeat",
+      "passed": true
+    },
+    {
+      "name": "P8 run hash",
+      "passed": true
+    },
+    {
+      "name": "P8 run hash",
+      "passed": true
+    },
+    {
+      "name": "P8 draft hash",
+      "passed": true
+    },
+    {
+      "name": "P8 report draft tokens",
+      "passed": true
+    },
+    {
+      "name": "P8 report candidate heartbeat",
+      "passed": true
+    },
+    {
+      "name": "P8 report candidate tokens",
+      "passed": true
+    },
+    {
+      "name": "P8 report token_reduction_pct",
+      "passed": true
+    },
+    {
+      "name": "P8 report heartbeat_reduction_pct",
+      "passed": true
+    },
+    {
+      "name": "P11 run hash",
+      "passed": true
+    },
+    {
+      "name": "P11 report token count",
+      "passed": true
+    },
+    {
+      "name": "P11 report heartbeat",
+      "passed": true
+    },
+    {
+      "name": "P11 run hash",
+      "passed": true
+    },
+    {
+      "name": "P11 draft hash",
+      "passed": true
+    },
+    {
+      "name": "P11 report draft tokens",
+      "passed": true
+    },
+    {
+      "name": "P11 report candidate heartbeat",
+      "passed": true
+    },
+    {
+      "name": "P11 report candidate tokens",
+      "passed": true
+    },
+    {
+      "name": "P11 report token_reduction_pct",
+      "passed": true
+    },
+    {
+      "name": "P11 report heartbeat_reduction_pct",
+      "passed": true
+    },
+    {
+      "name": "benchmark provenance hash",
+      "passed": true
+    },
+    {
+      "name": "HTML table matches metrics",
+      "passed": true
+    },
+    {
+      "name": "git diff --check",
+      "passed": true
+    },
+    {
+      "name": "whitespace docs/research/refactoring/warmup/박선영/evidence/run_experiments.py",
+      "passed": true
+    },
+    {
+      "name": "whitespace docs/research/refactoring/warmup/박선영/evidence/tests/check_documents.py",
+      "passed": true
+    },
+    {
+      "name": "whitespace docs/research/refactoring/warmup/박선영/evidence/tests/test_experiments.py",
+      "passed": true
+    },
+    {
+      "name": "whitespace docs/research/refactoring/warmup/박선영/evidence/tests/check_presentation.cjs",
+      "passed": true
+    },
+    {
+      "name": "whitespace docs/research/refactoring/warmup/박선영/report.md",
+      "passed": true
+    },
+    {
+      "name": "whitespace metrics/README.md",
+      "passed": true
+    }
+  ],
+  "status": "passed",
+  "unit_tests": 25,
+  "lean_candidate_execution": "See saved runs in metrics.json; this check does not rerun Lean."
+}

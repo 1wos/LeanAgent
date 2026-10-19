@@ -1,0 +1,844 @@
+{
+  "checked_at": "2026-10-18T04:12:13.327Z",
+  "browser": "147.0.7727.15",
+  "checks": [
+    {
+      "name": "eleven main slides",
+      "passed": true
+    },
+    {
+      "name": "six appendix slides",
+      "passed": true
+    },
+    {
+      "name": "appendix follows main narrative",
+      "passed": true
+    },
+    {
+      "name": "research question arrives at slide three",
+      "passed": true
+    },
+    {
+      "name": "opens at first slide",
+      "passed": true
+    },
+    {
+      "name": "next button",
+      "passed": true
+    },
+    {
+      "name": "previous button",
+      "passed": true
+    },
+    {
+      "name": "End key",
+      "passed": true
+    },
+    {
+      "name": "Home key",
+      "passed": true
+    },
+    {
+      "name": "arrow navigation",
+      "passed": true
+    },
+    {
+      "name": "main conclusion shortcut",
+      "passed": true
+    },
+    {
+      "name": "appendix shortcut",
+      "passed": true
+    },
+    {
+      "name": "overview shows all slides",
+      "passed": true
+    },
+    {
+      "name": "print displays all slides",
+      "passed": true
+    },
+    {
+      "name": "slide id exists legacy-results",
+      "passed": true
+    },
+    {
+      "name": "slide 17 navigation",
+      "passed": true
+    },
+    {
+      "name": "legacy results visible",
+      "passed": true
+    },
+    {
+      "name": "all seven version rows",
+      "passed": true
+    },
+    {
+      "name": "slide id exists confirmation-results",
+      "passed": true
+    },
+    {
+      "name": "slide 8 navigation",
+      "passed": true
+    },
+    {
+      "name": "confirmation results visible",
+      "passed": true
+    },
+    {
+      "name": "four confirmation conditions",
+      "passed": true
+    },
+    {
+      "name": "a001 saved validation passed",
+      "passed": true
+    },
+    {
+      "name": "a001 heartbeat matches raw result",
+      "passed": true
+    },
+    {
+      "name": "a001 proof_tokens matches raw result",
+      "passed": true
+    },
+    {
+      "name": "a001 B-relative decrease",
+      "passed": true
+    },
+    {
+      "name": "a002 saved validation passed",
+      "passed": true
+    },
+    {
+      "name": "a002 heartbeat matches raw result",
+      "passed": true
+    },
+    {
+      "name": "a002 proof_tokens matches raw result",
+      "passed": true
+    },
+    {
+      "name": "a002 B-relative decrease",
+      "passed": true
+    },
+    {
+      "name": "a003 saved validation passed",
+      "passed": true
+    },
+    {
+      "name": "a003 heartbeat matches raw result",
+      "passed": true
+    },
+    {
+      "name": "a003 proof_tokens matches raw result",
+      "passed": true
+    },
+    {
+      "name": "a003 B-relative decrease",
+      "passed": true
+    },
+    {
+      "name": "a004 saved validation passed",
+      "passed": true
+    },
+    {
+      "name": "a004 heartbeat matches raw result",
+      "passed": true
+    },
+    {
+      "name": "a004 proof_tokens matches raw result",
+      "passed": true
+    },
+    {
+      "name": "a004 B-relative decrease",
+      "passed": true
+    },
+    {
+      "name": "C decrease without A is 786",
+      "passed": true
+    },
+    {
+      "name": "C decrease after A is 786",
+      "passed": true
+    },
+    {
+      "name": "slide 1 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 1 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 2 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 2 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 3 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 3 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 4 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 4 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 5 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 5 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 6 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 6 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 7 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 7 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 8 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 8 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 9 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 9 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 10 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 10 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 11 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 11 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 12 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 12 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 13 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 13 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 14 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 14 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 15 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 15 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 16 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 16 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 17 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 17 1280/light",
+      "passed": true
+    },
+    {
+      "name": "overview no page overflow 1280/light",
+      "passed": true
+    },
+    {
+      "name": "theme 1280/light",
+      "passed": true
+    },
+    {
+      "name": "slide 1 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 1 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 2 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 2 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 3 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 3 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 4 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 4 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 5 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 5 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 6 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 6 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 7 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 7 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 8 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 8 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 9 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 9 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 10 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 10 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 11 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 11 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 12 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 12 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 13 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 13 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 14 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 14 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 15 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 15 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 16 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 16 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 17 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 17 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "overview no page overflow 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "theme 1280/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 1 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 1 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 2 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 2 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 3 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 3 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 4 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 4 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 5 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 5 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 6 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 6 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 7 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 7 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 8 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 8 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 9 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 9 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 10 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 10 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 11 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 11 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 12 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 12 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 13 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 13 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 14 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 14 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 15 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 15 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 16 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 16 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 17 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 17 400/light",
+      "passed": true
+    },
+    {
+      "name": "overview no page overflow 400/light",
+      "passed": true
+    },
+    {
+      "name": "theme 400/light",
+      "passed": true
+    },
+    {
+      "name": "slide 1 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 1 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 2 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 2 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 3 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 3 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 4 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 4 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 5 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 5 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 6 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 6 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 7 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 7 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 8 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 8 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 9 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 9 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 10 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 10 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 11 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 11 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 12 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 12 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 13 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 13 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 14 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 14 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 15 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 15 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 16 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 16 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide 17 navigation",
+      "passed": true
+    },
+    {
+      "name": "no page overflow slide 17 400/dark",
+      "passed": true
+    },
+    {
+      "name": "overview no page overflow 400/dark",
+      "passed": true
+    },
+    {
+      "name": "theme 400/dark",
+      "passed": true
+    },
+    {
+      "name": "slide id exists confirmation-results",
+      "passed": true
+    },
+    {
+      "name": "slide 8 navigation",
+      "passed": true
+    },
+    {
+      "name": "explicit light overrides dark OS",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/analysis.md",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/P11/selected.lean",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-adaptive3/report.md",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/attempts/a002/parent.diff",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/attempts/a002/candidate.lean",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/attempts/a003/parent.diff",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/attempts/a003/candidate.lean",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/analysis.md",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/report.md",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/run_experiments.py",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/report.md",
+      "passed": true
+    },
+    {
+      "name": "local link ../../../../../metrics/warmup/박선영/agent/p11-20261017-ac-check4/contrasts.json",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/report.md",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-ac-check4/README.md",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/agent/p11-20261017-adaptive3/report.md",
+      "passed": true
+    },
+    {
+      "name": "local link report.md",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/P8/selected.lean",
+      "passed": true
+    },
+    {
+      "name": "local link ../../../../../metrics/warmup/박선영/P8/runs/20261016T003747320609Z-attempt_01_recheck/result.json",
+      "passed": true
+    },
+    {
+      "name": "local link ../../../../../metrics/warmup/박선영/P11/runs/20261016T003619698812Z-attempt_01/result.json",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/P8/attempts/attempt_01.lean",
+      "passed": true
+    },
+    {
+      "name": "local link evidence/P11/attempts/attempt_01.lean",
+      "passed": true
+    },
+    {
+      "name": "no browser errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}
