@@ -1,0 +1,1364 @@
+[
+ {
+  "name": "fundamental_theorem_of_variational_calculus'",
+  "official": 851,
+  "counted": 851,
+  "check": "OK",
+  "nodes": 80,
+  "largest": [
+   {
+    "line": 28,
+    "last": 43,
+    "depth": 0,
+    "head": "have inner_pos₂ : ∀ x (hx : x ∈ Metric.ball x₀ δ₂), 0 < (⟪f…",
+    "tokens": 178,
+    "share": 20.9
+   },
+   {
+    "line": 49,
+    "last": 62,
+    "depth": 0,
+    "head": "have bump_exists : ∃ φ : Y → ℝ, IsTestFunction φ ∧ φ x₀ > 0…",
+    "tokens": 149,
+    "share": 17.5
+   },
+   {
+    "line": 52,
+    "last": 62,
+    "depth": 1,
+    "head": "(∀ x ∈ Metric.closedBall x₀ (δ₂/4), 0 < φ x) := by",
+    "tokens": 107,
+    "share": 12.6
+   },
+   {
+    "line": 110,
+    "last": 120,
+    "depth": 0,
+    "head": "have closedBall_subset_support :",
+    "tokens": 79,
+    "share": 9.3
+   },
+   {
+    "line": 96,
+    "last": 102,
+    "depth": 0,
+    "head": "have h_nonneg : ∀ x, 0 ≤ φ x * ⟪f x, f x₀⟫_ℝ := by",
+    "tokens": 53,
+    "share": 6.2
+   },
+   {
+    "line": 40,
+    "last": 41,
+    "depth": 1,
+    "head": "have inner_eq_self_add_diff : ⟪f₂ x, x₂⟫_ℝ = ⟪x₂, x₂⟫_ℝ + ⟪…",
+    "tokens": 36,
+    "share": 4.2
+   },
+   {
+    "line": 123,
+    "last": 125,
+    "depth": 0,
+    "head": "have integral_pos : 0 < ∫ x, φ x * ⟪f x, f x₀⟫_ℝ ∂μ :=",
+    "tokens": 36,
+    "share": 4.2
+   },
+   {
+    "line": 57,
+    "last": 59,
+    "depth": 2,
+    "head": "refine ⟨φ1.toFun, ⟨φ1.contDiff, φ1.hasCompactSupport⟩,",
+    "tokens": 35,
+    "share": 4.1
+   }
+  ],
+  "exact_groups": [],
+  "near_pairs": [],
+  "idx": 4
+ },
+ {
+  "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",
+  "official": 1463,
+  "counted": 1463,
+  "check": "OK",
+  "nodes": 141,
+  "largest": [
+   {
+    "line": 52,
+    "last": 147,
+    "depth": 0,
+    "head": "have h_dist_le_fw_dist_times_fiber_size : (hammingDist f g'…",
+    "tokens": 721,
+    "share": 49.3
+   },
+   {
+    "line": 73,
+    "last": 114,
+    "depth": 1,
+    "head": "have h_ΔH_subset_bad_fiber_points : ΔH ⊆ Finset.biUnion Y_b…",
+    "tokens": 364,
+    "share": 24.9
+   },
+   {
+    "line": 120,
+    "last": 141,
+    "depth": 1,
+    "head": "· -- The size of the sum is the number of bad fibers (`Y_ba…",
+    "tokens": 170,
+    "share": 11.6
+   },
+   {
+    "line": 85,
+    "last": 104,
+    "depth": 2,
+    "head": "have h_elemenet_Y_bad : y_of_x ∈ Y_bad.toFinset := by",
+    "tokens": 148,
+    "share": 10.1
+   },
+   {
+    "line": 169,
+    "last": 178,
+    "depth": 0,
+    "head": "have h_algebraic_identity : (d_i_plus_steps - 1) * 2 ^ step…",
+    "tokens": 143,
+    "share": 9.8
+   },
+   {
+    "line": 30,
+    "last": 49,
+    "depth": 0,
+    "head": "obtain ⟨g', h_g'_mem, h_g'_min_card⟩ : ∃ g' ∈ C_i, d_fw",
+    "tokens": 109,
+    "share": 7.5
+   },
+   {
+    "line": 127,
+    "last": 134,
+    "depth": 2,
+    "head": "have h_card_fiber_of_each_y : ∀ y ∈ Y_bad.toFinset,",
+    "tokens": 102,
+    "share": 7.0
+   },
+   {
+    "line": 192,
+    "last": 200,
+    "depth": 0,
+    "head": "have h_final_inequality : 2 * d_H_nat ≤ d_i - 1 := by",
+    "tokens": 96,
+    "share": 6.6
+   }
+  ],
+  "exact_groups": [
+   {
+    "members": [
+     [
+      173,
+      174
+     ],
+     [
+      176,
+      177
+     ]
+    ],
+    "heads": [
+     "rw [Nat.sub_add_eq_sub_sub_rev (h1 := by omega) (…",
+     "rw [Nat.sub_add_eq_sub_sub_rev (h1 := by omega) (…"
+    ],
+    "tokens_each": 28,
+    "count": 2,
+    "repeat_tokens": 28
+   }
+  ],
+  "near_pairs": [],
+  "idx": 10
+ },
+ {
+  "name": "Binius.BinaryBasefold.fold_advances_evaluation_poly",
+  "official": 1906,
+  "counted": 1906,
+  "check": "OK",
+  "nodes": 149,
+  "largest": [
+   {
+    "line": 142,
+    "last": 184,
+    "depth": 0,
+    "head": "calc f_i_plus_1 y",
+    "tokens": 538,
+    "share": 28.2
+   },
+   {
+    "line": 69,
+    "last": 111,
+    "depth": 0,
+    "head": "have h_fiber_diff : x₁.val - x₀.val = 1 := by",
+    "tokens": 429,
+    "share": 22.5
+   },
+   {
+    "line": 156,
+    "last": 184,
+    "depth": 1,
+    "head": "_ = P_i_plus_1.eval y.val := by",
+    "tokens": 293,
+    "share": 15.4
+   },
+   {
+    "line": 32,
+    "last": 47,
+    "depth": 0,
+    "head": "set new_coeffs := fun j : Fin (2^(ℓ - (i + 1))) =>",
+    "tokens": 187,
+    "share": 9.8
+   },
+   {
+    "line": 120,
+    "last": 124,
+    "depth": 0,
+    "head": "set P₁_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => coeffs ⟨j…",
+    "tokens": 126,
+    "share": 6.6
+   },
+   {
+    "line": 115,
+    "last": 119,
+    "depth": 0,
+    "head": "set P₀_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => coeffs ⟨j…",
+    "tokens": 124,
+    "share": 6.5
+   },
+   {
+    "line": 33,
+    "last": 41,
+    "depth": 1,
+    "head": "(1 - r_chal) * (coeffs ⟨j.val * 2, by",
+    "tokens": 114,
+    "share": 6.0
+   },
+   {
+    "line": 172,
+    "last": 176,
+    "depth": 2,
+    "head": "conv_lhs => enter [1]; rw [mul_comm (a := Polynomial.C (coe…",
+    "tokens": 95,
+    "share": 5.0
+   }
+  ],
+  "exact_groups": [
+   {
+    "members": [
+     [
+      118,
+      118
+     ],
+     [
+      123,
+      123
+     ]
+    ],
+    "heads": [
+     "have h3 : 2^(ℓ - (i + 1)) * 2 = 2^(ℓ - (i + 1) + …",
+     "have h3 : 2^(ℓ - (i + 1)) * 2 = 2^(ℓ - (i + 1) + …"
+    ],
+    "tokens_each": 36,
+    "count": 2,
+    "repeat_tokens": 36
+   },
+   {
+    "members": [
+     [
+      52,
+      53
+     ],
+     [
+      60,
+      61
+     ]
+    ],
+    "heads": [
+     "have h_res := is_fiber_iff_generates_quotient_poi…",
+     "have h_res := is_fiber_iff_generates_quotient_poi…"
+    ],
+    "tokens_each": 34,
+    "count": 2,
+    "repeat_tokens": 34
+   },
+   {
+    "members": [
+     [
+      117,
+      117
+     ],
+     [
+      122,
+      122
+     ]
+    ],
+    "heads": [
+     "have h2 : 2^(ℓ - (i + 1) + 1) = 2^(ℓ - i) := by r…",
+     "have h2 : 2^(ℓ - (i + 1) + 1) = 2^(ℓ - i) := by r…"
+    ],
+    "tokens_each": 30,
+    "count": 2,
+    "repeat_tokens": 30
+   },
+   {
+    "members": [
+     [
+      130,
+      131
+     ],
+     [
+      133,
+      134
+     ]
+    ],
+    "heads": [
+     "simp only [h_P_i_eval, Fin.eta, Polynomial.eval_a…",
+     "simp only [h_P_i_eval, Fin.eta, Polynomial.eval_a…"
+    ],
+    "tokens_each": 23,
+    "count": 2,
+    "repeat_tokens": 23
+   }
+  ],
+  "near_pairs": [
+   {
+    "a": [
+     115,
+     119
+    ],
+    "b": [
+     120,
+     124
+    ],
+    "a_head": "set P₀_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => coeffs ⟨j…",
+    "b_head": "set P₁_coeffs := fun j : Fin (2^(ℓ - (i + 1))) => coeffs ⟨j…",
+    "tokens": [
+     124,
+     126
+    ],
+    "edit_distance": 2,
+    "similarity": 0.984,
+    "raw_differences": [
+     [
+      "P₀_coeffs",
+      "P₁_coeffs",
+      1
+     ]
+    ],
+    "unaligned_tokens": 2
+   },
+   {
+    "a": [
+     48,
+     54
+    ],
+    "b": [
+     56,
+     62
+    ],
+    "a_head": "have h_eval_qMap_x₀ : (AdditiveNTT.qMap 𝔽q β ⟨i, by omega⟩)…",
+    "b_head": "have h_eval_qMap_x₁ : (AdditiveNTT.qMap 𝔽q β ⟨i, by omega⟩)…",
+    "tokens": [
+     82,
+     82
+    ],
+    "edit_distance": 1,
+    "similarity": 0.988,
+    "raw_differences": [
+     [
+      "x₀",
+      "x₁",
+      2
+     ],
+     [
+      "h_eval_qMap_x₀",
+      "h_eval_qMap_x₁",
+      1
+     ],
+     [
+      "x₀.val",
+      "x₁.val",
+      1
+     ]
+    ],
+    "unaligned_tokens": 0
+   },
+   {
+    "a": [
+     79,
+     85
+    ],
+    "b": [
+     86,
+     93
+    ],
+    "a_head": "have h_cast_0 :",
+    "b_head": "have h_cast_1 :",
+    "tokens": [
+     77,
+     79
+    ],
+    "edit_distance": 4,
+    "similarity": 0.949,
+    "raw_differences": [
+     [
+      "0",
+      "1",
+      2
+     ],
+     [
+      "h_cast_0",
+      "h_cast_1",
+      1
+     ]
+    ],
+    "unaligned_tokens": 2
+   }
+  ],
+  "idx": 11
+ },
+ {
+  "name": "interleaved_affine_gaps_imply_tensor_gaps",
+  "official": 1353,
+  "counted": 1353,
+  "check": "OK",
+  "nodes": 125,
+  "largest": [
+   {
+    "line": 15,
+    "last": 177,
+    "depth": 0,
+    "head": "| succ ϑ_sub_1 ih =>",
+    "tokens": 1340,
+    "share": 99.0
+   },
+   {
+    "line": 37,
+    "last": 177,
+    "depth": 1,
+    "head": "| succ ϑ_sub_2 =>",
+    "tokens": 1188,
+    "share": 87.8
+   },
+   {
+    "line": 143,
+    "last": 167,
+    "depth": 2,
+    "head": "have h_prob_line_gt_eps_div_q :",
+    "tokens": 354,
+    "share": 26.2
+   },
+   {
+    "line": 148,
+    "last": 167,
+    "depth": 3,
+    "head": "] > (↑ε : ENNReal) / (Fintype.card F : ENNReal) := by",
+    "tokens": 258,
+    "share": 19.1
+   },
+   {
+    "line": 51,
+    "last": 63,
+    "depth": 2,
+    "head": "have h_finsnoc_eq_r: ∀ r: Fin (ϑ_sub_2 + 1 + 1) → F,",
+    "tokens": 151,
+    "share": 11.2
+   },
+   {
+    "line": 17,
+    "last": 36,
+    "depth": 1,
+    "head": "| zero =>",
+    "tokens": 144,
+    "share": 10.6
+   },
+   {
+    "line": 169,
+    "last": 175,
+    "depth": 2,
+    "head": "have h_final_gap : jointProximityNat₂",
+    "tokens": 141,
+    "share": 10.4
+   },
+   {
+    "line": 120,
+    "last": 132,
+    "depth": 2,
+    "head": "have h_R_star_card_gt_eps : R_star_set.card > ε := by",
+    "tokens": 116,
+    "share": 8.6
+   }
+  ],
+  "exact_groups": [
+   {
+    "members": [
+     [
+      153,
+      153
+     ],
+     [
+      162,
+      162
+     ],
+     [
+      170,
+      170
+     ],
+     [
+      174,
+      174
+     ]
+    ],
+    "heads": [
+     "(u₀ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1…",
+     "(u₀ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1…",
+     "(u₀ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1…",
+     "(u₁ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1…"
+    ],
+    "tokens_each": 26,
+    "count": 4,
+    "repeat_tokens": 78
+   },
+   {
+    "members": [
+     [
+      146,
+      146
+     ],
+     [
+      154,
+      154
+     ],
+     [
+      163,
+      163
+     ]
+    ],
+    "heads": [
+     "(u₁ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1…",
+     "(u₁ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1…",
+     "(u₁ := ⋈|(show WordStack A (Fin (2 ^ (ϑ_sub_2 + 1…"
+    ],
+    "tokens_each": 32,
+    "count": 3,
+    "repeat_tokens": 64
+   }
+  ],
+  "near_pairs": [],
+  "idx": 12
+ },
+ {
+  "name": "putnam_1964_a4",
+  "official": 1769,
+  "counted": 1769,
+  "check": "OK",
+  "nodes": 174,
+  "largest": [
+   {
+    "line": 63,
+    "last": 184,
+    "depth": 0,
+    "head": "have h_periodic : ∃ N c : ℕ, c > 0 ∧ ∀ n ≥ N, u (n + c) = u…",
+    "tokens": 1239,
+    "share": 70.0
+   },
+   {
+    "line": 65,
+    "last": 163,
+    "depth": 1,
+    "head": "have h₁ : ∀ m : ℕ, u (i + m) = u (j + m) := by",
+    "tokens": 1027,
+    "share": 58.1
+   },
+   {
+    "line": 67,
+    "last": 162,
+    "depth": 2,
+    "head": "have h₂ : ∀ m : ℕ, u (i + m) = u (j + m) := by",
+    "tokens": 999,
+    "share": 56.5
+   },
+   {
+    "line": 70,
+    "last": 162,
+    "depth": 3,
+    "head": "| h m ih =>",
+    "tokens": 969,
+    "share": 54.8
+   },
+   {
+    "line": 94,
+    "last": 162,
+    "depth": 4,
+    "head": "| m + 4 =>",
+    "tokens": 879,
+    "share": 49.7
+   },
+   {
+    "line": 6,
+    "last": 61,
+    "depth": 0,
+    "head": "have h_main : ∃ (i j : ℕ), i < j ∧ (u i = u j ∧ u (i + 1) =…",
+    "tokens": 527,
+    "share": 29.8
+   },
+   {
+    "line": 8,
+    "last": 60,
+    "depth": 1,
+    "head": "have h₁ : ∃ (i j : ℕ), i < j ∧ (u i = u j ∧ u (i + 1) = u (…",
+    "tokens": 449,
+    "share": 25.4
+   },
+   {
+    "line": 13,
+    "last": 35,
+    "depth": 2,
+    "head": "have h₂ : Set.Finite (Set.range f) := by",
+    "tokens": 191,
+    "share": 10.8
+   }
+  ],
+  "exact_groups": [
+   {
+    "members": [
+     [
+      117,
+      118
+     ],
+     [
+      125,
+      126
+     ]
+    ],
+    "heads": [
+     "have h₆ : (i + (m + 4) - 1 : ℕ) = i + (m + 3) := …",
+     "have h₁₀ : (j + (m + 4) - 1 : ℕ) = j + (m + 3) :=…"
+    ],
+    "tokens_each": 27,
+    "count": 2,
+    "repeat_tokens": 27
+   },
+   {
+    "members": [
+     [
+      119,
+      120
+     ],
+     [
+      127,
+      128
+     ]
+    ],
+    "heads": [
+     "have h₇ : (i + (m + 4) - 2 : ℕ) = i + (m + 2) := …",
+     "have h₁₁ : (j + (m + 4) - 2 : ℕ) = j + (m + 2) :=…"
+    ],
+    "tokens_each": 27,
+    "count": 2,
+    "repeat_tokens": 27
+   },
+   {
+    "members": [
+     [
+      121,
+      122
+     ],
+     [
+      129,
+      130
+     ]
+    ],
+    "heads": [
+     "have h₈ : (i + (m + 4) - 3 : ℕ) = i + (m + 1) := …",
+     "have h₁₂ : (j + (m + 4) - 3 : ℕ) = j + (m + 1) :=…"
+    ],
+    "tokens_each": 27,
+    "count": 2,
+    "repeat_tokens": 27
+   },
+   {
+    "members": [
+     [
+      123,
+      124
+     ],
+     [
+      131,
+      132
+     ]
+    ],
+    "heads": [
+     "have h₉ : (i + (m + 4) - 4 : ℕ) = i + m := by",
+     "have h₁₃ : (j + (m + 4) - 4 : ℕ) = j + m := by"
+    ],
+    "tokens_each": 23,
+    "count": 2,
+    "repeat_tokens": 23
+   }
+  ],
+  "near_pairs": [
+   {
+    "a": [
+     98,
+     105
+    ],
+    "b": [
+     106,
+     116
+    ],
+    "a_head": "have h₄ : u (i + (m + 4)) = ((u (i + (m + 4) - 1) + u (i + …",
+    "b_head": "have h₅ : u (j + (m + 4)) = ((u (j + (m + 4) - 1) + u (j + …",
+    "tokens": [
+     167,
+     178
+    ],
+    "edit_distance": 15,
+    "similarity": 0.916,
+    "raw_differences": [
+     [
+      "i",
+      "j",
+      10
+     ],
+     [
+      "h₆",
+      "h₇",
+      2
+     ],
+     [
+      "h₄",
+      "h₅",
+      1
+     ],
+     [
+      "h₅",
+      "h₆",
+      1
+     ],
+     [
+      "h₅.1",
+      "h₆.1",
+      1
+     ]
+    ],
+    "unaligned_tokens": 11
+   },
+   {
+    "a": [
+     133,
+     136
+    ],
+    "b": [
+     137,
+     140
+    ],
+    "a_head": "have h₁₄ : u (i + (m + 3)) = u (j + (m + 3)) := by",
+    "b_head": "have h₁₅ : u (i + (m + 2)) = u (j + (m + 2)) := by",
+    "tokens": [
+     48,
+     48
+    ],
+    "edit_distance": 3,
+    "similarity": 0.938,
+    "raw_differences": [
+     [
+      "3",
+      "2",
+      3
+     ],
+     [
+      "h₁₅",
+      "h₁₆",
+      2
+     ],
+     [
+      "h₁₄",
+      "h₁₅",
+      1
+     ]
+    ],
+    "unaligned_tokens": 0
+   },
+   {
+    "a": [
+     133,
+     136
+    ],
+    "b": [
+     141,
+     144
+    ],
+    "a_head": "have h₁₄ : u (i + (m + 3)) = u (j + (m + 3)) := by",
+    "b_head": "have h₁₆ : u (i + (m + 1)) = u (j + (m + 1)) := by",
+    "tokens": [
+     48,
+     48
+    ],
+    "edit_distance": 3,
+    "similarity": 0.938,
+    "raw_differences": [
+     [
+      "3",
+      "1",
+      3
+     ],
+     [
+      "h₁₅",
+      "h₁₇",
+      2
+     ],
+     [
+      "h₁₄",
+      "h₁₆",
+      1
+     ]
+    ],
+    "unaligned_tokens": 0
+   },
+   {
+    "a": [
+     137,
+     140
+    ],
+    "b": [
+     141,
+     144
+    ],
+    "a_head": "have h₁₅ : u (i + (m + 2)) = u (j + (m + 2)) := by",
+    "b_head": "have h₁₆ : u (i + (m + 1)) = u (j + (m + 1)) := by",
+    "tokens": [
+     48,
+     48
+    ],
+    "edit_distance": 3,
+    "similarity": 0.938,
+    "raw_differences": [
+     [
+      "2",
+      "1",
+      3
+     ],
+     [
+      "h₁₆",
+      "h₁₇",
+      2
+     ],
+     [
+      "h₁₅",
+      "h₁₆",
+      1
+     ]
+    ],
+    "unaligned_tokens": 0
+   }
+  ],
+  "idx": 13
+ },
+ {
+  "name": "putnam_1964_b2",
+  "official": 1754,
+  "counted": 1754,
+  "check": "OK",
+  "nodes": 267,
+  "largest": [
+   {
+    "line": 140,
+    "last": 292,
+    "depth": 0,
+    "head": "have h_card : P.card = 2 ^ (Fintype.card S - 1) := by",
+    "tokens": 875,
+    "share": 49.9
+   },
+   {
+    "line": 14,
+    "last": 126,
+    "depth": 0,
+    "head": "have h_subset_or_compl : ∀ (A : Set S), A ∈ P ∨ Aᶜ ∈ P := by",
+    "tokens": 746,
+    "share": 42.5
+   },
+   {
+    "line": 145,
+    "last": 211,
+    "depth": 1,
+    "head": "have h₁ : P.card = Q.card := by",
+    "tokens": 313,
+    "share": 17.8
+   },
+   {
+    "line": 20,
+    "last": 55,
+    "depth": 1,
+    "head": "have h₃ : ∃ (U : Set S), U ∈ P ∧ A ∩ U = ∅ := by",
+    "tokens": 256,
+    "share": 14.6
+   },
+   {
+    "line": 57,
+    "last": 92,
+    "depth": 1,
+    "head": "have h₄ : ∃ (V : Set S), V ∈ P ∧ Aᶜ ∩ V = ∅ := by",
+    "tokens": 256,
+    "share": 14.6
+   },
+   {
+    "line": 213,
+    "last": 258,
+    "depth": 1,
+    "head": "have h₂ : P.card + Q.card = 2 ^ Fintype.card S := by",
+    "tokens": 242,
+    "share": 13.8
+   },
+   {
+    "line": 271,
+    "last": 291,
+    "depth": 1,
+    "head": "have h₅ : P.card = 2 ^ (Fintype.card S - 1) := by",
+    "tokens": 214,
+    "share": 12.2
+   },
+   {
+    "line": 214,
+    "last": 245,
+    "depth": 2,
+    "head": "have h₃ : P.card + Q.card = (Finset.univ : Finset (Set S)).…",
+    "tokens": 188,
+    "share": 10.7
+   }
+  ],
+  "exact_groups": [
+   {
+    "members": [
+     [
+      97,
+      104
+     ],
+     [
+      105,
+      112
+     ]
+    ],
+    "heads": [
+     "have h₅ : U ⊆ Aᶜ := by",
+     "have h₆ : V ⊆ A := by"
+    ],
+    "tokens_each": 48,
+    "count": 2,
+    "repeat_tokens": 48
+   },
+   {
+    "members": [
+     [
+      48,
+      52
+     ],
+     [
+      85,
+      89
+     ]
+    ],
+    "heads": [
+     "have h₉ : A ∩ U = ∅ := by",
+     "have h₉ : Aᶜ ∩ V = ∅ := by"
+    ],
+    "tokens_each": 28,
+    "count": 2,
+    "repeat_tokens": 28
+   },
+   {
+    "members": [
+     [
+      30,
+      33
+     ],
+     [
+      67,
+      70
+     ]
+    ],
+    "heads": [
+     "have h₉ : A ∩ U = U ∩ A := by",
+     "have h₁₀ : Aᶜ ∩ U = U ∩ Aᶜ := by"
+    ],
+    "tokens_each": 20,
+    "count": 2,
+    "repeat_tokens": 20
+   },
+   {
+    "members": [
+     [
+      34,
+      38
+     ],
+     [
+      71,
+      75
+     ]
+    ],
+    "heads": [
+     "have h₁₀ : U ∩ A ≠ ∅ := by",
+     "have h₁₁ : U ∩ Aᶜ ≠ ∅ := by"
+    ],
+    "tokens_each": 20,
+    "count": 2,
+    "repeat_tokens": 20
+   },
+   {
+    "members": [
+     [
+      174,
+      174
+     ],
+     [
+      175,
+      175
+     ]
+    ],
+    "heads": [
+     "have h₆ : ∀ (A : Set S), A ∈ P → Aᶜ ∈ Q := h₂",
+     "have h₇ : ∀ (A : Set S), A ∈ Q → Aᶜ ∈ P := h₃"
+    ],
+    "tokens_each": 20,
+    "count": 2,
+    "repeat_tokens": 20
+   }
+  ],
+  "near_pairs": [
+   {
+    "a": [
+     21,
+     40
+    ],
+    "b": [
+     58,
+     77
+    ],
+    "a_head": "have h₄ : ¬(A ∉ P ∧ ∀ (U : Set S), U ∈ P → A ∩ U ≠ ∅) := by",
+    "b_head": "have h₅ : ¬(Aᶜ ∉ P ∧ ∀ (U : Set S), U ∈ P → Aᶜ ∩ U ≠ ∅) := …",
+    "tokens": [
+     139,
+     139
+    ],
+    "edit_distance": 2,
+    "similarity": 0.986,
+    "raw_differences": [
+     [
+      "A",
+      "Aᶜ",
+      7
+     ],
+     [
+      "h₆",
+      "h₇",
+      2
+     ],
+     [
+      "h₇",
+      "h₈",
+      2
+     ],
+     [
+      "h₈",
+      "h₉",
+      2
+     ],
+     [
+      "h₁₀",
+      "h₁₁",
+      2
+     ],
+     [
+      "h₄",
+      "h₅",
+      1
+     ],
+     [
+      "h₅",
+      "h₆",
+      1
+     ],
+     [
+      "h₅.1",
+      "h₆.1",
+      1
+     ]
+    ],
+    "unaligned_tokens": 0
+   },
+   {
+    "a": [
+     42,
+     53
+    ],
+    "b": [
+     79,
+     90
+    ],
+    "a_head": "· have h₆ : ¬(∀ (U : Set S), U ∈ P → A ∩ U ≠ ∅) := by",
+    "b_head": "· have h₇ : ¬(∀ (U : Set S), U ∈ P → Aᶜ ∩ U ≠ ∅) := by",
+    "tokens": [
+     86,
+     86
+    ],
+    "edit_distance": 7,
+    "similarity": 0.919,
+    "raw_differences": [
+     [
+      "U",
+      "V",
+      4
+     ],
+     [
+      "h₆",
+      "h₇",
+      3
+     ],
+     [
+      "A",
+      "Aᶜ",
+      3
+     ],
+     [
+      "h₇",
+      "h₈",
+      2
+     ],
+     [
+      "hU",
+      "hV",
+      2
+     ],
+     [
+      "h₄",
+      "h₅",
+      1
+     ],
+     [
+      "h₅",
+      "h₆",
+      1
+     ]
+    ],
+    "unaligned_tokens": 0
+   }
+  ],
+  "idx": 14
+ },
+ {
+  "name": "putnam_1995_a3",
+  "official": 4085,
+  "counted": 4085,
+  "check": "OK",
+  "nodes": 232,
+  "largest": [
+   {
+    "line": 7,
+    "last": 281,
+    "depth": 0,
+    "head": "have h_main : ∀ (d e f : (Fin 9 → ℤ)), ((relation d e) ∧ (r…",
+    "tokens": 4082,
+    "share": 99.9
+   },
+   {
+    "line": 116,
+    "last": 189,
+    "depth": 1,
+    "head": "have h₇ : 7 ∣ digits_to_num e + digits_to_num d := by",
+    "tokens": 1160,
+    "share": 28.4
+   },
+   {
+    "line": 18,
+    "last": 65,
+    "depth": 1,
+    "head": "have h₅ : ∀ (i : Fin 9), 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : …",
+    "tokens": 812,
+    "share": 19.9
+   },
+   {
+    "line": 67,
+    "last": 114,
+    "depth": 1,
+    "head": "have h₆ : ∀ (i : Fin 9), 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : …",
+    "tokens": 812,
+    "share": 19.9
+   },
+   {
+    "line": 21,
+    "last": 55,
+    "depth": 2,
+    "head": "have h₇ : (digits_to_num (fun j : Fin 9 => if j = i then e …",
+    "tokens": 619,
+    "share": 15.2
+   },
+   {
+    "line": 70,
+    "last": 104,
+    "depth": 2,
+    "head": "have h₈ : (digits_to_num (fun j : Fin 9 => if j = i then f …",
+    "tokens": 619,
+    "share": 15.2
+   },
+   {
+    "line": 150,
+    "last": 188,
+    "depth": 2,
+    "head": "have h₁₃ : 7 ∣ digits_to_num e + digits_to_num d := by",
+    "tokens": 585,
+    "share": 14.3
+   },
+   {
+    "line": 22,
+    "last": 55,
+    "depth": 3,
+    "head": "calc",
+    "tokens": 570,
+    "share": 14.0
+   }
+  ],
+  "exact_groups": [
+   {
+    "members": [
+     [
+      18,
+      65
+     ],
+     [
+      67,
+      114
+     ]
+    ],
+    "heads": [
+     "have h₅ : ∀ (i : Fin 9), 7 ∣ (e i - d i) * (10 : …",
+     "have h₆ : ∀ (i : Fin 9), 7 ∣ (f i - e i) * (10 : …"
+    ],
+    "tokens_each": 812,
+    "count": 2,
+    "repeat_tokens": 812
+   },
+   {
+    "members": [
+     [
+      193,
+      193
+     ],
+     [
+      194,
+      194
+     ],
+     [
+      200,
+      200
+     ],
+     [
+      213,
+      213
+     ]
+    ],
+    "heads": [
+     "have h₉ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) + …",
+     "have h₁₀ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) +…",
+     "have h₁₃ : 7 ∣ (f i - e i) * (10 : ℤ) ^ (i : ℕ) +…",
+     "have h₁₅ : 7 ∣ (e i - d i) * (10 : ℤ) ^ (i : ℕ) +…"
+    ],
+    "tokens_each": 30,
+    "count": 4,
+    "repeat_tokens": 90
+   },
+   {
+    "members": [
+     [
+      229,
+      229
+     ],
+     [
+      246,
+      246
+     ],
+     [
+      251,
+      251
+     ],
+     [
+      255,
+      255
+     ]
+    ],
+    "heads": [
+     "have h₁₂ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i …",
+     "have h₁₆ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i …",
+     "have h₁₉ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i …",
+     "have h₂₂ : (7 : ℤ) ∣ (f i - d i) * (10 : ℤ) ^ (i …"
+    ],
+    "tokens_each": 30,
+    "count": 4,
+    "repeat_tokens": 90
+   },
+   {
+    "members": [
+     [
+      11,
+      13
+     ],
+     [
+      14,
+      16
+     ]
+    ],
+    "heads": [
+     "have h₃ : ∀ (i : Fin 9), 7 ∣ (digits_to_num (fun …",
+     "have h₄ : ∀ (i : Fin 9), 7 ∣ (digits_to_num (fun …"
+    ],
+    "tokens_each": 83,
+    "count": 2,
+    "repeat_tokens": 83
+   }
+  ],
+  "near_pairs": [
+   {
+    "a": [
+     158,
+     158
+    ],
+    "b": [
+     176,
+     176
+    ],
+    "a_head": "have h₁₈ : (∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ) +…",
+    "b_head": "have h₂₃ : (∑ i : Fin 9, (e i - d i) * (10 : ℤ) ^ (i : ℕ)) …",
+    "tokens": [
+     71,
+     78
+    ],
+    "edit_distance": 10,
+    "similarity": 0.872,
+    "raw_differences": [
+     [
+      "h₁₈",
+      "h₂₃",
+      1
+     ],
+     [
+      "9",
+      "2",
+      1
+     ],
+     [
+      ")",
+      "=",
+      1
+     ],
+     [
+      "=",
+      "(",
+      1
+     ]
+    ],
+    "unaligned_tokens": 7
+   }
+  ],
+  "idx": 15
+ }
+]
