@@ -56,6 +56,8 @@ from block_analyzer import strip_comments_keep_lines, line_tokens, indent, norma
 import block_tree as BT  # noqa: E402
 
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
+BASE_AXIOMS: set = set()     # axioms of the reference proof, filled after the base compile
+CACHE_VERSION = "2"          # bump when the parsing of compile results changes
 HEADER_RE = re.compile(r"^(\s*)have\s+(\S+)\s*:\s*(.+?)\s*:=\s*by\s*$")
 BINDER_RE = re.compile(r"\b(?:have|let|set|intro|intros|fun|obtain|rcases|rintro|cases|induction)\b(.*)")
 IDENT_RE = re.compile(r"[^\W\d][\w'₀-₉!?]*")
@@ -71,7 +73,7 @@ class Compiler:
         self.hits = self.runs = 0
 
     def run(self, text, tag):
-        key = hashlib.sha1(text.encode()).hexdigest()
+        key = hashlib.sha1((CACHE_VERSION + text).encode()).hexdigest()
         if key in self.cache:
             self.hits += 1
             return self.cache[key]
@@ -93,10 +95,12 @@ class Compiler:
                 msgs.append(json.loads(ln))
             except json.JSONDecodeError:
                 pass
-        errors = sum(m.get("severity") == "error" for m in msgs) + (0 if msgs or p.returncode == 0 else 1)
+        errors = sum(m.get("severity") == "error" for m in msgs)
+        if p.returncode != 0 and errors == 0:      # e.g. a Lake-level failure printed as plain text
+            errors = 1
         ax = None
         for m in msgs:
-            mm = re.search(r"depends on axioms: \[(.*?)\]", m.get("data", ""))
+            mm = re.search(r"depends on axioms: \[(.*?)\]", m.get("data", ""), re.S)   # list may wrap
             if mm:
                 ax = [a.strip() for a in mm.group(1).split(",") if a.strip()]
         res = {"errors": errors, "axioms": ax,
@@ -108,7 +112,8 @@ class Compiler:
 
 
 def ok(res):
-    return res["errors"] == 0 and res["axioms"] is not None and set(res["axioms"]) <= ALLOWED_AXIOMS
+    return (res["errors"] == 0 and res["axioms"] is not None
+            and set(res["axioms"]) <= ALLOWED_AXIOMS | BASE_AXIOMS)
 
 
 # ---------- helpers ----------
@@ -364,6 +369,8 @@ def run(a, row, header, comp):
     groups = [[by_line[m[0] - 1] for m in g["members"]] for g in res_tree["exact_groups"]]
 
     base = comp.run(file_text(header, row["src"], row["name"])[0], "base")
+    if base["errors"] == 0 and base["axioms"] is not None:
+        BASE_AXIOMS.update(base["axioms"])
     if not ok(base):
         raise SystemExit(f"reference does not compile: {base['first_error']}")
 

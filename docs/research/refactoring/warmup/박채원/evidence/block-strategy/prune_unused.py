@@ -74,7 +74,8 @@ def accept(prev: dict, new: dict) -> bool:
     if new["axioms"] is None:                   # #print axioms 결과가 있어야 함
         return False
     axioms = {a.strip() for a in new["axioms"].split(",") if a.strip()}
-    if not axioms <= ALLOWED_AXIOMS:            # 허용 공리만 써야 함 (sorryAx 등 차단)
+    # 허용 공리 + 원본 증명이 이미 쓰던 공리만 (원본에 없던 sorryAx 등은 차단)
+    if not axioms <= ALLOWED_AXIOMS | BASE_AXIOMS:
         return False
     if new["tokens"] > prev["tokens"]:          # proof token이 늘면 안 됨
         return False
@@ -87,8 +88,11 @@ def accept(prev: dict, new: dict) -> bool:
 _bullet = r"(·\s*)?" if ALLOW_BULLET else ""
 HAVE_START = re.compile(r"^\s*" + _bullet + r"(" + "|".join(REMOVABLE_KEYWORDS) + r")\b")
 WARN = re.compile(r":(\d+):(\d+): warning: unused variable `([^`]+)`")
-ERR = re.compile(r":\d+:\d+: error")
-AX = re.compile(r"depends on axioms: \[(.*?)\]")
+# Lean 형식 `file:l:c: error`와 Lake 형식 `error: …` 둘 다 센다
+ERR = re.compile(r":\d+:\d+: error|^error:", re.M)
+# 공리 목록은 길면 여러 줄로 나뉘어 출력된다
+AX = re.compile(r"depends on axioms: \[(.*?)\]", re.S)
+BASE_AXIOMS: set = set()   # 원본 증명의 공리 (pass0에서 채움)
 
 
 def indent(s: str) -> int:
@@ -167,7 +171,7 @@ def check(project, workdir, tag, header, decl, row, timeout, ctx=None):
         k = int(m.group(1)) - 1 - off             # 0-based line inside decl
         if 0 <= k < len(dl) and HAVE_START.match(dl[k]):
             unused.append((k, m.group(3)))
-    return {"errors": errors, "axioms": ax.group(1) if ax else None,
+    return {"errors": errors, "axioms": " ".join(ax.group(1).split()) if ax else None,
             "tokens": proof_length(decl, row["statement"]), "unused": sorted(set(unused))}
 
 
@@ -186,8 +190,9 @@ def run(row, project, header, workdir, timeout, ctx=None):
     def chk(tag, d):
         return check(project, workdir, tag, header, d, row, timeout, ctx)
     st = chk("pass0", decl)
-    if st["errors"]:
+    if st["errors"] or st["axioms"] is None:
         raise SystemExit(f"reference does not compile in this environment (see {workdir}/pass0.log)")
+    BASE_AXIOMS.update(a.strip() for a in st["axioms"].split(",") if a.strip())
     base_tokens = st["tokens"]
     passes.append({"pass": 0, "tokens": st["tokens"], "errors": 0, "axioms": st["axioms"], "removed": []})
     for p in range(1, MAX_PASSES + 1):
