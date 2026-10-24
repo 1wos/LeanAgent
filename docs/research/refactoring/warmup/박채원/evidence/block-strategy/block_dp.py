@@ -13,7 +13,7 @@ Rules (designed with 박채원; no LLM; the same input always gives the same out
      set. The chosen set is applied together and compiled again; the predicted
      total gain is compared with the measured one.
 
-Candidate sources
+Candidate sources (rule 8 added: identical branch bodies)
   A. Unused `have` removal from prune_unused.py results: each first-pass block
      on its own, and the whole pruning result as one candidate (later passes
      depend on earlier ones).
@@ -128,6 +128,21 @@ def file_text(header, decl, name, extra=""):
         return pre + decl.rstrip("\n") + f"\n\n#print axioms {name}\n" + after, pre.count("\n")
     pre = header.rstrip("\n") + "\n" + extra + "\n"
     return pre + decl.rstrip("\n") + f"\n\n#print axioms {name}\n", pre.count("\n")
+
+
+def locate_decl(lines, row):
+    """0-based [s0, e0) of the declaration in the file. Uses the row's start/end lines when
+    they match the source text; otherwise finds the unique exact occurrence of the source."""
+    s0, e0 = row["start_line"] - 1, row["end_line"]
+    src = row["src"].rstrip("\n")
+    if "\n".join(lines[s0:e0]).rstrip("\n") == src:
+        return s0, e0
+    text = "\n".join(lines)
+    i = text.find(src)
+    if i < 0 or text.find(src, i + 1) >= 0:
+        raise SystemExit("declaration source not found exactly once in " + row["file_path"])
+    s0 = text.count("\n", 0, i)
+    return s0, s0 + src.count("\n") + 1
 
 
 def decl_head_start(lines, s0):
@@ -264,6 +279,37 @@ def apply(src, repls):
     return out
 
 
+# ---------- rule 8: identical branch bodies -> one branch with several tags ----------
+CASE_RE = re.compile(r"^(\s*)case\s+(.+?)\s*=>\s*$")     # `case tag args =>` with the body below
+ALT_RE = re.compile(r"^(\s*)\|\s*(.+?)\s*=>\s*$")         # `| pattern =>` alternative with the body below
+
+
+def case_merge_candidate(group, src, clean):
+    """Members are `case t =>` (or `| p =>`) blocks whose bodies are identical text.
+    Lean accepts `case t1 | t2 => tac` and `| p1 | p2 => tac`, so the first member keeps
+    its body under a merged head and the other members are deleted."""
+    heads = [src[n.line] for n in group]
+    for rx, kw in ((CASE_RE, "case "), (ALT_RE, "| ")):
+        ms = [rx.match(h) for h in heads]
+        if all(ms):
+            break
+    else:
+        return None, None                                   # not a branch group
+    if len({m.group(1) for m in ms}) != 1:
+        return None, "분기 머리의 들여쓰기가 서로 다름"
+    def body(n):
+        return [clean[i].strip() for i in n.lines[1:] if clean[i].strip()]
+    b0 = body(group[0])
+    if not b0 or any(body(n) != b0 for n in group[1:]):
+        return None, "분기 본문이 이름까지 똑같지는 않음"
+    ind = ms[0].group(1)
+    head = ind + kw + " | ".join(m.group(2) for m in ms) + " =>"
+    repl = {(group[0].line,): [head]}
+    for n in group[1:]:
+        repl[tuple(n.lines)] = []
+    return repl, None
+
+
 # ---------- rule 7: tree DP ----------
 def tree_dp(root, cands):
     """cands: list of dict(lines=set, gain=int, id=str). Returns (best, chosen ids)."""
@@ -333,7 +379,7 @@ def main():
         target = os.path.abspath(os.path.join(a.repo, row["file_path"]))
         orig_bytes = open(target, "rb").read()
         lines = orig_bytes.decode("utf-8").replace("\r\n", "\n").split("\n")
-        s0, e0 = row["start_line"] - 1, row["end_line"]
+        s0, e0 = locate_decl(lines, row)
         h0 = decl_head_start(lines, s0)
         FILE_CTX = ("".join(l + "\n" for l in lines[:h0]), "".join(l + "\n" for l in lines[h0:s0]),
                     "\n" + "\n".join(lines[e0:]))
@@ -399,6 +445,23 @@ def run(a, row, header, comp):
     for gi in order:
         g = groups[gi]
         tag = f"group{gi + 1}"
+        # rule 8: identical branch bodies (no context needed)
+        repl, why = case_merge_candidate(g, src, clean)
+        if repl is not None or why is not None:
+            if repl is None:
+                skipped.append({"group": tag, "lines": [n.line + 1 for n in g], "reason": why})
+                continue
+            new = "\n".join(apply(src, repl))
+            r = comp.run(file_text(header, new, row["name"])[0], tag)
+            toks = proof_length(new, row["statement"])
+            gain = base_tokens - toks
+            log.append({"group": tag, "kind": "분기 합치기", "lines": [n.line + 1 for n in g],
+                        "compiles": ok(r), "tokens": toks, "gain": gain, "error": r["first_error"]})
+            if ok(r) and gain > 0:
+                lines = set().union(*[set(n.lines) for n in g])
+                cands.append({"id": tag, "kind": f"같은 본문의 분기 {len(g)}개 → 하나로", "lines": lines,
+                              "gain": gain, "repl": repl, "verified": "단독 컴파일 통과"})
+            continue
         probe = list(src)
         A = g[0]
         probe.insert(A.line, " " * indent(src[A.line]) + "trace_state")

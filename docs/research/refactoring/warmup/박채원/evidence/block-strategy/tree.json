@@ -1,5 +1,253 @@
 [
  {
+  "name": "CallElimCorrect.substOldPostSubset",
+  "official": 313,
+  "counted": 313,
+  "check": "OK",
+  "nodes": 91,
+  "largest": [
+   {
+    "line": 52,
+    "last": 71,
+    "depth": 0,
+    "head": "case app ih1 ih2 =>",
+    "tokens": 71,
+    "share": 22.7
+   },
+   {
+    "line": 72,
+    "last": 85,
+    "depth": 0,
+    "head": "case quant trih eih =>",
+    "tokens": 62,
+    "share": 19.8
+   },
+   {
+    "line": 34,
+    "last": 51,
+    "depth": 0,
+    "head": "case ite cih tih eih =>",
+    "tokens": 59,
+    "share": 18.8
+   },
+   {
+    "line": 86,
+    "last": 97,
+    "depth": 0,
+    "head": "case eq ih1 ih2 =>",
+    "tokens": 41,
+    "share": 13.1
+   },
+   {
+    "line": 61,
+    "last": 71,
+    "depth": 1,
+    "head": ". simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.…",
+    "tokens": 37,
+    "share": 11.8
+   },
+   {
+    "line": 75,
+    "last": 81,
+    "depth": 1,
+    "head": ". apply List.Subset.trans",
+    "tokens": 36,
+    "share": 11.5
+   },
+   {
+    "line": 54,
+    "last": 60,
+    "depth": 1,
+    "head": ". split",
+    "tokens": 28,
+    "share": 8.9
+   },
+   {
+    "line": 7,
+    "last": 14,
+    "depth": 0,
+    "head": "case fvar =>",
+    "tokens": 20,
+    "share": 6.4
+   }
+  ],
+  "exact_groups": [
+   {
+    "members": [
+     [
+      7,
+      14
+     ],
+     [
+      15,
+      21
+     ]
+    ],
+    "heads": [
+     "case fvar =>",
+     "case op =>"
+    ],
+    "tokens_each": 20,
+    "count": 2,
+    "repeat_tokens": 20
+   }
+  ],
+  "near_pairs": [],
+  "idx": 1
+ },
+ {
+  "name": "CallElimCorrect.extractedOldExprInVars",
+  "official": 222,
+  "counted": 222,
+  "check": "OK",
+  "nodes": 77,
+  "largest": [
+   {
+    "line": 11,
+    "last": 38,
+    "depth": 0,
+    "head": "case app fn e fn_ih e_ih =>",
+    "tokens": 77,
+    "share": 34.7
+   },
+   {
+    "line": 56,
+    "last": 71,
+    "depth": 0,
+    "head": "case ite cih tih eih =>",
+    "tokens": 45,
+    "share": 20.3
+   },
+   {
+    "line": 42,
+    "last": 55,
+    "depth": 0,
+    "head": "case quant trih eih =>",
+    "tokens": 40,
+    "share": 18.0
+   },
+   {
+    "line": 26,
+    "last": 38,
+    "depth": 1,
+    "head": ". cases Hnorm with",
+    "tokens": 34,
+    "share": 15.3
+   },
+   {
+    "line": 72,
+    "last": 82,
+    "depth": 0,
+    "head": "case eq ih1 ih2 =>",
+    "tokens": 31,
+    "share": 14.0
+   },
+   {
+    "line": 17,
+    "last": 25,
+    "depth": 1,
+    "head": ". next Hfalse =>",
+    "tokens": 23,
+    "share": 10.4
+   },
+   {
+    "line": 7,
+    "last": 10,
+    "depth": 0,
+    "head": "induction post <;>",
+    "tokens": 16,
+    "share": 7.2
+   },
+   {
+    "line": 8,
+    "last": 9,
+    "depth": 1,
+    "head": "simp [Imperative.HasVarsPure.getVars, extractOldExprVars,",
+    "tokens": 11,
+    "share": 5.0
+   }
+  ],
+  "exact_groups": [],
+  "near_pairs": [],
+  "idx": 2
+ },
+ {
+  "name": "Core.InitsUpdatesComm",
+  "official": 224,
+  "counted": 224,
+  "check": "OK",
+  "nodes": 46,
+  "largest": [
+   {
+    "line": 24,
+    "last": 55,
+    "depth": 0,
+    "head": "case update_some σ x v σ₀ xs vs σ₁ Hup Hups ih =>",
+    "tokens": 165,
+    "share": 73.7
+   },
+   {
+    "line": 31,
+    "last": 55,
+    "depth": 1,
+    "head": ". apply UpdateStates.update_some (σ':=updatedStates σ₀ ks' …",
+    "tokens": 126,
+    "share": 56.2
+   },
+   {
+    "line": 32,
+    "last": 52,
+    "depth": 2,
+    "head": ". simp [UpdateStateUpdated Hup, updatedStates]",
+    "tokens": 95,
+    "share": 42.4
+   },
+   {
+    "line": 34,
+    "last": 45,
+    "depth": 3,
+    "head": ". have Hdef := UpdateStateDefined' Hup",
+    "tokens": 53,
+    "share": 23.7
+   },
+   {
+    "line": 46,
+    "last": 52,
+    "depth": 3,
+    "head": ". rw [List.unzip_zip] <;> simp_all",
+    "tokens": 29,
+    "share": 12.9
+   },
+   {
+    "line": 16,
+    "last": 23,
+    "depth": 0,
+    "head": "case update_none =>",
+    "tokens": 23,
+    "share": 10.3
+   },
+   {
+    "line": 53,
+    "last": 55,
+    "depth": 2,
+    "head": ". apply (ih Hinit ?_ ?_).2.2",
+    "tokens": 20,
+    "share": 8.9
+   },
+   {
+    "line": 26,
+    "last": 30,
+    "depth": 1,
+    "head": ". apply updatedStatesInit Hlen1",
+    "tokens": 18,
+    "share": 8.0
+   }
+  ],
+  "exact_groups": [],
+  "near_pairs": [],
+  "idx": 3
+ },
+ {
   "name": "fundamental_theorem_of_variational_calculus'",
   "official": 851,
   "counted": 851,
@@ -74,6 +322,474 @@
   "exact_groups": [],
   "near_pairs": [],
   "idx": 4
+ },
+ {
+  "name": "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema",
+  "official": 1372,
+  "counted": 1372,
+  "check": "OK",
+  "nodes": 116,
+  "largest": [
+   {
+    "line": 20,
+    "last": 126,
+    "depth": 0,
+    "head": "calc _",
+    "tokens": 1213,
+    "share": 88.4
+   },
+   {
+    "line": 80,
+    "last": 126,
+    "depth": 1,
+    "head": "_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (fun x => ∂[j] (A.electr…",
+    "tokens": 538,
+    "share": 39.2
+   },
+   {
+    "line": 99,
+    "last": 121,
+    "depth": 2,
+    "head": "_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕…",
+    "tokens": 163,
+    "share": 11.9
+   },
+   {
+    "line": 31,
+    "last": 40,
+    "depth": 1,
+    "head": "_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∂ₜ (fun t => ∑ j, ∂[j] (A.magneticF…",
+    "tokens": 116,
+    "share": 8.5
+   },
+   {
+    "line": 86,
+    "last": 94,
+    "depth": 2,
+    "head": "_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (fun x => ∂[j] (A.electr…",
+    "tokens": 114,
+    "share": 8.3
+   },
+   {
+    "line": 67,
+    "last": 76,
+    "depth": 1,
+    "head": "_ = (1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (fun x => ∂[j] (A.elect…",
+    "tokens": 113,
+    "share": 8.2
+   },
+   {
+    "line": 21,
+    "last": 30,
+    "depth": 1,
+    "head": "_= ∂ₜ (fun t =>",
+    "tokens": 97,
+    "share": 7.1
+   },
+   {
+    "line": 77,
+    "last": 79,
+    "depth": 1,
+    "head": "_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (fun x => ∂[j] (A.electr…",
+    "tokens": 94,
+    "share": 6.9
+   }
+  ],
+  "exact_groups": [],
+  "near_pairs": [],
+  "idx": 5
+ },
+ {
+  "name": "FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time",
+  "official": 1217,
+  "counted": 1217,
+  "check": "OK",
+  "nodes": 110,
+  "largest": [
+   {
+    "line": 10,
+    "last": 112,
+    "depth": 0,
+    "head": "· rintro x ⟨φs, rfl⟩",
+    "tokens": 1114,
+    "share": 91.5
+   },
+   {
+    "line": 17,
+    "last": 107,
+    "depth": 1,
+    "head": "· rintro x ⟨φs', rfl⟩",
+    "tokens": 989,
+    "share": 81.3
+   },
+   {
+    "line": 19,
+    "last": 95,
+    "depth": 2,
+    "head": "calc _",
+    "tokens": 855,
+    "share": 70.3
+   },
+   {
+    "line": 41,
+    "last": 69,
+    "depth": 3,
+    "head": "_ = crAnTimeOrderSign (φs' ++ [φ, ψ] ++ φs) •",
+    "tokens": 362,
+    "share": 29.7
+   },
+   {
+    "line": 70,
+    "last": 81,
+    "depth": 3,
+    "head": "_ = crAnTimeOrderSign (φs' ++ [φ, ψ] ++ φs) •",
+    "tokens": 163,
+    "share": 13.4
+   },
+   {
+    "line": 82,
+    "last": 95,
+    "depth": 3,
+    "head": "_ = crAnTimeOrderSign (φs' ++ [φ, ψ] ++ φs) •",
+    "tokens": 152,
+    "share": 12.5
+   },
+   {
+    "line": 71,
+    "last": 80,
+    "depth": 4,
+    "head": "(ι (ofCrAnListF (List.takeWhile (fun c => ¬crAnTimeOrderRel…",
+    "tokens": 140,
+    "share": 11.5
+   },
+   {
+    "line": 52,
+    "last": 61,
+    "depth": 4,
+    "head": "ι (ofCrAnListF (List.takeWhile (fun c => ¬crAnTimeOrderRel …",
+    "tokens": 119,
+    "share": 9.8
+   }
+  ],
+  "exact_groups": [
+   {
+    "members": [
+     [
+      44,
+      45
+     ],
+     [
+      47,
+      48
+     ],
+     [
+      54,
+      55
+     ],
+     [
+      57,
+      58
+     ],
+     [
+      73,
+      74
+     ],
+     [
+      77,
+      78
+     ],
+     [
+      85,
+      86
+     ],
+     [
+      88,
+      89
+     ]
+    ],
+    "heads": [
+     "ι (ofCrAnListF (List.filter (fun c =>",
+     "ι (ofCrAnListF (List.filter (fun c =>",
+     "ι (ofCrAnListF (List.filter (fun c =>",
+     "ι (ofCrAnListF (List.filter (fun c =>",
+     "ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…",
+     "ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…",
+     "ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…",
+     "ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…"
+    ],
+    "tokens_each": 23,
+    "count": 8,
+    "repeat_tokens": 161
+   },
+   {
+    "members": [
+     [
+      79,
+      80
+     ],
+     [
+      90,
+      91
+     ]
+    ],
+    "heads": [
+     "ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…",
+     "ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…"
+    ],
+    "tokens_each": 35,
+    "count": 2,
+    "repeat_tokens": 35
+   },
+   {
+    "members": [
+     [
+      64,
+      64
+     ],
+     [
+      67,
+      67
+     ]
+    ],
+    "heads": [
+     "rw [crAnTimeOrderList, show φs' ++ φ :: ψ :: φs =…",
+     "rw [crAnTimeOrderList, show φs' ++ ψ :: φ :: φs =…"
+    ],
+    "tokens_each": 30,
+    "count": 2,
+    "repeat_tokens": 30
+   }
+  ],
+  "near_pairs": [],
+  "idx": 6
+ },
+ {
+  "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+  "official": 408,
+  "counted": 408,
+  "check": "OK",
+  "nodes": 82,
+  "largest": [
+   {
+    "line": 6,
+    "last": 22,
+    "depth": 0,
+    "head": "case app t₁ _ _ t₂ l r ih_l ih_r =>",
+    "tokens": 79,
+    "share": 19.4
+   },
+   {
+    "line": 61,
+    "last": 70,
+    "depth": 0,
+    "head": "case case t₁ _ _ t₂ _ t₃ _ der _ _ ih _ _ =>",
+    "tokens": 70,
+    "share": 17.2
+   },
+   {
+    "line": 23,
+    "last": 34,
+    "depth": 0,
+    "head": "case tapp σ' der _ ih =>",
+    "tokens": 53,
+    "share": 13.0
+   },
+   {
+    "line": 9,
+    "last": 18,
+    "depth": 1,
+    "head": "| inl val_l =>",
+    "tokens": 46,
+    "share": 11.3
+   },
+   {
+    "line": 35,
+    "last": 44,
+    "depth": 0,
+    "head": "case let' t₁ σ t₂ τ L der _ ih _ =>",
+    "tokens": 44,
+    "share": 10.8
+   },
+   {
+    "line": 45,
+    "last": 52,
+    "depth": 0,
+    "head": "case inl der _ ih =>",
+    "tokens": 35,
+    "share": 8.6
+   },
+   {
+    "line": 53,
+    "last": 60,
+    "depth": 0,
+    "head": "case inr der _ ih =>",
+    "tokens": 35,
+    "share": 8.6
+   },
+   {
+    "line": 64,
+    "last": 66,
+    "depth": 1,
+    "head": "| inl val =>",
+    "tokens": 31,
+    "share": 7.6
+   }
+  ],
+  "exact_groups": [],
+  "near_pairs": [],
+  "idx": 7
+ },
+ {
+  "name": "Cslib.SKI.parallelReduction_diamond",
+  "official": 407,
+  "counted": 407,
+  "check": "OK",
+  "nodes": 63,
+  "largest": [
+   {
+    "line": 5,
+    "last": 31,
+    "depth": 0,
+    "head": "case par a a' b b' ha' hb' =>",
+    "tokens": 160,
+    "share": 39.3
+   },
+   {
+    "line": 50,
+    "last": 64,
+    "depth": 0,
+    "head": "case red_S a b c =>",
+    "tokens": 104,
+    "share": 25.6
+   },
+   {
+    "line": 40,
+    "last": 49,
+    "depth": 0,
+    "head": "case red_K c =>",
+    "tokens": 67,
+    "share": 16.5
+   },
+   {
+    "line": 32,
+    "last": 39,
+    "depth": 0,
+    "head": "case red_I =>",
+    "tokens": 55,
+    "share": 13.5
+   },
+   {
+    "line": 55,
+    "last": 63,
+    "depth": 1,
+    "head": "case par d c' hd hc =>",
+    "tokens": 53,
+    "share": 13.0
+   },
+   {
+    "line": 25,
+    "last": 31,
+    "depth": 1,
+    "head": "case red_S a c =>",
+    "tokens": 45,
+    "share": 11.1
+   },
+   {
+    "line": 10,
+    "last": 16,
+    "depth": 1,
+    "head": "case par a'' b'' ha'' hb'' =>",
+    "tokens": 42,
+    "share": 10.3
+   },
+   {
+    "line": 43,
+    "last": 47,
+    "depth": 1,
+    "head": "case par a' c' ha hc =>",
+    "tokens": 32,
+    "share": 7.9
+   }
+  ],
+  "exact_groups": [],
+  "near_pairs": [],
+  "idx": 8
+ },
+ {
+  "name": "Cslib.CCS.bisimilarity_congr_choice",
+  "official": 251,
+  "counted": 251,
+  "check": "OK",
+  "nodes": 60,
+  "largest": [
+   {
+    "line": 36,
+    "last": 62,
+    "depth": 0,
+    "head": "case right =>",
+    "tokens": 116,
+    "share": 46.2
+   },
+   {
+    "line": 9,
+    "last": 35,
+    "depth": 0,
+    "head": "case left =>",
+    "tokens": 115,
+    "share": 45.8
+   },
+   {
+    "line": 12,
+    "last": 27,
+    "depth": 1,
+    "head": "case choice p q r hbisim =>",
+    "tokens": 70,
+    "share": 27.9
+   },
+   {
+    "line": 39,
+    "last": 54,
+    "depth": 1,
+    "head": "case choice p q r hbisim =>",
+    "tokens": 70,
+    "share": 27.9
+   },
+   {
+    "line": 55,
+    "last": 62,
+    "depth": 1,
+    "head": "case bisim hbisim =>",
+    "tokens": 38,
+    "share": 15.1
+   },
+   {
+    "line": 28,
+    "last": 35,
+    "depth": 1,
+    "head": "case bisim hbisim =>",
+    "tokens": 37,
+    "share": 14.7
+   },
+   {
+    "line": 15,
+    "last": 21,
+    "depth": 2,
+    "head": "case choiceL a b c htr =>",
+    "tokens": 33,
+    "share": 13.1
+   },
+   {
+    "line": 42,
+    "last": 48,
+    "depth": 2,
+    "head": "case choiceL a b c htr =>",
+    "tokens": 33,
+    "share": 13.1
+   }
+  ],
+  "exact_groups": [],
+  "near_pairs": [],
+  "idx": 9
  },
  {
   "name": "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius",

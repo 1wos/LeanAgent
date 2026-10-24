@@ -1,10 +1,18 @@
-# 중간 명제형 블록 트리 분석
+# 웜업 15문제 블록 트리 분석
 
 토큰은 공식 `proof_length` 규칙. 확인 = 루트 서브트리 토큰 + `:= by` 줄 토큰이 공식 값과 같은지.
 
 | # | 정리 | 공식 | 확인 | 노드 수 | 확정 중복 그룹 | 반복 토큰 합 | 근사 중복 쌍 |
 | ---: | --- | ---: | --- | ---: | ---: | ---: | ---: |
+| 1 | `substOldPostSubset` | 313 | OK | 91 | 1 | 20 | 0 |
+| 2 | `extractedOldExprInVars` | 222 | OK | 77 | 0 | 0 | 0 |
+| 3 | `InitsUpdatesComm` | 224 | OK | 46 | 0 | 0 | 0 |
 | 4 | `fundamental_theorem_of_variational_calculus'` | 851 | OK | 80 | 0 | 0 | 0 |
+| 5 | `time_deriv_time_deriv_electricField_of_isExtrema` | 1,372 | OK | 116 | 0 | 0 | 0 |
+| 6 | `ι_timeOrderF_superCommuteF_eq_time` | 1,217 | OK | 110 | 3 | 226 | 0 |
+| 7 | `progress` | 408 | OK | 82 | 0 | 0 | 0 |
+| 8 | `parallelReduction_diamond` | 407 | OK | 63 | 0 | 0 | 0 |
+| 9 | `bisimilarity_congr_choice` | 251 | OK | 60 | 0 | 0 | 0 |
 | 10 | `fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius` | 1,463 | OK | 141 | 1 | 28 | 0 |
 | 11 | `fold_advances_evaluation_poly` | 1,906 | OK | 149 | 4 | 123 | 3 |
 | 12 | `interleaved_affine_gaps_imply_tensor_gaps` | 1,353 | OK | 125 | 2 | 142 | 0 |
@@ -13,6 +21,57 @@
 | 15 | `putnam_1995_a3` | 4,085 | OK | 232 | 4 | 1,075 | 1 |
 
 반복 토큰 = (개수 − 1) × 블록 토큰. 같은 증명을 한 번만 쓰면 없어지는 토큰이며, 보조정리 호출 비용은 빼지 않은 값이다.
+
+## 1. `CallElimCorrect.substOldPostSubset` (313 토큰, OK)
+
+큰 노드 (서브트리 토큰 순)
+
+| src 줄 | 깊이 | 첫 줄 | 토큰 | 비중 |
+| --- | ---: | --- | ---: | ---: |
+| 52–71 | 0 | `case app ih1 ih2 =>` | 71 | 22.7% |
+| 72–85 | 0 | `case quant trih eih =>` | 62 | 19.8% |
+| 34–51 | 0 | `case ite cih tih eih =>` | 59 | 18.8% |
+| 86–97 | 0 | `case eq ih1 ih2 =>` | 41 | 13.1% |
+| 61–71 | 1 | `. simp [Imperative.HasVarsPure.getVars, Lambda.LExpr.LExpr.…` | 37 | 11.8% |
+| 75–81 | 1 | `. apply List.Subset.trans` | 36 | 11.5% |
+| 54–60 | 1 | `. split` | 28 | 8.9% |
+| 7–14 | 0 | `case fvar =>` | 20 | 6.4% |
+
+확정 중복 그룹 (이름 정규화 후 해시 일치)
+
+| 개수 | 블록 토큰 | 반복 토큰 | 위치와 첫 줄 |
+| ---: | ---: | ---: | --- |
+| 2 | 20 | 20 | src 7–14 `case fvar =>`<br>src 15–21 `case op =>` |
+
+## 2. `CallElimCorrect.extractedOldExprInVars` (222 토큰, OK)
+
+큰 노드 (서브트리 토큰 순)
+
+| src 줄 | 깊이 | 첫 줄 | 토큰 | 비중 |
+| --- | ---: | --- | ---: | ---: |
+| 11–38 | 0 | `case app fn e fn_ih e_ih =>` | 77 | 34.7% |
+| 56–71 | 0 | `case ite cih tih eih =>` | 45 | 20.3% |
+| 42–55 | 0 | `case quant trih eih =>` | 40 | 18.0% |
+| 26–38 | 1 | `. cases Hnorm with` | 34 | 15.3% |
+| 72–82 | 0 | `case eq ih1 ih2 =>` | 31 | 14.0% |
+| 17–25 | 1 | `. next Hfalse =>` | 23 | 10.4% |
+| 7–10 | 0 | `induction post <;>` | 16 | 7.2% |
+| 8–9 | 1 | `simp [Imperative.HasVarsPure.getVars, extractOldExprVars,` | 11 | 5.0% |
+
+## 3. `Core.InitsUpdatesComm` (224 토큰, OK)
+
+큰 노드 (서브트리 토큰 순)
+
+| src 줄 | 깊이 | 첫 줄 | 토큰 | 비중 |
+| --- | ---: | --- | ---: | ---: |
+| 24–55 | 0 | `case update_some σ x v σ₀ xs vs σ₁ Hup Hups ih =>` | 165 | 73.7% |
+| 31–55 | 1 | `. apply UpdateStates.update_some (σ':=updatedStates σ₀ ks' …` | 126 | 56.2% |
+| 32–52 | 2 | `. simp [UpdateStateUpdated Hup, updatedStates]` | 95 | 42.4% |
+| 34–45 | 3 | `. have Hdef := UpdateStateDefined' Hup` | 53 | 23.7% |
+| 46–52 | 3 | `. rw [List.unzip_zip] <;> simp_all` | 29 | 12.9% |
+| 16–23 | 0 | `case update_none =>` | 23 | 10.3% |
+| 53–55 | 2 | `. apply (ih Hinit ?_ ?_).2.2` | 20 | 8.9% |
+| 26–30 | 1 | `. apply updatedStatesInit Hlen1` | 18 | 8.0% |
 
 ## 4. `fundamental_theorem_of_variational_calculus'` (851 토큰, OK)
 
@@ -28,6 +87,89 @@
 | 40–41 | 1 | `have inner_eq_self_add_diff : ⟪f₂ x, x₂⟫_ℝ = ⟪x₂, x₂⟫_ℝ + ⟪…` | 36 | 4.2% |
 | 123–125 | 0 | `have integral_pos : 0 < ∫ x, φ x * ⟪f x, f x₀⟫_ℝ ∂μ :=` | 36 | 4.2% |
 | 57–59 | 2 | `refine ⟨φ1.toFun, ⟨φ1.contDiff, φ1.hasCompactSupport⟩,` | 35 | 4.1% |
+
+## 5. `Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema` (1,372 토큰, OK)
+
+큰 노드 (서브트리 토큰 순)
+
+| src 줄 | 깊이 | 첫 줄 | 토큰 | 비중 |
+| --- | ---: | --- | ---: | ---: |
+| 20–126 | 0 | `calc _` | 1,213 | 88.4% |
+| 80–126 | 1 | `_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (fun x => ∂[j] (A.electr…` | 538 | 39.2% |
+| 99–121 | 2 | `_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (∂[j] (A.electricField 𝓕…` | 163 | 11.9% |
+| 31–40 | 1 | `_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∂ₜ (fun t => ∑ j, ∂[j] (A.magneticF…` | 116 | 8.5% |
+| 86–94 | 2 | `_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (fun x => ∂[j] (A.electr…` | 114 | 8.3% |
+| 67–76 | 1 | `_ = (1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (fun x => ∂[j] (A.elect…` | 113 | 8.2% |
+| 21–30 | 1 | `_= ∂ₜ (fun t =>` | 97 | 7.1% |
+| 77–79 | 1 | `_ = 1 / (𝓕.μ₀ * 𝓕.ε₀) * ∑ j, (∂[j] (fun x => ∂[j] (A.electr…` | 94 | 6.9% |
+
+## 6. `FieldSpecification.WickAlgebra.ι_timeOrderF_superCommuteF_eq_time` (1,217 토큰, OK)
+
+큰 노드 (서브트리 토큰 순)
+
+| src 줄 | 깊이 | 첫 줄 | 토큰 | 비중 |
+| --- | ---: | --- | ---: | ---: |
+| 10–112 | 0 | `· rintro x ⟨φs, rfl⟩` | 1,114 | 91.5% |
+| 17–107 | 1 | `· rintro x ⟨φs', rfl⟩` | 989 | 81.3% |
+| 19–95 | 2 | `calc _` | 855 | 70.3% |
+| 41–69 | 3 | `_ = crAnTimeOrderSign (φs' ++ [φ, ψ] ++ φs) •` | 362 | 29.7% |
+| 70–81 | 3 | `_ = crAnTimeOrderSign (φs' ++ [φ, ψ] ++ φs) •` | 163 | 13.4% |
+| 82–95 | 3 | `_ = crAnTimeOrderSign (φs' ++ [φ, ψ] ++ φs) •` | 152 | 12.5% |
+| 71–80 | 4 | `(ι (ofCrAnListF (List.takeWhile (fun c => ¬crAnTimeOrderRel…` | 140 | 11.5% |
+| 52–61 | 4 | `ι (ofCrAnListF (List.takeWhile (fun c => ¬crAnTimeOrderRel …` | 119 | 9.8% |
+
+확정 중복 그룹 (이름 정규화 후 해시 일치)
+
+| 개수 | 블록 토큰 | 반복 토큰 | 위치와 첫 줄 |
+| ---: | ---: | ---: | --- |
+| 8 | 23 | 161 | src 44–45 `ι (ofCrAnListF (List.filter (fun c =>`<br>src 47–48 `ι (ofCrAnListF (List.filter (fun c =>`<br>src 54–55 `ι (ofCrAnListF (List.filter (fun c =>`<br>src 57–58 `ι (ofCrAnListF (List.filter (fun c =>`<br>src 73–74 `ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…`<br>src 77–78 `ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…`<br>src 85–86 `ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…`<br>src 88–89 `ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…` |
+| 2 | 35 | 35 | src 79–80 `ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…`<br>src 90–91 `ι (ofCrAnListF (List.filter (fun c => (crAnTimeOr…` |
+| 2 | 30 | 30 | src 64–64 `rw [crAnTimeOrderList, show φs' ++ φ :: ψ :: φs =…`<br>src 67–67 `rw [crAnTimeOrderList, show φs' ++ ψ :: φ :: φs =…` |
+
+## 7. `Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress` (408 토큰, OK)
+
+큰 노드 (서브트리 토큰 순)
+
+| src 줄 | 깊이 | 첫 줄 | 토큰 | 비중 |
+| --- | ---: | --- | ---: | ---: |
+| 6–22 | 0 | `case app t₁ _ _ t₂ l r ih_l ih_r =>` | 79 | 19.4% |
+| 61–70 | 0 | `case case t₁ _ _ t₂ _ t₃ _ der _ _ ih _ _ =>` | 70 | 17.2% |
+| 23–34 | 0 | `case tapp σ' der _ ih =>` | 53 | 13.0% |
+| 9–18 | 1 | `&#124; inl val_l =>` | 46 | 11.3% |
+| 35–44 | 0 | `case let' t₁ σ t₂ τ L der _ ih _ =>` | 44 | 10.8% |
+| 45–52 | 0 | `case inl der _ ih =>` | 35 | 8.6% |
+| 53–60 | 0 | `case inr der _ ih =>` | 35 | 8.6% |
+| 64–66 | 1 | `&#124; inl val =>` | 31 | 7.6% |
+
+## 8. `Cslib.SKI.parallelReduction_diamond` (407 토큰, OK)
+
+큰 노드 (서브트리 토큰 순)
+
+| src 줄 | 깊이 | 첫 줄 | 토큰 | 비중 |
+| --- | ---: | --- | ---: | ---: |
+| 5–31 | 0 | `case par a a' b b' ha' hb' =>` | 160 | 39.3% |
+| 50–64 | 0 | `case red_S a b c =>` | 104 | 25.6% |
+| 40–49 | 0 | `case red_K c =>` | 67 | 16.5% |
+| 32–39 | 0 | `case red_I =>` | 55 | 13.5% |
+| 55–63 | 1 | `case par d c' hd hc =>` | 53 | 13.0% |
+| 25–31 | 1 | `case red_S a c =>` | 45 | 11.1% |
+| 10–16 | 1 | `case par a'' b'' ha'' hb'' =>` | 42 | 10.3% |
+| 43–47 | 1 | `case par a' c' ha hc =>` | 32 | 7.9% |
+
+## 9. `Cslib.CCS.bisimilarity_congr_choice` (251 토큰, OK)
+
+큰 노드 (서브트리 토큰 순)
+
+| src 줄 | 깊이 | 첫 줄 | 토큰 | 비중 |
+| --- | ---: | --- | ---: | ---: |
+| 36–62 | 0 | `case right =>` | 116 | 46.2% |
+| 9–35 | 0 | `case left =>` | 115 | 45.8% |
+| 12–27 | 1 | `case choice p q r hbisim =>` | 70 | 27.9% |
+| 39–54 | 1 | `case choice p q r hbisim =>` | 70 | 27.9% |
+| 55–62 | 1 | `case bisim hbisim =>` | 38 | 15.1% |
+| 28–35 | 1 | `case bisim hbisim =>` | 37 | 14.7% |
+| 15–21 | 2 | `case choiceL a b c htr =>` | 33 | 13.1% |
+| 42–48 | 2 | `case choiceL a b c htr =>` | 33 | 13.1% |
 
 ## 10. `Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius` (1,463 토큰, OK)
 

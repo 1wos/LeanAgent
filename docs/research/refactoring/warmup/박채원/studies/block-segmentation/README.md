@@ -2,7 +2,7 @@
 
 - 작성: 박채원, 구조/전략 설계 그룹, 2026-10-20
 - 범위: 참조 증명을 어떤 단위로 나눌지 정하기 위해 Lean InfoTree와 Warm-up 1–3, 7–9번(Strata, CSLib) 증명 구조를 정리하고, Warm-up 15문제를 유형별로 묶어 분할 규칙을 정함.
-- 근거: [블록 분석기 결과](../../evidence/block-analyzer/README.md), [중간 명제형 블록 전략](../../evidence/block-strategy/README.md)
+- 근거: [블록 분석기 결과](../../evidence/block-analyzer/README.md), [웜업 블록 전략](../../evidence/block-strategy/README.md)
 
 ## 1. 블록으로 나누는 이유와 한계
 

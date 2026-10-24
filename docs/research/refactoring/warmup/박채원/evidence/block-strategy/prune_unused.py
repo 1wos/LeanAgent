@@ -131,6 +131,21 @@ def build_in_file(ctx, decl: str, name: str) -> tuple[str, int]:
     return text, pre.count("\n")
 
 
+def locate_decl(lines, row):
+    """0-based [s0, e0) of the declaration in the file. Uses the row's start/end lines when
+    they match the source text; otherwise finds the unique exact occurrence of the source."""
+    s0, e0 = row["start_line"] - 1, row["end_line"]
+    src = row["src"].rstrip("\n")
+    if "\n".join(lines[s0:e0]).rstrip("\n") == src:
+        return s0, e0
+    text = "\n".join(lines)
+    i = text.find(src)
+    if i < 0 or text.find(src, i + 1) >= 0:
+        raise SystemExit("declaration source not found exactly once in " + row["file_path"])
+    s0 = text.count("\n", 0, i)
+    return s0, s0 + src.count("\n") + 1
+
+
 def decl_head_start(lines, s0):
     """First line of the doc comment / attributes / `… in` prefixes attached to the declaration at s0.
     Options are inserted above them so the doc comment stays attached to the declaration."""
@@ -242,7 +257,7 @@ def main():
         path = os.path.abspath(os.path.join(a.repo, row["file_path"]))
         orig = open(path, "rb").read()
         lines = orig.decode("utf-8").replace("\r\n", "\n").split("\n")
-        s0, e0 = row["start_line"] - 1, row["end_line"]
+        s0, e0 = locate_decl(lines, row)
         h0 = decl_head_start(lines, s0)
         ctx = {"path": path, "rel": row["file_path"], "parts": ("".join(l + "\n" for l in lines[:h0]),
                                        "".join(l + "\n" for l in lines[h0:s0]),
