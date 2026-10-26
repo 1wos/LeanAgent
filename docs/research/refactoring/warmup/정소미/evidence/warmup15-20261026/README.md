@@ -1,14 +1,14 @@
-# Warmup 15 · 실제 후보 생성과 검증
+# Warmup 15 · 실험 코드와 실행 방법
 
-2026-10-26에 확보한 증명 중 검증된 출발 후보를 고정하고, 15문제에 새 편집을 적용한 실행 기록이다. 기존 증명의 작성자와 출처는 `starting-manifest.json`에 남긴다. 개선량은 출발 후보에서 추가로 달라진 부분만 계산한다.
+2026-10-26에 시험한 15문제의 편집 후보와 검증 기록이다. 출발 증명은 `starting-selection.json`, 작성자와 출처는 `starting-manifest.json`에 있다. 추가 점수는 출발 증명과의 차이다.
 
 이 README가 있는 `docs/research/refactoring/warmup/정소미/evidence/warmup15-20261026/`에서 명령을 실행한다. Python 3.10 이상, Git, Lean 버전 관리 도구 Elan이 필요하다.
 
 ## 실행 흐름
 
-`generate → 전체 문맥 검사 → HB 측정 → 실제 오류 수리 → 같은 조건 3회 대조 → 지정 버전 확인 → 선택`
+`후보 생성 → 전체 파일 검사 → 오류 수정 → 3회 측정 → 버전 확인 → 선택`
 
-`experiment.py`는 기존 검사기를 호출하는 재실행 도구다. `generators/`의 세 파일에는 실제로 시험한 문제별 편집이 들어 있다. 입력은 고정된 `starting-selection.json`이며, 생성 결과를 다시 Lean으로 검증하기 전에는 유효한 증명으로 취급하지 않는다. 새 모델 API 호출은 없다. 임의 정리에 적용되는 일반 탐색기나 학습된 라우터를 구현한 것은 아니다.
+`experiment.py`는 기존 검사기를 호출한다. `generators/`에는 이번 15문제에 시험한 편집이 들어 있다. 고정된 `starting-selection.json`에서 후보를 생성한 뒤 Lean으로 검증한다. 이 명령은 모델 API를 호출하지 않는다.
 
 ```sh
 python3 experiment.py generate --output /tmp/warmup15-candidates
@@ -28,7 +28,7 @@ python3 experiment.py verify \
 
 준비된 라이브러리 저장소는 `benchmark.jsonl`의 `version_info`에 있는 정확한 커밋과 Lean 버전이어야 한다. 의존성 빌드를 마친 깨끗한 체크아웃을 명시적으로 넘긴다. 실행 도구가 저장소나 패키지를 수정하지 않으며, 전후에 소스·의존성 커밋과 변경 여부를 검사한다. 환경 준비 실패를 증명 실패나 0점으로 바꾸지 않는다.
 
-검사기에는 두 고정점이 있다. `b5ad8ace25c8f1eed712b662f9a0d092562e3ebc`는 전체 문맥과 P12 별도 경로를 연결하는 Arena 실행 도구의 버전이고, `c18ec56682462847e2f4d8b6d60aa79ec071a10b`는 공통 토큰·HB 평가기 자체의 버전이다. `verifier-identity.json`이 실행 도구 파일의 해시를 기록한다. 실제 측정 당시의 개별 실행 도구와 원자료도 보존하며, 통합 명령의 재실행 결과를 이전 결과처럼 소급하지 않는다.
+검사기 버전은 다음 두 커밋으로 고정했다. `b5ad8ace25c8f1eed712b662f9a0d092562e3ebc`는 전체 문맥과 P12 별도 경로를 연결하는 Arena 실행 도구의 버전이고, `c18ec56682462847e2f4d8b6d60aa79ec071a10b`는 공통 토큰·HB 평가기 자체의 버전이다. `verifier-identity.json`이 실행 도구 파일의 해시를 기록한다. 당시 실행 스크립트와 원자료도 함께 저장했다. 통합 명령의 재실행 결과는 별도 기록이다.
 
 P09 v4.32.0 환경을 새로 마련하는 예시는 다음과 같다. 출력 경로는 비어 있어야 한다. 다른 버전은 `benchmark.jsonl`의 해당 행에 있는 커밋으로 별도 체크아웃을 만들어 같은 검증 명령을 반복한다.
 
@@ -44,18 +44,18 @@ git -C /tmp/warmup-cslib checkout 197a7be621263b84c67ca4f803f69205b36d06df
 
 HB(heartbeat)는 Lean 내부 계산량 카운터이며 벽시계 실행 시간이 아니다. 토큰은 고정 구문 계산기로 센 증명 본문 토큰이다.
 
-`verify` 결과는 지정한 출력 폴더의 `result.json`과 후보별 Lean 원문·로그다. `controlsValid`와 개별 후보의 `valid`, 3회 측정값을 먼저 읽는다. 지정 버전마다 별도로 확인한 뒤 점수식을 적용한다. 통합 명령은 P09의 원본·출발 후보·선택 후보를 다시 실행해 동작을 확인했다(`raw/replay-verify-final-p09.tar.gz`). 이 1회 실행은 도구 연결 확인이며, 성능 선택은 별도 3회 대조 기록을 사용한다. 최종 15개 선택과 대조 근거는 `selection.json`, 선택된 증명은 `selected/`에 공개한다. 생성·검증 명령만으로 자동으로 새 선택을 게시하지 않는다.
+`verify` 결과는 지정한 출력 폴더의 `result.json`과 후보별 Lean 원문·로그다. `controlsValid`와 개별 후보의 `valid`, 3회 측정값을 먼저 읽는다. 지정 버전마다 별도로 확인한 뒤 점수식을 적용한다. 통합 명령의 P09 실행 기록은 `raw/replay-verify-final-p09.tar.gz`에 있다. 이 1회 실행은 명령 동작을 확인한 기록이며, 성능 선택에는 별도 3회 측정값을 썼다. 선택 결과는 `selection.json`, 증명은 `selected/`에 있다.
 
 ## 통과와 선택
 
 - 고정 명제, 원문 전체 문맥과 후속 선언을 유지한다. 허용 공리는 `propext`, `Classical.choice`, `Quot.sound`다.
 - 공통 평가기는 HB 원시값을 1,000으로 나눈 내림값을 기록한다. 선택 전 원본·출발·새 후보를 같은 환경에서 각각 새 프로세스 3회 측정하고 중앙값을 쓴다.
 - 개선 점수는 `50 × (1 − 후보 토큰/원본 토큰) + 50 × (1 − 후보 HB/원본 HB)`다. 출발 후보 대비 추가 점수는 두 후보 점수의 차이다. 분모는 같은 실행의 원본이다.
-- 한 지표가 악화돼도 고정된 평균 점수가 증가할 수 있다. 이런 경우에는 그 교환관계를 함께 적는다. 통과한 모든 후보가 채택되는 것은 아니다.
+- 토큰과 HB의 감소율 평균으로 선택했다. P01·P05·P08·P10은 한 지표가 늘고 다른 지표가 줄었다. 두 지표가 함께 줄어든 문제는 P07·P11·P12·P14이고, P09는 토큰 수가 같다.
 - P12는 유효한 `#(...)` 유한 기수 표기를 허용하는 기존 Somi full-source v2 경로로 검사한다. 명제를 변경하지 않으며, 공통 평가기와 계측 경로가 달라 **공통 14문제 평균에서 제외**한다.
-- 작업 완료와 후보 통과는 다르다. `status=completed`여도 개별 후보의 `valid`와 반복 횟수, 지정 버전 결과를 확인해야 한다.
+- `status=completed`는 실행 종료를 뜻한다. 후보 통과 여부는 `valid`, 반복 횟수와 지정 버전 결과에 기록된다.
 
-모델 호출 비용은 계측하지 않았다. 따라서 문제당 $3 조건 충족, 공식 Arena 점수 또는 모델 생성 성공률을 주장하지 않는다. 이 기록은 제한된 후보 탐색이며 전역 최적 증명이라는 뜻도 아니다.
+모델 호출 비용은 계측하지 않아 문제당 $3 조건 충족 여부는 확인하지 못했다. 측정값은 로컬·CI 결과이며 공식 Arena 점수는 아니다. 실험 범위는 이 15문제의 편집 후보다.
 
 ## 보존된 결과 다시 집계
 
@@ -67,6 +67,6 @@ HB(heartbeat)는 Lean 내부 계산량 카운터이며 벽시계 실행 시간�
 python3 select_results.py --runs-dir /tmp/warmup15-runs --output /tmp/warmup15-selection
 ```
 
-`select_results.py`는 보존된 원자료의 읽기 전용 집계이며 신뢰할 수 없는 임의 결과를 판정하는 새 Lean 검사기가 아니다. 새 후보에는 먼저 `experiment.py verify`를 실행한다. 원격 자료의 원문·로그 해시, 측정 횟수와 문맥은 `summarize_remote.py`, P01–P06의 전체 소스 재구성은 `audit_native.py`로 추가 확인했다.
+`select_results.py`는 저장된 검증 결과를 집계한다. 새 후보의 Lean 검사는 `experiment.py verify`로 실행한다. 원격 자료의 원문·로그 해시, 측정 횟수와 문맥은 `summarize_remote.py`, P01–P06의 전체 소스 재구성은 `audit_native.py`로 추가 확인했다.
 
-원격 실행 기록: [P10–P15 대표 버전](https://github.com/Pseudo-Lab/LeanAgent-LeanRefactorArena/actions/runs/40243352796), [P12 수리·3개 버전](https://github.com/Pseudo-Lab/LeanAgent-LeanRefactorArena/actions/runs/40243802524), [P14 추가 버전](https://github.com/Pseudo-Lab/LeanAgent-LeanRefactorArena/actions/runs/40244093308), [P10·P11 최종 버전 검사](https://github.com/Pseudo-Lab/LeanAgent-LeanRefactorArena/actions/runs/40271664675). 실험 중 의도한 실패 후보가 있으므로 작업 전체의 표시보다 개별 후보와 대조 증명의 결과를 확인한다.
+원격 실행 기록: [P10–P15 대표 버전](https://github.com/Pseudo-Lab/LeanAgent-LeanRefactorArena/actions/runs/40243352796), [P12 수리·3개 버전](https://github.com/Pseudo-Lab/LeanAgent-LeanRefactorArena/actions/runs/40243802524), [P14 추가 버전](https://github.com/Pseudo-Lab/LeanAgent-LeanRefactorArena/actions/runs/40244093308), [P10·P11 최종 버전 검사](https://github.com/Pseudo-Lab/LeanAgent-LeanRefactorArena/actions/runs/40271664675). 실패한 후보도 실행 기록에 포함돼 있다. 전체 작업이 실패로 표시된 경우에도 개별 결과에서 원본·출발·선택 후보의 통과 여부를 볼 수 있다.
