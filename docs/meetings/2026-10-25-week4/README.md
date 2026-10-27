@@ -1,0 +1,17 @@
+# LeanAgent Week 4
+
+2026년 10월 25일 일요일 20:00–22:00.
+
+## 이번 주 주제
+
+**Evaluation Harness** — 모델 호출부터 Lean 검증·평가·결과 저장까지 연결하는 실행 구조를 다룹니다.
+
+## 공유 자료
+
+| 발표자 | 주제 | 대표 공유 자료 |
+| --- | --- | --- |
+| 권주원 | Lean 증명 최적화 하네스 실험과 구조 탐색 | [발표자료 (PDF)](../../research/refactoring/warmup/권주원/presentation-week4.pdf) |
+
+발표자료와 실험 기록은 [문서 지침](../../STRUCTURE.md)에 따라 `docs/research/`의 해당 주제·담당자 폴더에 작성하고, 이 README에 대표 자료를 연결합니다.
+
+이전 모임: [Week 3 · 역할 분담과 에이전트 설계](../2026-10-18-week3/README.md).
